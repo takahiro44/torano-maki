@@ -37,6 +37,12 @@ class DbHealthResponse(BaseModel):
     status: Literal["ok", "error"]
     postgres_version: str | None = None
     extensions: list[ExtensionInfo] = []
+    tables: list[str] = []
+    # DDLは docker/initdb/02_schema.sql、設定は config.py と2箇所にあるため、
+    # 食い違いをここで検知できるようにする。
+    # 不一致のまま進むと、ベクトルを挿入する瞬間まで誰も気づけない。
+    embedding_dim_in_db: int | None = None
+    embedding_dim_matches: bool | None = None
     detail: str | None = None
 
 
@@ -57,20 +63,44 @@ def health() -> HealthResponse:
 
 
 @router.get("/db", response_model=DbHealthResponse)
-def health_db(db: DbSession) -> DbHealthResponse:
-    """DBに実際につながるか、pgvectorが有効かまで確認する。"""
+def health_db(db: DbSession, settings: AppSettings) -> DbHealthResponse:
+    """DBに実際につながるか、pgvectorが有効か、スキーマが最新かまで確認する。"""
     try:
         version = db.execute(text("SELECT current_setting('server_version')")).scalar_one()
-        rows = db.execute(
+        extensions = db.execute(
             text(
                 "SELECT extname, extversion FROM pg_extension "
                 "WHERE extname IN ('vector', 'pg_trgm') ORDER BY extname"
             )
         ).all()
+        tables = (
+            db.execute(
+                text(
+                    "SELECT tablename FROM pg_tables WHERE schemaname = 'public' ORDER BY tablename"
+                )
+            )
+            .scalars()
+            .all()
+        )
+
+        # vector列の次元数は atttypmod に入る。テーブルが未作成なら None
+        dim_in_db = db.execute(
+            text(
+                "SELECT a.atttypmod FROM pg_attribute a "
+                "JOIN pg_class c ON c.oid = a.attrelid "
+                "WHERE c.relname = 'knowledge' AND a.attname = 'embedding'"
+            )
+        ).scalar_one_or_none()
+
         return DbHealthResponse(
             status="ok",
             postgres_version=str(version),
-            extensions=[ExtensionInfo(name=r[0], version=r[1]) for r in rows],
+            extensions=[ExtensionInfo(name=r[0], version=r[1]) for r in extensions],
+            tables=list(tables),
+            embedding_dim_in_db=dim_in_db,
+            embedding_dim_matches=(
+                None if dim_in_db is None else dim_in_db == settings.embedding_dim
+            ),
         )
     except Exception as e:  # 接続失敗の理由をそのまま返す方が切り分けが速い
         return DbHealthResponse(status="error", detail=f"{type(e).__name__}: {e}")
