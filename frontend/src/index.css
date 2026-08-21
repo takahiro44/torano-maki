@@ -1,0 +1,17 @@
+/* Viteの初期スタイル（中央寄せ・ダークテーマ）は画面設計の前提を勝手に決めてしまうため、
+   最小限のリセットだけにしておく。デザインは実装時に決める。 */
+
+:root {
+  font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
+  line-height: 1.6;
+  color: #1a1a1a;
+  background: #fff;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+}
