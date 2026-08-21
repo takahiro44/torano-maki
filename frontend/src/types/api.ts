@@ -28,6 +28,7 @@ export type ConfigHealthResponse = {
   embedding_configured: boolean;
   embedding_model: string | null;
   embedding_dim: number | null;
-  ollama_base_url: string;
-  ollama_model: string | null;
+  llm_configured: boolean;
+  base_url: string | null;
+  model_name: string | null;
 };

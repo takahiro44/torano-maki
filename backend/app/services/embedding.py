@@ -11,8 +11,8 @@ from app.config import get_settings
 def embed(texts: list[str]) -> list[list[float]]:
     """テキストをベクトル化する。
 
-    実装は未確定。sentence-transformers を使うか、Ollama に任せるかは
-    docs/decisions.md で決める。
+    実装は未確定。ただし DGX の vLLM は /v1/embeddings を持たないため
+    （2026-08-21 時点で404）、推論サーバに任せる選択肢は取れない。
     """
     settings = get_settings()
     if not settings.is_embedding_configured:

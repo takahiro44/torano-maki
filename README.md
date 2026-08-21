@@ -40,7 +40,7 @@
 
 | 層 | 技術 | 選定理由 |
 |---|---|---|
-| LLM推論 | Ollama | ARM64ネイティブ対応。量子化により帯域制約を緩和 |
+| LLM推論 | DGX Spark 上の vLLM（OpenAI互換API） | GPUは貸し出しで、こちらでサーバを選べない。詳細は `docs/decisions.md` |
 | 音声認識 | <!-- TODO: 検証後に確定 --> | ARM64でのCUDA対応状況により決定 |
 | 埋め込み | sentence-transformers | 日本語対応の埋め込みモデルをローカル実行 |
 | バックエンド | FastAPI / Pydantic | スキーマ定義がLLM・DB・APIの型を兼ねる |
@@ -79,7 +79,7 @@ x86_64向けのビルド済みパッケージが利用できない場合があ�
 | PostgreSQL + pgvector | Docker | OSごとに導入手順が異なり、4人での再現が難しいため |
 | FastAPI | ホスト（`uv run`） | `--reload` の即時反映を優先。ビルド待ちを発生させない |
 | フロントエンド | ホスト（`npm run dev`） | Vite の HMR をそのまま使う |
-| Ollama | DGX Spark にネイティブ | ARM64 + CUDA のコンテナ内GPU利用は検証コストが高い |
+| vLLM | DGX Spark（貸し出し機） | 構成はGPU提供側の管理。`.env` の `BASE_URL` から参照する |
 
 ### 0. 事前準備
 

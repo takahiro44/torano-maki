@@ -23,8 +23,11 @@ class Settings(BaseSettings):
     # 既定は5433。docker-compose.yml と揃えること（5432はネイティブPostgreSQLと衝突する）
     database_url: str = "postgresql+psycopg://torano:torano_dev_password@localhost:5433/torano_maki"
 
-    ollama_base_url: str = "http://localhost:11434"
-    ollama_model: str = ""
+    # LLM推論サーバ（DGX Spark 上の vLLM）。OpenAI互換なので末尾に /v1 を含める。
+    # 環境変数名を BASE_URL / MODEL_NAME としているのは、
+    # 推論サーバを差し替えても名前が実態と食い違わないようにするため。
+    base_url: str = ""
+    model_name: str = ""
 
     # 埋め込みモデルと次元数はまだ未確定（docs/decisions.md 参照）。
     # embedding_dim は DB の vector(N) と必ず一致させること。
@@ -32,6 +35,10 @@ class Settings(BaseSettings):
     # 利用側で is_embedding_configured を確認してから使う。
     embedding_model: str = ""
     embedding_dim: int | None = None
+
+    @property
+    def is_llm_configured(self) -> bool:
+        return bool(self.base_url) and bool(self.model_name)
 
     @property
     def is_embedding_configured(self) -> bool:
