@@ -7,6 +7,7 @@
 from functools import lru_cache
 from pathlib import Path
 
+from pydantic import field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # .env はリポジトリ直下に置く。backend/ 配下ではないので2階層上を見る
@@ -35,6 +36,20 @@ class Settings(BaseSettings):
     # 利用側で is_embedding_configured を確認してから使う。
     embedding_model: str = ""
     embedding_dim: int | None = None
+
+    @field_validator("embedding_dim", mode="before")
+    @classmethod
+    def _blank_to_none(cls, v: object) -> object:
+        """空文字を「未設定」として扱う。
+
+        .env.example は EMBEDDING_DIM= を空で配っているため、コピーしただけの人は
+        全員この値を空文字で読み込む。空文字は int にパースできず、
+        起動した瞬間に ValidationError で落ちて原因が分かりにくいため、
+        ここで None に倒して is_embedding_configured の判定に委ねる。
+        """
+        if isinstance(v, str) and not v.strip():
+            return None
+        return v
 
     @property
     def is_llm_configured(self) -> bool:
