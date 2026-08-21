@@ -50,10 +50,13 @@
 
 ### 未確定事項
 
-着手前に決める必要があるもの。詳細は [`CLAUDE.md`](CLAUDE.md) 3.2 を参照。
+着手前に決める必要があるもの。候補と経緯は [`docs/decisions.md`](docs/decisions.md) を参照。
 
 - **音声認識ライブラリ** — ARM64 + CUDA で動くものを検証して決定する
 - **埋め込みモデルと次元数** — `vector(N)` の定義に必要。**これが決まらないとDBを作れない**
+
+技術選定の理由は [`docs/decisions.md`](docs/decisions.md) に記録している。
+**方針に疑問を持ったら、まずここを読むこと。**
 
 ## 実行環境
 
@@ -67,7 +70,49 @@ x86_64向けのビルド済みパッケージが利用できない場合があ�
 
 ## セットアップ
 
-<!-- TODO: 環境構築が固まったら手順を記載 -->
+### 何をコンテナに入れるか
+
+**PostgreSQL のみ Docker で動かす。アプリ本体はホストでネイティブに動かす。**
+
+| 対象 | 動かす場所 | 理由 |
+|---|---|---|
+| PostgreSQL + pgvector | Docker | OSごとに導入手順が異なり、4人での再現が難しいため |
+| FastAPI | ホスト（`uv run`） | `--reload` の即時反映を優先。ビルド待ちを発生させない |
+| フロントエンド | ホスト（`npm run dev`） | Vite の HMR をそのまま使う |
+| Ollama | DGX Spark にネイティブ | ARM64 + CUDA のコンテナ内GPU利用は検証コストが高い |
+
+### 0. 事前準備
+
+**Mac** — [Docker Desktop](https://www.docker.com/products/docker-desktop/) をインストール（Apple Silicon 版）
+```bash
+brew install --cask docker
+```
+インストール後、**Docker Desktop アプリを起動する**。メニューバーのアイコンが Running になっていないとコマンドが失敗する。PC再起動のたびに起動が必要。
+
+**Windows** — Docker Desktop（WSL2 バックエンド）
+```powershell
+winget install --id Docker.DockerDesktop
+wsl --install   # WSL2 が未導入の場合。実行後に再起動
+```
+
+### 1. 環境変数
+
+```bash
+cp .env.example .env      # Windows: copy .env.example .env
+```
+
+`.env` は Git 管理外。**コミットしないこと。**
+
+### 2. データベースを起動
+
+```bash
+docker compose up -d
+docker compose ps          # STATUS が healthy になれば成功
+```
+
+### 3. バックエンド / フロントエンド
+
+<!-- TODO: backend / frontend の実装が入ったら手順を確定する -->
 
 ```bash
 # バックエンド
@@ -81,13 +126,54 @@ npm install
 npm run dev
 ```
 
-### 環境変数
+---
 
-`.env.example` をコピーして `.env` を作成する。
+## Docker の使い方
+
+覚えるのは以下だけでよい。
 
 ```bash
-cp .env.example .env
+docker compose up -d          # 起動
+docker compose ps             # 状態確認
+docker compose logs -f db     # ログを見る（エラー調査はここ）
+docker compose down           # 停止（データは残る）
+
+# DBに直接つなぐ
+docker compose exec db psql -U torano -d torano_maki
+
+# テーブルの中身をGUIで見る → http://localhost:8080
+docker compose --profile tools up -d
 ```
+
+### ⚠️ データを消すコマンド
+
+```bash
+docker compose down -v        # ボリュームごと削除 = 全データが消える
+```
+
+`-v` の有無でデータが消えるかが変わる。**付ける前に必ず確認すること。**
+
+現時点ではマイグレーションツールを導入していないため（[`CLAUDE.md`](CLAUDE.md) 3.1）、
+**スキーマを変更したときはDBを作り直す。**
+
+```bash
+docker compose down -v && docker compose up -d
+```
+
+`docker/initdb/` の SQL は**ボリュームが空のときしか実行されない。**
+SQLを追記しても反映されない場合は、上記で作り直す必要がある。
+
+### つまずいたら
+
+| 症状 | 原因 | 対処 |
+|---|---|---|
+| `port 5432 already in use` | ローカルにPostgresが既にいる | `.env` の `POSTGRES_PORT` を `5433` などに変更 |
+| `Cannot connect to the Docker daemon` | Docker Desktop が未起動 | アプリを起動する |
+| `type "vector" does not exist` | 初期化SQLが未実行 | `docker compose down -v && docker compose up -d` |
+| Mac で起動が遅い | Docker Desktop のメモリ不足 | Settings → Resources でメモリを4GB以上に |
+| `.env` が読まれない | ファイル名が `.env.txt` になっている | Windowsの拡張子表示をONにして確認 |
+
+解決したら [`docs/setup-notes.md`](docs/setup-notes.md) に記録すること。
 
 ---
 
@@ -116,8 +202,13 @@ torano-maki/
 │   └── pyproject.toml
 ├── frontend/                   # Vite + React
 │   └── src/
-├── docs/                       # 設計メモ・環境構築記録
+├── docker/
+│   └── initdb/                 # DB初回作成時に実行されるSQL
+├── docs/
+│   ├── decisions.md            # 技術選定の理由
+│   └── setup-notes.md          # 環境構築でハマった内容
 ├── docker-compose.yml          # PostgreSQL + pgvector
+├── .gitattributes              # 改行コード統一（Mac/Windows混在のため）
 ├── CLAUDE.md                   # Claude Code 向けルール
 └── README.md
 ```

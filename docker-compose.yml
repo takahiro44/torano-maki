@@ -1,0 +1,51 @@
+# 開発用の PostgreSQL + pgvector。
+#
+# アプリ本体（FastAPI / Vite）は意図的にコンテナ化していない。
+# ハッカソン中はコード修正のたびにビルド待ちが発生する方が損失が大きく、
+# --reload / HMR による即時反映を優先するため。
+# コンテナ化する価値があるのは、OSごとに導入手順が異なり4人での再現が
+# 難しい PostgreSQL + pgvector の方。
+
+services:
+  db:
+    # arm64 / amd64 両対応。Apple Silicon でもエミュレーションなしで動く
+    image: pgvector/pgvector:pg17
+    container_name: torano-maki-db
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-torano}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-torano_dev_password}
+      POSTGRES_DB: ${POSTGRES_DB:-torano_maki}
+      TZ: Asia/Tokyo
+    ports:
+      # ローカルに既存の PostgreSQL がいる場合は .env の POSTGRES_PORT を変える
+      - "${POSTGRES_PORT:-5432}:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+      # ボリュームが空のとき（初回起動時）のみ実行される
+      - ./docker/initdb:/docker-entrypoint-initdb.d:ro
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-torano} -d ${POSTGRES_DB:-torano_maki}"]
+      interval: 5s
+      timeout: 5s
+      retries: 10
+    restart: unless-stopped
+
+  # テーブルの中身をGUIで確認するためのツール。
+  # Docker に不慣れなメンバーがデータの状態を目視できると理解が早いため用意する。
+  # 常時起動する必要はないので profile で切り分ける。
+  #   docker compose --profile tools up -d
+  adminer:
+    image: adminer:latest
+    container_name: torano-maki-adminer
+    profiles: ["tools"]
+    ports:
+      - "${ADMINER_PORT:-8080}:8080"
+    environment:
+      ADMINER_DEFAULT_SERVER: db
+    depends_on:
+      db:
+        condition: service_healthy
+    restart: unless-stopped
+
+volumes:
+  pgdata:
