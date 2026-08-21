@@ -83,17 +83,60 @@ x86_64向けのビルド済みパッケージが利用できない場合があ�
 
 ### 0. 事前準備
 
-**Mac** — [Docker Desktop](https://www.docker.com/products/docker-desktop/) をインストール（Apple Silicon 版）
-```bash
-brew install --cask docker
-```
-インストール後、**Docker Desktop アプリを起動する**。メニューバーのアイコンが Running になっていないとコマンドが失敗する。PC再起動のたびに起動が必要。
+以下の3つが必要。
 
-**Windows** — Docker Desktop（WSL2 バックエンド）
+| ツール | 用途 |
+|---|---|
+| Docker Desktop | PostgreSQL + pgvector を動かす |
+| uv | Pythonのパッケージ管理 |
+| Node.js 24（LTS） | フロントエンド |
+
+> **Python は別途インストールしなくてよい。**
+> uv が `.python-version` を見て 3.12 を自動で取得する。
+> システムのPythonやAnacondaのPythonは使われないので、混ざる心配もない。
+
+#### Mac
+
+```bash
+brew install --cask docker     # Docker Desktop（Apple Silicon 版）
+brew install uv
+brew install node@24
+```
+
+Homebrew を使わない場合:
+- Docker Desktop … https://www.docker.com/products/docker-desktop/
+- uv … `curl -LsSf https://astral.sh/uv/install.sh | sh`
+- Node.js … https://nodejs.org/ から **24 LTS**（`node@24` が見つからない場合もこちら）
+
+インストール後、**Docker Desktop アプリを起動する。**
+メニューバーのクジラのアイコンが Running になっていないとコマンドが失敗する。
+**PC再起動のたびに起動が必要。**
+
+#### Windows
+
 ```powershell
 winget install --id Docker.DockerDesktop
+winget install --id astral-sh.uv
+winget install --id OpenJS.NodeJS.LTS
 wsl --install   # WSL2 が未導入の場合。実行後に再起動
 ```
+
+winget を使わない場合:
+- uv … `powershell -ExecutionPolicy ByPass -c "irm https://astral.sh/uv/install.ps1 | iex"`
+- Node.js … https://nodejs.org/ から 24 LTS
+
+#### 確認
+
+**インストール後はターミナルを開き直すこと**（PATHが反映されないため）。
+
+```bash
+docker --version
+uv --version
+node --version     # v24 系（v22.12 以上なら動作はする）
+```
+
+3つとも表示されれば準備完了。`command not found` が出たら、
+ターミナルを開き直しても直らないか確認する。
 
 ### 1. 環境変数
 
@@ -218,7 +261,10 @@ SQLを追記しても反映されない場合は、上記で作り直す必要�
 | `type "vector" does not exist` | 初期化SQLが未実行 | `docker compose down -v && docker compose up -d` |
 | Mac で起動が遅い | Docker Desktop のメモリ不足 | Settings → Resources でメモリを4GB以上に |
 | `.env` が読まれない | ファイル名が `.env.txt` になっている | Windowsの拡張子表示をONにして確認 |
-| `npm ci` が失敗する | Node のバージョン違い | `.nvmrc` の 22 に合わせる |
+| `npm ci` が失敗する | Node のバージョン違い | `.nvmrc` の 24 に合わせる |
+| `uv: command not found` | uv が未インストール、またはPATH未反映 | 「0. 事前準備」を実施し、**ターミナルを開き直す** |
+| `node: command not found` | 同上 | 同上 |
+| `uv sync` が Python を探しに行く | 正常な動作 | uv が 3.12 を自動取得する。待てばよい |
 
 > ⚠️ **ポート競合が「エラーなし」で起きることがある**
 >
@@ -271,7 +317,7 @@ torano-maki/
 │   │   ├── App.tsx             # 疎通確認画面
 │   │   ├── api/client.ts       # API呼び出し口
 │   │   └── types/api.ts        # レスポンス型
-│   ├── .nvmrc                  # Node 22 に固定
+│   ├── .nvmrc                  # Node 24 に固定
 │   └── package-lock.json       # 依存のバージョン固定。必ずコミットする
 ├── docker/
 │   └── initdb/                 # DB初回作成時に実行されるSQL

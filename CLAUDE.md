@@ -78,7 +78,7 @@
 |---|---|---|
 | Python | `backend/.python-version` | 3.12 |
 | Pythonの依存 | `backend/uv.lock` | — |
-| Node | `frontend/.nvmrc` | 22 |
+| Node | `frontend/.nvmrc` | 24（LTS） |
 | Nodeの依存 | `frontend/package-lock.json` | — |
 
 - **`pip install` を使わない。必ず `uv add <パッケージ>`**
