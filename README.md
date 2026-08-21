@@ -200,6 +200,32 @@ curl http://127.0.0.1:8000/health/db
 curl http://127.0.0.1:8000/health/config
 ```
 
+### ⚠️ 最新化したとき（`git pull` の後）
+
+**`pull` しただけでは動かないことがある。** 取り込んだ差分に以下が
+含まれていたら、対応する作業が必要。
+
+| 変わったファイル | 必要な作業 |
+|---|---|
+| `backend/uv.lock` | `cd backend && uv sync` |
+| `frontend/package-lock.json` | `cd frontend && npm ci` |
+| `docker/initdb/` の SQL | `docker compose down -v && docker compose up -d` |
+| **`.env.example`** | **`.env` を手で更新する** |
+| `CLAUDE.md` | **Claude Code を再起動する** |
+
+`.env` は Git 管理外なので、**`.env.example` が変わっても自分の `.env` は
+自動更新されない。** ポート番号や項目が変わっていても気づけず、
+原因の分かりにくい接続エラーになる。
+
+`pull` の出力に出るファイル一覧を確認する習慣をつけること。
+
+```bash
+git pull                      # 出力のファイル一覧を見る
+git diff HEAD@{1} --stat      # 後から確認する場合
+```
+
+詳細は [`CLAUDE.md`](CLAUDE.md) 4.10 を参照。
+
 ### 依存を追加するとき
 
 **バージョンを固定するため、直接インストールしないこと**（[`CLAUDE.md`](CLAUDE.md) 3.2）。
@@ -340,6 +366,25 @@ torano-maki/
 
 Git運用・コーディング規約は [`CLAUDE.md`](CLAUDE.md) を参照。
 **作業開始前に必ず目を通すこと。**
+
+### 毎回の流れ
+
+```bash
+# 1. 作業開始
+git status                          # 作業ツリーがクリーンか
+git branch --show-current           # 今どのブランチにいるか（毎回確認する）
+git switch main && git pull
+git switch -c feat/xxx              # main から切る
+
+# 2. PR作成の直前（必須）
+git fetch origin
+git merge origin/main               # feature branch では pull ではなく merge
+```
+
+- **`git pull` は `main` の上でだけ使う。** feature branch で `git pull` しても
+  取り込まれるのは自分が push したものだけで、`main` の変更は入らない
+- `main` への直接コミット・直接pushは禁止。マージは人間が行う
+- 詳細は [`CLAUDE.md`](CLAUDE.md) 4.9 / 4.10
 
 ## チーム
 
