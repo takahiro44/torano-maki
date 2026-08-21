@@ -53,6 +53,7 @@
 | 埋め込み | sentence-transformers（**各自のPCのCPUで実行**） |
 | バックエンド | FastAPI / Pydantic / SQLAlchemy |
 | フロントエンド | Vite / React / TypeScript |
+| CSS | Tailwind CSS v4（Viteプラグイン。設定は `src/index.css` の `@theme`） |
 | データストア | PostgreSQL + pgvector |
 | Python管理 | uv |
 | DBドライバ | psycopg[binary] / pgvector |

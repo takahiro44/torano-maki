@@ -1,129 +1,90 @@
 /**
- * 環境の疎通確認画面。
+ * MVPの画面。
  *
- * 4人がそれぞれ自分の環境を自力で検証できるようにするために置いている。
- * 「動かない」となったとき、フロント・バックエンド・DBのどこで
- * 止まっているかをこの画面だけで切り分けられる。
- *
- * 機能実装が始まったらこの画面は置き換えてよい。
+ * 「テキストを保存 → Embedding化 → 自然言語で検索」を1画面で確認できるようにする。
+ * ルーターは入れていない。画面が3つしかなく、URLを分ける必要が出てから
+ * 導入すれば足りるため（依存を増やさない）。
  */
 
 import { useEffect, useState } from "react";
-import { apiGet } from "./api/client";
-import type { ConfigHealthResponse, DbHealthResponse, HealthResponse } from "./types/api";
+import { countKnowledge, getDbHealth } from "./api/client";
+import { KnowledgeInput } from "./components/KnowledgeInput";
+import { KnowledgeList } from "./components/KnowledgeList";
+import { KnowledgeSearch } from "./components/KnowledgeSearch";
+import type { KnowledgeCounts } from "./types/api";
 
-type Load<T> = { state: "loading" } | { state: "ok"; data: T } | { state: "error"; message: string };
+type Tab = "search" | "input" | "list";
 
-function useEndpoint<T>(path: string): Load<T> {
-  const [result, setResult] = useState<Load<T>>({ state: "loading" });
-  useEffect(() => {
-    apiGet<T>(path)
-      .then((data) => setResult({ state: "ok", data }))
-      .catch((e: unknown) => setResult({ state: "error", message: String(e) }));
-  }, [path]);
-  return result;
-}
-
-function Row({ label, ok, detail }: { label: string; ok: boolean | null; detail: string }) {
-  const mark = ok === null ? "…" : ok ? "OK" : "NG";
-  const color = ok === null ? "#888" : ok ? "#137333" : "#c5221f";
-  return (
-    <tr>
-      <td style={{ padding: "8px 12px", borderBottom: "1px solid #eee" }}>{label}</td>
-      <td style={{ padding: "8px 12px", borderBottom: "1px solid #eee", color, fontWeight: 700 }}>
-        {mark}
-      </td>
-      <td
-        style={{
-          padding: "8px 12px",
-          borderBottom: "1px solid #eee",
-          fontFamily: "monospace",
-          fontSize: 13,
-          wordBreak: "break-all",
-        }}
-      >
-        {detail}
-      </td>
-    </tr>
-  );
-}
+const TABS: { key: Tab; label: string }[] = [
+  { key: "search", label: "探す" },
+  { key: "input", label: "登録" },
+  { key: "list", label: "一覧" },
+];
 
 export default function App() {
-  const health = useEndpoint<HealthResponse>("/health");
-  const db = useEndpoint<DbHealthResponse>("/health/db");
-  const config = useEndpoint<ConfigHealthResponse>("/health/config");
+  const [tab, setTab] = useState<Tab>("search");
+  // 登録・更新のたびに一覧と件数を取り直すためのトリガー
+  const [reloadKey, setReloadKey] = useState(0);
+  const [counts, setCounts] = useState<KnowledgeCounts | null>(null);
+  const [apiError, setApiError] = useState<string | null>(null);
 
-  const dbOk = db.state === "loading" ? null : db.state === "ok" && db.data.status === "ok";
-  const vector =
-    db.state === "ok" ? db.data.extensions.find((e) => e.name === "vector") : undefined;
+  useEffect(() => {
+    countKnowledge()
+      .then((c) => {
+        setCounts(c);
+        setApiError(null);
+      })
+      .catch((e: unknown) => setApiError(e instanceof Error ? e.message : String(e)));
+  }, [reloadKey]);
+
+  // バックエンドに到達できない場合、原因が分かるよう案内を出す
+  useEffect(() => {
+    getDbHealth().catch(() =>
+      setApiError("バックエンドに接続できません。uvicorn が起動しているか確認してください"),
+    );
+  }, []);
 
   return (
-    <main style={{ fontFamily: "system-ui, sans-serif", maxWidth: 860, margin: "40px auto", padding: "0 16px" }}>
-      <h1 style={{ marginBottom: 4 }}>torano-maki</h1>
-      <p style={{ color: "#666", marginTop: 0 }}>環境疎通確認</p>
+    <div className="mx-auto max-w-3xl px-4 py-10">
+      <header className="mb-8">
+        <h1 className="text-2xl font-bold tracking-tight">torano-maki</h1>
+        <p className="mt-1 text-sm text-slate-500">
+          営業ナレッジを貯めて、意味で探す
+          {counts && <span className="ml-2 text-slate-400">登録 {counts.confirmed} 件</span>}
+        </p>
+      </header>
 
-      <table style={{ borderCollapse: "collapse", width: "100%", marginTop: 24 }}>
-        <thead>
-          <tr style={{ textAlign: "left", background: "#fafafa" }}>
-            <th style={{ padding: "8px 12px" }}>項目</th>
-            <th style={{ padding: "8px 12px" }}>状態</th>
-            <th style={{ padding: "8px 12px" }}>詳細</th>
-          </tr>
-        </thead>
-        <tbody>
-          <Row
-            label="フロントエンド"
-            ok={true}
-            detail="この画面が見えていればOK"
-          />
-          <Row
-            label="バックエンド API"
-            ok={health.state === "loading" ? null : health.state === "ok"}
-            detail={
-              health.state === "error"
-                ? "uvicorn が起動しているか確認: cd backend && uv run uvicorn app.main:app --reload"
-                : "GET /health"
-            }
-          />
-          <Row
-            label="データベース"
-            ok={dbOk}
-            detail={
-              db.state === "ok"
-                ? db.data.status === "ok"
-                  ? `PostgreSQL ${db.data.postgres_version}`
-                  : (db.data.detail ?? "接続失敗")
-                : db.state === "error"
-                  ? "バックエンドに到達できていない"
-                  : "確認中"
-            }
-          />
-          <Row
-            label="pgvector"
-            ok={db.state === "loading" ? null : Boolean(vector)}
-            detail={
-              vector
-                ? `vector ${vector.version}`
-                : "docker compose up -d でDBが起動しているか確認"
-            }
-          />
-          <Row
-            label="埋め込み設定"
-            ok={config.state === "ok" ? config.data.embedding_configured : null}
-            detail={
-              config.state === "ok"
-                ? config.data.embedding_configured
-                  ? `${config.data.embedding_model} / ${config.data.embedding_dim}次元`
-                  : "未設定。docs/decisions.md で次元数を決めてから .env に記入する"
-                : "確認中"
-            }
-          />
-        </tbody>
-      </table>
+      {apiError && (
+        <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+          {apiError}
+          <div className="mt-1 font-mono text-xs text-red-600">
+            cd backend &amp;&amp; uv run uvicorn app.main:app --reload
+          </div>
+        </div>
+      )}
 
-      <p style={{ color: "#666", fontSize: 13, marginTop: 24 }}>
-        「埋め込み設定」が NG なのは想定どおり。モデルと次元数が未確定のため。
-      </p>
-    </main>
+      <nav className="mb-6 flex gap-1 border-b border-slate-200">
+        {TABS.map((t) => (
+          <button
+            key={t.key}
+            onClick={() => setTab(t.key)}
+            className={
+              "-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors " +
+              (tab === t.key
+                ? "border-slate-900 text-slate-900"
+                : "border-transparent text-slate-400 hover:text-slate-600")
+            }
+          >
+            {t.label}
+          </button>
+        ))}
+      </nav>
+
+      <main>
+        {tab === "search" && <KnowledgeSearch />}
+        {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
+        {tab === "list" && <KnowledgeList reloadKey={reloadKey} />}
+      </main>
+    </div>
   );
 }

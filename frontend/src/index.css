@@ -1,17 +1,15 @@
-/* Viteの初期スタイル（中央寄せ・ダークテーマ）は画面設計の前提を勝手に決めてしまうため、
-   最小限のリセットだけにしておく。デザインは実装時に決める。 */
+@import "tailwindcss";
 
-:root {
-  font-family: system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP", sans-serif;
-  line-height: 1.6;
-  color: #1a1a1a;
-  background: #fff;
-}
-
-* {
-  box-sizing: border-box;
+/* Tailwind v4 の設定はここに書く（tailwind.config.js は使わない）。
+   日本語を含むため、日本語フォントを明示的に指定している。
+   指定しないと環境によって游ゴシックなどにフォールバックし、
+   Mac と Windows で見え方が大きく変わる。 */
+@theme {
+  --font-sans:
+    system-ui, -apple-system, "Segoe UI", "Hiragino Sans", "Noto Sans JP",
+    "Yu Gothic UI", sans-serif;
 }
 
 body {
-  margin: 0;
+  @apply bg-slate-50 text-slate-900 antialiased;
 }
