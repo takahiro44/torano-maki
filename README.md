@@ -110,21 +110,66 @@ docker compose up -d
 docker compose ps          # STATUS が healthy になれば成功
 ```
 
-### 3. バックエンド / フロントエンド
+### 3. バックエンド
 
-<!-- TODO: backend / frontend の実装が入ったら手順を確定する -->
+```bash
+cd backend
+uv sync                                     # Python 3.12 も自動で取得される
+uv run uvicorn app.main:app --reload
+```
+
+→ http://127.0.0.1:8000/docs でAPIドキュメントが開く
+
+**埋め込み処理を担当する人だけ**、追加で以下を実行する。
+PyTorch を含むため 3〜4GB になるので、必要な人以外は入れない。
+
+```bash
+uv sync --group ml
+```
+
+### 4. フロントエンド
+
+```bash
+cd frontend
+npm ci                                      # npm install ではない
+npm run dev
+```
+
+→ http://localhost:5173 で疎通確認画面が開く
+
+### 5. 環境の確認
+
+http://localhost:5173 を開き、以下が **OK** になっていれば環境構築は完了。
+
+| 項目 | 期待値 |
+|---|---|
+| フロントエンド | OK |
+| バックエンド API | OK |
+| データベース | OK |
+| pgvector | OK |
+| 埋め込み設定 | **NG のままで正常**（モデルと次元数が未確定のため） |
+
+コマンドで確認する場合:
+
+```bash
+curl http://127.0.0.1:8000/health
+curl http://127.0.0.1:8000/health/db
+curl http://127.0.0.1:8000/health/config
+```
+
+### 依存を追加するとき
+
+**バージョンを固定するため、直接インストールしないこと**（[`CLAUDE.md`](CLAUDE.md) 3.2）。
 
 ```bash
 # バックエンド
-cd backend
-uv sync
-uv run uvicorn app.main:app --reload
+cd backend && uv add <パッケージ>          # pip install は使わない
 
 # フロントエンド
-cd frontend
-npm install
-npm run dev
+cd frontend && npm install <パッケージ>
 ```
+
+更新された `uv.lock` / `package-lock.json` を必ずコミットする。
 
 ---
 
@@ -167,11 +212,29 @@ SQLを追記しても反映されない場合は、上記で作り直す必要�
 
 | 症状 | 原因 | 対処 |
 |---|---|---|
-| `port 5432 already in use` | ローカルにPostgresが既にいる | `.env` の `POSTGRES_PORT` を `5433` などに変更 |
+| **`ユーザー"torano"のパスワード認証に失敗しました`** | **別のPostgreSQLに繋がっている**（下記） | `.env` の `POSTGRES_PORT` を別の値に変える |
+| `port is already allocated` | 指定ポートが使用中 | `.env` の `POSTGRES_PORT` を変更 |
 | `Cannot connect to the Docker daemon` | Docker Desktop が未起動 | アプリを起動する |
 | `type "vector" does not exist` | 初期化SQLが未実行 | `docker compose down -v && docker compose up -d` |
 | Mac で起動が遅い | Docker Desktop のメモリ不足 | Settings → Resources でメモリを4GB以上に |
 | `.env` が読まれない | ファイル名が `.env.txt` になっている | Windowsの拡張子表示をONにして確認 |
+| `npm ci` が失敗する | Node のバージョン違い | `.nvmrc` の 22 に合わせる |
+
+> ⚠️ **ポート競合が「エラーなし」で起きることがある**
+>
+> ネイティブのPostgreSQLが動いている環境では、**Windowsだと Docker と両方が
+> 5432 をLISTENできてしまい、「使用中」エラーが出ないままホストからの接続が
+> ネイティブ側に吸われる。** 結果、認証エラーだけが出て原因が非常に分かりにくい。
+>
+> このプロジェクトが既定で **5433** を使っているのはこれを避けるため。
+> それでも認証エラーが出る場合は、何が5432/5433を掴んでいるか確認する:
+>
+> ```bash
+> # Windows
+> netstat -ano | findstr :5433
+> # Mac
+> lsof -i :5433
+> ```
 
 解決したら [`docs/setup-notes.md`](docs/setup-notes.md) に記録すること。
 
@@ -190,6 +253,7 @@ torano-maki/
 │   │   │   ├── knowledge.py    #   Pydantic（LLM出力・APIの型を兼ねる）
 │   │   │   └── tables.py       #   SQLAlchemy
 │   │   ├── api/                # 機能ごとに分割（コンフリクト回避）
+│   │   │   ├── health.py       #   疎通確認
 │   │   │   ├── ingest.py       #   ナレッジ蓄積
 │   │   │   ├── search.py       #   ナレッジ探索
 │   │   │   └── roleplay.py     #   ロープレ
@@ -199,9 +263,16 @@ torano-maki/
 │   │       ├── embedding.py      # ベクトル化
 │   │       ├── search.py         # 検索
 │   │       └── roleplay.py       # ペルソナ生成・対話
-│   └── pyproject.toml
+│   ├── .python-version         # Python 3.12 に固定
+│   ├── pyproject.toml
+│   └── uv.lock                 # 依存のバージョン固定。必ずコミットする
 ├── frontend/                   # Vite + React
-│   └── src/
+│   ├── src/
+│   │   ├── App.tsx             # 疎通確認画面
+│   │   ├── api/client.ts       # API呼び出し口
+│   │   └── types/api.ts        # レスポンス型
+│   ├── .nvmrc                  # Node 22 に固定
+│   └── package-lock.json       # 依存のバージョン固定。必ずコミットする
 ├── docker/
 │   └── initdb/                 # DB初回作成時に実行されるSQL
 ├── docs/

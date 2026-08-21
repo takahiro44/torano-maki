@@ -1,0 +1,44 @@
+[project]
+name = "torano-maki-backend"
+version = "0.1.0"
+description = "営業ナレッジの蓄積・探索・ロープレのバックエンド"
+requires-python = ">=3.12,<3.13"
+
+dependencies = [
+    "fastapi>=0.115",
+    "uvicorn[standard]>=0.32",
+    "pydantic>=2.9",
+    "pydantic-settings>=2.6",
+    "sqlalchemy>=2.0",
+    "psycopg[binary]>=3.2",
+    "pgvector>=0.3",
+    "httpx>=0.28",
+]
+
+[dependency-groups]
+# 埋め込み処理を担当する人だけが入れる。
+# sentence-transformers は PyTorch を引き連れてくるため 3〜4GB になる。
+# 全員に強制するとMac/Windowsで導入に詰まるリスクがあるので分離する。
+#   uv sync --group ml
+ml = [
+    "sentence-transformers>=3.3",
+]
+
+dev = [
+    "ruff>=0.8",
+    "pytest>=8.3",
+]
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["app"]

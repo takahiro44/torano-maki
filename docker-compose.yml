@@ -17,8 +17,12 @@ services:
       POSTGRES_DB: ${POSTGRES_DB:-torano_maki}
       TZ: Asia/Tokyo
     ports:
-      # ローカルに既存の PostgreSQL がいる場合は .env の POSTGRES_PORT を変える
-      - "${POSTGRES_PORT:-5432}:5432"
+      # 標準の5432ではなく5433を使う。
+      # ネイティブのPostgreSQLが5432で動いている環境だと、Windowsでは
+      # 両方がLISTENできてしまい「ポート使用中」エラーが出ないまま
+      # ホストからの接続がネイティブ側に吸われる。原因が非常に分かりにくいため、
+      # 最初から衝突しないポートを既定にする。
+      - "${POSTGRES_PORT:-5433}:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
       # ボリュームが空のとき（初回起動時）のみ実行される
