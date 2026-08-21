@@ -36,7 +36,8 @@ DGX Spark（ARM64 + CUDA）および各自の開発環境で、
 | OS | <!-- --> |
 | CUDA | <!-- nvcc --version --> |
 | Python | <!-- --> |
-| Ollama | <!-- ollama --version --> |
+| 推論サーバ | vLLM 0.22.1rc1（OpenAI互換 / ポート8080） |
+| 公開モデル | `DiffusionGemma-NVFP4`（`max_model_len` 262144） |
 
 ### 各自の開発環境
 

@@ -46,8 +46,9 @@ class ConfigHealthResponse(BaseModel):
     embedding_configured: bool
     embedding_model: str | None
     embedding_dim: int | None
-    ollama_base_url: str
-    ollama_model: str | None
+    llm_configured: bool
+    base_url: str | None
+    model_name: str | None
 
 
 @router.get("", response_model=HealthResponse)
@@ -81,6 +82,7 @@ def health_config(settings: AppSettings) -> ConfigHealthResponse:
         embedding_configured=settings.is_embedding_configured,
         embedding_model=settings.embedding_model or None,
         embedding_dim=settings.embedding_dim,
-        ollama_base_url=settings.ollama_base_url,
-        ollama_model=settings.ollama_model or None,
+        llm_configured=settings.is_llm_configured,
+        base_url=settings.base_url or None,
+        model_name=settings.model_name or None,
     )

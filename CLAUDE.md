@@ -49,7 +49,7 @@
 
 | 層 | 技術 |
 |---|---|
-| LLM推論 | Ollama |
+| LLM推論 | DGX Spark 上の vLLM（OpenAI互換API） |
 | 埋め込み | sentence-transformers |
 | バックエンド | FastAPI / Pydantic / SQLAlchemy |
 | フロントエンド | Vite / React / TypeScript |
