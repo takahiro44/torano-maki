@@ -7,11 +7,25 @@
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import field_validator
+from pydantic import ValidationInfo, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 # .env はリポジトリ直下に置く。backend/ 配下ではないので2階層上を見る
 _ENV_FILE = Path(__file__).resolve().parents[2] / ".env"
+
+# 埋め込みモデルは確定済み（docs/decisions.md 参照）。
+# DGX上のvLLMは固定モデルを配信しており埋め込みを載せられないため、
+# 埋め込みは各自のPCのCPUで実行する。
+#
+# DEFAULT_EMBEDDING_DIM は docker/initdb/02_schema.sql の vector(N) と
+# 必ず一致させること。片方だけ変えると、挿入時までエラーに気づけない。
+DEFAULT_EMBEDDING_MODEL = "intfloat/multilingual-e5-large"
+DEFAULT_EMBEDDING_DIM = 1024
+
+_EMBEDDING_DEFAULTS: dict[str, object] = {
+    "embedding_model": DEFAULT_EMBEDDING_MODEL,
+    "embedding_dim": DEFAULT_EMBEDDING_DIM,
+}
 
 
 class Settings(BaseSettings):
@@ -30,25 +44,25 @@ class Settings(BaseSettings):
     base_url: str = ""
     model_name: str = ""
 
-    # 埋め込みモデルと次元数はまだ未確定（docs/decisions.md 参照）。
-    # embedding_dim は DB の vector(N) と必ず一致させること。
-    # 値が入っていない状態でベクトル列を作ろうとすると事故るため、
-    # 利用側で is_embedding_configured を確認してから使う。
-    embedding_model: str = ""
-    embedding_dim: int | None = None
+    # 埋め込みは確定済み。DBの vector(N) と embedding_dim は必ず一致させること。
+    embedding_model: str = DEFAULT_EMBEDDING_MODEL
+    embedding_dim: int = DEFAULT_EMBEDDING_DIM
 
-    @field_validator("embedding_dim", mode="before")
+    @field_validator("embedding_model", "embedding_dim", mode="before")
     @classmethod
-    def _blank_to_none(cls, v: object) -> object:
-        """空文字を「未設定」として扱う。
+    def _blank_to_default(cls, v: object, info: ValidationInfo) -> object:
+        """空文字は「未指定」とみなして既定値に倒す。
 
-        .env.example は EMBEDDING_DIM= を空で配っているため、コピーしただけの人は
-        全員この値を空文字で読み込む。空文字は int にパースできず、
-        起動した瞬間に ValidationError で落ちて原因が分かりにくいため、
-        ここで None に倒して is_embedding_configured の判定に委ねる。
+        古い .env（EMBEDDING_DIM= が空のまま）を持っている人がいるため。
+        空文字は int にパースできず、起動した瞬間に ValidationError で落ちて
+        原因が分かりにくい。既定値に倒せば、.env を更新していない人でも動く。
+
+        なお before バリデータが None を返しても pydantic は既定値に
+        フォールバックしない（環境変数が存在する時点で「指定あり」と扱われる）。
+        そのため既定値を明示的に返す必要がある。
         """
         if isinstance(v, str) and not v.strip():
-            return None
+            return _EMBEDDING_DEFAULTS[info.field_name]
         return v
 
     @property

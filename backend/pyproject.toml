@@ -13,17 +13,14 @@ dependencies = [
     "psycopg[binary]>=3.2",
     "pgvector>=0.3",
     "httpx>=0.28",
-]
-
-[dependency-groups]
-# 埋め込み処理を担当する人だけが入れる。
-# sentence-transformers は PyTorch を引き連れてくるため 3〜4GB になる。
-# 全員に強制するとMac/Windowsで導入に詰まるリスクがあるので分離する。
-#   uv sync --group ml
-ml = [
+    # 埋め込みは各自のPCのCPUで行う（DGX上のvLLMは固定モデルのみ配信しており
+    # 埋め込みを載せられないため）。PyTorchを含むため導入に3〜4GBかかるが、
+    # 検索を1回でも叩く人は全員必要になるので任意グループには分けない。
+    # 詳細は docs/decisions.md を参照。
     "sentence-transformers>=3.3",
 ]
 
+[dependency-groups]
 dev = [
     "ruff>=0.8",
     "pytest>=8.3",

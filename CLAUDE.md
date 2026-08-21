@@ -50,7 +50,7 @@
 | 層 | 技術 |
 |---|---|
 | LLM推論 | DGX Spark 上の vLLM（OpenAI互換API） |
-| 埋め込み | sentence-transformers |
+| 埋め込み | sentence-transformers（**各自のPCのCPUで実行**） |
 | バックエンド | FastAPI / Pydantic / SQLAlchemy |
 | フロントエンド | Vite / React / TypeScript |
 | データストア | PostgreSQL + pgvector |
@@ -90,15 +90,45 @@
   `main` 側を採用したうえで `uv add` / `npm install` をやり直す
 - FastAPIの依存性注入は `Annotated` で書く（`Depends()` を引数の既定値に直接書かない）
 
-### 3.3 未確定事項（決まるまで実装を進めない）
+### 3.3 確定した重要事項
+
+| 項目 | 値 |
+|---|---|
+| 埋め込みモデル | `intfloat/multilingual-e5-large` |
+| **埋め込みの次元数** | **1024** |
+
+**次元数は3箇所で一致していなければならない。**
+
+| 場所 | 内容 |
+|---|---|
+| `docker/initdb/02_schema.sql` | `vector(1024)` ← **DDLの正** |
+| `backend/app/config.py` | `DEFAULT_EMBEDDING_DIM` |
+| `.env` | `EMBEDDING_DIM` |
+
+ズレたまま動かすと**ベクトルを挿入する瞬間まで誰も気づけない。**
+`/health/db` の `embedding_dim_matches` で検知できるので、
+おかしいと思ったらまずここを見ること。
+
+変更するには DB の作り直しが必要（3.1 の方針どおりデータは捨てる）。
+
+```bash
+docker compose down -v && docker compose up -d
+```
+
+**`e5` 系はプレフィックスが必要。** 付け忘れると精度が落ちるが、
+エラーにはならないので気づきにくい。`services/embedding.py` の中に閉じ込め、
+呼び出し側が意識しなくてよい形にすること。
+
+```python
+"passage: <本文>"   # 保存するとき
+"query: <検索文>"   # 検索するとき
+```
+
+### 3.4 未確定事項（決まるまで実装を進めない）
 
 | 項目 | 状態 | 影響 |
 |---|---|---|
 | 音声認識ライブラリ | ❌ 未確定 | ARM64 + CUDA の対応状況を検証してから決定 |
-| 埋め込みモデルと**次元数** | ❌ 未確定 | **次元が決まらないと `vector(N)` を定義できず、DBを作れない** |
-
-**埋め込みモデルの次元数は最優先で確定させること。** ここが決まらない限り、
-スキーマ定義もDB構築も検索実装も着手できず、全員が待ち状態になる。
 
 ---
 
@@ -301,7 +331,18 @@ pull後、cd frontend && npm ci を実行してください。
 
 ## 6. 設計上の原則
 
-- **ナレッジのスキーマ定義は1箇所にまとめる。** Pydanticモデルが、LLMへのJSON Schema・DBの構造・APIの型を兼ねる
+- **ナレッジのスキーマ定義を3箇所に散らかさない。** 役割ごとに正を決める
+
+  | 何の正か | ファイル |
+  |---|---|
+  | ナレッジの構造（LLMへのJSON Schema・APIの型・フロントの型） | `backend/app/models/knowledge.py`（Pydantic） |
+  | **DDL**（列・制約・インデックス・トリガー） | `docker/initdb/02_schema.sql` |
+  | 上のDDLに対応するクエリ用の定義 | `backend/app/models/tables.py`（SQLAlchemy） |
+
+  `Base.metadata.create_all()` は**使わない。** DDLが2箇所に存在すると必ず食い違うため
+  （理由は `docs/decisions.md`）。列を増やすときは
+  **SQL → `tables.py` → `knowledge.py` の3つを揃えて直し**、DBを作り直す。
+  ズレていないかは `/health/db` で確認できる
 - 音声処理は時間がかかるため、**HTTPリクエスト内で完結させない。** ジョブIDを返して非同期で処理する
 - 音声認識ライブラリは差し替えの可能性があるため、**呼び出し口を1つの関数に集約する**
 - ナレッジ検索の結果には**必ず出典（source_id）を含める**
