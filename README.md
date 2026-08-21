@@ -200,6 +200,27 @@ curl http://127.0.0.1:8000/health/db
 curl http://127.0.0.1:8000/health/config
 ```
 
+### サンプルデータを入れる
+
+検索を試すには、ある程度の件数が必要。15件のサンプルを用意してある。
+
+```bash
+cd backend
+uv run python scripts/seed.py            # 追加投入
+uv run python scripts/seed.py --reset    # 既存を消してから投入
+```
+
+### テストを実行する
+
+```bash
+cd backend
+uv run pytest              # 全部（1分弱。埋め込みを実際に生成するため）
+uv run pytest tests/test_models.py -q    # スキーマだけなら一瞬
+```
+
+**テストはトランザクションでロールバックされるため、登録済みのデータは消えない。**
+DBコンテナが起動している必要がある。
+
 ### ⚠️ 最新化したとき（`git pull` の後）
 
 **`pull` しただけでは動かないことがある。** 取り込んだ差分に以下が

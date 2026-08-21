@@ -64,15 +64,21 @@ def _get_model() -> "SentenceTransformer":
         # 既定の挙動はHugging Face Hubへ更新確認に行くため、回線が不安定だと
         # キャッシュ済みでも失敗する（実際にデモ環境で起きうる）。
         # キャッシュがあればネットワークを一切使わず、起動も速い。
+        # device を明示する。指定しないと CUDA や MPS が使える環境では
+        # 自動的にそちらが選ばれ、「各自のPCのCPUで実行する」という決定
+        # （docs/decisions.md）とコードが食い違う。
+        # 変えるとベクトルの再現性に影響するため、チームで合意してから変更すること。
         try:
-            model = SentenceTransformer(settings.embedding_model, local_files_only=True)
+            model = SentenceTransformer(
+                settings.embedding_model, device="cpu", local_files_only=True
+            )
             logger.info("埋め込みモデルをローカルキャッシュから読み込みました")
         except Exception:
             logger.info(
                 "キャッシュが無いため %s をダウンロードします（約2.2GB、数分かかります）",
                 settings.embedding_model,
             )
-            model = SentenceTransformer(settings.embedding_model)
+            model = SentenceTransformer(settings.embedding_model, device="cpu")
 
         # sentence-transformers 6.0 で get_sentence_embedding_dimension から改名された
         actual_dim = model.get_embedding_dimension()

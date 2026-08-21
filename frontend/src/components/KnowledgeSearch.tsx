@@ -86,10 +86,14 @@ export function KnowledgeSearch() {
 
       {results && (
         <div className="space-y-3">
+          {/* 関連がなくても top_k 件返す仕様。利用者が「関連情報がある」と
+              誤解しないよう明記する。スコアは0.78〜0.88に固まり、無関係でも
+              0.78程度出るため、しきい値で足切りしていない */}
           <p className="text-xs text-slate-500">
             {results.length}件（関連が高い順）。
             <span className="ml-1">
-              スコアは参考値です。値そのものではなく順番で見てください。
+              該当が無い場合も、登録済みデータから近い順に表示します。
+              スコアは参考値なので、値ではなく順番で見てください。
             </span>
           </p>
 
