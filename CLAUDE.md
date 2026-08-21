@@ -199,7 +199,14 @@ PRがマージされて `main` に戻ったまま、という状態は頻繁に�
 1. `git status` で対象ファイルを確認し、**内容をユーザーに提示する**
 2. `git diff` で変更内容を確認する
 3. **意図しないファイルが含まれていないか確認する**（音声、モデル、キャッシュ、`.env`）
-4. lint / テストが存在する場合は実行する。**失敗した場合は原則commitしない**
+4. lint / テストを実行する。**失敗した場合は原則commitしない**
+
+   ```bash
+   cd backend  && uv run ruff check . && uv run ruff format --check . && uv run pytest -q
+   cd frontend && npm run lint && npm run build
+   ```
+
+   テストはトランザクションでロールバックされるため、登録済みのデータは消えない
 5. ユーザーの承認を得てからcommitする
 
 ### 4.7 commit メッセージ

@@ -9,18 +9,23 @@ import { useEffect, useState } from "react";
 import { deleteKnowledge, listKnowledge, updateKnowledge } from "../api/client";
 import type { Knowledge } from "../types/api";
 
-type Props = { reloadKey: number };
+type Props = {
+  reloadKey: number;
+  /** 編集・削除で件数が変わったことを親に伝える。
+   *  子の内部状態だけで再取得すると、ヘッダーの件数が古いまま残るため。 */
+  onChanged: () => void;
+};
 
-export function KnowledgeList({ reloadKey }: Props) {
+export function KnowledgeList({ reloadKey, onChanged }: Props) {
   const [items, setItems] = useState<Knowledge[] | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [editingId, setEditingId] = useState<string | null>(null);
   const [draft, setDraft] = useState("");
   const [busyId, setBusyId] = useState<string | null>(null);
 
-  // 再取得のトリガー。親からの reloadKey と、この画面での操作の両方で回す
-  const [localKey, setLocalKey] = useState(0);
-  const refresh = () => setLocalKey((n) => n + 1);
+  // 再取得は親に一本化する。ここで独自に再取得すると、
+  // 一覧は更新されてもヘッダーの件数が古いまま残る
+  const refresh = onChanged;
 
   useEffect(() => {
     // 連続で操作したとき、先に投げた古い応答が後の結果を上書きしないようにする
@@ -39,7 +44,7 @@ export function KnowledgeList({ reloadKey }: Props) {
     return () => {
       cancelled = true;
     };
-  }, [reloadKey, localKey]);
+  }, [reloadKey]);
 
   async function save(id: string) {
     setBusyId(id);

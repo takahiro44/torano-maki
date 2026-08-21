@@ -83,7 +83,9 @@ export default function App() {
       <main>
         {tab === "search" && <KnowledgeSearch />}
         {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
-        {tab === "list" && <KnowledgeList reloadKey={reloadKey} />}
+        {tab === "list" && (
+          <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
+        )}
       </main>
     </div>
   );

@@ -19,9 +19,10 @@ DBのテーブル定義は `tables.py`、実際のDDLは `docker/initdb/02_schem
 
 from datetime import datetime
 from enum import StrEnum
+from typing import Annotated
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
 
 
 class KnowledgeStatus(StrEnum):
@@ -49,6 +50,12 @@ class SourceType(StrEnum):
     AUDIO = "audio"  # 音声
 
 
+# 前後の空白を落としたうえで1文字以上を要求する。
+# min_length だけだと "   " のような空白だけの本文が通ってしまい、
+# APIを直接叩かれたときに中身の無いナレッジが登録される。
+NonBlankText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
+
+
 class KnowledgeCreate(BaseModel):
     """Knowledge の登録リクエスト。
 
@@ -56,7 +63,7 @@ class KnowledgeCreate(BaseModel):
     他の項目はAI整理・議事録・音声を追加する段階で使う。
     """
 
-    content: str = Field(min_length=1, description="ナレッジ本文。検索対象になる")
+    content: NonBlankText = Field(description="ナレッジ本文。検索対象になる")
     original_content: str | None = Field(
         default=None,
         description="AI整理前の元テキスト。手入力の場合はNone",
@@ -71,10 +78,27 @@ class KnowledgeCreate(BaseModel):
 
 
 class KnowledgeUpdate(BaseModel):
-    """Knowledge の更新リクエスト。指定した項目だけ更新する。"""
+    """Knowledge の更新リクエスト。指定した項目だけ更新する。
 
-    content: str | None = Field(default=None, min_length=1)
+    「変更しない」はキーを省略して表す。**明示的な null は受け付けない。**
+    null を許すと、`exclude_unset` では省略と区別できないまま None が
+    DBの NOT NULL 列へ渡り、500 になるため。
+    """
+
+    content: NonBlankText | None = None
     status: KnowledgeStatus | None = None
+
+    @field_validator("content", "status", mode="before")
+    @classmethod
+    def _reject_explicit_null(cls, v: object) -> object:
+        """明示的な null を 422 にする。
+
+        既定値の None には走らない（バリデータは値が渡されたときだけ動く）ため、
+        キーを省略した場合は従来どおり「変更しない」になる。
+        """
+        if v is None:
+            raise ValueError("null は指定できません。変更しない項目はキーごと省略してください")
+        return v
 
 
 class Knowledge(BaseModel):

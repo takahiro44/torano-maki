@@ -40,3 +40,9 @@ build-backend = "hatchling.build"
 
 [tool.hatch.build.targets.wheel]
 packages = ["app"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+# 検索の質のテストは15件の埋め込みを行うため時間がかかる。
+# 普段の確認では -m "not slow" で除外できるようにしておく。
+markers = ["slow: 実行に時間がかかるテスト"]
