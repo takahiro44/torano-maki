@@ -1,0 +1,27 @@
+# Mac 2人 / Windows 2人の混在環境のため、改行コードを明示的に統一する。
+# 特にコンテナ内で実行されるファイルがCRLFになると、起動時に原因の分かりにくい
+# エラーになるため、LFを強制する。
+
+* text=auto
+
+# コンテナ内・Linux上で実行されるもの
+*.sh       text eol=lf
+*.sql      text eol=lf
+*.yml      text eol=lf
+*.yaml     text eol=lf
+Dockerfile text eol=lf
+
+# Windows側で実行されるもの
+*.bat text eol=crlf
+*.ps1 text eol=crlf
+
+# 差分を取らない（誤ってコミットされた場合に巨大な差分を出さないため）
+*.wav        binary
+*.mp3        binary
+*.m4a        binary
+*.flac       binary
+*.mp4        binary
+*.gguf       binary
+*.safetensors binary
+*.pt         binary
+*.onnx       binary
