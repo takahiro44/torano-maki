@@ -59,11 +59,20 @@ def _get_model() -> "SentenceTransformer":
         from sentence_transformers import SentenceTransformer
 
         settings = get_settings()
-        logger.info(
-            "埋め込みモデルを読み込みます: %s（初回はダウンロードに数分かかります）",
-            settings.embedding_model,
-        )
-        model = SentenceTransformer(settings.embedding_model)
+
+        # まずローカルのキャッシュだけで読み込む。
+        # 既定の挙動はHugging Face Hubへ更新確認に行くため、回線が不安定だと
+        # キャッシュ済みでも失敗する（実際にデモ環境で起きうる）。
+        # キャッシュがあればネットワークを一切使わず、起動も速い。
+        try:
+            model = SentenceTransformer(settings.embedding_model, local_files_only=True)
+            logger.info("埋め込みモデルをローカルキャッシュから読み込みました")
+        except Exception:
+            logger.info(
+                "キャッシュが無いため %s をダウンロードします（約2.2GB、数分かかります）",
+                settings.embedding_model,
+            )
+            model = SentenceTransformer(settings.embedding_model)
 
         # sentence-transformers 6.0 で get_sentence_embedding_dimension から改名された
         actual_dim = model.get_embedding_dimension()
@@ -109,3 +118,21 @@ def embed_query(text: str) -> list[float]:
     `embed_passages` と取り違えても例外は出ないが、検索精度が落ちる。
     """
     return _encode([_QUERY_PREFIX + text])[0]
+
+
+def warmup() -> None:
+    """モデルを先に読み込んでおく。
+
+    遅延読み込みのままだと、サーバ起動後の**最初の1回だけ**約23秒かかる。
+    デモの最初の操作でこれが起きると印象が悪いため、起動時に済ませておく。
+    その分 uvicorn の起動は遅くなるが、リクエストは常に速くなる。
+
+    失敗しても起動は止めない。DBやフロントの作業をしている人が、
+    埋め込みモデルを持っていないせいでサーバを上げられないのは困るため。
+    """
+    try:
+        _get_model()
+    except Exception:
+        logger.exception(
+            "埋め込みモデルの事前読み込みに失敗しました。初回リクエスト時に再試行します"
+        )
