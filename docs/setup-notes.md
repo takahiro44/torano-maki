@@ -64,6 +64,45 @@ DBコンテナが動作確認できたら、自分の環境の行を埋めるこ
 
 ## 記録
 
+### 2026-08-24 Hugging Face からのモデル取得が途中で切れる
+
+- **やろうとしたこと**: `faster-whisper` のモデルを取得する
+  （`medium` 1.5GB / `large-v3` 2.9GB）
+- **起きたこと**: ダウンロードが途中で切断される。2回発生した
+
+  ```
+  LocalEntryNotFoundError: Got: ConnectError: [WinError 10054]
+  既存の接続はリモート ホストに強制的に切断されました。
+
+  httpx.RemoteProtocolError: Server disconnected without sending a response.
+  ```
+
+- **原因**: 未認証リクエストは帯域が絞られるため、大きいファイルほど切れやすい。
+  「`HF_TOKEN` を設定すると速い」という警告が実際に出る
+- **解決策**: **単に再試行する。** `snapshot_download` は取得済みの分を再利用するので、
+  途中から再開される。`large-v3` は再試行1回・263秒で完了した。
+  何度も切れるなら再試行をループで回すとよい
+- **注意**: `HF_TOKEN` を設定する場合、**トークンをコミットしないこと**（CLAUDE.md 4.2）
+
+### 2026-08-24 文字起こし環境で分かったこと（Windows 11 / x86_64 / 8コア / 32GB）
+
+**`faster-whisper` は導入が軽い。** 詰まりやすい箇所を2つ回避できている。
+
+| 項目 | 内容 |
+|---|---|
+| PyTorch | **不要**（CTranslate2 + onnxruntime）。`.venv` は 249MB |
+| ffmpeg のバイナリ | **不要**（PyAV を同梱しているため） |
+| モデルの置き場 | `~/.cache/huggingface`。リポジトリには残らない |
+| 速度 | `medium` / `int8` で実時間の約1.2倍速 |
+
+- 埋め込み用の `sentence-transformers`（PyTorch で3〜4GB）とは別物なので、
+  **もう一組 torch を入れる必要はない**
+- Windows では HF キャッシュの symlink 警告が出るが**無害**。
+  開発者モードが無効なだけで、動作に影響しない（重複分のディスクは余計に使う）
+- モデルの実サイズ: `small` 約0.5GB / `medium` 1.5GB / `large-v3` 2.9GB。
+  **`large-v3` は精度が悪く遅かったので入れる必要はない**（`docs/decisions.md`）
+
+
 ### 2026-08-21 ⚠️ e5 の類似度スコアは絶対値で判断できない
 
 **検索実装をする人は先に読むこと。**
