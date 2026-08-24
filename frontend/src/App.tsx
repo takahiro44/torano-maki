@@ -49,7 +49,7 @@ export default function App() {
       <header className="mb-8">
         <h1 className="text-2xl font-bold tracking-tight">torano-maki</h1>
         <p className="mt-1 text-sm text-slate-500">
-          営業ナレッジを貯めて、意味で探す
+          自由テキストを構造化して貯め、意味で探す
           {counts && <span className="ml-2 text-slate-400">登録 {counts.confirmed} 件</span>}
         </p>
       </header>

@@ -334,3 +334,29 @@ CLAUDE.md のルールを追加・変更したときも、理由をここに残�
   のどれにするか。**まず (1) を確認してから決める**
 - **覆すとしたら**: DGX 側のサーバ構成が変わった場合。`.env` の項目名は
   プロバイダ非依存にしてあるので、値の差し替えだけで済むはず
+
+### 2026-08-24 抽出は Qwen + vLLM Structured Outputs
+
+- **背景**: 配信モデルが `Qwen3.8-27B-NVFP4` に変わった。拡散モデル時代の
+  「json_schema / guided_json が無視される」前提は現行サーバでは見直す
+- **決定**: `services/extraction.py` は公式 Online Serving に合わせ、
+  `response_format.json_schema` と extra の `structured_outputs.json` を併用する。
+  `guided_json` は使わない（vLLM 0.12 廃止）。thinking は OFF
+- **理由**: 制約デコードをサーバ側に任せ、フェンス付き自由テキストへの依存を減らす。
+  パース失敗時のフォールバックは残す
+
+### 2026-08-24 構造化は JSONB 1列で拡張する
+
+- **背景**: 抽出項目（状況・学び・業界など）は今後増える。項目ごとに SQL 列を
+  増やすと、そのたびに DB 作り直しが必要になる
+- **決定**: `knowledge.extracted JSONB` を1列追加する。スキーマの正は
+  `ExtractedItem`（Pydantic）。フィールド追加はモデルと表示ラベル表だけで済ませる
+- **理由**: 検索用の本文（`content`）と原文（`original_content`）は残しつつ、
+  機械が扱う構造は JSON に閉じる。個別列化はフィルタ要件が出てからにする
+
+### 2026-08-24 CBR 列で knowledge を持つ
+
+- **決定**: 抽出結果は JSONB ではなく CBR 6項目 + title を列として持つ。
+  `search_text` は embedding 専用。`data_sources` を参照する。
+  推論 URL は従来どおり `BASE_URL` / `MODEL_NAME`（QWEN_API_ENDPOINT は使わない）
+- **理由**: 指示スキーマと検索用フラットテキストを分離し、画面には CBR だけ出す

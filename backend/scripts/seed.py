@@ -56,7 +56,10 @@ def main() -> int:
         print(f"既存 {len(existing)} 件を論理削除しました（行はDBに残ります）")
 
     for i, content in enumerate(SEED_KNOWLEDGE, 1):
-        res = client.post("/knowledge", json={"content": content})
+        res = client.post(
+            "/knowledge",
+            json={"title": content[:100], "situation": content, "status": "confirmed"},
+        )
         if res.status_code != 201:
             print(f"{i}件目の投入に失敗: HTTP {res.status_code} {res.text}", file=sys.stderr)
             return 1
