@@ -1,0 +1,10 @@
+# 検証用の独立プロジェクト。
+# google-cloud-texttospeech は本番の依存ではないため、
+# backend/uv.lock を汚さないようにここで分離している（CLAUDE.md 3 / 3.2）。
+[project]
+name = "tts-experiment"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "google-cloud-texttospeech>=2.27.0",
+]

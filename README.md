@@ -41,7 +41,7 @@
 | 層 | 技術 | 選定理由 |
 |---|---|---|
 | LLM推論 | DGX Spark 上の vLLM（OpenAI互換API） | GPUは貸し出しで、こちらでサーバを選べない。詳細は `docs/decisions.md` |
-| 音声認識 | <!-- TODO: 検証後に確定 --> | ARM64でのCUDA対応状況により決定 |
+| 音声認識 | `faster-whisper` / `medium` / CPU `int8` | 実測でCER・欠落・業務用語を比較して選定。CPUで実用速度が出るため、ARM64+CUDAの検証を待たなくてよい |
 | 埋め込み | sentence-transformers | 日本語対応の埋め込みモデルをローカル実行 |
 | バックエンド | FastAPI / Pydantic | スキーマ定義がLLM・DB・APIの型を兼ねる |
 | フロントエンド | Vite / React / TypeScript | SPAに徹し、バックエンドと責務を分離 |
@@ -52,8 +52,8 @@
 
 着手前に決める必要があるもの。候補と経緯は [`docs/decisions.md`](docs/decisions.md) を参照。
 
-- **音声認識ライブラリ** — ARM64 + CUDA で動くものを検証して決定する
-- **埋め込みモデルと次元数** — `vector(N)` の定義に必要。**これが決まらないとDBを作れない**
+- **LLMに構造化出力をさせる方法** — DGXのvLLMがJSON Schema制約を無視するため、
+  パースとリトライを自前で持つ必要がある。**抽出処理の着手前に決める**
 
 技術選定の理由は [`docs/decisions.md`](docs/decisions.md) に記録している。
 **方針に疑問を持ったら、まずここを読むこと。**
@@ -190,7 +190,7 @@ http://localhost:5173 を開き、以下が **OK** になっていれば環境�
 | バックエンド API | OK |
 | データベース | OK |
 | pgvector | OK |
-| 埋め込み設定 | **NG のままで正常**（モデルと次元数が未確定のため） |
+| 埋め込み設定 | OK（`multilingual-e5-large` / 1024次元） |
 
 コマンドで確認する場合:
 
