@@ -1,0 +1,13 @@
+# 検証用の独立プロジェクト。
+# faster-whisper は本番の依存として確定していないため、
+# backend/uv.lock を汚さないようにここで分離している（CLAUDE.md 3 / 3.2）。
+#
+# faster-whisper は音声のデコードに PyAV を使うため、
+# ffmpeg のバイナリを別途インストールする必要がない（Windowsで詰まりにくい）。
+[project]
+name = "stt-experiment"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "faster-whisper>=1.1.0",
+]
