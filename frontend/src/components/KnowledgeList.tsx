@@ -1,34 +1,25 @@
 /**
- * ナレッジの一覧画面。編集と削除もここで行う。
- *
- * 削除は論理削除なので、押しても復帰できる。
- * ただし利用者にはそれが分からないため、確認してから実行する。
+ * ナレッジの一覧。抽出直後は draft なので、承認して検索対象にする。
  */
 
 import { useEffect, useState } from "react";
 import { deleteKnowledge, listKnowledge, updateKnowledge } from "../api/client";
 import type { Knowledge } from "../types/api";
+import { KnowledgeArticle } from "./KnowledgeArticle";
 
 type Props = {
   reloadKey: number;
-  /** 編集・削除で件数が変わったことを親に伝える。
-   *  子の内部状態だけで再取得すると、ヘッダーの件数が古いまま残るため。 */
   onChanged: () => void;
 };
 
 export function KnowledgeList({ reloadKey, onChanged }: Props) {
   const [items, setItems] = useState<Knowledge[] | null>(null);
   const [error, setError] = useState<string | null>(null);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  const [draft, setDraft] = useState("");
   const [busyId, setBusyId] = useState<string | null>(null);
 
-  // 再取得は親に一本化する。ここで独自に再取得すると、
-  // 一覧は更新されてもヘッダーの件数が古いまま残る
   const refresh = onChanged;
 
   useEffect(() => {
-    // 連続で操作したとき、先に投げた古い応答が後の結果を上書きしないようにする
     let cancelled = false;
     void (async () => {
       try {
@@ -46,11 +37,10 @@ export function KnowledgeList({ reloadKey, onChanged }: Props) {
     };
   }, [reloadKey]);
 
-  async function save(id: string) {
+  async function confirm(id: string) {
     setBusyId(id);
     try {
-      await updateKnowledge(id, { content: draft });
-      setEditingId(null);
+      await updateKnowledge(id, { status: "confirmed" });
       refresh();
     } catch (e) {
       setError(e instanceof Error ? e.message : String(e));
@@ -91,64 +81,29 @@ export function KnowledgeList({ reloadKey, onChanged }: Props) {
       <ul className="space-y-2">
         {items.map((k) => (
           <li key={k.id} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
-            {editingId === k.id ? (
-              <div className="space-y-2">
-                <textarea
-                  value={draft}
-                  onChange={(e) => setDraft(e.target.value)}
-                  rows={3}
-                  className="w-full rounded border border-slate-300 p-2 text-sm outline-none
-                             focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
-                />
-                <div className="flex gap-2">
+            <KnowledgeArticle knowledge={k} />
+            <div className="mt-3 flex items-center gap-3 border-t border-slate-100 pt-2 text-xs text-slate-400">
+              <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-600">{k.status}</span>
+              <span>{new Date(k.created_at).toLocaleString("ja-JP")}</span>
+              <div className="ml-auto flex gap-2">
+                {k.status === "draft" && (
                   <button
-                    onClick={() => save(k.id)}
-                    disabled={busyId === k.id || !draft.trim()}
-                    className="rounded bg-slate-900 px-3 py-1 text-xs text-white
-                               hover:bg-slate-700 disabled:bg-slate-300"
+                    onClick={() => void confirm(k.id)}
+                    disabled={busyId === k.id}
+                    className="text-slate-700 underline underline-offset-2 hover:text-slate-900"
                   >
-                    {busyId === k.id ? "保存中…" : "保存"}
+                    承認して検索対象にする
                   </button>
-                  <button
-                    onClick={() => setEditingId(null)}
-                    className="rounded border border-slate-300 px-3 py-1 text-xs text-slate-600"
-                  >
-                    やめる
-                  </button>
-                  <span className="self-center text-xs text-slate-400">
-                    本文を変えると埋め込みも作り直されます
-                  </span>
-                </div>
+                )}
+                <button
+                  onClick={() => void remove(k.id)}
+                  disabled={busyId === k.id}
+                  className="text-red-600 underline underline-offset-2 hover:text-red-800"
+                >
+                  削除
+                </button>
               </div>
-            ) : (
-              <>
-                <p className="text-sm leading-relaxed">{k.content}</p>
-                <div className="mt-3 flex items-center gap-3 border-t border-slate-100 pt-2 text-xs text-slate-400">
-                  <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-600">
-                    {k.status}
-                  </span>
-                  <span>{new Date(k.created_at).toLocaleString("ja-JP")}</span>
-                  <div className="ml-auto flex gap-2">
-                    <button
-                      onClick={() => {
-                        setEditingId(k.id);
-                        setDraft(k.content);
-                      }}
-                      className="text-slate-500 underline underline-offset-2 hover:text-slate-900"
-                    >
-                      編集
-                    </button>
-                    <button
-                      onClick={() => remove(k.id)}
-                      disabled={busyId === k.id}
-                      className="text-red-600 underline underline-offset-2 hover:text-red-800"
-                    >
-                      削除
-                    </button>
-                  </div>
-                </div>
-              </>
-            )}
+            </div>
           </li>
         ))}
       </ul>

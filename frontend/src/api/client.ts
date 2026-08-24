@@ -39,6 +39,7 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     try {
       const body = await res.json();
       if (typeof body?.detail === "string") detail = body.detail;
+      else if (Array.isArray(body?.detail)) detail = JSON.stringify(body.detail);
     } catch {
       // JSONでないエラー応答は無視して既定のメッセージを使う
     }
@@ -52,10 +53,17 @@ export const apiGet = <T>(path: string) => request<T>(path);
 
 // --- Knowledge ---
 
-export function createKnowledge(content: string) {
-  return request<Knowledge>("/knowledge", {
+export type IngestTextResponse = {
+  raw_text: string;
+  saved: Knowledge[];
+  notes: string[];
+};
+
+export function ingestText(rawText: string) {
+  return request<IngestTextResponse>("/ingest/text", {
     method: "POST",
-    body: JSON.stringify({ content }),
+    body: JSON.stringify({ raw_text: rawText }),
+    signal: AbortSignal.timeout(720_000),
   });
 }
 
@@ -72,7 +80,7 @@ export function countKnowledge() {
 
 export function updateKnowledge(
   id: string,
-  changes: { content?: string; status?: KnowledgeStatus },
+  changes: { title?: string; situation?: string; status?: KnowledgeStatus },
 ) {
   return request<Knowledge>(`/knowledge/${id}`, {
     method: "PATCH",

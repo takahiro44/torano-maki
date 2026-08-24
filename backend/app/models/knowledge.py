@@ -1,136 +1,241 @@
 """ナレッジのスキーマ定義。**このファイルがスキーマの唯一の源。**
 
-ここで定義したPydanticモデルが、
-  - LLMに渡すJSON Schema（構造化出力の指定）
-  - APIのリクエスト・レスポンス型
-  - フロントの型（OpenAPIスキーマ経由）
-を兼ねる（CLAUDE.md 6章）。3箇所に別々の定義を書かないこと。
-
-DBのテーブル定義は `tables.py`、実際のDDLは `docker/initdb/02_schema.sql`。
-
-設計の要点:
-- **入力時に構造化を強制しない。** 雑なテキストをそのまま受け取り、
-  分類や整理は後から行う（実装計画 §4）。そのため必須項目は content だけ
-- **元データを失わない。** AI整理を入れる段階では original_content に
-  整理前のテキストを残す。AIの整理が間違っていても復元できる（実装計画 §6）
-- **出典を辿れるようにする。** source_type / source_id で、どの入力から
-  生まれたKnowledgeかを記録する（CLAUDE.md 6章）
+CBR ケース構造 (Aamodt & Plaza 1994) を LLM・API・DB列で共有する。
+DDL の正は `docker/initdb/02_schema.sql`。
 """
+
+from __future__ import annotations
 
 from datetime import datetime
 from enum import StrEnum
 from typing import Annotated
 from uuid import UUID
 
-from pydantic import BaseModel, ConfigDict, Field, StringConstraints, field_validator
+from pydantic import (
+    BaseModel,
+    ConfigDict,
+    Field,
+    StringConstraints,
+    computed_field,
+    field_validator,
+)
 
 
 class KnowledgeStatus(StrEnum):
-    """人間による確認が済んでいるか。
-
-    AIが抽出した候補を、人間が確認してから正式なKnowledgeにするため
-    （実装計画 §22「AIは提案、人間が最終判断」）。
-    手入力のものは確認済みとして直接 CONFIRMED で登録してよい。
-    """
-
-    DRAFT = "draft"  # AIが抽出した候補。まだ検索対象にしない
-    CONFIRMED = "confirmed"  # 人間が確認済み。検索対象
-    REJECTED = "rejected"  # 人間が却下。残すのは再学習・分析のため
+    DRAFT = "draft"
+    CONFIRMED = "confirmed"
+    REJECTED = "rejected"
+    ARCHIVED = "archived"
 
 
 class SourceType(StrEnum):
-    """どの入力経路から来たか。
+    """data_sources.source_type。"""
 
-    入力方法が増えてもKnowledge側を変えずに済むよう、
-    経路を値で持つ（実装計画 §7 Input Adapter）。
-    """
-
-    MANUAL = "manual"  # 自由入力
-    MEETING = "meeting"  # 議事録
-    AUDIO = "audio"  # 音声
+    AUDIO = "audio"
+    DOCUMENT = "document"
+    MANUAL = "manual"
+    ROLEPLAY = "roleplay"
+    INTERVIEW = "interview"
 
 
-# 前後の空白を落としたうえで1文字以上を要求する。
-# min_length だけだと "   " のような空白だけの本文が通ってしまい、
-# APIを直接叩かれたときに中身の無いナレッジが登録される。
 NonBlankText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
+TitleText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)]
+
+
+class StructuredData(BaseModel):
+    """CBR ケース構造。LLM 抽出結果のバリデーション用。"""
+
+    model_config = ConfigDict(extra="forbid")
+
+    situation: str | None = Field(None, description="状況: 何が起きたか")
+    customer_issue: str | None = Field(None, description="顧客課題: 何が障壁だったか")
+    sales_action: str | None = Field(None, description="営業対応: 何をどう判断し実行したか")
+    action_reason: str | None = Field(None, description="対応理由: なぜその行動を選んだか")
+    result: str | None = Field(None, description="結果: どうなったか")
+    learning: str | None = Field(None, description="学び: 抽象化された教訓")
+
+
+class ExtractedKnowledge(BaseModel):
+    """LLM が原文から抽出した 1 件。プロンプトはフラット JSON。"""
+
+    model_config = ConfigDict(extra="forbid")
+
+    title: str = Field(..., max_length=100)
+    situation: str | None = None
+    customer_issue: str | None = None
+    sales_action: str | None = None
+    action_reason: str | None = None
+    result: str | None = None
+    learning: str | None = None
+    knowledge_type: str = "sales_knowhow"
+
+    @field_validator("title", mode="before")
+    @classmethod
+    def _clip_title(cls, v: object) -> object:
+        if isinstance(v, str) and len(v) > 100:
+            return v[:100]
+        return v
+
+    @property
+    def structured_data(self) -> StructuredData:
+        return StructuredData(
+            situation=self.situation,
+            customer_issue=self.customer_issue,
+            sales_action=self.sales_action,
+            action_reason=self.action_reason,
+            result=self.result,
+            learning=self.learning,
+        )
+
+
+# 後方互換。抽出テストやプレビューが ExtractedItem を参照していたため。
+ExtractedItem = ExtractedKnowledge
+
+CBR_FIELD_LABELS: tuple[tuple[str, str], ...] = (
+    ("title", "タイトル"),
+    ("situation", "状況"),
+    ("customer_issue", "顧客課題"),
+    ("sales_action", "営業対応"),
+    ("action_reason", "対応理由"),
+    ("result", "結果"),
+    ("learning", "学び"),
+)
+
+
+class ExtractionResult(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    items: list[ExtractedKnowledge] = Field(default_factory=list)
 
 
 class KnowledgeCreate(BaseModel):
-    """Knowledge の登録リクエスト。
+    """手入力登録。title があればよい。CBR は任意。"""
 
-    MVPでは content だけあれば登録できる。
-    他の項目はAI整理・議事録・音声を追加する段階で使う。
-    """
-
-    content: NonBlankText = Field(description="ナレッジ本文。検索対象になる")
-    original_content: str | None = Field(
-        default=None,
-        description="AI整理前の元テキスト。手入力の場合はNone",
-    )
-    source_type: SourceType = SourceType.MANUAL
-    source_id: UUID | None = Field(
-        default=None,
-        description="元になった入力（議事録・音声など）のID。将来用",
-    )
-    created_by: str | None = Field(default=None, description="登録者。認証は作らないため任意")
+    title: TitleText
+    knowledge_type: str = "sales_knowhow"
+    situation: str | None = None
+    customer_issue: str | None = None
+    sales_action: str | None = None
+    action_reason: str | None = None
+    result: str | None = None
+    learning: str | None = None
+    original_content: str | None = None
+    data_source_id: UUID | None = None
     status: KnowledgeStatus = KnowledgeStatus.CONFIRMED
 
 
 class KnowledgeUpdate(BaseModel):
-    """Knowledge の更新リクエスト。指定した項目だけ更新する。
-
-    「変更しない」はキーを省略して表す。**明示的な null は受け付けない。**
-    null を許すと、`exclude_unset` では省略と区別できないまま None が
-    DBの NOT NULL 列へ渡り、500 になるため。
-    """
-
-    content: NonBlankText | None = None
+    title: TitleText | None = None
+    situation: str | None = None
+    customer_issue: str | None = None
+    sales_action: str | None = None
+    action_reason: str | None = None
+    result: str | None = None
+    learning: str | None = None
     status: KnowledgeStatus | None = None
 
-    @field_validator("content", "status", mode="before")
+    @field_validator(
+        "title",
+        "situation",
+        "customer_issue",
+        "sales_action",
+        "action_reason",
+        "result",
+        "learning",
+        "status",
+        mode="before",
+    )
     @classmethod
     def _reject_explicit_null(cls, v: object) -> object:
-        """明示的な null を 422 にする。
-
-        既定値の None には走らない（バリデータは値が渡されたときだけ動く）ため、
-        キーを省略した場合は従来どおり「変更しない」になる。
-        """
         if v is None:
             raise ValueError("null は指定できません。変更しない項目はキーごと省略してください")
         return v
 
 
-class Knowledge(BaseModel):
-    """APIが返す Knowledge。
+class KnowledgeStatusPatch(BaseModel):
+    status: KnowledgeStatus
 
-    embedding は返さない。1024個の浮動小数点数はフロントで使い道がなく、
-    レスポンスを無駄に重くするため。
-    """
+
+class Knowledge(BaseModel):
+    """APIが返す Knowledge。search_text / embedding は出さない。"""
 
     model_config = ConfigDict(from_attributes=True)
 
     id: UUID
-    content: str
-    original_content: str | None
+    data_source_id: UUID | None = None
+    knowledge_type: str
+    title: str
+    situation: str | None = None
+    customer_issue: str | None = None
+    sales_action: str | None = None
+    action_reason: str | None = None
+    result: str | None = None
+    learning: str | None = None
+    original_content: str | None = None
     status: KnowledgeStatus
-    source_type: SourceType
-    source_id: UUID | None
-    created_by: str | None
     created_at: datetime
     updated_at: datetime
 
+    @computed_field
+    @property
+    def source_id(self) -> UUID | None:
+        """出典。CLAUDE.md 6章。data_source_id と同じ。"""
+        return self.data_source_id
+
+    @computed_field
+    @property
+    def source_type(self) -> str:
+        return "manual"
+
+    @computed_field
+    @property
+    def content(self) -> str:
+        """一覧・検索の互換表示。CBR をフラット化したもの。"""
+        from app.services.search_text import generate_search_text
+
+        return generate_search_text(
+            title=self.title,
+            situation=self.situation,
+            customer_issue=self.customer_issue,
+            sales_action=self.sales_action,
+            action_reason=self.action_reason,
+            result=self.result,
+            learning=self.learning,
+        )
+
 
 class KnowledgeSearchResult(Knowledge):
-    """検索結果。類似度を添えて返す。
-
-    どのKnowledgeがどれだけ近かったかを示さないと、
-    利用者が結果を信頼できないため（CLAUDE.md 6章）。
-    """
-
     score: float = Field(description="コサイン類似度。1に近いほど query に近い")
 
 
 class SearchRequest(BaseModel):
     query: str = Field(min_length=1, description="自然文の検索クエリ")
     top_k: int = Field(default=5, ge=1, le=50)
+
+
+class ExtractRequest(BaseModel):
+    text: Annotated[
+        str,
+        StringConstraints(strip_whitespace=True, min_length=1, max_length=100_000),
+    ]
+    data_source_id: UUID | None = None
+
+
+class IngestTextRequest(BaseModel):
+    raw_text: Annotated[
+        str,
+        StringConstraints(strip_whitespace=True, min_length=1, max_length=100_000),
+    ]
+    created_by: str | None = None
+    data_source_id: UUID | None = None
+
+
+class IngestPreviewItem(ExtractedKnowledge):
+    content: str
+
+
+class IngestTextResponse(BaseModel):
+    raw_text: str
+    extracted: list[IngestPreviewItem]
+    saved: list[Knowledge] = Field(default_factory=list)
+    notes: list[str] = Field(default_factory=list)

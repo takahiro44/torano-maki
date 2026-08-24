@@ -22,7 +22,10 @@ def _seed_note() -> None:
 @pytest.fixture
 def seeded(client: TestClient, _seed_note: None) -> TestClient:
     for content in SEED_KNOWLEDGE:
-        res = client.post("/knowledge", json={"content": content})
+        res = client.post(
+            "/knowledge",
+            json={"title": content[:100], "situation": content, "status": "confirmed"},
+        )
         assert res.status_code == 201, res.text
     return client
 
