@@ -1,29 +1,40 @@
 /**
- * バックエンドのレスポンス型。
- *
- * 手書きするとバックエンドとズレるため、実装が固まったら
- * OpenAPIスキーマから自動生成する方針（CLAUDE.md 5章）。
- *   npx openapi-typescript http://127.0.0.1:8000/openapi.json -o src/types/api.d.ts
- *
- * 現時点では手で定義している。backend/app/models/knowledge.py と対応させること。
+ * バックエンドのレスポンス型。CBR 列と対応させる。
  */
 
-export type KnowledgeStatus = "draft" | "confirmed" | "rejected";
-export type SourceType = "manual" | "meeting" | "audio";
+export type KnowledgeStatus = "draft" | "confirmed" | "rejected" | "archived";
+export type SourceType = "audio" | "document" | "manual" | "roleplay" | "interview";
+
+export const CBR_FIELD_LABELS: { key: keyof Knowledge; label: string }[] = [
+  { key: "title", label: "タイトル" },
+  { key: "situation", label: "状況" },
+  { key: "customer_issue", label: "顧客課題" },
+  { key: "sales_action", label: "営業対応" },
+  { key: "action_reason", label: "対応理由" },
+  { key: "result", label: "結果" },
+  { key: "learning", label: "学び" },
+];
 
 export type Knowledge = {
   id: string;
-  content: string;
+  data_source_id: string | null;
+  knowledge_type: string;
+  title: string;
+  situation: string | null;
+  customer_issue: string | null;
+  sales_action: string | null;
+  action_reason: string | null;
+  result: string | null;
+  learning: string | null;
   original_content: string | null;
   status: KnowledgeStatus;
-  source_type: SourceType;
   source_id: string | null;
-  created_by: string | null;
+  source_type: SourceType;
+  content: string;
   created_at: string;
   updated_at: string;
 };
 
-/** 検索結果。score は類似度だが参考値であり、しきい値判定には使わない。 */
 export type KnowledgeSearchResult = Knowledge & {
   score: number;
 };
@@ -32,10 +43,9 @@ export type KnowledgeCounts = {
   draft: number;
   confirmed: number;
   rejected: number;
+  archived: number;
   total: number;
 };
-
-// --- 疎通確認用 ---
 
 export type HealthResponse = {
   status: "ok";

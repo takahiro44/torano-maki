@@ -10,6 +10,7 @@
 import { useState } from "react";
 import { searchKnowledge } from "../api/client";
 import type { KnowledgeSearchResult } from "../types/api";
+import { KnowledgeArticle } from "./KnowledgeArticle";
 
 const EXAMPLE_QUERIES = [
   "サポート体制を重視する顧客",
@@ -112,7 +113,9 @@ export function KnowledgeSearch() {
                 <span className="mt-0.5 shrink-0 rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
                   {i + 1}
                 </span>
-                <p className="flex-1 text-sm leading-relaxed">{r.content}</p>
+                <div className="min-w-0 flex-1">
+                  <KnowledgeArticle knowledge={r} />
+                </div>
               </div>
               <div className="mt-3 flex items-center gap-3 border-t border-slate-100 pt-2 text-xs text-slate-400">
                 <span>スコア {r.score.toFixed(3)}</span>

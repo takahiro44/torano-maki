@@ -126,6 +126,11 @@ def embed_query(text: str) -> list[float]:
     return _encode([_QUERY_PREFIX + text])[0]
 
 
+def generate_embedding(text: str) -> list[float]:
+    """search_text から 1024 次元の embedding を生成。"""
+    return embed_passages([text])[0]
+
+
 def warmup() -> None:
     """モデルを先に読み込んでおく。
 
