@@ -1,0 +1,870 @@
+{
+  "data_sources": [
+    {
+      "id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "source_type": "audio",
+      "file_name": "sales_demo_perturn.wav",
+      "occurred_at": "2026-08-24T03:45:38.526186Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "525bda3e-7ba6-5dca-bcf5-b55878a18d54",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 12.200000000000001,
+      "content": "前回はありがとうございました。前回のお話では、今の販売管理システムをもう10年近く使われていて、そろそろ入れ替えも検討したいということでしたよね。"
+    },
+    {
+      "id": "0b58d047-6984-5434-8fdb-de18cdd5571c",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 12.200000000000001,
+      "end_sec": 20.46,
+      "content": "そうですね。古いですし、社員からも使いづらいという声が出ています。"
+    },
+    {
+      "id": "dfbdb016-91b1-5fe3-8575-a4c769a2c1e9",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 20.46,
+      "end_sec": 28.66,
+      "content": "ありがとうございます。今日は製品のお話に入る前に、今の業務をもう少し詳しく伺えればと思っています。"
+    },
+    {
+      "id": "39ae378c-c0a5-5e72-94d5-f4c30cdbae07",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 28.76,
+      "end_sec": 34.06,
+      "content": "使いづらいというところで、直近で特に困ったことって何かありましたか?"
+    },
+    {
+      "id": "fbb44ba1-e22c-5479-ab78-7f30468556c4",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 34.06,
+      "end_sec": 45.1,
+      "content": "直近ですか。先週ですね。大きめの注文が重なった日があって、その日は営業事務がかなりバタバタしていました。"
+    },
+    {
+      "id": "b68dd062-1a2e-5dcd-af8f-6532f6c7ed63",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 45.1,
+      "end_sec": 54.22,
+      "content": "先週ですか。その時、注文が入ってから出荷の準備に入るまで、実際にはどういう作業をされていたんでしょうか?"
+    },
+    {
+      "id": "711fa9a0-f5ce-58b8-b3bf-ce57a110c6dc",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 54.22,
+      "end_sec": 59.9,
+      "content": "うちは注文が電話、FAX、メールで来るんですよ。"
+    },
+    {
+      "id": "ed543e05-daae-565f-8128-66e5f5cb6b21",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 59.9,
+      "end_sec": 68.78,
+      "content": "FAXとメールは営業事務が確認して、電話の場合は営業が注文を受けて、内容を営業事務に伝えます。"
+    },
+    {
+      "id": "bf50cc84-5327-53fd-a229-670713305622",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 68.78,
+      "end_sec": 72.88,
+      "content": "そこから営業事務が販売管理システムに入力します。"
+    },
+    {
+      "id": "c8a819d4-90fd-5c87-a773-a095b5d1f5ae",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 72.88,
+      "end_sec": 80.62,
+      "content": "なるほど。注文を受けた後、最終的には営業事務の方が販売管理システムへ入力するんですね。"
+    },
+    {
+      "id": "3fa403ea-195a-5669-8a47-fc17fe9d65f6",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 11,
+      "speaker": "salesperson",
+      "start_sec": 80.62,
+      "end_sec": 85.86,
+      "content": "その情報って、販売管理システム以外にも入力されていますか?"
+    },
+    {
+      "id": "dd24ebdd-9c21-5c0b-8fee-3e0fa05b7f4d",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 85.86,
+      "end_sec": 97.22,
+      "content": "ありますね。営業は自分たちで案件管理用のExcelを使っています。それから、在庫が微妙な商品だと倉庫にも確認します。"
+    },
+    {
+      "id": "fa31af0d-d306-5611-9fa4-8bfaabe35392",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 97.22,
+      "end_sec": 109.9,
+      "content": "ということは、一つの注文でも最初にメールやFAXを確認して、販売管理システムに入れて、場合によっては営業側のExcelにも入れて、"
+    },
+    {
+      "id": "ab0bd070-4f58-5acd-b5da-e98e6dc67bb1",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 109.94000000000001,
+      "end_sec": 114.06,
+      "content": "在庫については倉庫へ確認する。そんな流れですか?"
+    },
+    {
+      "id": "1cf8d2bb-cd31-594f-9949-649816ad126a",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 114.06,
+      "end_sec": 122.5,
+      "content": "そうですね。改めて言われると、結構同じ情報を触っていますね。"
+    },
+    {
+      "id": "03957557-6654-5334-b9a7-efa27018a053",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 122.5,
+      "end_sec": 130.86,
+      "content": "先ほど、先週かなりバタバタしたとおっしゃっていましたが、その時一番時間がかかったのはどこでしたか?"
+    },
+    {
+      "id": "f7731087-1635-5c68-ba38-24112dc53eda",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 130.86,
+      "end_sec": 139.46,
+      "content": "あの日は、在庫確認ですね。システム上では在庫があることになっていたんですが、"
+    },
+    {
+      "id": "fd21a978-b80c-5378-baec-4b8c54cc9819",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 18,
+      "speaker": "customer",
+      "start_sec": 139.46,
+      "end_sec": 145.46,
+      "content": "実際には別のお客様向けに確保している商品が混ざっていたんです。"
+    },
+    {
+      "id": "c6a26853-aba9-50da-933f-8fbe47256a26",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 19,
+      "speaker": "salesperson",
+      "start_sec": 145.46,
+      "end_sec": 155.54000000000002,
+      "content": "なるほど。システム上の在庫数と、実際に今その注文に回せる在庫が一致していなかった。"
+    },
+    {
+      "id": "ad599737-dcbe-55d4-87c8-3b9fd7c20590",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 155.54000000000002,
+      "end_sec": 160.46,
+      "content": "そうなんです。結局倉庫に電話して確認しました。"
+    },
+    {
+      "id": "70842b0b-fa3f-5b9a-a848-38ccf0877a25",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 160.46,
+      "end_sec": 169.46,
+      "content": "そのあたりって、誰が見ても判断できるんでしょうか?それとも分かる人が限られていますか?"
+    },
+    {
+      "id": "d8a03511-f449-5815-9787-2d57313053d0",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 169.46,
+      "end_sec": 179.46,
+      "content": "正直、人によりますね。ベテランの事務員なら、あの商品は別案件で使う予定だったなとか覚えているんです。"
+    },
+    {
+      "id": "57d70114-cf59-5e85-a884-867d2eb7dee3",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 179.46,
+      "end_sec": 184.46,
+      "content": "でも、新人だとシステムの数字を見るしかないので。"
+    },
+    {
+      "id": "ec1239cb-f928-5d4a-93b8-236932a31950",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 185.46,
+      "end_sec": 188.46,
+      "content": "なるほど。それは結構大きいですね。"
+    },
+    {
+      "id": "953d8528-c3fe-5c65-bd28-47b8403051f5",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 188.46,
+      "end_sec": 198.46,
+      "content": "実際にシステム上では在庫があるので、お客様に出荷できますと回答したけれど、後で難しいと分かったようなケースもありますか?"
+    },
+    {
+      "id": "0e8134e4-2551-5d73-a323-006bbd0312b9",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 198.46,
+      "end_sec": 205.46,
+      "content": "あります。頻繁ではないですけど、月に買いあるかないかくらいですね。"
+    },
+    {
+      "id": "6df2e5b3-dabc-5a04-b557-47942b5740c1",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 205.46,
+      "end_sec": 209.46,
+      "content": "その場合はどうされるんですか?"
+    },
+    {
+      "id": "94af9e2b-2c55-5c3e-b0b2-a74a48ca4974",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 28,
+      "speaker": "customer",
+      "start_sec": 209.46,
+      "end_sec": 217.46,
+      "content": "担当営業がお客様に連絡して謝ります。納期を伸ばしてもらったり、代替品を提案したりですね。"
+    },
+    {
+      "id": "760c7c1c-c5bc-590e-ba4f-67bc2cc37e8c",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 217.46,
+      "end_sec": 230.46,
+      "content": "そうすると、単純に営業事務の入力作業が大変というだけではなくて、情報が分散していることで、お客様への納期回答にも影響しているんですね。"
+    },
+    {
+      "id": "df44fd35-ab19-5246-96aa-cf5d16861cb0",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 230.46,
+      "end_sec": 236.46,
+      "content": "そうですね。言われてみればそっちの方が問題かもしれません。"
+    },
+    {
+      "id": "0c850754-b2c6-5699-93b7-1f893f96e148",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 236.46,
+      "end_sec": 245.46,
+      "content": "ちなみに、受注入力そのものの負担も少し確認したいんですが、1日に何件くらい注文がありますか?"
+    },
+    {
+      "id": "001c3310-8082-5406-a5cc-dadd2976e84d",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 32,
+      "speaker": "customer",
+      "start_sec": 245.46,
+      "end_sec": 247.46,
+      "content": "大体で大丈夫です。"
+    },
+    {
+      "id": "e0806f5b-1b7a-5160-a63f-b6744fafb639",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 247.46,
+      "end_sec": 252.46,
+      "content": "普通の日で50件くらいです。多い日は80件を超えますね。"
+    },
+    {
+      "id": "c6fccfbc-7745-5f0d-9f39-ddbd36938775",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 252.46,
+      "end_sec": 259.46000000000004,
+      "content": "1件の注文を確認して、システムへ登録するまでってどれくらいかかりますか?"
+    },
+    {
+      "id": "8c0633fa-b3ac-58ee-905b-356f5b2d90a9",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 259.46,
+      "end_sec": 262.46,
+      "content": "簡単な注文なら2、3分です。"
+    },
+    {
+      "id": "558d0677-f036-58c2-8d1f-bbbbf7b956bb",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 262.46,
+      "end_sec": 270.46,
+      "content": "ただ、FAXが読みづらかったり、商品コードが分からなかったりすると5分以上かかることもあります。"
+    },
+    {
+      "id": "b81349e5-1150-5b59-9130-6efb351e6fd7",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 270.46,
+      "end_sec": 279.46,
+      "content": "仮に平均3分としても、50件だと150分なので、1日2時間半くらいですね。"
+    },
+    {
+      "id": "e94242e1-ec0a-5c1f-b6d2-771bd178be29",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 279.46,
+      "end_sec": 286.46,
+      "content": "もちろん入力作業自体を全部なくせるわけではないですが、毎日の業務としてはかなり大きいですね。"
+    },
+    {
+      "id": "f96849eb-aa1c-5019-88d2-5a1974653ce0",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 39,
+      "speaker": "customer",
+      "start_sec": 286.46,
+      "end_sec": 294.46,
+      "content": "そうですね。月末は請求処理もありますから、残業になることもあります。"
+    },
+    {
+      "id": "f1ed98b5-2f03-54f5-aaa6-db16f2312b37",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 294.46,
+      "end_sec": 300.46,
+      "content": "ありがとうございます。一度、ここまでのお話を私の理解で整理してもいいですか?"
+    },
+    {
+      "id": "ef77f817-6e73-566a-bd91-3f06eb1311a4",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 300.46,
+      "end_sec": 302.46,
+      "content": "はい。"
+    },
+    {
+      "id": "9637c100-eeaa-5dd1-87f8-c8c9bdbb6bfe",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 302.46,
+      "end_sec": 307.46,
+      "content": "前回は販売管理システムが古いというお話から始まりましたが、"
+    },
+    {
+      "id": "7c9d0ff7-4de6-5341-8f63-0dfb5dd404e4",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 308.46,
+      "end_sec": 320.46,
+      "content": "今日伺った限りだと、古いことそのものよりも、まず注文が電話、FAX、メールに分かれていて、受けた情報を何度か入力し直している。"
+    },
+    {
+      "id": "d652932e-551f-521a-8cc0-0d467615d102",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 320.46,
+      "end_sec": 327.46,
+      "content": "それから、システムに表示されている在庫だけでは、実際にその注文へ割り当てられるか判断できない場合がある。"
+    },
+    {
+      "id": "caec2680-2cef-5706-8fd7-9c7ad246fb5d",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 327.46,
+      "end_sec": 332.46,
+      "content": "さらに、その判断の一部がベテランの方の経験に依存している。"
+    },
+    {
+      "id": "7191967c-8bbc-5f2e-8e94-a5107d374d44",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 332.46,
+      "end_sec": 339.46,
+      "content": "この辺りの方が実際の業務には影響が大きそうに感じたんですが、田中さんの認識としてはいかがですか?"
+    },
+    {
+      "id": "70e7435a-96c9-5d35-8905-7a0021aec2cb",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 47,
+      "speaker": "customer",
+      "start_sec": 339.46,
+      "end_sec": 349.46,
+      "content": "その通りだと思います。特に二重入力は昔からこういうものだと思っていたので、あまり問題として考えていませんでした。"
+    },
+    {
+      "id": "5117cf1a-ba24-5d28-b141-db69fdcdad73",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 349.46,
+      "end_sec": 361.46,
+      "content": "ありがとうございます。では仮に、今のお話の中から一つだけ先に改善できるとしたら、田中さんとしてはどれが一番効果が大きそうですか?"
+    },
+    {
+      "id": "650e6e25-0a21-5b59-9174-5312b7e175ae",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 49,
+      "speaker": "customer",
+      "start_sec": 361.46,
+      "end_sec": 371.46,
+      "content": "まずは受注入力ですね。毎日のことなので、そこが楽になるだけでも営業事務の負担はかなり違うと思います。"
+    },
+    {
+      "id": "f00a031a-a86b-5148-9489-95a292f4a9bf",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 50,
+      "speaker": "salesperson",
+      "start_sec": 371.46,
+      "end_sec": 380.46,
+      "content": "分かりました。そうすると、最初から古いシステムを全部入れ替えましょうという話ではなくて、"
+    },
+    {
+      "id": "55fdf08b-b2a6-5df9-b879-c94f6616cd2c",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 51,
+      "speaker": "salesperson",
+      "start_sec": 380.46,
+      "end_sec": 392.46,
+      "content": "まず受注から在庫確認、出荷までの流れを整理して、その中で手入力や確認作業をどこまで減らせるかを見る方が良さそうですね。"
+    },
+    {
+      "id": "4c4628c1-fadc-5fc7-b665-c7d55c1d44e9",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 52,
+      "speaker": "customer",
+      "start_sec": 392.46,
+      "end_sec": 399.46,
+      "content": "その方がありがたいですね。全部一気に変えるとなると現場も大変なので。"
+    },
+    {
+      "id": "069fea03-484b-5580-a5df-6d9bb6ffb1b2",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 53,
+      "speaker": "salesperson",
+      "start_sec": 399.46000000000004,
+      "end_sec": 410.46000000000004,
+      "content": "そうですよね。その前提で一つ候補としてご紹介すると、弊社にはスマイルVセカンドエディション販売という販売管理の製品があります。"
+    },
+    {
+      "id": "34f4834f-04be-5495-8c1d-db6a94886350",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 54,
+      "speaker": "salesperson",
+      "start_sec": 410.46000000000004,
+      "end_sec": 420.46000000000004,
+      "content": "売り上げや仕入れ、在庫などの販売管理業務を扱えるものなので、今日伺った受注入力や在庫確認についても改善の選択肢として検討できると思っています。"
+    },
+    {
+      "id": "b4d9fb99-07c7-54db-852a-685fa979b4d3",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 55,
+      "speaker": "customer",
+      "start_sec": 420.46000000000004,
+      "end_sec": 423.46000000000004,
+      "content": "そういう製品があるんですね。"
+    },
+    {
+      "id": "0a8486eb-00ba-5735-ad84-dd4f8d44488d",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 56,
+      "speaker": "salesperson",
+      "start_sec": 424.46000000000004,
+      "end_sec": 430.46000000000004,
+      "content": "はい、ただ今の段階でスマイルを入れれば全部解決しますとは考えていません。"
+    },
+    {
+      "id": "fc2f6417-48f7-561a-9db6-b412dcb89bf1",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 57,
+      "speaker": "salesperson",
+      "start_sec": 430.46000000000004,
+      "end_sec": 441.46000000000004,
+      "content": "音社の場合、電話、FAX、メールで注文が入っていることや、営業側でExcelを使われていること、それから在庫の運用にも独自のルールがありますよね。"
+    },
+    {
+      "id": "32832192-74de-573c-9e4e-1831b8fd8795",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 58,
+      "speaker": "salesperson",
+      "start_sec": 441.46000000000004,
+      "end_sec": 448.46000000000004,
+      "content": "そこを確認せずにシステムだけ入れ替えると、結局今と同じような手作業が残ってしまう可能性があります。"
+    },
+    {
+      "id": "5777b5fe-383b-55ea-b8a7-c7bcbce06bbb",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 59,
+      "speaker": "customer",
+      "start_sec": 448.46000000000004,
+      "end_sec": 452.46000000000004,
+      "content": "確かにそれは避けたいですね。"
+    },
+    {
+      "id": "ac790c5b-2d2b-5653-8e67-921b85e6172c",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 60,
+      "speaker": "salesperson",
+      "start_sec": 452.46000000000004,
+      "end_sec": 461.46000000000004,
+      "content": "なので、次回はスマイルVセカンドエディション販売を前提の一つとして、現在のどの作業がどう変わるのか、"
+    },
+    {
+      "id": "d4ae8cc6-8b85-5362-b9d5-c96c3f2c30f4",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 61,
+      "speaker": "salesperson",
+      "start_sec": 461.46000000000004,
+      "end_sec": 468.46000000000004,
+      "content": "どの作業は今の運用を残した方がいいのか、この2つが分かる形でお持ちしたいと思っています。"
+    },
+    {
+      "id": "b9e171c0-dc2c-5051-aec5-ca334ea19bde",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 62,
+      "speaker": "salesperson",
+      "start_sec": 468.46000000000004,
+      "end_sec": 476.46000000000004,
+      "content": "もし可能であれば、実際に営業事務の方が使っている受注表と、営業の方が使っている案件管理のExcelを、"
+    },
+    {
+      "id": "514da877-09dd-5298-86f7-dbebc2d14d1f",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 63,
+      "speaker": "salesperson",
+      "start_sec": 476.46000000000004,
+      "end_sec": 479.46000000000004,
+      "content": "機密情報を除いたサンプルで見せていただけますか?"
+    },
+    {
+      "id": "5efc7425-cc94-5795-8f92-8e783a3c8811",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 64,
+      "speaker": "customer",
+      "start_sec": 479.46000000000004,
+      "end_sec": 481.46000000000004,
+      "content": "それなら用意できます。"
+    },
+    {
+      "id": "42d3d5b7-f35f-5b1e-8060-6e1f31cfc811",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 65,
+      "speaker": "salesperson",
+      "start_sec": 481.46000000000004,
+      "end_sec": 483.46000000000004,
+      "content": "ありがとうございます。"
+    },
+    {
+      "id": "8cb45e15-0ba9-5536-9afb-e0362b63d5e4",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 66,
+      "speaker": "salesperson",
+      "start_sec": 483.46000000000004,
+      "end_sec": 490.46000000000004,
+      "content": "あと、可能なら、次回までに営業事務の方にも一度お話を伺いたいです。"
+    },
+    {
+      "id": "4d27c42e-1fe1-55dd-ab82-2c3896c22b2f",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 67,
+      "speaker": "salesperson",
+      "start_sec": 490.46000000000004,
+      "end_sec": 498.46000000000004,
+      "content": "田中さんから見えている課題と、実際に入力作業をされている方が困っているところが、少し違う可能性もありますので。"
+    },
+    {
+      "id": "1ed15618-727b-5964-8a73-618c00a5583a",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 68,
+      "speaker": "customer",
+      "start_sec": 498.46000000000004,
+      "end_sec": 502.46000000000004,
+      "content": "わかりました。担当者にも声をかけておきます。"
+    },
+    {
+      "id": "58fe47fc-92e8-5144-9b8f-d0189159319d",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 69,
+      "speaker": "salesperson",
+      "start_sec": 502.46000000000004,
+      "end_sec": 504.46000000000004,
+      "content": "ありがとうございます。"
+    },
+    {
+      "id": "8d1828e0-3e6a-5bc0-89d8-6f6c4a8c4ebd",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 70,
+      "speaker": "salesperson",
+      "start_sec": 505.46000000000004,
+      "end_sec": 512.46,
+      "content": "では、次回は今日伺った受注から在庫確認までの流れをこちらでも整理して、"
+    },
+    {
+      "id": "736c74ff-8658-5eeb-882f-b75d7916a9d8",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 71,
+      "speaker": "salesperson",
+      "start_sec": 512.46,
+      "end_sec": 517.46,
+      "content": "スマイルVセカンドエディション販売を使った場合の改善案と一緒にお持ちします。"
+    },
+    {
+      "id": "de51456d-3dcb-5f16-a9e7-0425e076bcb2",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 72,
+      "speaker": "salesperson",
+      "start_sec": 517.46,
+      "end_sec": 522.46,
+      "content": "その上で、実際にどこから手をつけるのが良いか、一緒に決められればと思います。"
+    },
+    {
+      "id": "d0d3cf84-66d8-523d-866e-0a44f69366e9",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 73,
+      "speaker": "customer",
+      "start_sec": 522.46,
+      "end_sec": 524.46,
+      "content": "お願いします。"
+    },
+    {
+      "id": "f435f1f6-9687-5b4f-a5d7-93656be2402e",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "sequence_no": 74,
+      "speaker": "salesperson",
+      "start_sec": 524.46,
+      "end_sec": 530.46,
+      "content": "ありがとうございます。本日はかなり具体的に伺えたので、助かりました。よろしくお願いします。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "dd57b240-c05b-5c96-99bb-01018a1d2e7f",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "knowledge_type": "pain_point",
+      "title": "在庫情報の非同期による顧客対応リスク",
+      "situation": "販売管理システム上の在庫数と、実際に割り当て可能な在庫数が一致しない状況",
+      "problem": "システム上は在庫ありと表示されるため顧客に出荷可能と回答したが、実際には別案件で確保されていたため納期遅延や代替品提案が発生する",
+      "judgment": "システム単体のデータではなく、運用ルール（別案件確保など）を反映した実効在庫の把握が不足している",
+      "action": "倉庫への電話確認やベテラン社員の経験に依存して在庫の可否を判断している",
+      "reasoning": "新人社員はシステム数値しか参照できないため、判断の属人化が進み、顧客への誤った約束（ミスコミットメント）のリスクが高まっている",
+      "outcome": "月に1回程度、顧客への謝罪や納期変更が発生している",
+      "lesson": "在庫管理の課題は「データの入力負荷」だけでなく、「データと実態の乖離」が顧客信頼を損なう重大なリスク要因である",
+      "applicable_situations": "在庫管理システムを導入済みだが、手作業による在庫調整や確保ルールが存在する製造業・卸売業",
+      "limitations": "リアルタイムの在庫同期が技術的に困難な場合、運用ルールの標準化が前提となる",
+      "industry": "卸売業",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "在庫情報の非同期による顧客対応リスク\n販売管理システム上の在庫数と、実際に割り当て可能な在庫数が一致しない状況\nシステム上は在庫ありと表示されるため顧客に出荷可能と回答したが、実際には別案件で確保されていたため納期遅延や代替品提案が発生する\nシステム単体のデータではなく、運用ルール（別案件確保など）を反映した実効在庫の把握が不足している\n倉庫への電話確認やベテラン社員の経験に依存して在庫の可否を判断している\n新人社員はシステム数値しか参照できないため、判断の属人化が進み、顧客への誤った約束（ミスコミットメント）のリスクが高まっている\n月に1回程度、顧客への謝罪や納期変更が発生している\n在庫管理の課題は「データの入力負荷」だけでなく、「データと実態の乖離」が顧客信頼を損なう重大なリスク要因である\n在庫管理システムを導入済みだが、手作業による在庫調整や確保ルールが存在する製造業・卸売業\nリアルタイムの在庫同期が技術的に困難な場合、運用ルールの標準化が前提となる\n卸売業\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-24T07:55:19.390854Z"
+    },
+    {
+      "id": "7ee7bb4f-6c9a-5680-ab0e-39a8d5014d2f",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "knowledge_type": "sales_technique",
+      "title": "課題の再定義と優先順位付けの促し",
+      "situation": "顧客が「システムが古い」という表面的な不満を述べている段階",
+      "problem": "顧客は二重入力や属人化を「昔からこうだった」と捉えており、真の業務影響を認識していない",
+      "judgment": "単なるシステム入れ替えではなく、業務フロー全体の最適化が必要と判断",
+      "action": "収集した情報（二重入力、在庫乖離、属人化）を整理して顧客に返却し、「一つだけ改善するならどれか」と質問する",
+      "reasoning": "顧客自身に優先順位をつけさせることで、当事者意識を高め、解決策への納得感を醸成する",
+      "outcome": "顧客は「受注入力の負担軽減」を最優先課題として認識し、段階的改善への同意を得る",
+      "lesson": "顧客の自発的な優先順位付けを促すことで、提案の受け入れやすさが向上する",
+      "applicable_situations": "顧客が漠然とした不満を抱えているが、具体的な改善目標が定まっていない商談",
+      "limitations": "顧客が明確な予算や期限を提示している場合は、この手法よりも直接的な提案が有効な場合がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "課題の再定義と優先順位付けの促し\n顧客が「システムが古い」という表面的な不満を述べている段階\n顧客は二重入力や属人化を「昔からこうだった」と捉えており、真の業務影響を認識していない\n単なるシステム入れ替えではなく、業務フロー全体の最適化が必要と判断\n収集した情報（二重入力、在庫乖離、属人化）を整理して顧客に返却し、「一つだけ改善するならどれか」と質問する\n顧客自身に優先順位をつけさせることで、当事者意識を高め、解決策への納得感を醸成する\n顧客は「受注入力の負担軽減」を最優先課題として認識し、段階的改善への同意を得る\n顧客の自発的な優先順位付けを促すことで、提案の受け入れやすさが向上する\n顧客が漠然とした不満を抱えているが、具体的な改善目標が定まっていない商談\n顧客が明確な予算や期限を提示している場合は、この手法よりも直接的な提案が有効な場合がある\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-24T07:55:19.390854Z"
+    },
+    {
+      "id": "19b3bf56-0674-5a7f-8e5e-11723f9fa6b7",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "knowledge_type": "proposal",
+      "title": "段階的導入アプローチの提示",
+      "situation": "顧客が「全部一気に変えるのは現場が大変」と懸念を表明している",
+      "problem": "大規模なシステム入れ替えへの抵抗感",
+      "judgment": "既存の運用を完全に否定するのではなく、現行フローの中で改善可能な部分に焦点を当てる",
+      "action": "「受注から在庫確認、出荷までの流れを整理し、手入力を減らせるかを見る」という段階的アプローチを提案",
+      "reasoning": "顧客の懸念（現場の負担）を解消しつつ、自社製品（スマイルV）の導入可能性を自然に示す",
+      "outcome": "顧客は「その方がありがたい」と応じ、次回の詳細な改善案作成に同意",
+      "lesson": "大規模変革を提案する際は、顧客の心理的ハードルを下げるため、スモールスタートや段階的導入の選択肢を明示する",
+      "applicable_situations": "レガシーシステムからの移行を伴うIT商談",
+      "limitations": "根本的なアーキテクチャ変更が必要な場合、段階的アプローチでは解決できない",
+      "industry": null,
+      "product": "スマイルVセカンドエディション販売",
+      "sales_stage": "proposal",
+      "search_text": "段階的導入アプローチの提示\n顧客が「全部一気に変えるのは現場が大変」と懸念を表明している\n大規模なシステム入れ替えへの抵抗感\n既存の運用を完全に否定するのではなく、現行フローの中で改善可能な部分に焦点を当てる\n「受注から在庫確認、出荷までの流れを整理し、手入力を減らせるかを見る」という段階的アプローチを提案\n顧客の懸念（現場の負担）を解消しつつ、自社製品（スマイルV）の導入可能性を自然に示す\n顧客は「その方がありがたい」と応じ、次回の詳細な改善案作成に同意\n大規模変革を提案する際は、顧客の心理的ハードルを下げるため、スモールスタートや段階的導入の選択肢を明示する\nレガシーシステムからの移行を伴うIT商談\n根本的なアーキテクチャ変更が必要な場合、段階的アプローチでは解決できない\nスマイルVセカンドエディション販売\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-24T07:55:19.390854Z"
+    },
+    {
+      "id": "df2ac2f3-ba05-516c-97ad-c87410e811a1",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "knowledge_type": "operational_insight",
+      "title": "属人化された在庫判断のリスク",
+      "situation": "在庫の可否判断がベテラン社員の記憶に依存している",
+      "problem": "新人社員はシステム数値のみ参照するため、別案件で確保されている在庫を誤って出荷可能と判断する可能性がある",
+      "judgment": "属人化された知識は組織の脆弱性であり、標準化が必要",
+      "action": "システム上の在庫数と実効在庫の乖離を定量的に把握し、判断基準の明確化を提案",
+      "reasoning": "属人化は人材の異動や退職時に業務停止やミスコミットメントのリスクを高める",
+      "outcome": "顧客も「言われてみればそっちの方が問題かもしれない」と認識を改める",
+      "lesson": "業務の属人化は、単なる効率問題ではなく、顧客対応の品質とリスク管理の問題として捉えるべき",
+      "applicable_situations": "経験豊富な社員が重要な判断を下している業務プロセス",
+      "limitations": "属人化が意図的な柔軟性として機能している場合は、標準化が逆効果になる場合がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "属人化された在庫判断のリスク\n在庫の可否判断がベテラン社員の記憶に依存している\n新人社員はシステム数値のみ参照するため、別案件で確保されている在庫を誤って出荷可能と判断する可能性がある\n属人化された知識は組織の脆弱性であり、標準化が必要\nシステム上の在庫数と実効在庫の乖離を定量的に把握し、判断基準の明確化を提案\n属人化は人材の異動や退職時に業務停止やミスコミットメントのリスクを高める\n顧客も「言われてみればそっちの方が問題かもしれない」と認識を改める\n業務の属人化は、単なる効率問題ではなく、顧客対応の品質とリスク管理の問題として捉えるべき\n経験豊富な社員が重要な判断を下している業務プロセス\n属人化が意図的な柔軟性として機能している場合は、標準化が逆効果になる場合がある\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-24T07:55:19.390854Z"
+    },
+    {
+      "id": "0cd5e4c2-4c28-565f-8e11-d4d7cd5330d7",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "knowledge_type": "next_action",
+      "title": "現場担当者へのヒアリングと資料収集",
+      "situation": "経営層（田中さん）からの情報だけでは、現場の実態が把握しきれない可能性がある",
+      "problem": "課題を認識している側と、実際に作業を行っている側の認識のズレ",
+      "judgment": "現場の営業事務担当者にも直接ヒアリングする必要がある",
+      "action": "受注表と案件管理Excelのサンプル提供、および営業事務担当者へのヒアリング機会を確保",
+      "reasoning": "具体的な業務フローとデータ構造を把握することで、より精度の高い改善案を提案できる",
+      "outcome": "顧客はサンプル提供と担当者への声かけに同意",
+      "lesson": "意思決定者だけでなく、現場の実務担当者にも直接触れることで、提案の精度と顧客の納得感を高める",
+      "applicable_situations": "業務プロセスの改善を提案する商談",
+      "limitations": "現場担当者のスケジュール調整に時間がかかる場合がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "follow_up",
+      "search_text": "現場担当者へのヒアリングと資料収集\n経営層（田中さん）からの情報だけでは、現場の実態が把握しきれない可能性がある\n課題を認識している側と、実際に作業を行っている側の認識のズレ\n現場の営業事務担当者にも直接ヒアリングする必要がある\n受注表と案件管理Excelのサンプル提供、および営業事務担当者へのヒアリング機会を確保\n具体的な業務フローとデータ構造を把握することで、より精度の高い改善案を提案できる\n顧客はサンプル提供と担当者への声かけに同意\n意思決定者だけでなく、現場の実務担当者にも直接触れることで、提案の精度と顧客の納得感を高める\n業務プロセスの改善を提案する商談\n現場担当者のスケジュール調整に時間がかかる場合がある\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-24T07:55:19.390854Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "e07410df-b448-5c6b-8400-aee72dfa8039",
+      "knowledge_id": "dd57b240-c05b-5c96-99bb-01018a1d2e7f",
+      "start_utterance_id": "f7731087-1635-5c68-ba38-24112dc53eda",
+      "end_utterance_id": "ad599737-dcbe-55d4-87c8-3b9fd7c20590"
+    },
+    {
+      "id": "a1d4bebe-3819-504d-bd84-f2e6641e8618",
+      "knowledge_id": "dd57b240-c05b-5c96-99bb-01018a1d2e7f",
+      "start_utterance_id": "953d8528-c3fe-5c65-bd28-47b8403051f5",
+      "end_utterance_id": "94af9e2b-2c55-5c3e-b0b2-a74a48ca4974"
+    },
+    {
+      "id": "a8f53931-660a-5b9d-aeea-71804b06bf08",
+      "knowledge_id": "7ee7bb4f-6c9a-5680-ab0e-39a8d5014d2f",
+      "start_utterance_id": "9637c100-eeaa-5dd1-87f8-c8c9bdbb6bfe",
+      "end_utterance_id": "650e6e25-0a21-5b59-9174-5312b7e175ae"
+    },
+    {
+      "id": "0a80ce23-4554-5a02-8504-6ba5c19df228",
+      "knowledge_id": "19b3bf56-0674-5a7f-8e5e-11723f9fa6b7",
+      "start_utterance_id": "f00a031a-a86b-5148-9489-95a292f4a9bf",
+      "end_utterance_id": "4c4628c1-fadc-5fc7-b665-c7d55c1d44e9"
+    },
+    {
+      "id": "2d000627-d861-52b4-b884-0dfc02c59b85",
+      "knowledge_id": "19b3bf56-0674-5a7f-8e5e-11723f9fa6b7",
+      "start_utterance_id": "069fea03-484b-5580-a5df-6d9bb6ffb1b2",
+      "end_utterance_id": "34f4834f-04be-5495-8c1d-db6a94886350"
+    },
+    {
+      "id": "7d173221-412e-57f3-bf33-0a692d69d33b",
+      "knowledge_id": "df2ac2f3-ba05-516c-97ad-c87410e811a1",
+      "start_utterance_id": "70842b0b-fa3f-5b9a-a848-38ccf0877a25",
+      "end_utterance_id": "ec1239cb-f928-5d4a-93b8-236932a31950"
+    },
+    {
+      "id": "8c34fcf7-24a0-5583-be06-fb8b929c93ae",
+      "knowledge_id": "df2ac2f3-ba05-516c-97ad-c87410e811a1",
+      "start_utterance_id": "760c7c1c-c5bc-590e-ba4f-67bc2cc37e8c",
+      "end_utterance_id": "df44fd35-ab19-5246-96aa-cf5d16861cb0"
+    },
+    {
+      "id": "f1a03a7d-de8d-50a8-be76-03963029a433",
+      "knowledge_id": "0cd5e4c2-4c28-565f-8e11-d4d7cd5330d7",
+      "start_utterance_id": "b9e171c0-dc2c-5051-aec5-ca334ea19bde",
+      "end_utterance_id": "1ed15618-727b-5964-8a73-618c00a5583a"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "05aab9c8-2b0b-5e96-a224-c2723817f0ed",
+      "data_source_id": "eaa26d88-834e-532f-83b9-8a81f72f414d",
+      "summary": "顧客は10年近く使用している販売管理システムの老朽化と使いづらさを理由に入れ替えを検討中。商談では、注文の二重入力、システム在庫と実効在庫の乖離、属人化された在庫判断が業務効率と顧客対応の品質を損なっていることが明らかになった。顧客は「受注入力の負担軽減」を最優先課題として認識し、段階的改善アプローチに同意。次回は、現場担当者へのヒアリングと資料収集を経て、具体的な改善案を提示する予定。",
+      "customer_needs": [
+        "受注入力の負担軽減",
+        "システム在庫と実効在庫の乖離の解消",
+        "属人化された在庫判断の標準化",
+        "顧客へのミスコミットメント防止"
+      ],
+      "proposals": [
+        "受注から在庫確認、出荷までのフロー整理",
+        "スマイルVセカンドエディション販売を活用した段階的改善",
+        "現場担当者へのヒアリングと資料収集"
+      ],
+      "decisions": [
+        "受注入力の負担軽減を最優先課題として認識",
+        "段階的改善アプローチに同意",
+        "受注表と案件管理Excelのサンプル提供に同意",
+        "営業事務担当者へのヒアリング機会を確保"
+      ],
+      "next_actions": [
+        "受注から在庫確認までのフローを整理",
+        "スマイルVセカンドエディション販売を使った改善案を作成",
+        "営業事務担当者へのヒアリングを実施",
+        "次回の商談で改善案を提示"
+      ]
+    }
+  ]
+}
