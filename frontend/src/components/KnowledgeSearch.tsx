@@ -10,7 +10,7 @@
 import { useState } from "react";
 import { searchKnowledge } from "../api/client";
 import type { KnowledgeSearchResult } from "../types/api";
-import { KnowledgeArticle } from "./KnowledgeArticle";
+import { KnowledgeCard } from "./KnowledgeCard";
 
 const EXAMPLE_QUERIES = [
   "サポート体制を重視する顧客",
@@ -105,28 +105,21 @@ export function KnowledgeSearch() {
           )}
 
           {results.map((r, i) => (
-            <div
+            <KnowledgeCard
               key={r.id}
-              className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm"
-            >
-              <div className="flex items-start gap-3">
-                <span className="mt-0.5 shrink-0 rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
-                  {i + 1}
-                </span>
-                <div className="min-w-0 flex-1">
-                  <KnowledgeArticle knowledge={r} />
-                </div>
-              </div>
-              <div className="mt-3 flex items-center gap-3 border-t border-slate-100 pt-2 text-xs text-slate-400">
-                <span>スコア {r.score.toFixed(3)}</span>
-                {/* 出典。CLAUDE.md 6章で検索結果に必須としている */}
-                <span>
-                  出典:{" "}
-                  {r.source_id ? `${r.source_type} / ${r.source_id.slice(0, 8)}` : "手入力"}
-                </span>
-                <span>{new Date(r.created_at).toLocaleString("ja-JP")}</span>
-              </div>
-            </div>
+              knowledge={r}
+              rank={i + 1}
+              extra={
+                <>
+                  <span>スコア {r.score.toFixed(3)}</span>
+                  <span>
+                    出典:{" "}
+                    {r.source_id ? `${r.source_type} / ${r.source_id.slice(0, 8)}` : "手入力"}
+                  </span>
+                  <span>{new Date(r.created_at).toLocaleString("ja-JP")}</span>
+                </>
+              }
+            />
           ))}
         </div>
       )}

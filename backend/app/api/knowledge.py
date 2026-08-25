@@ -12,13 +12,19 @@ from app.models.knowledge import (
     ExtractRequest,
     Knowledge,
     KnowledgeCreate,
+    KnowledgeEvidenceSpan,
     KnowledgeSortField,
     KnowledgeStatus,
     KnowledgeStatusPatch,
     KnowledgeUpdate,
     SortDirection,
 )
-from app.models.tables import DataSourceTable, KnowledgeUnitTable
+from app.models.tables import (
+    DataSourceTable,
+    KnowledgeEvidenceTable,
+    KnowledgeUnitTable,
+    UtteranceSegmentTable,
+)
 from app.services.embedding import generate_embedding
 from app.services.extraction import (
     LlmNotConfiguredError,
@@ -157,6 +163,45 @@ def count_knowledge(db: DbSession) -> dict[str, int]:
 @router.get("/{knowledge_id}", response_model=Knowledge)
 def get_knowledge(knowledge_id: UUID, db: DbSession) -> KnowledgeUnitTable:
     return _get_or_404(db, knowledge_id)
+
+
+@router.get("/{knowledge_id}/evidence", response_model=list[KnowledgeEvidenceSpan])
+def list_knowledge_evidence(knowledge_id: UUID, db: DbSession) -> list[KnowledgeEvidenceSpan]:
+    """構造化ナレッジの根拠発話。画面から原文へ辿るため。"""
+    row = _get_or_404(db, knowledge_id)
+    evidence_rows = list(
+        db.execute(
+            select(KnowledgeEvidenceTable).where(KnowledgeEvidenceTable.knowledge_id == row.id)
+        )
+        .scalars()
+        .all()
+    )
+    spans: list[KnowledgeEvidenceSpan] = []
+    for ev in evidence_rows:
+        start = db.get(UtteranceSegmentTable, ev.start_utterance_id)
+        end = db.get(UtteranceSegmentTable, ev.end_utterance_id)
+        if start is None or end is None:
+            continue
+        lo, hi = start.sequence_no, end.sequence_no
+        if lo > hi:
+            lo, hi = hi, lo
+        utterances = list(
+            db.execute(
+                select(UtteranceSegmentTable)
+                .where(
+                    UtteranceSegmentTable.data_source_id == start.data_source_id,
+                    UtteranceSegmentTable.sequence_no >= lo,
+                    UtteranceSegmentTable.sequence_no <= hi,
+                )
+                .order_by(UtteranceSegmentTable.sequence_no.asc())
+            )
+            .scalars()
+            .all()
+        )
+        spans.append(
+            KnowledgeEvidenceSpan(start_sequence_no=lo, end_sequence_no=hi, utterances=utterances)
+        )
+    return spans
 
 
 @router.patch("/{knowledge_id}/status", response_model=Knowledge)

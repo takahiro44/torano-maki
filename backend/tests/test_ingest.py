@@ -53,6 +53,10 @@ def test_ingest_text_はdraftでCBR列に保存する(client: TestClient) -> Non
     listed = client.get("/knowledge", params={"status": "draft"}).json()
     assert any(row["id"] == saved["id"] for row in listed)
 
+    evidence = client.get(f"/knowledge/{saved['id']}/evidence").json()
+    assert len(evidence) == 1
+    assert evidence[0]["utterances"][0]["content"] == raw
+
 
 def test_preview_LLM未設定は503(client: TestClient) -> None:
     from app.services.extraction import LlmNotConfiguredError
