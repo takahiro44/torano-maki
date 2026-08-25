@@ -6,6 +6,8 @@
  */
 
 import type {
+  ChatMessage,
+  ChatResponse,
   ConfigHealthResponse,
   DbHealthResponse,
   Knowledge,
@@ -135,6 +137,26 @@ export function searchKnowledge(query: string, topK = 5) {
   return request<KnowledgeSearchResult[]>("/search", {
     method: "POST",
     body: JSON.stringify({ query, top_k: topK }),
+  });
+}
+
+// --- AIチャット ---
+
+/**
+ * 蓄積ナレッジをもとにAIへ質問する。
+ *
+ * **会話履歴は毎回すべて送る。** サーバは履歴を保持しない
+ * （認証を作らない方針のため、会話の所有者を定義できない）。
+ *
+ * **応答に1分近くかかる。** AIが裏で検索と根拠取得を行い、
+ * vLLMと複数回やりとりするため。既定のfetchはタイムアウトしないが、
+ * 無期限に待つと画面が復帰できなくなるので上限を置いている。
+ */
+export function sendChat(messages: ChatMessage[], topK = 5) {
+  return request<ChatResponse>("/chat", {
+    method: "POST",
+    body: JSON.stringify({ messages, top_k: topK }),
+    signal: AbortSignal.timeout(300_000),
   });
 }
 
