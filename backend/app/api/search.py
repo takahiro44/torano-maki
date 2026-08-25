@@ -22,6 +22,11 @@ DbSession = Annotated[Session, Depends(get_db)]
 def search(payload: SearchRequest, db: DbSession) -> list[KnowledgeSearchResult]:
     """自然文でナレッジを検索する。
 
+    ベクトル検索（意味）と pg_trgm による語彙検索を RRF で統合している。
+    リクエスト・レスポンスの形は従来どおりで、`score` の意味だけが
+    コサイン類似度から RRF スコアに変わった（内訳は semantic_score /
+    lexical_score で参照できる）。
+
     スコアは参考値。しきい値で足切りせず top_k 件を返す
     （理由は services/search.py のdocstring）。
     """
