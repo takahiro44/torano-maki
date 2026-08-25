@@ -1,10 +1,13 @@
-"""商談台本（dialogue.json）から Gemini TTS で2話者の商談音声を1本生成する。
+"""商談台本（scripts/*.json）から Gemini TTS で2話者の商談音声を1本生成する。
 
 営業ナレッジ抽出の検証には実際の商談音声が要るが、本物の商談録音は持ち出せない。
 そのため合成音声でデモデータを用意する。
 
 Cloud Text-to-Speech は1リクエストあたり4000 bytesの制限があり、台本全文は
 1回で送れない。合成モードが2つあるのはこのため（--mode を参照）。
+
+話者の性別・年代は台本ごとに異なるため、音声IDと人物像はコードに持たず
+台本JSONの `speakers` から読む。台本を増やすときはJSONを1つ足すだけでよい。
 """
 
 from __future__ import annotations
@@ -24,12 +27,6 @@ MODEL = "gemini-3.1-flash-tts-preview"
 LANGUAGE = "ja-JP"
 SAMPLE_RATE_HERTZ = 22050
 
-# 話者エイリアス（dialogue.json の speaker）と Gemini TTS のプリセット音声の対応
-SPEAKER_VOICES: dict[str, str] = {
-    "Sales": "Achird",
-    "Customer": "Algieba",
-}
-
 # APIの実際の上限。超えると 400 InvalidArgument:
 #   "Either `input.text` or `input.prompt` is longer than the limit of 4000 bytes."
 # 台本を少し足しただけで落ちないよう、既定では SAFETY_MARGIN_BYTES を引いて使う
@@ -40,26 +37,17 @@ SAFETY_MARGIN_BYTES = 200
 GAP_MS = 250
 
 BASE_DIR = Path(__file__).parent
-DIALOGUE_PATH = BASE_DIR / "dialogue.json"
-OUTPUT_DIR = BASE_DIR / "output"
-FINAL_PATH = OUTPUT_DIR / "sales_demo.wav"
+SCRIPTS_DIR = BASE_DIR / "scripts"
+OUTPUT_ROOT = BASE_DIR / "output"
 
 # 16bit PCM の最大振幅。正規化でクリップさせないための上限
 PCM16_PEAK = 32767
 
-PROMPT = """
+# Multi-speaker 合成に添えるプロンプト。人物像は台本JSONから差し込む
+MULTI_SPEAKER_PROMPT = """
 これは日本企業で行われている法人営業の商談です。
 
-Salesは30代男性の法人営業担当者です。
-落ち着いて丁寧で、顧客の話をよく聞きます。
-台本の朗読ではなく、実際の商談のような自然な話し方にしてください。
-話す速度は普通で、信頼感のある口調にしてください。
-
-Customerは40代から50代の男性の業務部長です。
-自社の業務については詳しい一方で、
-ITやシステムについての専門家ではありません。
-話す速度は普通で、落ち着いた自然な口調にしてください。
-
+{personas}
 二人とも過度に演技的にはせず、
 実際に会議室で対面して会話しているようにしてください。
 
@@ -68,39 +56,17 @@ ITやシステムについての専門家ではありません。
 """
 
 # 1発話ずつ合成するときは話者が1人しかいないため、その人物像だけを渡す
-SPEAKER_PROMPTS: dict[str, str] = {
-    "Sales": """
-これは日本企業で行われている法人営業の商談での、営業担当者の発話です。
-話し手は30代男性の法人営業担当者で、落ち着いて丁寧です。
+SINGLE_SPEAKER_PROMPT = """
+これは日本企業で行われている法人営業の商談での、{role}の発話です。
+話し手は{persona}
 台本の朗読ではなく、実際の商談のような自然な話し方にしてください。
-話す速度は普通で、信頼感のある口調にしてください。
 過度に演技的にはせず、会議室で対面して話しているようにしてください。
-""",
-    "Customer": """
-これは日本企業で行われている法人営業の商談での、顧客側の発話です。
-話し手は40代から50代の男性の業務部長で、自社の業務については詳しい一方、
-ITやシステムについての専門家ではありません。
-台本の朗読ではなく、実際の商談のような自然な話し方にしてください。
-話す速度は普通で、落ち着いた自然な口調にしてください。
-過度に演技的にはせず、会議室で対面して話しているようにしてください。
-""",
-}
+"""
 
 # 本文が短すぎて上のプロンプトが通らないときの代替。
 # 人物設定を落とすと声の印象が変わってしまうため、そこは残したまま短くする。
 # 拒否の判定は長さではなく内容依存で、命令形の指示を含む短い文ほど弾かれやすい。
-SPEAKER_FALLBACK_PROMPTS: dict[str, str] = {
-    "Sales": (
-        "これは法人営業の商談での営業担当者の発話です。"
-        "話し手は30代男性の法人営業担当者で、落ち着いて丁寧な口調です。"
-        "話す速度は普通で、過度に演技的にはしません。"
-    ),
-    "Customer": (
-        "これは法人営業の商談での顧客側の発話です。"
-        "話し手は40代から50代の男性の業務部長で、落ち着いた自然な口調です。"
-        "話す速度は普通で、過度に演技的にはしません。"
-    ),
-}
+PERSONA_ONLY_PROMPT = "これは法人営業の商談での{role}の発話です。話し手は{persona}"
 
 # 人物設定を含む上の代替でも通らなかったときの最後の砦
 SHORT_PROMPT = "商談での自然な話し方で、落ち着いた口調にしてください。"
@@ -122,17 +88,61 @@ class Turn:
         return len(self.to_line().encode("utf-8")) + 1  # 連結時の改行ぶん
 
 
-def load_dialogue(path: Path, limit: int | None = None) -> list[Turn]:
+@dataclass(frozen=True)
+class Speaker:
+    """台本ごとの登場人物。音声IDと人物像は必ず対で使うため1つにまとめる。"""
+
+    voice: str
+    role: str
+    persona: str
+
+
+@dataclass(frozen=True)
+class Script:
+    """1本の商談台本。出力先を名前から決めるため stem を持たせる。"""
+
+    stem: str
+    title: str
+    speakers: dict[str, Speaker]
+    turns: list[Turn]
+
+    @property
+    def output_dir(self) -> Path:
+        """台本ごとにpart置き場を分ける。共有すると別台本のpartを消してしまう。"""
+        return OUTPUT_ROOT / self.stem
+
+    @property
+    def default_output(self) -> Path:
+        return OUTPUT_ROOT / f"{self.stem}.wav"
+
+
+def load_script(path: Path, limit: int | None = None) -> Script:
     """台本を読み込む。未知の話者はここで弾かないと合成時まで気づけない。"""
     raw = json.loads(path.read_text(encoding="utf-8"))
+
+    speakers = {
+        alias: Speaker(
+            voice=config["voice"],
+            role=config["role"],
+            persona=config["persona"],
+        )
+        for alias, config in raw["speakers"].items()
+    }
+
     turns: list[Turn] = []
-    for index, item in enumerate(raw, start=1):
+    for index, item in enumerate(raw["turns"], start=1):
         speaker = item["speaker"]
-        if speaker not in SPEAKER_VOICES:
+        if speaker not in speakers:
             msg = f"{path.name} の {index} 番目に未知の話者 '{speaker}' がある"
             raise ValueError(msg)
         turns.append(Turn(speaker=speaker, text=item["text"]))
-    return turns[:limit] if limit else turns
+
+    return Script(
+        stem=path.stem,
+        title=raw.get("title", path.stem),
+        speakers=speakers,
+        turns=turns[:limit] if limit else turns,
+    )
 
 
 def split_into_chunks(turns: list[Turn], limit_bytes: int) -> list[str]:
@@ -176,15 +186,15 @@ def split_into_chunks(turns: list[Turn], limit_bytes: int) -> list[str]:
     return chunks
 
 
-def multi_speaker_voice() -> texttospeech.VoiceSelectionParams:
+def multi_speaker_voice(script: Script) -> texttospeech.VoiceSelectionParams:
     """話者エイリアスへ音声を割り当てた Multi-speaker の設定。"""
     config = texttospeech.MultiSpeakerVoiceConfig(
         speaker_voice_configs=[
             texttospeech.MultispeakerPrebuiltVoice(
                 speaker_alias=alias,
-                speaker_id=voice_id,
+                speaker_id=speaker.voice,
             )
-            for alias, voice_id in SPEAKER_VOICES.items()
+            for alias, speaker in script.speakers.items()
         ]
     )
     return texttospeech.VoiceSelectionParams(
@@ -194,13 +204,21 @@ def multi_speaker_voice() -> texttospeech.VoiceSelectionParams:
     )
 
 
-def single_speaker_voice(speaker: str) -> texttospeech.VoiceSelectionParams:
+def single_speaker_voice(speaker: Speaker) -> texttospeech.VoiceSelectionParams:
     """プリセット音声を名前で直接指定する。声のIDが固定されるため人物が入れ替わらない。"""
     return texttospeech.VoiceSelectionParams(
         language_code=LANGUAGE,
-        name=SPEAKER_VOICES[speaker],
+        name=speaker.voice,
         model_name=MODEL,
     )
+
+
+def multi_speaker_prompt(script: Script) -> str:
+    """登場人物の紹介を台本から組み立てる。話者名はJSONのエイリアスに揃える。"""
+    personas = "".join(
+        f"{alias}は{speaker.persona}\n\n" for alias, speaker in script.speakers.items()
+    )
+    return MULTI_SPEAKER_PROMPT.format(personas=personas)
 
 
 def synthesize(
@@ -225,7 +243,7 @@ def synthesize_with_fallback(
     client: texttospeech.TextToSpeechClient,
     text: str,
     voice: texttospeech.VoiceSelectionParams,
-    speaker: str,
+    speaker: Speaker,
 ) -> tuple[bytes, str]:
     """プロンプトを段階的に差し替えながら合成する。
 
@@ -236,9 +254,10 @@ def synthesize_with_fallback(
     ここで人物設定まで落とすと**その発話だけ声の印象が変わる**ため、
     まず人物設定を残した短いプロンプトを試す。
     """
+    fields = {"role": speaker.role, "persona": speaker.persona}
     attempts = [
-        (SPEAKER_PROMPTS[speaker], "指定どおり"),
-        (SPEAKER_FALLBACK_PROMPTS[speaker], "人物設定のみ"),
+        (SINGLE_SPEAKER_PROMPT.format(**fields), "指定どおり"),
+        (PERSONA_ONLY_PROMPT.format(**fields), "人物設定のみ"),
         (SHORT_PROMPT, "短縮プロンプト"),
         ("", "プロンプト無し"),
     ]
@@ -326,35 +345,36 @@ def duration_seconds(path: Path) -> float:
         return w.getnframes() / w.getframerate()
 
 
-def clear_parts() -> None:
+def clear_parts(output_dir: Path) -> None:
     """前回が今回より多いパート数だと、古い part が結合対象に紛れ込むため消す。"""
-    for stale in OUTPUT_DIR.glob("part_*.wav"):
+    for stale in output_dir.glob("part_*.wav"):
         stale.unlink()
 
 
 def generate_chunked(
     client: texttospeech.TextToSpeechClient,
-    turns: list[Turn],
+    script: Script,
     chunk_bytes: int,
 ) -> list[Path]:
     """会話をまとめて Multi-speaker で合成する。掛け合いは自然だが継ぎ目で声が変わる。"""
-    chunks = split_into_chunks(turns, chunk_bytes)
-    print(f"{len(turns)} 発話 → {len(chunks)} チャンク（multi-speaker）")
-    clear_parts()
+    chunks = split_into_chunks(script.turns, chunk_bytes)
+    print(f"{len(script.turns)} 発話 → {len(chunks)} チャンク（multi-speaker）")
+    clear_parts(script.output_dir)
 
-    voice = multi_speaker_voice()
+    voice = multi_speaker_voice(script)
+    prompt = multi_speaker_prompt(script)
     parts: list[Path] = []
     for index, chunk in enumerate(chunks, start=1):
-        part_path = OUTPUT_DIR / f"part_{index:02d}.wav"
+        part_path = script.output_dir / f"part_{index:02d}.wav"
         print(f"  合成中 {part_path.name} ({len(chunk.encode('utf-8'))} bytes)")
-        part_path.write_bytes(synthesize(client, chunk, voice, PROMPT))
+        part_path.write_bytes(synthesize(client, chunk, voice, prompt))
         parts.append(part_path)
     return parts
 
 
 def generate_per_turn(
     client: texttospeech.TextToSpeechClient,
-    turns: list[Turn],
+    script: Script,
     resume: bool,
 ) -> list[Path]:
     """1発話ずつ単一話者で合成する。
@@ -362,21 +382,23 @@ def generate_per_turn(
     プリセット音声を名前で固定するため、リクエストをまたいでも人物が入れ替わらない。
     そのかわり掛け合いの自然さは multi-speaker に劣る。
     """
+    turns = script.turns
     print(f"{len(turns)} 発話 → {len(turns)} リクエスト（per-turn）")
     if not resume:
-        clear_parts()
+        clear_parts(script.output_dir)
 
     parts: list[Path] = []
     for index, turn in enumerate(turns, start=1):
-        part_path = OUTPUT_DIR / f"part_{index:02d}.wav"
+        part_path = script.output_dir / f"part_{index:02d}.wav"
         parts.append(part_path)
         if resume and part_path.exists():
             continue
+        speaker = script.speakers[turn.speaker]
         audio, label = synthesize_with_fallback(
             client,
             turn.text,
-            single_speaker_voice(turn.speaker),
-            turn.speaker,
+            single_speaker_voice(speaker),
+            speaker,
         )
         note = "" if label == "指定どおり" else f" ← {label}"
         print(f"  合成中 {part_path.name} [{turn.speaker}]{note}")
@@ -384,8 +406,23 @@ def generate_per_turn(
     return parts
 
 
+def resolve_script_path(value: str) -> Path:
+    """名前とパスの両方を受ける。打ち間違いに気づけるよう候補を添えて落とす。"""
+    for candidate in (Path(value), SCRIPTS_DIR / value, SCRIPTS_DIR / f"{value}.json"):
+        if candidate.is_file():
+            return candidate
+    available = ", ".join(sorted(path.stem for path in SCRIPTS_DIR.glob("*.json")))
+    msg = f"台本 '{value}' が見つからない。利用できる台本: {available}"
+    raise SystemExit(msg)
+
+
 def main() -> None:
     parser = argparse.ArgumentParser(description="商談台本からデモ音声を生成する")
+    parser.add_argument(
+        "--script",
+        required=True,
+        help=f"台本。{SCRIPTS_DIR.name}/ 配下の名前かパスで指定する",
+    )
     parser.add_argument(
         "--mode",
         choices=("chunk", "per-turn"),
@@ -407,8 +444,8 @@ def main() -> None:
     parser.add_argument(
         "--out",
         type=Path,
-        default=FINAL_PATH,
-        help=f"最終出力先（既定 {FINAL_PATH.name}）",
+        default=None,
+        help="最終出力先（既定 output/<台本名>.wav）",
     )
     parser.add_argument(
         "--no-normalize",
@@ -430,20 +467,22 @@ def main() -> None:
     if args.chunk_bytes > MAX_INPUT_BYTES:
         raise SystemExit(f"--chunk-bytes は {MAX_INPUT_BYTES} 以下にすること")
 
-    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
+    script = load_script(resolve_script_path(args.script), limit=args.limit)
+    script.output_dir.mkdir(parents=True, exist_ok=True)
+    destination = args.out or script.default_output
+    print(f"台本: {script.title}（{script.stem}）")
 
     if args.concat_only:
-        parts = sorted(OUTPUT_DIR.glob("part_*.wav"))
+        parts = sorted(script.output_dir.glob("part_*.wav"))
     else:
-        turns = load_dialogue(DIALOGUE_PATH, limit=args.limit)
         client = texttospeech.TextToSpeechClient()
         if args.mode == "per-turn":
-            parts = generate_per_turn(client, turns, resume=args.resume)
+            parts = generate_per_turn(client, script, resume=args.resume)
         else:
-            parts = generate_chunked(client, turns, args.chunk_bytes)
+            parts = generate_chunked(client, script, args.chunk_bytes)
 
-    concat_wavs(parts, args.out, GAP_MS, normalize=not args.no_normalize)
-    print(f"生成完了: {args.out} ({duration_seconds(args.out):.1f} 秒)")
+    concat_wavs(parts, destination, GAP_MS, normalize=not args.no_normalize)
+    print(f"生成完了: {destination} ({duration_seconds(destination):.1f} 秒)")
 
 
 if __name__ == "__main__":

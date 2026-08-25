@@ -25,7 +25,7 @@ _REPO_ROOT = _HERE.parents[1]
 # 名前で固定しているため、途中で話者の声が入れ替わらない。
 # 声が揺れる音声で測ると、文字起こしの精度なのか合成の乱れなのか切り分けられない。
 DEFAULT_AUDIO = _REPO_ROOT / "tts-demo" / "output" / "sales_demo_perturn.wav"
-DEFAULT_REFERENCE = _REPO_ROOT / "tts-demo" / "dialogue.json"
+DEFAULT_REFERENCE = _REPO_ROOT / "tts-demo" / "scripts" / "01_order_entry.json"
 
 # Whisper に事前に渡す語彙。製品名や業務用語は音声だけからは正しい表記に
 # たどり着けないため（SMILE V 2nd Edition が「スマイル」になる）、
@@ -72,8 +72,8 @@ def load_reference(path: Path) -> str:
     人手で書き起こした正解を用意する時間がないが、この音声は台本から
     合成したものなので、台本がそのまま正解になる。
     """
-    turns = json.loads(path.read_text(encoding="utf-8"))
-    return "".join(turn["text"] for turn in turns)
+    script = json.loads(path.read_text(encoding="utf-8"))
+    return "".join(turn["text"] for turn in script["turns"])
 
 
 def main() -> None:

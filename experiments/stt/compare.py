@@ -54,10 +54,9 @@ def dropped_spans(ref: str, hyp: str) -> list[str]:
 
 
 def main() -> None:
-    turns = json.loads(
-        (_REPO_ROOT / "tts-demo" / "dialogue.json").read_text(encoding="utf-8")
-    )
-    reference = normalize("".join(t["text"] for t in turns))
+    reference_path = _REPO_ROOT / "tts-demo" / "scripts" / "01_order_entry.json"
+    script = json.loads(reference_path.read_text(encoding="utf-8"))
+    reference = normalize("".join(t["text"] for t in script["turns"]))
 
     rows = []
     for path in sorted((_HERE / "output").glob("*.json")):
@@ -86,7 +85,7 @@ def main() -> None:
     print("\n" + header)
     print("-" * 100)
     print(
-        f"{'（正解）':<21}{'-':>7}{'-':>7}{len(turns):>6}  "
+        f"{'（正解）':<21}{'-':>7}{'-':>7}{len(script['turns']):>6}  "
         + "".join(f"{ref_terms[t]:>8}" for t in _KEY_TERMS)
     )
     for r in rows:
