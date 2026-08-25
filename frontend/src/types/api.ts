@@ -1,18 +1,26 @@
 /**
- * バックエンドのレスポンス型。CBR 列と対応させる。
+ * バックエンドのレスポンス型。knowledge_units の列と対応させる。
  */
 
 export type KnowledgeStatus = "draft" | "confirmed" | "rejected" | "archived";
+export type KnowledgeSortField = "created_at" | "updated_at" | "title" | "status";
+export type SortDirection = "asc" | "desc";
 export type SourceType = "audio" | "document" | "manual" | "roleplay" | "interview";
 
 export const CBR_FIELD_LABELS: { key: keyof Knowledge; label: string }[] = [
   { key: "title", label: "タイトル" },
   { key: "situation", label: "状況" },
-  { key: "customer_issue", label: "顧客課題" },
-  { key: "sales_action", label: "営業対応" },
-  { key: "action_reason", label: "対応理由" },
-  { key: "result", label: "結果" },
-  { key: "learning", label: "学び" },
+  { key: "problem", label: "顧客課題" },
+  { key: "judgment", label: "判断" },
+  { key: "action", label: "行動" },
+  { key: "reasoning", label: "理由" },
+  { key: "outcome", label: "結果" },
+  { key: "lesson", label: "学び" },
+  { key: "applicable_situations", label: "適用場面" },
+  { key: "limitations", label: "制約・非適用" },
+  { key: "industry", label: "業界" },
+  { key: "product", label: "商材" },
+  { key: "sales_stage", label: "商談フェーズ" },
 ];
 
 export type Knowledge = {
@@ -21,12 +29,18 @@ export type Knowledge = {
   knowledge_type: string;
   title: string;
   situation: string | null;
-  customer_issue: string | null;
-  sales_action: string | null;
-  action_reason: string | null;
-  result: string | null;
-  learning: string | null;
-  original_content: string | null;
+  problem: string | null;
+  judgment: string | null;
+  action: string | null;
+  reasoning: string | null;
+  outcome: string | null;
+  lesson: string | null;
+  applicable_situations: string | null;
+  limitations: string | null;
+  industry: string | null;
+  product: string | null;
+  sales_stage: string | null;
+  embedding_model: string | null;
   status: KnowledgeStatus;
   source_id: string | null;
   source_type: SourceType;

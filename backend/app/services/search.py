@@ -14,7 +14,7 @@ from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.knowledge import Knowledge, KnowledgeSearchResult, KnowledgeStatus
-from app.models.tables import KnowledgeTable
+from app.models.tables import KnowledgeUnitTable
 from app.services.embedding import embed_query
 
 
@@ -28,15 +28,15 @@ def search_knowledge(db: Session, query: str, top_k: int) -> list[KnowledgeSearc
     query_vector = embed_query(query)
 
     # <=> はコサイン距離（0が最も近い）。スコアは分かりやすさのため類似度に直す
-    distance = KnowledgeTable.embedding.cosine_distance(query_vector)
+    distance = KnowledgeUnitTable.embedding.cosine_distance(query_vector)
 
     rows = db.execute(
-        select(KnowledgeTable, distance.label("distance"))
+        select(KnowledgeUnitTable, distance.label("distance"))
         .where(
-            KnowledgeTable.deleted_at.is_(None),
-            KnowledgeTable.status == KnowledgeStatus.CONFIRMED,
+            KnowledgeUnitTable.deleted_at.is_(None),
+            KnowledgeUnitTable.status == KnowledgeStatus.CONFIRMED,
             # 埋め込み未生成のものは距離を計算できないため除く
-            KnowledgeTable.embedding.is_not(None),
+            KnowledgeUnitTable.embedding.is_not(None),
         )
         .order_by(distance)
         .limit(top_k)
@@ -44,7 +44,7 @@ def search_knowledge(db: Session, query: str, top_k: int) -> list[KnowledgeSearc
 
     return [
         KnowledgeSearchResult(
-            **Knowledge.model_validate(row.KnowledgeTable).model_dump(),
+            **Knowledge.model_validate(row.KnowledgeUnitTable).model_dump(),
             score=1.0 - row.distance,
         )
         for row in rows

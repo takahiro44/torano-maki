@@ -53,6 +53,36 @@ class TestUpdate:
         assert client.patch(f"/knowledge/{missing}", json={"title": "x"}).status_code == 404
 
 
+class TestListSort:
+    def test_タイトル昇順で並べ替えられる(self, client: TestClient) -> None:
+        zeta = _create(client, "zzz-sort-probe")
+        alpha = _create(client, "aaa-sort-probe")
+        rows = client.get(
+            "/knowledge", params={"sort": "title", "order": "asc", "limit": 200}
+        ).json()
+        ids = [r["id"] for r in rows]
+        assert ids.index(alpha["id"]) < ids.index(zeta["id"])
+
+    def test_不正なsortは422(self, client: TestClient) -> None:
+        assert client.get("/knowledge", params={"sort": "embedding"}).status_code == 422
+
+
+class TestListFilter:
+    def test_業界で絞り込める(self, client: TestClient) -> None:
+        mfg = client.post(
+            "/knowledge",
+            json={"title": "製造向け", "industry": "製造業", "status": "confirmed"},
+        ).json()
+        client.post(
+            "/knowledge",
+            json={"title": "金融向け", "industry": "金融", "status": "confirmed"},
+        )
+        rows = client.get("/knowledge", params={"industry": "製造業", "limit": 200}).json()
+        ids = [r["id"] for r in rows]
+        assert mfg["id"] in ids
+        assert all(r["industry"] == "製造業" for r in rows)
+
+
 class TestDelete:
     def test_論理削除後は取得できない(self, client: TestClient) -> None:
         row = _create(client, "消す対象")

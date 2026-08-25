@@ -12,39 +12,54 @@ from app.models.knowledge import (
     ExtractRequest,
     Knowledge,
     KnowledgeCreate,
+    KnowledgeSortField,
     KnowledgeStatus,
     KnowledgeStatusPatch,
     KnowledgeUpdate,
+    SortDirection,
 )
-from app.models.tables import DataSourceTable, KnowledgeTable
+from app.models.tables import DataSourceTable, KnowledgeUnitTable
 from app.services.embedding import generate_embedding
 from app.services.extraction import (
     LlmNotConfiguredError,
     LlmRequestError,
     process_text_to_knowledge,
 )
-from app.services.search_text import generate_search_text
+from app.services.search_text import generate_search_text_from_mapping
 
 router = APIRouter(prefix="/knowledge", tags=["knowledge"])
 
 DbSession = Annotated[Session, Depends(get_db)]
 
-_CBR_KEYS = (
+_SEARCH_KEYS = (
     "title",
     "situation",
-    "customer_issue",
-    "sales_action",
-    "action_reason",
-    "result",
-    "learning",
+    "problem",
+    "judgment",
+    "action",
+    "reasoning",
+    "outcome",
+    "lesson",
+    "applicable_situations",
+    "limitations",
+    "industry",
+    "product",
+    "sales_stage",
 )
 
+_SORT_COLUMNS = {
+    KnowledgeSortField.CREATED_AT: KnowledgeUnitTable.created_at,
+    KnowledgeSortField.UPDATED_AT: KnowledgeUnitTable.updated_at,
+    KnowledgeSortField.TITLE: KnowledgeUnitTable.title,
+    KnowledgeSortField.STATUS: KnowledgeUnitTable.status,
+}
 
-def _get_or_404(db: Session, knowledge_id: UUID) -> KnowledgeTable:
+
+def _get_or_404(db: Session, knowledge_id: UUID) -> KnowledgeUnitTable:
     row = db.execute(
-        select(KnowledgeTable).where(
-            KnowledgeTable.id == knowledge_id,
-            KnowledgeTable.deleted_at.is_(None),
+        select(KnowledgeUnitTable).where(
+            KnowledgeUnitTable.id == knowledge_id,
+            KnowledgeUnitTable.deleted_at.is_(None),
         )
     ).scalar_one_or_none()
     if row is None:
@@ -52,22 +67,19 @@ def _get_or_404(db: Session, knowledge_id: UUID) -> KnowledgeTable:
     return row
 
 
-def _refresh_search_fields(row: KnowledgeTable) -> None:
-    row.search_text = generate_search_text(
-        title=row.title,
-        situation=row.situation,
-        customer_issue=row.customer_issue,
-        sales_action=row.sales_action,
-        action_reason=row.action_reason,
-        result=row.result,
-        learning=row.learning,
+def _refresh_search_fields(row: KnowledgeUnitTable) -> None:
+    from app.config import get_settings
+
+    row.search_text = generate_search_text_from_mapping(
+        {key: getattr(row, key) for key in _SEARCH_KEYS}
     )
     row.embedding = generate_embedding(row.search_text)
+    row.embedding_model = get_settings().embedding_model
 
 
 @router.post("/extract", response_model=list[Knowledge])
-def extract_and_store(payload: ExtractRequest, db: DbSession) -> list[KnowledgeTable]:
-    """テキストから CBR ナレッジを抽出し draft で格納する。"""
+def extract_and_store(payload: ExtractRequest, db: DbSession) -> list[KnowledgeUnitTable]:
+    """テキストからナレッジを抽出し draft で格納する。"""
     try:
         saved, _notes = process_text_to_knowledge(
             payload.text, db, data_source_id=payload.data_source_id
@@ -80,7 +92,7 @@ def extract_and_store(payload: ExtractRequest, db: DbSession) -> list[KnowledgeT
 
 
 @router.post("", response_model=Knowledge, status_code=status.HTTP_201_CREATED)
-def create_knowledge(payload: KnowledgeCreate, db: DbSession) -> KnowledgeTable:
+def create_knowledge(payload: KnowledgeCreate, db: DbSession) -> KnowledgeUnitTable:
     data_source_id = payload.data_source_id
     if data_source_id is None:
         source = DataSourceTable(source_type="manual")
@@ -91,7 +103,7 @@ def create_knowledge(payload: KnowledgeCreate, db: DbSession) -> KnowledgeTable:
     dump = payload.model_dump()
     dump["data_source_id"] = data_source_id
     dump["status"] = payload.status.value if hasattr(payload.status, "value") else payload.status
-    row = KnowledgeTable(**dump)
+    row = KnowledgeUnitTable(**dump)
     _refresh_search_fields(row)
     db.add(row)
     db.commit()
@@ -102,22 +114,38 @@ def create_knowledge(payload: KnowledgeCreate, db: DbSession) -> KnowledgeTable:
 def list_knowledge(
     db: DbSession,
     status_filter: Annotated[KnowledgeStatus | None, Query(alias="status")] = None,
+    industry: Annotated[str | None, Query()] = None,
+    product: Annotated[str | None, Query()] = None,
+    sales_stage: Annotated[str | None, Query()] = None,
+    knowledge_type: Annotated[str | None, Query()] = None,
+    sort: Annotated[KnowledgeSortField, Query()] = KnowledgeSortField.CREATED_AT,
+    order: Annotated[SortDirection, Query()] = SortDirection.DESC,
     limit: Annotated[int, Query(ge=1, le=200)] = 50,
     offset: Annotated[int, Query(ge=0)] = 0,
-) -> list[KnowledgeTable]:
-    stmt = select(KnowledgeTable).where(KnowledgeTable.deleted_at.is_(None))
+) -> list[KnowledgeUnitTable]:
+    stmt = select(KnowledgeUnitTable).where(KnowledgeUnitTable.deleted_at.is_(None))
     if status_filter is not None:
-        stmt = stmt.where(KnowledgeTable.status == status_filter)
-    stmt = stmt.order_by(KnowledgeTable.created_at.desc()).limit(limit).offset(offset)
+        stmt = stmt.where(KnowledgeUnitTable.status == status_filter)
+    if industry is not None:
+        stmt = stmt.where(KnowledgeUnitTable.industry == industry)
+    if product is not None:
+        stmt = stmt.where(KnowledgeUnitTable.product == product)
+    if sales_stage is not None:
+        stmt = stmt.where(KnowledgeUnitTable.sales_stage == sales_stage)
+    if knowledge_type is not None:
+        stmt = stmt.where(KnowledgeUnitTable.knowledge_type == knowledge_type)
+    column = _SORT_COLUMNS[sort]
+    ordered = column.asc() if order == SortDirection.ASC else column.desc()
+    stmt = stmt.order_by(ordered, KnowledgeUnitTable.id.asc()).limit(limit).offset(offset)
     return list(db.execute(stmt).scalars().all())
 
 
 @router.get("/count")
 def count_knowledge(db: DbSession) -> dict[str, int]:
     rows = db.execute(
-        select(KnowledgeTable.status, func.count())
-        .where(KnowledgeTable.deleted_at.is_(None))
-        .group_by(KnowledgeTable.status)
+        select(KnowledgeUnitTable.status, func.count())
+        .where(KnowledgeUnitTable.deleted_at.is_(None))
+        .group_by(KnowledgeUnitTable.status)
     ).all()
     counts = {s.value: 0 for s in KnowledgeStatus}
     for name, n in rows:
@@ -127,14 +155,14 @@ def count_knowledge(db: DbSession) -> dict[str, int]:
 
 
 @router.get("/{knowledge_id}", response_model=Knowledge)
-def get_knowledge(knowledge_id: UUID, db: DbSession) -> KnowledgeTable:
+def get_knowledge(knowledge_id: UUID, db: DbSession) -> KnowledgeUnitTable:
     return _get_or_404(db, knowledge_id)
 
 
 @router.patch("/{knowledge_id}/status", response_model=Knowledge)
 def patch_knowledge_status(
     knowledge_id: UUID, payload: KnowledgeStatusPatch, db: DbSession
-) -> KnowledgeTable:
+) -> KnowledgeUnitTable:
     row = _get_or_404(db, knowledge_id)
     row.status = payload.status.value
     db.commit()
@@ -142,18 +170,20 @@ def patch_knowledge_status(
 
 
 @router.patch("/{knowledge_id}", response_model=Knowledge)
-def update_knowledge(knowledge_id: UUID, payload: KnowledgeUpdate, db: DbSession) -> KnowledgeTable:
+def update_knowledge(
+    knowledge_id: UUID, payload: KnowledgeUpdate, db: DbSession
+) -> KnowledgeUnitTable:
     row = _get_or_404(db, knowledge_id)
     changes = payload.model_dump(exclude_unset=True)
-    cbr_changed = False
+    search_changed = False
     for key, value in changes.items():
         if key == "status":
             row.status = value.value if hasattr(value, "value") else value
             continue
         setattr(row, key, value.value if hasattr(value, "value") else value)
-        if key in _CBR_KEYS:
-            cbr_changed = True
-    if cbr_changed:
+        if key in _SEARCH_KEYS:
+            search_changed = True
+    if search_changed:
         _refresh_search_fields(row)
     db.commit()
     return row

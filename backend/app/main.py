@@ -13,7 +13,7 @@ from contextlib import asynccontextmanager
 from fastapi import FastAPI
 from fastapi.middleware.cors import CORSMiddleware
 
-from app.api import health, ingest, knowledge, roleplay, search
+from app.api import health, ingest, knowledge, roleplay, search, summaries
 from app.services.embedding import warmup
 
 
@@ -56,4 +56,5 @@ app.include_router(health.router)
 app.include_router(knowledge.router)
 app.include_router(search.router)
 app.include_router(ingest.router)
+app.include_router(summaries.router)
 app.include_router(roleplay.router)

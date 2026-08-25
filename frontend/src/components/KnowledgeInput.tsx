@@ -55,7 +55,7 @@ export function KnowledgeInput({ onCreated }: Props) {
       <div>
         <h2 className="text-lg font-semibold">ナレッジを登録</h2>
         <p className="mt-1 text-sm text-slate-500">
-          形式は問いません。走り書きでも、長い議事録でも構いません。AIがCBR形式に構造化します。
+          形式は問いません。走り書きでも、長い議事録でも構いません。AIが構造化します。
           登録直後は下書きです。一覧で「承認」すると検索対象になります。上限は10万文字です。
         </p>
       </div>
