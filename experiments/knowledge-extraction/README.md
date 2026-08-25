@@ -16,7 +16,7 @@ FastAPIへ引き継ぐためのER図、ファイル配置、処理フローは
 - `call_summaries`
 
 Pydanticの入出力契約は [`schema.py`](schema.py) に分離している。実行スクリプト、
-テスト、コミット済みサンプルが同じモデルを使うため、構造のずれを検出できる。
+テスト、コミット済みの出力が同じモデルを使うため、構造のずれを検出できる。
 
 LLMには話者、ナレッジ、根拠の発話番号、商談要約だけを生成させる。
 UUIDと外部キーはスクリプト側で決定的に生成するため、LLMが存在しないIDを作ることはない。
@@ -26,15 +26,19 @@ UUIDと外部キーはスクリプト側で決定的に生成するため、LLM�
 
 ## 入力データ
 
-次のファイルを `input/` に置く。音声と生成済み文字起こしはgit管理しない。
+次のファイルを `input/` に置く。
 
 ```text
 input/
-├── sales_demo_perturn.wav
-└── medium_glossary.json
+├── sales_demo_perturn.wav   # git管理しない
+└── medium_glossary.json     # git管理する
 ```
 
-今回の検証では、作業開始時のブランチにだけ存在した次のファイルをコピーしている。
+`medium_glossary.json` はgit管理する。音声から再生成するのに手間がかかるうえ、
+メンバーごとに文字起こしが違うと抽出結果を比較できなくなるため、
+検証の入力を固定する。音声は容量が大きいため管理しない。
+
+次のファイルからコピーした。音声は作業開始時のブランチにだけ存在したもの。
 
 ```text
 tts-demo/output/sales_demo_perturn.wav
@@ -57,12 +61,14 @@ uv run python run_experiment.py
 uv run python run_experiment.py --model-name Qwen3.8-27B-NVFP4
 ```
 
-生成物は `output/knowledge_extraction.json` に保存される。LLMの生応答は
-`output/raw_attempt_<N>.json` に保存するため、パースに失敗した場合も原因を確認できる。
+生成物は `output/knowledge_extraction.json` に保存される。このファイルはgit管理するため、
+実行していないメンバーも結果を読める。LLMの生応答は `output/raw_attempt_<N>.json` に
+保存するため、パースに失敗した場合も原因を確認できる。こちらは実行のたびに変わるので
+git管理しない。
 
-今回成功した結果は
-[`examples/knowledge_extraction.example.json`](examples/knowledge_extraction.example.json)
-にも固定している。このサンプルはFastAPI実装時の入出力例と回帰テストに使う。
+コミット済みの `output/knowledge_extraction.json` は、2026-08-24に成功した結果である。
+FastAPI実装時の入出力例と回帰テストに使う。`run_experiment.py` を実行すると上書きされるため、
+再実行後は `git diff` で意図しない差分が出ていないか確認すること。
 
 出力制約はプロンプトだけに依存せず、Pydanticによる次の検証を行う。
 

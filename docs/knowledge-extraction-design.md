@@ -15,7 +15,7 @@
 検証コードの入出力契約は
 [`experiments/knowledge-extraction/schema.py`](../experiments/knowledge-extraction/schema.py)、
 成功例は
-[`knowledge_extraction.example.json`](../experiments/knowledge-extraction/examples/knowledge_extraction.example.json)
+[`knowledge_extraction.json`](../experiments/knowledge-extraction/output/knowledge_extraction.json)
 を参照する。
 
 ## 検証結果
@@ -111,13 +111,16 @@ erDiagram
 
 ```text
 experiments/knowledge-extraction/input/
-├── sales_demo_perturn.wav
-└── medium_glossary.json
+├── sales_demo_perturn.wav   # git管理しない
+└── medium_glossary.json     # git管理する
 ```
 
+音声は容量が大きいためgitには含めない。文字起こしは再生成に手間がかかり、
+メンバーごとに内容が違うと抽出結果を比較できないため、入力を固定する目的で管理する。
+
 生成結果とLLMの生応答は `experiments/knowledge-extraction/output/` に置く。
-こちらもgitには含めない。成功した出力だけを、レビュー可能な固定サンプルとして
-`examples/knowledge_extraction.example.json` にコピーしている。
+成功した出力 `output/knowledge_extraction.json` だけを、レビュー可能な固定サンプルとして
+git管理する。生応答 `output/raw_attempt_<N>.json` は実行のたびに変わるため含めない。
 
 ### FastAPIのMVP
 
