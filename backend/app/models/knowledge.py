@@ -259,7 +259,22 @@ class Knowledge(BaseModel):
 
 
 class KnowledgeSearchResult(Knowledge):
-    score: float = Field(description="コサイン類似度。1に近いほど query に近い")
+    """ハイブリッド検索の1件。
+
+    `score` は RRF スコア。**方式をまたいで比較できる絶対値ではない**（0.03 程度の
+    小さな値になる）。順位を決めるための内部値であり、そのまま画面に出す想定ではない。
+    内訳を別に返しているのは、なぜその順位になったかを追えるようにするため。
+    """
+
+    score: float = Field(description="RRFスコア。順位の根拠であり、類似度ではない")
+    semantic_score: float | None = Field(
+        default=None, description="コサイン類似度。ベクトル検索で拾えなかった場合は null"
+    )
+    lexical_score: float | None = Field(
+        default=None, description="pg_trgm の word_similarity。語が一致しなければ null"
+    )
+    semantic_rank: int | None = Field(default=None, description="ベクトル検索内での順位")
+    lexical_rank: int | None = Field(default=None, description="語彙検索内での順位")
 
 
 class SearchRequest(BaseModel):
