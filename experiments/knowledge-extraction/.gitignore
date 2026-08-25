@@ -1,6 +1,10 @@
 /.venv/
-/input/
-/output/
+# 入力の文字起こしと成功した抽出結果だけは追跡する。
+# 音声から再生成するのに手間がかかり、メンバー間で同じ入力を共有できないため。
+/input/*
+!/input/medium_glossary.json
+/output/*
+!/output/knowledge_extraction.json
 /__pycache__/
 /.pytest_cache/
 /.ruff_cache/

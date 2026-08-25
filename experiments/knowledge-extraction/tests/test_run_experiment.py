@@ -100,13 +100,9 @@ def test_materialize_result_connects_foreign_keys(tmp_path: Path) -> None:
     assert "課題を具体化する" in knowledge.search_text
 
 
-def test_committed_example_matches_result_contract() -> None:
-    example_path = (
-        Path(__file__).resolve().parents[1]
-        / "examples"
-        / "knowledge_extraction.example.json"
-    )
-    result = ExperimentResult.model_validate_json(example_path.read_text(encoding="utf-8"))
+def test_committed_output_matches_result_contract() -> None:
+    output_path = Path(__file__).resolve().parents[1] / "output" / "knowledge_extraction.json"
+    result = ExperimentResult.model_validate_json(output_path.read_text(encoding="utf-8"))
 
     assert len(result.data_sources) == 1
     assert len(result.utterance_segments) == 74
