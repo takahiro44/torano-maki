@@ -33,7 +33,7 @@ uv run test_stt.py --model small
 |---|---|---|
 | `--model` | `small` | `tiny` / `base` / `small` / `medium` / `large-v3` |
 | `--audio` | `tts-demo/output/sales_demo_perturn.wav` | 対象の音声 |
-| `--reference` | `tts-demo/dialogue.json` | CERの基準にする台本 |
+| `--reference` | `tts-demo/scripts/01_order_entry.json` | CERの基準にする台本 |
 | `--compute-type` | `int8` | `int8` / `int8_float32` / `float32` |
 | `--vad` | off | 無音区間の除去を有効にする（通常は指定しない） |
 | `--no-reference` | off | CERを計測しない |
@@ -44,7 +44,7 @@ uv run test_stt.py --model small
 
 ## 正解テキストについて
 
-人手の書き起こしは用意していない。この音声は `tts-demo/dialogue.json` の台本から
+人手の書き起こしは用意していない。この音声は `tts-demo/scripts/01_order_entry.json` の台本から
 TTSで合成したものなので、**台本がそのまま正解**になる。
 
 CERは比較前に句読点・全半角・空白を落としている（表記の差を誤りに数えないため）。
