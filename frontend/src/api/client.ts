@@ -13,6 +13,7 @@ import type {
   KnowledgeSearchResult,
   KnowledgeSortField,
   KnowledgeStatus,
+  KnowledgeEvidenceSpan,
   SortDirection,
 } from "../types/api";
 
@@ -122,6 +123,10 @@ export function updateKnowledge(
 
 export function deleteKnowledge(id: string) {
   return request<void>(`/knowledge/${id}`, { method: "DELETE" });
+}
+
+export function getKnowledgeEvidence(id: string) {
+  return request<KnowledgeEvidenceSpan[]>(`/knowledge/${id}/evidence`);
 }
 
 // --- 検索 ---

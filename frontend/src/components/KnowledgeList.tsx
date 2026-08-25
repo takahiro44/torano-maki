@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 import { deleteKnowledge, listKnowledge, updateKnowledge } from "../api/client";
 import type { Knowledge, KnowledgeSortField, SortDirection } from "../types/api";
 import { CBR_FIELD_LABELS } from "../types/api";
-import { KnowledgeArticle } from "./KnowledgeArticle";
+import { KnowledgeCard } from "./KnowledgeCard";
 
 type Props = {
   reloadKey: number;
@@ -159,7 +159,7 @@ export function KnowledgeList({ reloadKey, onChanged }: Props) {
         <div>
           <h2 className="text-lg font-semibold">登録済みナレッジ</h2>
           <p className="mt-1 text-xs text-slate-500">
-            空欄の項目は「未抽出」と出します。search_text / embedding は検索用なので画面には出しません。
+            タイトルと要約だけ出します。詳細と根拠の原文は「詳細を見る」から。
           </p>
         </div>
         <div className="flex flex-wrap items-center gap-2 text-sm">
@@ -199,8 +199,9 @@ export function KnowledgeList({ reloadKey, onChanged }: Props) {
 
       <ul className="space-y-2">
         {items.map((k) => (
-          <li key={k.id} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+          <li key={k.id}>
             {editingId === k.id && draft ? (
+              <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
               <form
                 className="space-y-3"
                 onSubmit={(e) => {
@@ -248,43 +249,46 @@ export function KnowledgeList({ reloadKey, onChanged }: Props) {
                   </button>
                 </div>
               </form>
-            ) : (
-              <>
-                <p className="mb-2 font-mono text-[11px] text-slate-400">id: {k.id}</p>
-                <KnowledgeArticle knowledge={k} showEmpty />
-              </>
-            )}
-            <div className="mt-3 flex items-center gap-3 border-t border-slate-100 pt-2 text-xs text-slate-400">
-              <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-600">{k.status}</span>
-              <span>{new Date(k.created_at).toLocaleString("ja-JP")}</span>
-              <div className="ml-auto flex gap-2">
-                {editingId !== k.id && (
-                  <button
-                    onClick={() => startEdit(k)}
-                    disabled={busyId === k.id}
-                    className="text-slate-700 underline underline-offset-2 hover:text-slate-900"
-                  >
-                    編集
-                  </button>
-                )}
-                {k.status === "draft" && (
-                  <button
-                    onClick={() => void confirm(k.id)}
-                    disabled={busyId === k.id}
-                    className="text-slate-700 underline underline-offset-2 hover:text-slate-900"
-                  >
-                    承認して検索対象にする
-                  </button>
-                )}
-                <button
-                  onClick={() => void remove(k.id)}
-                  disabled={busyId === k.id}
-                  className="text-red-600 underline underline-offset-2 hover:text-red-800"
-                >
-                  削除
-                </button>
               </div>
-            </div>
+            ) : (
+              <KnowledgeCard
+                knowledge={k}
+                showEmptyDetails
+                extra={
+                  <>
+                    <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-600">{k.status}</span>
+                    <span>{new Date(k.created_at).toLocaleString("ja-JP")}</span>
+                  </>
+                }
+                actions={
+                  <>
+                    <button
+                      onClick={() => startEdit(k)}
+                      disabled={busyId === k.id}
+                      className="text-slate-700 underline underline-offset-2 hover:text-slate-900"
+                    >
+                      編集
+                    </button>
+                    {k.status === "draft" && (
+                      <button
+                        onClick={() => void confirm(k.id)}
+                        disabled={busyId === k.id}
+                        className="text-slate-700 underline underline-offset-2 hover:text-slate-900"
+                      >
+                        承認して検索対象にする
+                      </button>
+                    )}
+                    <button
+                      onClick={() => void remove(k.id)}
+                      disabled={busyId === k.id}
+                      className="text-red-600 underline underline-offset-2 hover:text-red-800"
+                    >
+                      削除
+                    </button>
+                  </>
+                }
+              />
+            )}
           </li>
         ))}
       </ul>

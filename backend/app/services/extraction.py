@@ -9,6 +9,7 @@ from typing import Any
 from uuid import UUID
 
 import httpx
+from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
@@ -18,7 +19,12 @@ from app.models.knowledge import (
     ExtractionResult,
     KnowledgeStatus,
 )
-from app.models.tables import DataSourceTable, KnowledgeUnitTable
+from app.models.tables import (
+    DataSourceTable,
+    KnowledgeEvidenceTable,
+    KnowledgeUnitTable,
+    UtteranceSegmentTable,
+)
 from app.services.embedding import generate_embedding
 from app.services.search_text import generate_search_text_from_mapping
 
@@ -282,7 +288,15 @@ def process_text_to_knowledge(
 
     pairs = extract_knowledge_with_sources(text)
     saved: list[KnowledgeUnitTable] = []
-    for item, _excerpt in pairs:
+    excerpt_to_segment: dict[str, UtteranceSegmentTable] = {}
+    max_seq = db.execute(
+        select(func.max(UtteranceSegmentTable.sequence_no)).where(
+            UtteranceSegmentTable.data_source_id == data_source_id
+        )
+    ).scalar()
+    next_seq = int(max_seq or 0) + 1
+
+    for item, excerpt in pairs:
         if not item.title.strip():
             continue
         row = knowledge_row_from_extracted(
@@ -291,6 +305,30 @@ def process_text_to_knowledge(
             status=status,
         )
         db.add(row)
+        db.flush()
+
+        segment = excerpt_to_segment.get(excerpt)
+        if segment is None:
+            segment = UtteranceSegmentTable(
+                data_source_id=data_source_id,
+                sequence_no=next_seq,
+                speaker="source",
+                start_sec=0.0,
+                end_sec=0.01,
+                content=excerpt,
+            )
+            next_seq += 1
+            db.add(segment)
+            db.flush()
+            excerpt_to_segment[excerpt] = segment
+
+        db.add(
+            KnowledgeEvidenceTable(
+                knowledge_id=row.id,
+                start_utterance_id=segment.id,
+                end_utterance_id=segment.id,
+            )
+        )
         saved.append(row)
     db.commit()
     for row in saved:

@@ -23,6 +23,9 @@ export const CBR_FIELD_LABELS: { key: keyof Knowledge; label: string }[] = [
   { key: "sales_stage", label: "商談フェーズ" },
 ];
 
+/** カード見出し以外の詳細項目 */
+export const DETAIL_FIELD_LABELS = CBR_FIELD_LABELS.filter((f) => f.key !== "title");
+
 export type Knowledge = {
   id: string;
   data_source_id: string | null;
@@ -51,6 +54,21 @@ export type Knowledge = {
 
 export type KnowledgeSearchResult = Knowledge & {
   score: number;
+};
+
+export type Utterance = {
+  id: string;
+  sequence_no: number;
+  speaker: string;
+  start_sec: number;
+  end_sec: number;
+  content: string;
+};
+
+export type KnowledgeEvidenceSpan = {
+  start_sequence_no: number;
+  end_sequence_no: number;
+  utterances: Utterance[];
 };
 
 export type KnowledgeCounts = {

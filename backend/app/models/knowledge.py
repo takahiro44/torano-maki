@@ -308,5 +308,24 @@ class CallSummary(BaseModel):
     created_at: datetime
 
 
+class UtteranceOut(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    sequence_no: int
+    speaker: str
+    start_sec: float
+    end_sec: float
+    content: str
+
+
+class KnowledgeEvidenceSpan(BaseModel):
+    """根拠として紐づく発話。start〜end の連番を含む。"""
+
+    start_sequence_no: int
+    end_sequence_no: int
+    utterances: list[UtteranceOut]
+
+
 class GenerateSummaryRequest(BaseModel):
     data_source_id: UUID
