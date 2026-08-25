@@ -1,6 +1,6 @@
 """ナレッジのスキーマ定義。**このファイルがスキーマの唯一の源。**
 
-CBR ケース構造 (Aamodt & Plaza 1994) を LLM・API・DB列で共有する。
+検証済み ER（docs/knowledge-extraction-design.md）の knowledge_units と揃える。
 DDL の正は `docker/initdb/02_schema.sql`。
 """
 
@@ -28,9 +28,21 @@ class KnowledgeStatus(StrEnum):
     ARCHIVED = "archived"
 
 
-class SourceType(StrEnum):
-    """data_sources.source_type。"""
+class KnowledgeSortField(StrEnum):
+    """一覧の並べ替え。ホワイトリスト用。"""
 
+    CREATED_AT = "created_at"
+    UPDATED_AT = "updated_at"
+    TITLE = "title"
+    STATUS = "status"
+
+
+class SortDirection(StrEnum):
+    ASC = "asc"
+    DESC = "desc"
+
+
+class SourceType(StrEnum):
     AUDIO = "audio"
     DOCUMENT = "document"
     MANUAL = "manual"
@@ -38,35 +50,59 @@ class SourceType(StrEnum):
     INTERVIEW = "interview"
 
 
-NonBlankText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1)]
 TitleText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)]
+
+_SEARCH_FIELD_NAMES = (
+    "title",
+    "situation",
+    "problem",
+    "judgment",
+    "action",
+    "reasoning",
+    "outcome",
+    "lesson",
+    "applicable_situations",
+    "limitations",
+    "industry",
+    "product",
+    "sales_stage",
+)
 
 
 class StructuredData(BaseModel):
-    """CBR ケース構造。LLM 抽出結果のバリデーション用。"""
+    """CBR + 適用条件。LLM 抽出結果のバリデーション用。"""
 
     model_config = ConfigDict(extra="forbid")
 
-    situation: str | None = Field(None, description="状況: 何が起きたか")
-    customer_issue: str | None = Field(None, description="顧客課題: 何が障壁だったか")
-    sales_action: str | None = Field(None, description="営業対応: 何をどう判断し実行したか")
-    action_reason: str | None = Field(None, description="対応理由: なぜその行動を選んだか")
-    result: str | None = Field(None, description="結果: どうなったか")
-    learning: str | None = Field(None, description="学び: 抽象化された教訓")
+    situation: str | None = None
+    problem: str | None = None
+    judgment: str | None = None
+    action: str | None = None
+    reasoning: str | None = None
+    outcome: str | None = None
+    lesson: str | None = None
+    applicable_situations: str | None = None
+    limitations: str | None = None
 
 
 class ExtractedKnowledge(BaseModel):
-    """LLM が原文から抽出した 1 件。プロンプトはフラット JSON。"""
+    """LLM が原文から抽出した 1 件。"""
 
     model_config = ConfigDict(extra="forbid")
 
     title: str = Field(..., max_length=100)
     situation: str | None = None
-    customer_issue: str | None = None
-    sales_action: str | None = None
-    action_reason: str | None = None
-    result: str | None = None
-    learning: str | None = None
+    problem: str | None = None
+    judgment: str | None = None
+    action: str | None = None
+    reasoning: str | None = None
+    outcome: str | None = None
+    lesson: str | None = None
+    applicable_situations: str | None = None
+    limitations: str | None = None
+    industry: str | None = None
+    product: str | None = None
+    sales_stage: str | None = None
     knowledge_type: str = "sales_knowhow"
 
     @field_validator("title", mode="before")
@@ -80,25 +116,33 @@ class ExtractedKnowledge(BaseModel):
     def structured_data(self) -> StructuredData:
         return StructuredData(
             situation=self.situation,
-            customer_issue=self.customer_issue,
-            sales_action=self.sales_action,
-            action_reason=self.action_reason,
-            result=self.result,
-            learning=self.learning,
+            problem=self.problem,
+            judgment=self.judgment,
+            action=self.action,
+            reasoning=self.reasoning,
+            outcome=self.outcome,
+            lesson=self.lesson,
+            applicable_situations=self.applicable_situations,
+            limitations=self.limitations,
         )
 
 
-# 後方互換。抽出テストやプレビューが ExtractedItem を参照していたため。
 ExtractedItem = ExtractedKnowledge
 
 CBR_FIELD_LABELS: tuple[tuple[str, str], ...] = (
     ("title", "タイトル"),
     ("situation", "状況"),
-    ("customer_issue", "顧客課題"),
-    ("sales_action", "営業対応"),
-    ("action_reason", "対応理由"),
-    ("result", "結果"),
-    ("learning", "学び"),
+    ("problem", "顧客課題"),
+    ("judgment", "判断"),
+    ("action", "行動"),
+    ("reasoning", "理由"),
+    ("outcome", "結果"),
+    ("lesson", "学び"),
+    ("applicable_situations", "適用場面"),
+    ("limitations", "制約・非適用"),
+    ("industry", "業界"),
+    ("product", "商材"),
+    ("sales_stage", "商談フェーズ"),
 )
 
 
@@ -108,18 +152,33 @@ class ExtractionResult(BaseModel):
     items: list[ExtractedKnowledge] = Field(default_factory=list)
 
 
+class CallSummaryDraft(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    summary: str
+    customer_needs: list[str] = Field(default_factory=list)
+    proposals: list[str] = Field(default_factory=list)
+    decisions: list[str] = Field(default_factory=list)
+    next_actions: list[str] = Field(default_factory=list)
+
+
 class KnowledgeCreate(BaseModel):
-    """手入力登録。title があればよい。CBR は任意。"""
+    """手入力登録。title があればよい。"""
 
     title: TitleText
     knowledge_type: str = "sales_knowhow"
     situation: str | None = None
-    customer_issue: str | None = None
-    sales_action: str | None = None
-    action_reason: str | None = None
-    result: str | None = None
-    learning: str | None = None
-    original_content: str | None = None
+    problem: str | None = None
+    judgment: str | None = None
+    action: str | None = None
+    reasoning: str | None = None
+    outcome: str | None = None
+    lesson: str | None = None
+    applicable_situations: str | None = None
+    limitations: str | None = None
+    industry: str | None = None
+    product: str | None = None
+    sales_stage: str | None = None
     data_source_id: UUID | None = None
     status: KnowledgeStatus = KnowledgeStatus.CONFIRMED
 
@@ -127,24 +186,20 @@ class KnowledgeCreate(BaseModel):
 class KnowledgeUpdate(BaseModel):
     title: TitleText | None = None
     situation: str | None = None
-    customer_issue: str | None = None
-    sales_action: str | None = None
-    action_reason: str | None = None
-    result: str | None = None
-    learning: str | None = None
+    problem: str | None = None
+    judgment: str | None = None
+    action: str | None = None
+    reasoning: str | None = None
+    outcome: str | None = None
+    lesson: str | None = None
+    applicable_situations: str | None = None
+    limitations: str | None = None
+    industry: str | None = None
+    product: str | None = None
+    sales_stage: str | None = None
     status: KnowledgeStatus | None = None
 
-    @field_validator(
-        "title",
-        "situation",
-        "customer_issue",
-        "sales_action",
-        "action_reason",
-        "result",
-        "learning",
-        "status",
-        mode="before",
-    )
+    @field_validator(*_SEARCH_FIELD_NAMES, "status", mode="before")
     @classmethod
     def _reject_explicit_null(cls, v: object) -> object:
         if v is None:
@@ -166,12 +221,18 @@ class Knowledge(BaseModel):
     knowledge_type: str
     title: str
     situation: str | None = None
-    customer_issue: str | None = None
-    sales_action: str | None = None
-    action_reason: str | None = None
-    result: str | None = None
-    learning: str | None = None
-    original_content: str | None = None
+    problem: str | None = None
+    judgment: str | None = None
+    action: str | None = None
+    reasoning: str | None = None
+    outcome: str | None = None
+    lesson: str | None = None
+    applicable_situations: str | None = None
+    limitations: str | None = None
+    industry: str | None = None
+    product: str | None = None
+    sales_stage: str | None = None
+    embedding_model: str | None = None
     status: KnowledgeStatus
     created_at: datetime
     updated_at: datetime
@@ -190,17 +251,10 @@ class Knowledge(BaseModel):
     @computed_field
     @property
     def content(self) -> str:
-        """一覧・検索の互換表示。CBR をフラット化したもの。"""
-        from app.services.search_text import generate_search_text
+        from app.services.search_text import generate_search_text_from_mapping
 
-        return generate_search_text(
-            title=self.title,
-            situation=self.situation,
-            customer_issue=self.customer_issue,
-            sales_action=self.sales_action,
-            action_reason=self.action_reason,
-            result=self.result,
-            learning=self.learning,
+        return generate_search_text_from_mapping(
+            self.model_dump(exclude={"content", "source_id", "source_type"})
         )
 
 
@@ -239,3 +293,20 @@ class IngestTextResponse(BaseModel):
     extracted: list[IngestPreviewItem]
     saved: list[Knowledge] = Field(default_factory=list)
     notes: list[str] = Field(default_factory=list)
+
+
+class CallSummary(BaseModel):
+    model_config = ConfigDict(from_attributes=True)
+
+    id: UUID
+    data_source_id: UUID
+    summary: str
+    customer_needs: list[str]
+    proposals: list[str]
+    decisions: list[str]
+    next_actions: list[str]
+    created_at: datetime
+
+
+class GenerateSummaryRequest(BaseModel):
+    data_source_id: UUID

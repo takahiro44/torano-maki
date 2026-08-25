@@ -9,9 +9,9 @@ from app.models.knowledge import ExtractedKnowledge
 _SAMPLE = ExtractedKnowledge(
     title="価格指摘への切り返し",
     situation="他社より高いと指摘された",
-    customer_issue="価格が高いことが障壁",
-    sales_action="値引きせず比較軸を聞いた",
-    learning="値引きより先に評価軸を確認する",
+    problem="価格が高いことが障壁",
+    action="値引きせず比較軸を聞いた",
+    lesson="値引きより先に評価軸を確認する",
 )
 _FAKE_VECTOR = [0.0] * 1024
 
@@ -45,10 +45,10 @@ def test_ingest_text_はdraftでCBR列に保存する(client: TestClient) -> Non
     assert len(body["saved"]) == 1
     saved = body["saved"][0]
     assert saved["status"] == "draft"
-    assert saved["original_content"] == raw
     assert saved["title"] == "価格指摘への切り返し"
-    assert saved["learning"] == "値引きより先に評価軸を確認する"
-    assert saved["sales_action"] == "値引きせず比較軸を聞いた"
+    assert saved["lesson"] == "値引きより先に評価軸を確認する"
+    assert saved["action"] == "値引きせず比較軸を聞いた"
+    assert saved["problem"] == "価格が高いことが障壁"
 
     listed = client.get("/knowledge", params={"status": "draft"}).json()
     assert any(row["id"] == saved["id"] for row in listed)

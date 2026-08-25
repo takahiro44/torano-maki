@@ -88,7 +88,7 @@ def health_db(db: DbSession, settings: AppSettings) -> DbHealthResponse:
             text(
                 "SELECT a.atttypmod FROM pg_attribute a "
                 "JOIN pg_class c ON c.oid = a.attrelid "
-                "WHERE c.relname = 'knowledge' AND a.attname = 'embedding'"
+                "WHERE c.relname = 'knowledge_units' AND a.attname = 'embedding'"
             )
         ).scalar_one_or_none()
 

@@ -11,7 +11,9 @@ import type {
   Knowledge,
   KnowledgeCounts,
   KnowledgeSearchResult,
+  KnowledgeSortField,
   KnowledgeStatus,
+  SortDirection,
 } from "../types/api";
 
 const API_BASE_URL = import.meta.env.VITE_API_BASE_URL ?? "http://127.0.0.1:8000";
@@ -67,9 +69,24 @@ export function ingestText(rawText: string) {
   });
 }
 
-export function listKnowledge(params: { status?: KnowledgeStatus; limit?: number } = {}) {
+export function listKnowledge(
+  params: {
+    status?: KnowledgeStatus;
+    industry?: string;
+    product?: string;
+    sales_stage?: string;
+    sort?: KnowledgeSortField;
+    order?: SortDirection;
+    limit?: number;
+  } = {},
+) {
   const q = new URLSearchParams();
   if (params.status) q.set("status", params.status);
+  if (params.industry) q.set("industry", params.industry);
+  if (params.product) q.set("product", params.product);
+  if (params.sales_stage) q.set("sales_stage", params.sales_stage);
+  if (params.sort) q.set("sort", params.sort);
+  if (params.order) q.set("order", params.order);
   q.set("limit", String(params.limit ?? 50));
   return request<Knowledge[]>(`/knowledge?${q}`);
 }
@@ -80,7 +97,22 @@ export function countKnowledge() {
 
 export function updateKnowledge(
   id: string,
-  changes: { title?: string; situation?: string; status?: KnowledgeStatus },
+  changes: {
+    title?: string;
+    situation?: string;
+    problem?: string;
+    judgment?: string;
+    action?: string;
+    reasoning?: string;
+    outcome?: string;
+    lesson?: string;
+    applicable_situations?: string;
+    limitations?: string;
+    industry?: string;
+    product?: string;
+    sales_stage?: string;
+    status?: KnowledgeStatus;
+  },
 ) {
   return request<Knowledge>(`/knowledge/${id}`, {
     method: "PATCH",

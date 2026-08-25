@@ -1,27 +1,68 @@
 """検索専用フラットテキスト。人間の画面には出さない。"""
 
+from __future__ import annotations
+
+from typing import Any
+
 
 def generate_search_text(
     title: str,
-    situation: str | None,
-    customer_issue: str | None,
-    sales_action: str | None,
-    action_reason: str | None,
-    result: str | None,
-    learning: str | None,
+    situation: str | None = None,
+    problem: str | None = None,
+    judgment: str | None = None,
+    action: str | None = None,
+    reasoning: str | None = None,
+    outcome: str | None = None,
+    lesson: str | None = None,
+    applicable_situations: str | None = None,
+    limitations: str | None = None,
+    industry: str | None = None,
+    product: str | None = None,
+    sales_stage: str | None = None,
 ) -> str:
-    """CBR フィールドをフラットテキストに結合。embedding 用。"""
+    """全フィールドをフラットテキストに結合。embedding 用。"""
     parts = [title]
-    if situation:
-        parts.append(f"状況: {situation}")
-    if customer_issue:
-        parts.append(f"顧客課題: {customer_issue}")
-    if sales_action:
-        parts.append(f"営業対応: {sales_action}")
-    if action_reason:
-        parts.append(f"対応理由: {action_reason}")
-    if result:
-        parts.append(f"結果: {result}")
-    if learning:
-        parts.append(f"学び: {learning}")
+    for label, value in [
+        ("状況", situation),
+        ("顧客課題", problem),
+        ("判断", judgment),
+        ("行動", action),
+        ("理由", reasoning),
+        ("結果", outcome),
+        ("学び", lesson),
+        ("適用場面", applicable_situations),
+        ("制約", limitations),
+    ]:
+        if value:
+            parts.append(f"{label}: {value}")
+
+    meta: list[str] = []
+    if industry:
+        meta.append(f"業界: {industry}")
+    if product:
+        meta.append(f"商材: {product}")
+    if sales_stage:
+        meta.append(f"フェーズ: {sales_stage}")
+    if meta:
+        parts.append(" ".join(meta))
+
     return " ".join(parts)
+
+
+def generate_search_text_from_mapping(data: dict[str, Any]) -> str:
+    """ORM / Pydantic の dump から search_text を作る。"""
+    return generate_search_text(
+        title=str(data["title"]),
+        situation=data.get("situation"),
+        problem=data.get("problem"),
+        judgment=data.get("judgment"),
+        action=data.get("action"),
+        reasoning=data.get("reasoning"),
+        outcome=data.get("outcome"),
+        lesson=data.get("lesson"),
+        applicable_situations=data.get("applicable_situations"),
+        limitations=data.get("limitations"),
+        industry=data.get("industry"),
+        product=data.get("product"),
+        sales_stage=data.get("sales_stage"),
+    )

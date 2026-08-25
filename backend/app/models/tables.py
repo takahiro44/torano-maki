@@ -10,7 +10,19 @@ from datetime import datetime
 from uuid import UUID
 
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import CheckConstraint, DateTime, FetchedValue, ForeignKey, String, Text, func
+from sqlalchemy import (
+    CheckConstraint,
+    DateTime,
+    FetchedValue,
+    Float,
+    ForeignKey,
+    Integer,
+    String,
+    Text,
+    UniqueConstraint,
+    func,
+)
+from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.dialects.postgresql import UUID as PgUUID
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -34,17 +46,46 @@ class DataSourceTable(Base):
         PgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
     )
     source_type: Mapped[str] = mapped_column(String(20), nullable=False)
-    filename: Mapped[str | None] = mapped_column(String(255))
-    conducted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    file_name: Mapped[str | None] = mapped_column(String(255))
+    occurred_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
 
-    knowledge_items: Mapped[list[KnowledgeTable]] = relationship(back_populates="data_source")
+    segments: Mapped[list[UtteranceSegmentTable]] = relationship(back_populates="data_source")
+    knowledge_items: Mapped[list[KnowledgeUnitTable]] = relationship(back_populates="data_source")
+    summary: Mapped[CallSummaryTable | None] = relationship(
+        back_populates="data_source", uselist=False
+    )
 
 
-class KnowledgeTable(Base):
-    __tablename__ = "knowledge"
+class UtteranceSegmentTable(Base):
+    __tablename__ = "utterance_segments"
+
+    __table_args__ = (
+        UniqueConstraint("data_source_id", "sequence_no", name="uq_segment_sequence"),
+    )
+
+    id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
+    )
+    data_source_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("data_sources.id"), nullable=False
+    )
+    sequence_no: Mapped[int] = mapped_column(Integer, nullable=False)
+    speaker: Mapped[str] = mapped_column(String(100), nullable=False)
+    start_sec: Mapped[float] = mapped_column(Float, nullable=False)
+    end_sec: Mapped[float] = mapped_column(Float, nullable=False)
+    content: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    data_source: Mapped[DataSourceTable] = relationship(back_populates="segments")
+
+
+class KnowledgeUnitTable(Base):
+    __tablename__ = "knowledge_units"
 
     __table_args__ = (
         CheckConstraint(
@@ -66,15 +107,23 @@ class KnowledgeTable(Base):
     title: Mapped[str] = mapped_column(String(100), nullable=False)
 
     situation: Mapped[str | None] = mapped_column(Text)
-    customer_issue: Mapped[str | None] = mapped_column(Text)
-    sales_action: Mapped[str | None] = mapped_column(Text)
-    action_reason: Mapped[str | None] = mapped_column(Text)
-    result: Mapped[str | None] = mapped_column(Text)
-    learning: Mapped[str | None] = mapped_column(Text)
+    problem: Mapped[str | None] = mapped_column(Text)
+    judgment: Mapped[str | None] = mapped_column(Text)
+    action: Mapped[str | None] = mapped_column(Text)
+    reasoning: Mapped[str | None] = mapped_column(Text)
+    outcome: Mapped[str | None] = mapped_column(Text)
+    lesson: Mapped[str | None] = mapped_column(Text)
+
+    applicable_situations: Mapped[str | None] = mapped_column(Text)
+    limitations: Mapped[str | None] = mapped_column(Text)
+
+    industry: Mapped[str | None] = mapped_column(String(100))
+    product: Mapped[str | None] = mapped_column(String(100))
+    sales_stage: Mapped[str | None] = mapped_column(String(50))
 
     search_text: Mapped[str | None] = mapped_column(Text)
-    original_content: Mapped[str | None] = mapped_column(Text)
     embedding: Mapped[list[float] | None] = mapped_column(Vector(_EMBEDDING_DIM))
+    embedding_model: Mapped[str | None] = mapped_column(String(100))
 
     status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="draft")
 
@@ -90,3 +139,57 @@ class KnowledgeTable(Base):
     deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
 
     data_source: Mapped[DataSourceTable | None] = relationship(back_populates="knowledge_items")
+    evidence: Mapped[list[KnowledgeEvidenceTable]] = relationship(
+        back_populates="knowledge", cascade="all, delete-orphan"
+    )
+
+
+class KnowledgeEvidenceTable(Base):
+    __tablename__ = "knowledge_evidence"
+
+    id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
+    )
+    knowledge_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True),
+        ForeignKey("knowledge_units.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    start_utterance_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("utterance_segments.id"), nullable=False
+    )
+    end_utterance_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("utterance_segments.id"), nullable=False
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    knowledge: Mapped[KnowledgeUnitTable] = relationship(back_populates="evidence")
+    start_utterance: Mapped[UtteranceSegmentTable] = relationship(foreign_keys=[start_utterance_id])
+    end_utterance: Mapped[UtteranceSegmentTable] = relationship(foreign_keys=[end_utterance_id])
+
+
+class CallSummaryTable(Base):
+    __tablename__ = "call_summaries"
+
+    id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
+    )
+    data_source_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("data_sources.id"), nullable=False, unique=True
+    )
+    summary: Mapped[str] = mapped_column(Text, nullable=False)
+    customer_needs: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    proposals: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    decisions: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    next_actions: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    data_source: Mapped[DataSourceTable] = relationship(back_populates="summary")
+
+
+# 既存の検索・CRUD が KnowledgeTable 名を参照していたため。
+KnowledgeTable = KnowledgeUnitTable
