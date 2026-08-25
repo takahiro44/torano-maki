@@ -106,3 +106,64 @@ export type ConfigHealthResponse = {
   base_url: string | null;
   model_name: string | null;
 };
+
+// --- AIチャット ---
+//
+// バックエンドの models/chat.py と対応させる。形の正は OpenAPI スキーマ
+// （/openapi.json）で、こちらはそれを写したもの。
+
+/** クライアントが送れる役割。system / tool はサーバ側が拒否する */
+export type ChatRole = "user" | "assistant";
+
+export type ChatMessage = {
+  role: ChatRole;
+  content: string;
+};
+
+export type CitationUtterance = {
+  sequence_no: number;
+  speaker: string;
+  start_sec: number;
+  end_sec: number;
+  content: string;
+};
+
+/**
+ * AIが参照したナレッジ。
+ *
+ * **「回答の引用元」ではない。** 検索は当たったが回答が「該当なし」に
+ * なる場合も入る。どれを引用したかはモデルにしか分からないため、
+ * 画面では「AIが参照した情報」として見せること。
+ */
+export type Citation = {
+  knowledge_id: string;
+  title: string;
+  data_source_id: string | null;
+  source_type: string | null;
+  file_name: string | null;
+  utterances: CitationUtterance[];
+};
+
+/** AIが実行したTool 1回分。回答が返るまで長いため、何をしたかを見せる材料 */
+export type ToolTraceStep = {
+  step: number;
+  tool: string;
+  ok: boolean;
+  summary: string;
+  error_code: string | null;
+};
+
+export type ChatUsage = {
+  iterations: number;
+  prompt_tokens: number;
+  completion_tokens: number;
+  /** 上限に達して打ち切った。true なら回答が不完全な可能性がある */
+  hit_max_iterations: boolean;
+};
+
+export type ChatResponse = {
+  answer: string;
+  citations: Citation[];
+  tool_trace: ToolTraceStep[];
+  usage: ChatUsage;
+};

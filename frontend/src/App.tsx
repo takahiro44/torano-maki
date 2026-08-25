@@ -8,21 +8,23 @@
 
 import { useEffect, useState } from "react";
 import { countKnowledge, getDbHealth } from "./api/client";
+import { AiChat } from "./components/AiChat";
 import { KnowledgeInput } from "./components/KnowledgeInput";
 import { KnowledgeList } from "./components/KnowledgeList";
 import { KnowledgeSearch } from "./components/KnowledgeSearch";
 import type { KnowledgeCounts } from "./types/api";
 
-type Tab = "search" | "input" | "list";
+type Tab = "chat" | "search" | "input" | "list";
 
 const TABS: { key: Tab; label: string }[] = [
+  { key: "chat", label: "AIに聞く" },
   { key: "search", label: "探す" },
   { key: "input", label: "登録" },
   { key: "list", label: "一覧" },
 ];
 
 export default function App() {
-  const [tab, setTab] = useState<Tab>("search");
+  const [tab, setTab] = useState<Tab>("chat");
   // 登録・更新のたびに一覧と件数を取り直すためのトリガー
   const [reloadKey, setReloadKey] = useState(0);
   const [counts, setCounts] = useState<KnowledgeCounts | null>(null);
@@ -81,6 +83,7 @@ export default function App() {
       </nav>
 
       <main>
+        {tab === "chat" && <AiChat />}
         {tab === "search" && <KnowledgeSearch />}
         {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
         {tab === "list" && (
