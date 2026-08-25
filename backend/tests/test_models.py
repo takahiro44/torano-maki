@@ -51,7 +51,7 @@ class TestKnowledgeUpdate:
 
 
 def test_CBR項目は見出し付きで整形できる() -> None:
-    item = ExtractedKnowledge(title="見出し", learning="学びだけある")
+    item = ExtractedKnowledge(title="見出し", lesson="学びだけある")
     text = format_item_as_content(item)
     assert "【タイトル】\n見出し" in text
     assert "【学び】\n学びだけある" in text
@@ -61,15 +61,12 @@ def test_CBR項目は見出し付きで整形できる() -> None:
 def test_search_textはCBRをフラット化する() -> None:
     blob = generate_search_text(
         title="見出し",
-        situation=None,
-        customer_issue=None,
-        sales_action=None,
-        action_reason=None,
-        result=None,
-        learning="学びだけある",
+        lesson="学びだけある",
+        industry="製造業",
     )
     assert blob.startswith("見出し")
     assert "学び: 学びだけある" in blob
+    assert "業界: 製造業" in blob
 
 
 def test_短いメモは1チャンク() -> None:

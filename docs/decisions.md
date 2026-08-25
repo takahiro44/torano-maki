@@ -360,3 +360,15 @@ CLAUDE.md のルールを追加・変更したときも、理由をここに残�
   `search_text` は embedding 専用。`data_sources` を参照する。
   推論 URL は従来どおり `BASE_URL` / `MODEL_NAME`（QWEN_API_ENDPOINT は使わない）
 - **理由**: 指示スキーマと検索用フラットテキストを分離し、画面には CBR だけ出す
+
+### 2026-08-25 knowledge_units ER を本番DDLにする
+
+- **背景**: 文字起こし検証（`docs/knowledge-extraction-design.md`）で
+  data_sources / utterance_segments / knowledge_units / knowledge_evidence /
+  call_summaries の5テーブルが通った
+- **決定**: 検証済みの列名（problem / judgment / action 等）と
+  フィルタ用 industry / product / sales_stage を DDL に載せる。
+  埋め込みインデックスは件数が少ないデモ向けに **HNSW** を維持する
+  （ivfflat lists=100 は訓練不足になりやすい）
+- **理由**: 検証で根拠区間と商談要約まで辿れた契約を、抽出担当の API と共有する
+

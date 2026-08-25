@@ -18,39 +18,43 @@ from app.models.knowledge import (
     ExtractionResult,
     KnowledgeStatus,
 )
-from app.models.tables import DataSourceTable, KnowledgeTable
+from app.models.tables import DataSourceTable, KnowledgeUnitTable
 from app.services.embedding import generate_embedding
-from app.services.search_text import generate_search_text
+from app.services.search_text import generate_search_text_from_mapping
 
 logger = logging.getLogger(__name__)
 
 _SCHEMA_NAME = "knowledge_extraction"
 
 _SYSTEM_PROMPT = """あなたは営業ナレッジ抽出の専門家です。
-入力されたテキスト（商談議事録・営業メモ・対話ログ等）から、
-営業担当者の経験・ノウハウを構造化して抽出してください。
+入力テキストから営業担当者の経験・ノウハウを構造化して抽出してください。
 
 ## 抽出フォーマット
 
-1件のナレッジにつき、以下の項目を抽出してください：
+1件につき以下を抽出：
 
-- title: ナレッジの見出し（30文字以内、内容が一目でわかるもの）
-- situation: 状況（何が起きたか、どんな商談場面か）
-- customer_issue: 顧客課題（顧客側の障壁・懸念・要望）
-- sales_action: 営業対応（営業担当者が具体的に何をしたか。判断と行動を含む）
-- action_reason: 対応理由（なぜその対応を選んだか）
-- result: 結果（対応の結果どうなったか）
-- learning: 学び（この経験から得られる、他の商談でも使える教訓）
+- title: 見出し（30文字以内）
+- situation: 状況（何が起きたか）
+- problem: 顧客課題（顧客側の障壁・懸念）
+- judgment: 判断（営業が何を考え、どう判断したか）
+- action: 行動（具体的に何をしたか）
+- reasoning: 理由（なぜその判断・行動を選んだか）
+- outcome: 結果（どうなったか）
+- lesson: 学び（他の商談でも使える教訓）
+- applicable_situations: 適用場面（どんな場面で使えるか）
+- limitations: 制約・非適用場面（使えない場面や注意点）
+- industry: 業界（該当する場合のみ）
+- product: 商材（該当する場合のみ）
+- sales_stage: 商談フェーズ（初回/提案/クロージング等、該当する場合のみ）
 
 ## ルール
 
-- 1つのテキストから複数のナレッジを抽出してよい
-- 抽出できるナレッジがない場合は空配列を返す
-- 各項目は1〜3文程度で簡潔に
-- 推測や一般論ではなく、テキストに書かれている事実に基づいて抽出する
-- 情報が不足している項目は null にする（無理に埋めない）
-- title は「〜の対応法」「〜への切り返し」のような、検索時に見つけやすい表現にする
-- 入力の形式は問わない（走り書き・箇条書き・長文いずれも可）
+- 1テキストから複数件抽出可
+- 抽出できなければ空配列を返す
+- 各項目は1〜3文で簡潔に
+- テキストに書かれた事実に基づく（推測しない）
+- 情報不足の項目は null（無理に埋めない）
+- title は「〜の対応法」「〜への切り返し」のような検索しやすい表現
 - 出力は指定の JSON Schema に厳密に従う。説明文やコードフェンスは付けない
 """
 
@@ -227,32 +231,31 @@ def _parse_extraction_json(raw: str) -> ExtractionResult:
 def knowledge_row_from_extracted(
     item: ExtractedKnowledge,
     *,
-    original_content: str,
     data_source_id: UUID | None,
     status: str = KnowledgeStatus.DRAFT.value,
-) -> KnowledgeTable:
-    search_text = generate_search_text(
-        title=item.title,
-        situation=item.situation,
-        customer_issue=item.customer_issue,
-        sales_action=item.sales_action,
-        action_reason=item.action_reason,
-        result=item.result,
-        learning=item.learning,
-    )
-    return KnowledgeTable(
+) -> KnowledgeUnitTable:
+    dump = item.model_dump()
+    search_text = generate_search_text_from_mapping(dump)
+    settings = get_settings()
+    return KnowledgeUnitTable(
         data_source_id=data_source_id,
-        knowledge_type=item.knowledge_type,
-        title=item.title,
-        situation=item.situation,
-        customer_issue=item.customer_issue,
-        sales_action=item.sales_action,
-        action_reason=item.action_reason,
-        result=item.result,
-        learning=item.learning,
+        knowledge_type=dump["knowledge_type"],
+        title=dump["title"],
+        situation=dump["situation"],
+        problem=dump["problem"],
+        judgment=dump["judgment"],
+        action=dump["action"],
+        reasoning=dump["reasoning"],
+        outcome=dump["outcome"],
+        lesson=dump["lesson"],
+        applicable_situations=dump["applicable_situations"],
+        limitations=dump["limitations"],
+        industry=dump["industry"],
+        product=dump["product"],
+        sales_stage=dump["sales_stage"],
         search_text=search_text,
-        original_content=original_content,
         embedding=generate_embedding(search_text),
+        embedding_model=settings.embedding_model,
         status=status,
     )
 
@@ -263,7 +266,7 @@ def process_text_to_knowledge(
     data_source_id: UUID | None = None,
     *,
     status: str = KnowledgeStatus.DRAFT.value,
-) -> tuple[list[KnowledgeTable], list[str]]:
+) -> tuple[list[KnowledgeUnitTable], list[str]]:
     """テキスト → 構造化 → search_text → embedding → DB。"""
     notes: list[str] = []
     if source_was_truncated(text):
@@ -278,13 +281,12 @@ def process_text_to_knowledge(
         data_source_id = source.id
 
     pairs = extract_knowledge_with_sources(text)
-    saved: list[KnowledgeTable] = []
+    saved: list[KnowledgeUnitTable] = []
     for item, _excerpt in pairs:
         if not item.title.strip():
             continue
         row = knowledge_row_from_extracted(
             item,
-            original_content=text,
             data_source_id=data_source_id,
             status=status,
         )

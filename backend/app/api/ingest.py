@@ -79,15 +79,23 @@ def ingest_text(payload: IngestTextRequest, db: DbSession) -> IngestTextResponse
 
     extracted: list[IngestPreviewItem] = []
     for row in saved:
-        item = ExtractedKnowledge(
-            title=row.title,
-            situation=row.situation,
-            customer_issue=row.customer_issue,
-            sales_action=row.sales_action,
-            action_reason=row.action_reason,
-            result=row.result,
-            learning=row.learning,
-            knowledge_type=row.knowledge_type,
+        item = ExtractedKnowledge.model_validate(
+            {
+                "title": row.title,
+                "situation": row.situation,
+                "problem": row.problem,
+                "judgment": row.judgment,
+                "action": row.action,
+                "reasoning": row.reasoning,
+                "outcome": row.outcome,
+                "lesson": row.lesson,
+                "applicable_situations": row.applicable_situations,
+                "limitations": row.limitations,
+                "industry": row.industry,
+                "product": row.product,
+                "sales_stage": row.sales_stage,
+                "knowledge_type": row.knowledge_type,
+            }
         )
         extracted.append(
             IngestPreviewItem(**item.model_dump(), content=format_item_as_content(item))
