@@ -12,6 +12,7 @@
 
 import { useState } from "react";
 import { getKnowledge } from "../../api/client";
+import { navigate, roleplayStartPath } from "../../lib/router";
 import type { Citation, Knowledge } from "../../types/api";
 import { KnowledgeArticle } from "../KnowledgeArticle";
 import { Spinner } from "./AgentTimeline";
@@ -105,6 +106,13 @@ function CitationCard({ citation }: { citation: Citation }) {
           )}
           {error && <p className="text-xs text-rose-600">{error}</p>}
           {knowledge && <KnowledgeArticle knowledge={knowledge} />}
+          <button
+            onClick={() => navigate(roleplayStartPath(citation.knowledge_id))}
+            className="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-medium text-white
+                       hover:bg-indigo-500"
+          >
+            この場面を練習する
+          </button>
         </div>
       )}
     </div>

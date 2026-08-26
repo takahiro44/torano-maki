@@ -276,3 +276,128 @@ export type ChatStreamEvent =
   | ChatAnswerResetEvent
   | ChatDoneEvent
   | ChatErrorEvent;
+
+// --- ロープレ ---
+//
+// バックエンドの models/roleplay.py と対応させる。形の正は OpenAPI スキーマ
+// （/openapi.json）で、こちらはそれを写したもの。
+//
+// **Knowledge ID を持つのは references だけ。** シナリオにも顧客役の発言にも
+// IDは入らない。出典はサーバが session に紐づけた記録からのみ組み立てられる
+// （AIに書かせると捏造するため）。
+
+export type RoleplayCategory =
+  | "needs_discovery"
+  | "price_objection"
+  | "objection"
+  | "complaint"
+  | "next_commitment";
+
+export type SessionStatus = "active" | "completed" | "abandoned";
+export type TurnRole = "learner" | "customer";
+/** generated はAIが作った発言。人の回答（text / audio）と必ず区別する */
+export type InputMode = "text" | "audio" | "generated";
+export type UsageType = "primary" | "supporting";
+export type RubricVerdict = "met" | "partial" | "not_met";
+
+export type CategoryOption = {
+  key: RoleplayCategory;
+  label: string;
+};
+
+/** フィードバックの評価観点。根拠のない総合点を出さないために先に固定する */
+export type RubricItem = {
+  key: string;
+  label: string;
+};
+
+export type RoleplayScenario = {
+  title: string;
+  situation: string;
+  learner_goal: string;
+  customer_persona: string;
+  /** 顧客の最初の発言。この一言から練習が始まる */
+  opening_line: string;
+  /** 後輩が発言できる最大回数 */
+  max_turns: number;
+  rubric: RubricItem[];
+};
+
+export type RoleplayTurn = {
+  sequence_no: number;
+  role: TurnRole;
+  content: string;
+  input_mode: InputMode;
+  created_at: string;
+};
+
+export type ReferencedUtterance = {
+  sequence_no: number;
+  speaker: string;
+  start_sec: number;
+  end_sec: number;
+  content: string;
+};
+
+/**
+ * セッションが実際に使ったナレッジ。
+ *
+ * `limitations`（使えない場面）を必ず表示すること。成功例の模倣だけを
+ * 正解にすると、後輩が場面を選ばず真似てしまう。
+ */
+export type ReferencedKnowledge = {
+  knowledge_id: string;
+  title: string;
+  usage_type: UsageType;
+  rank: number;
+  data_source_id: string | null;
+  file_name: string | null;
+  applicable_situations: string | null;
+  limitations: string | null;
+  utterances: ReferencedUtterance[];
+};
+
+export type RubricResult = {
+  key: string;
+  verdict: RubricVerdict;
+  comment: string;
+  label: string;
+};
+
+export type RoleplayFeedback = {
+  rubric_results: RubricResult[];
+  strengths: string[];
+  improvements: string[];
+  /** 次に試す一言。そのまま口に出せる形で返る */
+  next_phrase: string;
+  /** 再挑戦時に意識する1点 */
+  focus_next_try: string;
+  created_at: string;
+};
+
+export type RoleplaySession = {
+  session_id: string;
+  status: SessionStatus;
+  query: string;
+  scenario: RoleplayScenario;
+  turns: RoleplayTurn[];
+  references: ReferencedKnowledge[];
+  feedback: RoleplayFeedback | null;
+  learner_turns_used: number;
+  remaining_learner_turns: number;
+  created_at: string;
+  completed_at: string | null;
+};
+
+/**
+ * マイク回答の文字起こし。
+ *
+ * **この時点ではまだ発言として保存されていない。** 誤認識を人が直してから
+ * `sendRoleplayTurn` へ送る。誤ったまま進むと顧客役がそれに答え、
+ * フィードバックまでその前提で作られる。
+ */
+export type RoleplayTranscription = {
+  text: string;
+  language: string | null;
+  duration_sec: number;
+};

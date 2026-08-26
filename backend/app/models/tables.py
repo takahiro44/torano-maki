@@ -40,6 +40,11 @@ class DataSourceTable(Base):
             "source_type IN ('audio', 'document', 'manual', 'roleplay', 'interview')",
             name="ck_data_sources_source_type",
         ),
+        CheckConstraint("origin IN ('real', 'synthetic')", name="ck_data_sources_origin"),
+        CheckConstraint(
+            "review_status IN ('unreviewed', 'reviewed')",
+            name="ck_data_sources_review_status",
+        ),
     )
 
     id: Mapped[UUID] = mapped_column(
@@ -48,6 +53,11 @@ class DataSourceTable(Base):
     source_type: Mapped[str] = mapped_column(String(20), nullable=False)
     file_name: Mapped[str | None] = mapped_column(String(255))
     occurred_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+    # source_type（媒体）と混ぜない。合成商談を実商談として説明しないための列。
+    origin: Mapped[str] = mapped_column(String(20), nullable=False, server_default="real")
+    review_status: Mapped[str] = mapped_column(
+        String(20), nullable=False, server_default="unreviewed"
+    )
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )
@@ -189,6 +199,129 @@ class CallSummaryTable(Base):
     )
 
     data_source: Mapped[DataSourceTable] = relationship(back_populates="summary")
+
+
+class RoleplaySessionTable(Base):
+    """1回の練習。
+
+    `scenario` を JSONB のスナップショットで持つ理由は SQL 側のコメントを参照。
+    """
+
+    __tablename__ = "roleplay_sessions"
+
+    __table_args__ = (
+        CheckConstraint(
+            "status IN ('active', 'completed', 'abandoned')",
+            name="ck_roleplay_sessions_status",
+        ),
+    )
+
+    id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
+    )
+    query: Mapped[str] = mapped_column(Text, nullable=False)
+    scenario: Mapped[dict[str, object]] = mapped_column(JSONB, nullable=False)
+    status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="active")
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    completed_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+    knowledge_links: Mapped[list[RoleplaySessionKnowledgeTable]] = relationship(
+        back_populates="session", cascade="all, delete-orphan"
+    )
+    turns: Mapped[list[RoleplayTurnTable]] = relationship(
+        back_populates="session",
+        cascade="all, delete-orphan",
+        order_by="RoleplayTurnTable.sequence_no",
+    )
+    feedback: Mapped[RoleplayFeedbackTable | None] = relationship(
+        back_populates="session", cascade="all, delete-orphan", uselist=False
+    )
+
+
+class RoleplaySessionKnowledgeTable(Base):
+    """セッションが実際に使ったナレッジ。画面の出典はここだけから作る。"""
+
+    __tablename__ = "roleplay_session_knowledge"
+
+    __table_args__ = (
+        CheckConstraint(
+            "usage_type IN ('primary', 'supporting')",
+            name="ck_roleplay_session_knowledge_usage_type",
+        ),
+    )
+
+    session_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True),
+        ForeignKey("roleplay_sessions.id", ondelete="CASCADE"),
+        primary_key=True,
+    )
+    knowledge_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("knowledge_units.id"), primary_key=True
+    )
+    rank: Mapped[int] = mapped_column(Integer, nullable=False)
+    usage_type: Mapped[str] = mapped_column(String(20), nullable=False, server_default="supporting")
+
+    session: Mapped[RoleplaySessionTable] = relationship(back_populates="knowledge_links")
+    knowledge: Mapped[KnowledgeUnitTable] = relationship()
+
+
+class RoleplayTurnTable(Base):
+    """1発言。顧客役の最初の発言も含めて全てここに並ぶ。"""
+
+    __tablename__ = "roleplay_turns"
+
+    __table_args__ = (
+        UniqueConstraint("session_id", "sequence_no", name="uq_roleplay_turn_sequence"),
+        CheckConstraint("role IN ('learner', 'customer')", name="ck_roleplay_turns_role"),
+        CheckConstraint(
+            "input_mode IN ('text', 'audio', 'generated')",
+            name="ck_roleplay_turns_input_mode",
+        ),
+    )
+
+    id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
+    )
+    session_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True),
+        ForeignKey("roleplay_sessions.id", ondelete="CASCADE"),
+        nullable=False,
+    )
+    sequence_no: Mapped[int] = mapped_column(Integer, nullable=False)
+    role: Mapped[str] = mapped_column(String(20), nullable=False)
+    content: Mapped[str] = mapped_column(Text, nullable=False)
+    input_mode: Mapped[str] = mapped_column(String(20), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    session: Mapped[RoleplaySessionTable] = relationship(back_populates="turns")
+
+
+class RoleplayFeedbackTable(Base):
+    """1セッション1件のフィードバック。"""
+
+    __tablename__ = "roleplay_feedback"
+
+    session_id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True),
+        ForeignKey("roleplay_sessions.id", ondelete="CASCADE"),
+        primary_key=True,
+    )
+    rubric_result: Mapped[list[dict[str, object]]] = mapped_column(
+        JSONB, nullable=False, server_default="[]"
+    )
+    strengths: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    improvements: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    next_phrase: Mapped[str] = mapped_column(Text, nullable=False)
+    focus_next_try: Mapped[str] = mapped_column(Text, nullable=False)
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+
+    session: Mapped[RoleplaySessionTable] = relationship(back_populates="feedback")
 
 
 class ChatReviewTable(Base):
