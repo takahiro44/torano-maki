@@ -56,12 +56,22 @@ def chat_completion(
     tools: list[dict[str, Any]] | None = None,
     temperature: float = 0.3,
     timeout: float = DEFAULT_TIMEOUT_SECONDS,
+    json_schema: dict[str, Any] | None = None,
+    schema_name: str = "structured_output",
 ) -> dict[str, Any]:
     """`/chat/completions` を1回呼び、応答のJSONをそのまま返す。
 
     パースして畳まずに生の body を返すのは、Tool Calling では
     `tool_calls` / `finish_reason` / `usage` を呼び出し側が同時に見るため。
     ここで型を決め打つと、Agent Loop 側が必要な情報を取り出せなくなる。
+
+    `json_schema` を渡すと構造化出力（guided decoding）を要求する。
+    **Tool Calling とは併用しない。** Tool を呼ぶかどうかをモデルが選ぶ場面と、
+    決まった形のJSONを1回で受け取る場面は別物で、混ぜると
+    「Tool を呼びたいのにスキーマへ押し込められる」状態になる。
+    キー名は extraction.py が実績のある形（`response_format` と
+    `structured_outputs` の併記）に合わせている。vLLM のバージョンにより
+    受け付ける側が違うため、両方送るのが確実だった。
     """
     settings = get_settings()
     if not settings.is_llm_configured:
@@ -79,6 +89,12 @@ def chat_completion(
     if tools:
         payload["tools"] = tools
         payload["tool_choice"] = "auto"
+    elif json_schema is not None:
+        payload["response_format"] = {
+            "type": "json_schema",
+            "json_schema": {"name": schema_name, "schema": json_schema},
+        }
+        payload["structured_outputs"] = {"json": json_schema}
 
     url = settings.base_url.rstrip("/") + "/chat/completions"
     try:

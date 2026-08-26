@@ -7,17 +7,22 @@
 
 import type {
   AudioTranscribeResponse,
+  CategoryOption,
   ChatMessage,
   ChatResponse,
   ChatStreamEvent,
   ConfigHealthResponse,
   DbHealthResponse,
+  InputMode,
   Knowledge,
   KnowledgeCounts,
   KnowledgeSearchResult,
   KnowledgeSortField,
   KnowledgeStatus,
   KnowledgeEvidenceSpan,
+  RoleplayCategory,
+  RoleplaySession,
+  RoleplayTranscription,
   SortDirection,
 } from "../types/api";
 
@@ -197,6 +202,99 @@ export function sendChat(messages: ChatMessage[], topK = 5) {
     body: JSON.stringify({ messages, top_k: topK }),
     signal: AbortSignal.timeout(300_000),
   });
+}
+
+// --- ロープレ ---
+//
+// **待ち時間が用途ごとに大きく違う。** セッション作成は検索とシナリオ生成、
+// ターンは顧客役の生成、振り返りは講評の生成でそれぞれvLLMを待つ。
+// 一律のタイムアウトにすると、短い処理で無駄に待つか、長い処理を
+// 正常なのに打ち切ることになるため個別に置いている。
+
+/** 練習できる場面の一覧。ボタンはこの応答から作る（対応表をフロントに持たない） */
+export function listRoleplayCategories() {
+  return request<CategoryOption[]>("/roleplay/categories");
+}
+
+/**
+ * 練習を始める。
+ *
+ * `knowledgeId` を渡すと、そのナレッジを主役にした場面が作られる。
+ * AIチャットの「この場面を練習する」から入る経路で使う。
+ * 渡さない場合は `query` / `category` からナレッジを検索する。
+ *
+ * **30秒以上かかる。** 検索・根拠取得・シナリオ生成を順に行うため。
+ */
+export function startRoleplaySession(params: {
+  query?: string;
+  knowledgeId?: string;
+  category?: RoleplayCategory;
+  maxTurns?: number;
+}) {
+  return request<RoleplaySession>("/roleplay/sessions", {
+    method: "POST",
+    body: JSON.stringify({
+      query: params.query ?? null,
+      knowledge_id: params.knowledgeId ?? null,
+      category: params.category ?? null,
+      max_turns: params.maxTurns ?? 2,
+    }),
+    signal: AbortSignal.timeout(300_000),
+  });
+}
+
+/** 再読込・復帰用。シナリオ・発言・出典・振り返りがすべて入って返る */
+export function getRoleplaySession(sessionId: string) {
+  return request<RoleplaySession>(`/roleplay/sessions/${sessionId}`);
+}
+
+/** 回答を送り、顧客役の返答まで進める */
+export function sendRoleplayTurn(sessionId: string, content: string, inputMode: InputMode) {
+  return request<RoleplaySession>(`/roleplay/sessions/${sessionId}/turns/text`, {
+    method: "POST",
+    body: JSON.stringify({ content, input_mode: inputMode }),
+    signal: AbortSignal.timeout(180_000),
+  });
+}
+
+/** 振り返りを作って終了する。発言回数が残っていても呼べる */
+export function finishRoleplay(sessionId: string) {
+  return request<RoleplaySession>(`/roleplay/sessions/${sessionId}/feedback`, {
+    method: "POST",
+    signal: AbortSignal.timeout(300_000),
+  });
+}
+
+/** 同じ場面をもう一度。シナリオは作り直さないため待ち時間がない */
+export function retryRoleplay(sessionId: string) {
+  return request<RoleplaySession>(`/roleplay/sessions/${sessionId}/retry`, { method: "POST" });
+}
+
+/**
+ * マイク回答を文字起こしする。**まだ発言としては保存されない。**
+ *
+ * 誤認識を画面で直してから `sendRoleplayTurn` へ送る2段構え。
+ *
+ * **Content-Type を自分で付けないこと。** FormData を渡したときに
+ * ブラウザが multipart の boundary 付きで設定するため、
+ * 手で書くと boundary が欠けてサーバ側でパースに失敗する。
+ */
+export async function transcribeRoleplayAnswer(
+  sessionId: string,
+  audio: Blob,
+  signal?: AbortSignal,
+) {
+  const form = new FormData();
+  // MediaRecorder の Blob にはファイル名が無い。サーバは Content-Type から
+  // 拡張子を判定できるが、名前を付けておくと原因追跡が楽になる
+  form.append("file", audio, "answer.webm");
+  const res = await fetch(`${API_BASE_URL}/roleplay/sessions/${sessionId}/turns/audio`, {
+    method: "POST",
+    body: form,
+    signal: signal ?? AbortSignal.timeout(180_000),
+  });
+  await throwIfNotOk(res, "POST /roleplay/sessions/{id}/turns/audio failed");
+  return (await res.json()) as RoleplayTranscription;
 }
 
 // --- 疎通確認 ---
