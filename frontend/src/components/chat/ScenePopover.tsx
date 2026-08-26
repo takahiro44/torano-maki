@@ -162,7 +162,7 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
 
         <footer className="shrink-0 border-t border-slate-100 px-3.5 py-2.5">
           <button
-            onClick={() => navigate(roleplayStartPath(target.knowledgeId))}
+            onClick={() => navigate(roleplayStartPath({ knowledgeId: target.knowledgeId }))}
             className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
           >
             この場面を練習する

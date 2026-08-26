@@ -235,6 +235,9 @@ def test_出典はセッションに紐づけたナレッジだけから作ら�
 def test_シナリオが契約に合わなければセッションを作らない(db: Session) -> None:
     knowledge = _make_knowledge(db)
     broken = {**_SCENARIO_JSON, "rubric": []}
+    # 全件数ではなく増分で見る。開発用DBには実際に練習した記録が残っており、
+    # 「0件であること」を期待すると、機能を使うたびにテストが落ちる
+    before = db.query(RoleplayTurnTable).count()
 
     with (
         patch(
@@ -247,7 +250,7 @@ def test_シナリオが契約に合わなければセッションを作らな�
             create_session(db, RoleplaySessionCreate(query="値引き"))
 
     # 生成に失敗したのに空のセッションが残ってはいけない
-    assert db.query(RoleplayTurnTable).count() == 0
+    assert db.query(RoleplayTurnTable).count() == before
 
 
 # ---------------------------------------------------------------------------

@@ -318,13 +318,33 @@ def _format_seconds(value: float) -> str:
     return f"{int(value // 60)}:{int(value % 60):02d}"
 
 
+# 話者ラベルの日本語表記。
+#
+# **DBの生の値をそのまま渡さない。** `salesperson` / `customer` は
+# Qwenでも読めるが、日本語のプロンプトの中で英語の識別子が混ざると
+# 「顧客役を演じる」という指示との対応が弱くなる。
+# `source` は抽出時に作られた合成セグメントで、話者が特定できていない。
+_SPEAKER_LABELS: dict[str, str] = {
+    "salesperson": "営業",
+    "customer": "顧客",
+    "source": "不明",
+    "unknown": "不明",
+}
+
+
+def _speaker_label(speaker: str) -> str:
+    return _SPEAKER_LABELS.get(speaker, "不明")
+
+
 def _format_utterances(context: KnowledgeContext, limit: int) -> list[str]:
     """発話を番号・話者・時刻つきで並べる。
 
-    **話者ラベルは現状 unknown が多い。** faster-whisper 経路は話者分離を
-    しておらず、営業と顧客の区別が付いていない（計画書6章）。
-    そのまま渡すと Qwen が勝手に役割を決めてしまうため、
-    プロンプト側で「話者は不確かである」と明示する。
+    **話者ラベルは信用してよい。** 商談データの投入経路が話者を保持する
+    ようになり、実測で営業593 / 顧客485 / 不明155（12%）まで判明している。
+    以前は全件 unknown だったため「話者は不確かである」と伝えていたが、
+    それを続けると使える情報をQwenに捨てさせることになる。
+
+    不明が残る分は「不明」と表示し、Qwenが役割を推測で埋めないようにする。
     """
     lines: list[str] = []
     for span in context.spans:
@@ -333,7 +353,7 @@ def _format_utterances(context: KnowledgeContext, limit: int) -> list[str]:
                 return lines
             mark = "★" if utterance.is_evidence else "　"
             lines.append(
-                f"{mark}#{utterance.sequence_no} [{utterance.speaker}] "
+                f"{mark}#{utterance.sequence_no} [{_speaker_label(utterance.speaker)}] "
                 f"{_format_seconds(utterance.start_sec)} {utterance.content}"
             )
     return lines
@@ -361,7 +381,9 @@ def _format_knowledge_block(item: SelectedKnowledge) -> str:
 
     utterances = _format_utterances(item.context, _MAX_PROMPT_UTTERANCES)
     if utterances:
-        parts.append("- 実際の発話（★が根拠範囲。話者ラベルは未確定で信用しないこと）:")
+        parts.append(
+            "- 実際の発話（★が根拠範囲。[営業]/[顧客]は確認済み。[不明]は推測で埋めないこと）:"
+        )
         parts.extend(f"  {line}" for line in utterances)
 
     summary = item.context.summary

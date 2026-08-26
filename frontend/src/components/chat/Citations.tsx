@@ -24,7 +24,11 @@ const SPEAKER_LABEL: Record<string, string> = {
   unknown: "不明",
 };
 
-export function Citations({ citations }: { citations: Citation[] }) {
+/**
+ * @param question この出典を得たときの利用者の質問。ロープレへ引き継ぐ。
+ *   ナレッジIDだけ渡すと本人の問題意識が消えるため（lib/router.ts 参照）。
+ */
+export function Citations({ citations, question }: { citations: Citation[]; question: string }) {
   if (citations.length === 0) return null;
 
   return (
@@ -35,14 +39,18 @@ export function Citations({ citations }: { citations: Citation[] }) {
       </h3>
       <div className="space-y-1.5">
         {citations.map((citation) => (
-          <CitationCard key={citation.knowledge_id} citation={citation} />
+          <CitationCard
+            key={citation.knowledge_id}
+            citation={citation}
+            question={question}
+          />
         ))}
       </div>
     </section>
   );
 }
 
-function CitationCard({ citation }: { citation: Citation }) {
+function CitationCard({ citation, question }: { citation: Citation; question: string }) {
   const [open, setOpen] = useState(false);
   const [knowledge, setKnowledge] = useState<Knowledge | null>(null);
   const [loading, setLoading] = useState(false);
@@ -107,7 +115,9 @@ function CitationCard({ citation }: { citation: Citation }) {
           {error && <p className="text-xs text-rose-600">{error}</p>}
           {knowledge && <KnowledgeArticle knowledge={knowledge} />}
           <button
-            onClick={() => navigate(roleplayStartPath(citation.knowledge_id))}
+            onClick={() =>
+              navigate(roleplayStartPath({ knowledgeId: citation.knowledge_id, query: question }))
+            }
             className="rounded-lg bg-indigo-600 px-3 py-2 text-xs font-medium text-white
                        hover:bg-indigo-500"
           >

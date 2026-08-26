@@ -23,6 +23,7 @@ import { AgentTimeline, Spinner } from "./AgentTimeline";
 import { Citations } from "./Citations";
 import { Markdown } from "./Markdown";
 import { useChat, type Turn } from "./useChat";
+import { navigate, roleplayStartPath } from "../../lib/router";
 
 const EXAMPLE_QUESTIONS = [
   "在庫が合わなくて顧客に謝ることになった事例は？",
@@ -272,8 +273,26 @@ function TurnView({
             </div>
           )}
 
+          {/* **出典の一覧より上に、右寄せで置く。** 出典カードや場面の札にも
+              練習ボタンがあるが、あちらは開かないと見えず「読んで終わり」で
+              流れてしまう。読み終えた直後が最も動機の高い瞬間なので、
+              事例を選ばせる前にここから入れるようにする。
+              ナレッジIDは渡さない。どの事例で練習するかはサーバの検索に任せ、
+              利用者には「何を練習したいか」だけを決めさせる */}
+          {turn.status === "done" && (
+            <div className="flex justify-end">
+              <button
+                onClick={() => navigate(roleplayStartPath({ query: turn.question }))}
+                className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white
+                           hover:bg-indigo-500"
+              >
+                この疑問を練習する
+              </button>
+            </div>
+          )}
+
           <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
-            <Citations citations={turn.citations} />
+            <Citations citations={turn.citations} question={turn.question} />
           </div>
 
           {turn.status === "done" && <TurnFooter turn={turn} />}
