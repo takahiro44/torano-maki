@@ -30,13 +30,14 @@ import { RoleplayStart } from "./RoleplayStart";
 type Props = {
   /** AIチャットの「この場面を練習する」から渡る。指定時はそのナレッジが主役になる */
   knowledgeId?: string;
-  initialQuery?: string;
+  /** そのとき利用者が実際に打った疑問。場面をその問題意識に寄せるために使う */
+  query?: string;
 };
 
 /** 失敗はセッションIDに紐づける。別の練習へ移ったときに古いエラーを出さないため */
 type Failure = { sessionId: string; message: string };
 
-export function Roleplay({ knowledgeId, initialQuery }: Props) {
+export function Roleplay({ knowledgeId, query }: Props) {
   const path = useRoutePath();
   const routeSessionId = matchRoleplaySession(path);
 
@@ -98,11 +99,7 @@ export function Roleplay({ knowledgeId, initialQuery }: Props) {
 
   if (routeSessionId === null) {
     return (
-      <RoleplayStart
-        knowledgeId={knowledgeId}
-        initialQuery={initialQuery}
-        onStarted={openSession}
-      />
+      <RoleplayStart knowledgeId={knowledgeId} seedQuery={query} onStarted={openSession} />
     );
   }
 

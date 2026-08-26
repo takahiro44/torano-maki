@@ -92,14 +92,31 @@ export function useRoutePath(): string {
 
 export const ROLEPLAY_PATH = "/roleplay";
 
-export function roleplayStartPath(knowledgeId?: string): string {
-  if (!knowledgeId) return ROLEPLAY_PATH;
-  return `${ROLEPLAY_PATH}?knowledge_id=${encodeURIComponent(knowledgeId)}`;
+/**
+ * ロープレの開始URL。
+ *
+ * **`query`（利用者が実際に打った疑問）を必ず連れて行く。**
+ * ナレッジIDだけを渡すと、「在庫の齟齬で謝ることになったらどうする？」という
+ * 問題意識が消え、ナレッジのタイトルだけから場面が作られる。
+ * 練習したいのは本人が引っかかった一点なので、そこを落とすと
+ * 「なぜこの場面をやっているのか」が本人にも分からなくなる。
+ */
+export function roleplayStartPath(seed?: { knowledgeId?: string; query?: string }): string {
+  const params = new URLSearchParams();
+  if (seed?.knowledgeId) params.set("knowledge_id", seed.knowledgeId);
+  if (seed?.query) params.set("q", seed.query);
+  const search = params.toString();
+  return search ? `${ROLEPLAY_PATH}?${search}` : ROLEPLAY_PATH;
 }
 
-export function readKnowledgeIdParam(): string | null {
-  if (typeof window === "undefined") return null;
-  return new URLSearchParams(window.location.search).get("knowledge_id");
+/** 開始URLに載せた手がかりを読み出す。どちらも無ければ通常の開始画面になる */
+export function readRoleplaySeed(): { knowledgeId?: string; query?: string } {
+  if (typeof window === "undefined") return {};
+  const params = new URLSearchParams(window.location.search);
+  return {
+    knowledgeId: params.get("knowledge_id") ?? undefined,
+    query: params.get("q") ?? undefined,
+  };
 }
 
 export function roleplaySessionPath(sessionId: string): string {

@@ -198,7 +198,7 @@ function TurnView({ turn, onRetry, busy }: { turn: Turn; onRetry: () => void; bu
             </div>
           )}
 
-          <Citations citations={turn.citations} />
+          <Citations citations={turn.citations} question={turn.question} />
 
           {turn.status === "done" && <TurnFooter turn={turn} />}
         </div>

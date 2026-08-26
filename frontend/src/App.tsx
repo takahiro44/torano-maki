@@ -22,7 +22,7 @@ import { KnowledgeList } from "./components/KnowledgeList";
 import { KnowledgeSearch } from "./components/KnowledgeSearch";
 import { Roleplay } from "./components/roleplay/Roleplay";
 import { SupervisorInbox } from "./components/SupervisorInbox";
-import { navigate, readKnowledgeIdParam, useRoutePath } from "./lib/router";
+import { navigate, readRoleplaySeed, useRoutePath } from "./lib/router";
 import type { KnowledgeCounts } from "./types/api";
 
 type Tab = "chat" | "search" | "input" | "audio" | "supervisor" | "list" | "roleplay";
@@ -134,7 +134,7 @@ export default function App() {
                 <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
               )}
               {tab === "roleplay" && (
-                <Roleplay knowledgeId={readKnowledgeIdParam() ?? undefined} />
+                <Roleplay {...readRoleplaySeed()} />
               )}
             </div>
           </div>
