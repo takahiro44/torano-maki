@@ -50,6 +50,7 @@
 | 層 | 技術 |
 |---|---|
 | LLM推論 | DGX Spark 上の vLLM（OpenAI互換API） |
+| 音声認識 | DGX Spark 上の faster-whisper（OpenAI互換API） |
 | 埋め込み | sentence-transformers（**各自のPCのCPUで実行**） |
 | バックエンド | FastAPI / Pydantic / SQLAlchemy |
 | フロントエンド | Vite / React / TypeScript |
@@ -97,7 +98,7 @@
 |---|---|
 | 埋め込みモデル | `intfloat/multilingual-e5-large` |
 | **埋め込みの次元数** | **1024** |
-| 音声認識 | `faster-whisper` / `medium` / CPU `int8` |
+| 音声認識 | DGX Spark 上の `faster-whisper` / `medium` / CUDA `float16` |
 | 音声認識の設定 | 用語集あり / VADなし |
 
 **次元数は3箇所で一致していなければならない。**
