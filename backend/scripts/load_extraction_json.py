@@ -20,10 +20,15 @@ APIではなくDBへ直接書く。`utterance_segments` / `knowledge_evidence` /
 `call_summaries` に対応するエンドポイントが無く、
 1商談分を1トランザクションで入れたいため。
 
+既定で `experiments/knowledge-extraction/output/meetings/` の全商談を
+**1トランザクションで**投入する。`git pull` した人がこのコマンド1つで
+チームと同じデータを手元に用意できる状態を保つこと。
+
 使い方:
     cd backend
-    uv run python scripts/load_extraction_json.py
-    uv run python scripts/load_extraction_json.py --replace   # 入れ直す
+    uv run python scripts/load_extraction_json.py            # 全商談を投入
+    uv run python scripts/load_extraction_json.py --replace  # 入れ直す
+    uv run python scripts/load_extraction_json.py --file <path>   # 1件だけ
     uv run python scripts/load_extraction_json.py --status draft
 """
 
@@ -37,6 +42,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import delete, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
@@ -53,9 +59,15 @@ from app.services.embedding import embed_passages
 from app.services.search_text import generate_search_text_from_mapping
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_JSON = (
-    _REPO_ROOT / "experiments" / "knowledge-extraction" / "output" / "knowledge_extraction.json"
-)
+_EXTRACTION_DIR = _REPO_ROOT / "experiments" / "knowledge-extraction" / "output"
+# 商談1件につき1ファイル。既定でこのディレクトリを丸ごと入れる。
+# 1件ずつ指定させると、22件を投入するのに22回コマンドを叩くことになり、
+# そのたびに埋め込みモデル（2.2GB）の読み込みが走って10分近くかかる。
+DEFAULT_DIR = _EXTRACTION_DIR / "meetings"
+# 2026-08-24の検証結果。`meetings/01_order_entry.json` と**同じ商談**
+# （どちらも tts-demo/scripts/01_order_entry.json の台本から合成した音声）なので、
+# 両方入れると同じナレッジが検索結果に二重に出る。既定では読まない。
+LEGACY_JSON = _EXTRACTION_DIR / "knowledge_extraction.json"
 
 
 # 実験側の schema.py は別の uv プロジェクトにあり、backend から import できない。
@@ -136,6 +148,42 @@ def load_result(path: Path) -> ExtractionResult:
     return ExtractionResult.model_validate_json(path.read_text(encoding="utf-8"))
 
 
+def merge_results(paths: list[Path]) -> ExtractionResult:
+    """複数商談のJSONを1つにまとめる。
+
+    **1トランザクションで入れるため**にまとめている。ファイルごとに
+    投入すると、途中で失敗したときに「何件目まで入ったか」が分からない
+    中途半端なDBが残る。埋め込みも `insert_result` が一括で生成するので、
+    まとめた方がモデルの読み込みが1回で済む。
+
+    同じ商談が複数ファイルに現れたら止める。決定的UUIDなので、
+    そのまま入れると主キーの衝突で落ちるが、原因が分かりにくい。
+    """
+    merged = ExtractionResult(
+        data_sources=[],
+        utterance_segments=[],
+        knowledge_units=[],
+        knowledge_evidence=[],
+        call_summaries=[],
+    )
+    seen: dict[UUID, Path] = {}
+    for path in paths:
+        result = load_result(path)
+        for source in result.data_sources:
+            if source.id in seen:
+                raise ValueError(
+                    f"同じ商談が2つのファイルにあります: {seen[source.id].name} と {path.name}"
+                    f"（{source.file_name}）"
+                )
+            seen[source.id] = path
+        merged.data_sources.extend(result.data_sources)
+        merged.utterance_segments.extend(result.utterance_segments)
+        merged.knowledge_units.extend(result.knowledge_units)
+        merged.knowledge_evidence.extend(result.knowledge_evidence)
+        merged.call_summaries.extend(result.call_summaries)
+    return merged
+
+
 def source_ids(result: ExtractionResult) -> list[UUID]:
     return [s.id for s in result.data_sources]
 
@@ -177,15 +225,28 @@ def delete_sources(db: Session, ids: list[UUID]) -> None:
     db.execute(delete(DataSourceTable).where(DataSourceTable.id.in_(ids)))
 
 
-def insert_result(db: Session, result: ExtractionResult, *, status: str) -> dict[str, int]:
+def insert_result(
+    db: Session,
+    result: ExtractionResult,
+    *,
+    status: str,
+    origin: str = "synthetic",
+) -> dict[str, int]:
     """5テーブルを外部キーの順に挿入する。commitは呼び出し側が行う。
 
     `search_text` はJSONの値をそのまま使わず `services/search_text.py` で
     作り直す。語彙検索（pg_trgm）は `search_text` を直接見るため、
     投入経路ごとに書式が違うと同じクエリでも当たり方が変わってしまう。
+
+    **`origin` は既定で `synthetic`。** この経路で入るのは
+    `tts-demo/scripts/*.json` の台本からTTSで合成した商談だけであり、
+    実際の顧客との商談ではない。`data_sources.origin` の既定は `real` なので、
+    指定しないと**合成データが実商談として並ぶ**（02_schema.sql の
+    「合成データを実商談と誤認させないため」を参照）。実データを入れる場合だけ
+    `origin="real"` を明示すること。
     """
     for source in result.data_sources:
-        db.add(DataSourceTable(**source.model_dump()))
+        db.add(DataSourceTable(**source.model_dump(), origin=origin))
     for segment in result.utterance_segments:
         db.add(UtteranceSegmentTable(**segment.model_dump()))
     db.flush()
@@ -225,7 +286,15 @@ def insert_result(db: Session, result: ExtractionResult, *, status: str) -> dict
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--file", type=Path, default=DEFAULT_JSON, help=f"投入するJSON（既定: {DEFAULT_JSON}）"
+        "--dir",
+        type=Path,
+        default=DEFAULT_DIR,
+        help=f"この中の *.json をすべて投入する（既定: {DEFAULT_DIR}）",
+    )
+    parser.add_argument(
+        "--file",
+        type=Path,
+        help="1件だけ投入する。指定すると --dir は無視される",
     )
     parser.add_argument(
         "--replace",
@@ -238,14 +307,35 @@ def main() -> int:
         choices=[s.value for s in KnowledgeStatus],
         help="投入するナレッジの状態（既定: confirmed。draft は検索に出ない）",
     )
+    parser.add_argument(
+        "--origin",
+        default="synthetic",
+        choices=["synthetic", "real"],
+        help="商談の出所（既定: synthetic。この経路で入るのはTTSで合成した商談のため）",
+    )
     args = parser.parse_args()
 
-    if not args.file.exists():
-        print(f"ファイルがありません: {args.file}", file=sys.stderr)
-        return 1
+    if args.file is not None:
+        if not args.file.exists():
+            print(f"ファイルがありません: {args.file}", file=sys.stderr)
+            return 1
+        paths = [args.file]
+    else:
+        if not args.dir.is_dir():
+            print(f"ディレクトリがありません: {args.dir}", file=sys.stderr)
+            return 1
+        paths = sorted(args.dir.glob("*.json"))
+        if not paths:
+            print(f"投入するJSONがありません: {args.dir}", file=sys.stderr)
+            return 1
 
-    result = load_result(args.file)
+    try:
+        result = merge_results(paths)
+    except ValueError as error:
+        print(error, file=sys.stderr)
+        return 1
     ids = source_ids(result)
+    print(f"入力: {len(paths)}ファイル / 商談{len(ids)}件")
 
     db = SessionLocal()
     try:
@@ -258,11 +348,28 @@ def main() -> int:
             )
             return 1
         if existing:
-            delete_sources(db, existing)
+            try:
+                delete_sources(db, existing)
+            except IntegrityError as error:
+                # ロープレやチャットレビューが、消そうとしているナレッジを
+                # 参照していると外部キーで落ちる。素の IntegrityError は
+                # SQLとUUIDの羅列で、原因も対処も読み取れない。
+                # ここは他メンバーの担当領域なので**勝手に消さず**、
+                # 何が掴んでいるかだけを伝えて止める。
+                db.rollback()
+                print(
+                    "既存の商談を削除できません。ロープレ等のデータが"
+                    "ナレッジを参照しています。\n"
+                    "参照している側を先に消すか、DBを作り直してください:\n"
+                    "  docker compose down -v && docker compose up -d\n"
+                    f"詳細: {error.orig}",
+                    file=sys.stderr,
+                )
+                return 1
             print(f"既存の商談 {len(existing)}件を削除しました")
 
         print("埋め込みを生成しています（初回はモデル読み込みで数十秒かかります）…")
-        counts = insert_result(db, result, status=args.status)
+        counts = insert_result(db, result, status=args.status, origin=args.origin)
         db.commit()
     except Exception:
         db.rollback()
@@ -270,7 +377,7 @@ def main() -> int:
     finally:
         db.close()
 
-    print(f"\n投入しました（status={args.status}）")
+    print(f"\n投入しました（status={args.status} / origin={args.origin}）")
     for name, count in counts.items():
         print(f"  {name:<20} {count:>4}件")
     return 0

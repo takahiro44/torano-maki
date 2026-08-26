@@ -1,0 +1,596 @@
+{
+  "data_sources": [
+    {
+      "id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "source_type": "audio",
+      "file_name": "long_013.wav",
+      "occurred_at": "2026-08-25T00:33:16Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "777fd0f8-3f0b-50c7-a0b1-1d069cb112c4",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 8.5,
+      "content": "先ほど複合機の横を通ったら、ファイル名の付け方が貼ってありました。 皆さんで工夫されているんですね。"
+    },
+    {
+      "id": "442c2bf1-3069-5288-89dc-0dd83ffaad23",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 8.5,
+      "end_sec": 15.24,
+      "content": "工夫というより、工夫肉の策です。守られないことも多いです。"
+    },
+    {
+      "id": "375f39f7-c76b-5f9f-8afd-575ac8d4c2e8",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 15.24,
+      "end_sec": 21.0,
+      "content": "最後に、ファイルを探せなかった請求書を教えていただけますか?"
+    },
+    {
+      "id": "6f93d787-d4fa-5f9d-9b74-8a694903ed65",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 21.0,
+      "end_sec": 26.24,
+      "content": "物件Aの請求書はどんな問い合わせに必要だったんですか?"
+    },
+    {
+      "id": "27519eec-1c39-54b4-a71d-eab9db13af30",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 26.24,
+      "end_sec": 34.54,
+      "content": "オーナーから修繕費の内訳を聞かれました。 電話中に見つからず折り返しにしました。"
+    },
+    {
+      "id": "7ece082b-e299-5fe8-8085-fc6385aed504",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 34.54,
+      "end_sec": 42.54,
+      "content": "折り返しまでどれくらいかかりましたか? 40分です。担当者にも探してもらいました。"
+    },
+    {
+      "id": "4a1795b8-0c2d-5679-bb5e-491dc0107414",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 42.54,
+      "end_sec": 49.64,
+      "content": "相手を待たせる時間と、社内2人の探索時間が発生したんですね。"
+    },
+    {
+      "id": "3ef9ba70-cbd6-5a0b-ab5b-241151109621",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 49.64,
+      "end_sec": 57.34,
+      "content": "管理個数が増えて、同じ物件名の別ともあり、さらに探しにくくなっています。"
+    },
+    {
+      "id": "8ee11db7-8d1d-59c9-9de3-7beb8ed3b125",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 57.34,
+      "end_sec": 66.64,
+      "content": "昨日、物件Aの修繕請求書を探しました。 担当者はスキャン済みと言いましたが、個人フォルダーに入っていました。"
+    },
+    {
+      "id": "c10cdd88-927b-5250-a2fe-a8ed5f308344",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 66.64,
+      "end_sec": 70.84,
+      "content": "スキャン時に保存先とファイル名を毎回選ぶようですか?"
+    },
+    {
+      "id": "ac096136-19a8-5bed-a652-4711d6407812",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 70.84,
+      "end_sec": 78.94,
+      "content": "はい。日付・取引先・物件名を手入力します。 急いでいると省略されます。"
+    },
+    {
+      "id": "2a650a05-e7ba-55ed-b8c1-483a8e694783",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 78.94,
+      "end_sec": 88.34,
+      "content": "紙の原本はどうしていますか? ファイル名を省略した場合、後から誰かが直していますか?"
+    },
+    {
+      "id": "f08a416e-0148-5da2-9f7d-f5564195f53f",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 88.34,
+      "end_sec": 96.54,
+      "content": "気づいた人が直しますが、結末まで放置されることもあります。 責任者は決まっていません。"
+    },
+    {
+      "id": "bbb077ca-7158-59d0-abd7-a9215eaedef0",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 96.54,
+      "end_sec": 107.64,
+      "content": "登録時の手間を後工程送っている状態ですね。 必須属性を少なくし、登録時に完了させる方が全体では負担が減りそうです。"
+    },
+    {
+      "id": "43773dc8-3443-5bab-ae59-7364553dbb40",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 107.64,
+      "end_sec": 114.64,
+      "content": "日付と物件コード、取引先があれば大半は探せます。"
+    },
+    {
+      "id": "45a0330c-3342-5854-b2b4-512a1fede0b7",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 114.64,
+      "end_sec": 126.04,
+      "content": "物件名の表記揺れを避けるため、自入力よりマスターから選ぶ方が良いかもしれません。 既存の物件代償と称号できるか確認します。"
+    },
+    {
+      "id": "23e655fa-c0fd-5ec1-934e-18897096f68a",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 126.04,
+      "end_sec": 133.44,
+      "content": "物件コードは会計にもあるので、同じものを使いたいです。 付き別ファイルへ入れます。"
+    },
+    {
+      "id": "b6249f30-cdb1-5681-adbe-37224aeb4dd4",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 18,
+      "speaker": "customer",
+      "start_sec": 133.64,
+      "end_sec": 138.94,
+      "content": "電子と紙のどちらが正しいか分からないこともあります。"
+    },
+    {
+      "id": "a9ba29fe-ec9d-5a20-91db-70bc15888ac0",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 19,
+      "speaker": "salesperson",
+      "start_sec": 138.94,
+      "end_sec": 150.94,
+      "content": "電子化の目的は、紙を減らすことですか? それとも物件別に必要な商標すぐ出せることですか?"
+    },
+    {
+      "id": "88436849-c394-5852-865b-b9a5d25f7c05",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 150.94,
+      "end_sec": 156.84,
+      "content": "あ、校舎です。オーナーから問い合わせが来た時、すぐ説明できるようにしたいです。"
+    },
+    {
+      "id": "80b42364-2d0d-5b0e-aabf-1ada974e4486",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 156.84,
+      "end_sec": 168.64,
+      "content": "複合機は紙文書の電子化に活用でき、E-VALUE-V 2nd Edition Document管理では、属性検索や全文検索、権限制御などを検討できます。"
+    },
+    {
+      "id": "27f98d52-bde6-53a0-b1f1-b18091212015",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 168.64,
+      "end_sec": 175.64,
+      "content": "ただ、成本と登録担当、必須属性を決めないと保存先だけ変わる可能性があります。"
+    },
+    {
+      "id": "ee61a96f-5be2-529e-b849-c6bc6d4499cc",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 175.64,
+      "end_sec": 181.24,
+      "content": "スキャン作業は1日に何件、どなたが行っていますか?"
+    },
+    {
+      "id": "0eb7a851-0654-537e-b9ee-922bdb90ee2d",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 181.34,
+      "end_sec": 189.14,
+      "content": "経理3人で合計50件ほどです。 繁忙日は複合機の前に列ができます。"
+    },
+    {
+      "id": "287bd75d-a9ff-5010-9711-4bb509262854",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 189.14,
+      "end_sec": 194.84,
+      "content": "複合機側での操作が増えると、別のボトルネックになる可能性がありますね。"
+    },
+    {
+      "id": "1bcaad22-c100-52d1-93f8-c38eca8d886b",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 194.84,
+      "end_sec": 199.44,
+      "content": "1件ずつ細かく入力するのは現実的ではありません。"
+    },
+    {
+      "id": "5ea0fc64-455b-5825-a153-26d88ed529a6",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 199.44,
+      "end_sec": 209.44,
+      "content": "複合機から最低限の情報で取り込み、後から担当画面で補う方法と、その場で完了する方法を実機で比較しましょう。"
+    },
+    {
+      "id": "ac8d466c-9b1b-5463-bee1-192f3d69f272",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 28,
+      "speaker": "customer",
+      "start_sec": 209.54,
+      "end_sec": 216.64,
+      "content": "うーん、担当者によってやりやすさが違うと思うので、3人とも試したいです。"
+    },
+    {
+      "id": "3a988872-53fe-57ae-b961-4d2aca98a28f",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 29,
+      "speaker": "customer",
+      "start_sec": 216.64,
+      "end_sec": 221.44,
+      "content": "物件名は必…にしたいです。"
+    },
+    {
+      "id": "e43a6f9d-3663-57a2-b60d-833ee1564840",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 30,
+      "speaker": "salesperson",
+      "start_sec": 221.44,
+      "end_sec": 231.84,
+      "content": "次回、物件Aの請求書を5件使い、複合機から登録して、別の担当者が物件名と取引先で探せるか試しましょう。"
+    },
+    {
+      "id": "69d61ba1-b697-5c82-852a-39da639d8d5c",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 231.84,
+      "end_sec": 237.24,
+      "content": "憲法を残す範囲は、法務、経理の要件を確認して決めます。"
+    },
+    {
+      "id": "823a3e5a-477d-5f2c-8519-6022050c95e9",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 237.24,
+      "end_sec": 246.04,
+      "content": "電子カゴの閲覧権限は、物件担当者と経理で同じですか?"
+    },
+    {
+      "id": "cd8f6727-e37d-53ed-841a-e5f3c217d596",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 246.04,
+      "end_sec": 256.04,
+      "content": "担当者は自分の物件、経理は全物件を見ます。個人情報がある書類はさらに限定したいです。"
+    },
+    {
+      "id": "c309b0d3-a8a5-5282-8d0b-6dc09b92fee4",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 256.04,
+      "end_sec": 266.04,
+      "content": "文書種別等、担当物件の二軸で権限を考える必要があります。退職、移動時の変更も含めます。"
+    },
+    {
+      "id": "c78b438e-d960-5a4d-bd02-7a3f6ef06f11",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 266.04,
+      "end_sec": 273.04,
+      "content": "今の共有フォルダは、部署単位なので、そこまで細かくできていないんですよね。"
+    },
+    {
+      "id": "94d722f7-593a-5597-8b11-1cf6b4e7801e",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 273.04,
+      "end_sec": 282.44,
+      "content": "試行では検索時間だけでなく、誤った人が閲覧できないこと、移動時に権限を変更できることも確認します。"
+    },
+    {
+      "id": "51610cab-5240-5d75-ad3c-b2e01e3a0916",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 282.44,
+      "end_sec": 286.44,
+      "content": "オーナーへ説明するときの安心材料になります。"
+    },
+    {
+      "id": "e1dd6d74-6843-50cf-9cfd-eff5d1131be7",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 286.44,
+      "end_sec": 295.44,
+      "content": "試行後は、検索に成功した例だけでなく、見つからなかった例と権限で迷った例も記録して改善します。"
+    },
+    {
+      "id": "b718c633-327f-5012-8719-3c123c226a7f",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 295.84,
+      "end_sec": 301.84,
+      "content": "失敗した検索の方が、必要な項目を見直す材料になりそうです。"
+    },
+    {
+      "id": "20d301b8-f632-5ec0-8a68-922dfd5f16e7",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 301.84,
+      "end_sec": 312.84,
+      "content": "その記録を月次で確認し、属性追加ではなく、登録方法や検索後の改善で解けないかも検討します。"
+    },
+    {
+      "id": "a7f5af06-ca27-5747-aedc-bf6a969d74de",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 312.84,
+      "end_sec": 318.84,
+      "content": "項目を増やし続けて入力が重くならないようにしたいです。"
+    },
+    {
+      "id": "b00e5909-47c3-5933-9a54-c8d761d58c78",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 318.84,
+      "end_sec": 322.84,
+      "content": "実際に探すところまで試せると判断しやすいです。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "5e07090e-d94f-5d3c-a69a-4ab471a34884",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "knowledge_type": "pain_point",
+      "title": "手動メタデータ入力による検索遅延と属人化リスク",
+      "situation": "複合機でスキャン時に日付・取引先・物件名を手入力しているが、急ぎの場合に省略され、後から修正されるか放置される。",
+      "problem": "ファイル名や保存先の不統一により、オーナーからの問い合わせ対応時に40分以上の探索時間がかかり、社内の複数人が手探り状態になる。",
+      "judgment": "登録時の手間が後工程に転嫁されており、全体コストが増大している。",
+      "action": "必須属性を最小限に絞り、登録時に完了させる設計への変更を検討する。",
+      "reasoning": "入力項目が多いほど省略や誤りが起きやすく、検索精度が低下する。",
+      "outcome": null,
+      "lesson": "スキャン時の手動入力はボトルネックになりやすく、必須項目の最小化と自動化が重要である。",
+      "applicable_situations": "紙文書の電子化プロセスで、スキャン直後のメタデータ入力に依存している場合。",
+      "limitations": "必須項目を減らしすぎると、後から補完するコストや検索の曖昧さが生じる可能性がある。",
+      "industry": "不動産管理",
+      "product": "複合機、文書管理システム",
+      "sales_stage": "discovery",
+      "search_text": "手動メタデータ入力による検索遅延と属人化リスク\n複合機でスキャン時に日付・取引先・物件名を手入力しているが、急ぎの場合に省略され、後から修正されるか放置される。\nファイル名や保存先の不統一により、オーナーからの問い合わせ対応時に40分以上の探索時間がかかり、社内の複数人が手探り状態になる。\n登録時の手間が後工程に転嫁されており、全体コストが増大している。\n必須属性を最小限に絞り、登録時に完了させる設計への変更を検討する。\n入力項目が多いほど省略や誤りが起きやすく、検索精度が低下する。\nスキャン時の手動入力はボトルネックになりやすく、必須項目の最小化と自動化が重要である。\n紙文書の電子化プロセスで、スキャン直後のメタデータ入力に依存している場合。\n必須項目を減らしすぎると、後から補完するコストや検索の曖昧さが生じる可能性がある。\n不動産管理\n複合機、文書管理システム\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:27:59.385794Z"
+    },
+    {
+      "id": "46145d15-934c-51a4-aebe-a5f8b0b60913",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "knowledge_type": "sales_technique",
+      "title": "表記揺れ防止のためのマスターデータ連携提案",
+      "situation": "物件名の表記が担当者によって異なり、検索漏れの原因になっている。",
+      "problem": "自由入力による表記揺れが、文書検索の信頼性を損なっている。",
+      "judgment": "自入力ではなく、既存のマスターデータ（物件コード等）から選択させる方が正確性が高い。",
+      "action": "会計システム等で使用している物件コードを文書管理に連携し、選択式入力を提案する。",
+      "reasoning": "コードは一意であり、表記揺れを排除できるため、検索精度が向上する。",
+      "outcome": null,
+      "lesson": "文書管理の検索精度を高めるには、自由テキストではなく、他システムと共通のIDやコードを活用する設計が有効である。",
+      "applicable_situations": "エンティティ名（顧客名、物件名等）の表記揺れが検索障害の原因となっている場合。",
+      "limitations": "マスターデータが整備されていない、または他システムとの連携コストが高い場合は適用が難しい。",
+      "industry": "不動産管理",
+      "product": "文書管理システム",
+      "sales_stage": "proposal",
+      "search_text": "表記揺れ防止のためのマスターデータ連携提案\n物件名の表記が担当者によって異なり、検索漏れの原因になっている。\n自由入力による表記揺れが、文書検索の信頼性を損なっている。\n自入力ではなく、既存のマスターデータ（物件コード等）から選択させる方が正確性が高い。\n会計システム等で使用している物件コードを文書管理に連携し、選択式入力を提案する。\nコードは一意であり、表記揺れを排除できるため、検索精度が向上する。\n文書管理の検索精度を高めるには、自由テキストではなく、他システムと共通のIDやコードを活用する設計が有効である。\nエンティティ名（顧客名、物件名等）の表記揺れが検索障害の原因となっている場合。\nマスターデータが整備されていない、または他システムとの連携コストが高い場合は適用が難しい。\n不動産管理\n文書管理システム\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:27:59.385794Z"
+    },
+    {
+      "id": "e267e992-c41c-532a-a577-4794035de69f",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "knowledge_type": "customer_need",
+      "title": "オーナー対応における迅速な情報提供と安心感の確保",
+      "situation": "オーナーから修繕費の内訳等の問い合わせがあり、電話中に資料が見つからず折り返し対応している。",
+      "problem": "資料の所在不明により、顧客（オーナー）を長時間待たせ、信頼を損なうリスクがある。",
+      "judgment": "電子化の目的は単なる紙削減ではなく、問い合わせ時に即座に説明できる状態にあること。",
+      "action": "検索時間の短縮と、権限管理による情報漏洩防止の両立を目指す。",
+      "reasoning": "迅速な対応は顧客満足度向上に直結し、権限管理は個人情報等の漏洩リスクを低減する。",
+      "outcome": null,
+      "lesson": "文書管理の価値は「探せること」だけでなく、「顧客に安心感を与えられる迅速な提供」にある。",
+      "applicable_situations": "外部顧客への説明資料を頻繁に作成・提供している業務プロセス。",
+      "limitations": null,
+      "industry": "不動産管理",
+      "product": "文書管理システム",
+      "sales_stage": "discovery",
+      "search_text": "オーナー対応における迅速な情報提供と安心感の確保\nオーナーから修繕費の内訳等の問い合わせがあり、電話中に資料が見つからず折り返し対応している。\n資料の所在不明により、顧客（オーナー）を長時間待たせ、信頼を損なうリスクがある。\n電子化の目的は単なる紙削減ではなく、問い合わせ時に即座に説明できる状態にあること。\n検索時間の短縮と、権限管理による情報漏洩防止の両立を目指す。\n迅速な対応は顧客満足度向上に直結し、権限管理は個人情報等の漏洩リスクを低減する。\n文書管理の価値は「探せること」だけでなく、「顧客に安心感を与えられる迅速な提供」にある。\n外部顧客への説明資料を頻繁に作成・提供している業務プロセス。\n不動産管理\n文書管理システム\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:27:59.385794Z"
+    },
+    {
+      "id": "4c5b0768-7a87-5f38-9e1d-a6b90ce4d7f9",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "knowledge_type": "operational_insight",
+      "title": "スキャン業務のボトルネック分析と実機比較の必要性",
+      "situation": "経理3名で1日50件程度のスキャン作業を行っており、繁忙期には複合機前に行列ができる。",
+      "problem": "1件ずつ詳細な情報を入力する方式は、現場の作業負荷が高く現実的でない。",
+      "judgment": "複合機側での操作が増えると、スキャン自体がボトルネックになる可能性がある。",
+      "action": "「複合機で最低限入力し後から補完する方式」と「その場で完了させる方式」を実機で比較検証する。",
+      "reasoning": "担当者の作業スタイルや負荷は個人差があるため、実際の操作感での比較が判断材料となる。",
+      "outcome": null,
+      "lesson": "業務プロセスの改善提案は、現場の作業量や繁忙状況を把握し、実機での比較検証を通じて受け入れ可能性を高めるべきである。",
+      "applicable_situations": "大量の紙文書処理を行う現場でのシステム導入検討時。",
+      "limitations": "実機比較には時間とリソースが必要であり、短期間での決定は難しい。",
+      "industry": "不動産管理",
+      "product": "複合機、文書管理システム",
+      "sales_stage": "proposal",
+      "search_text": "スキャン業務のボトルネック分析と実機比較の必要性\n経理3名で1日50件程度のスキャン作業を行っており、繁忙期には複合機前に行列ができる。\n1件ずつ詳細な情報を入力する方式は、現場の作業負荷が高く現実的でない。\n複合機側での操作が増えると、スキャン自体がボトルネックになる可能性がある。\n「複合機で最低限入力し後から補完する方式」と「その場で完了させる方式」を実機で比較検証する。\n担当者の作業スタイルや負荷は個人差があるため、実際の操作感での比較が判断材料となる。\n業務プロセスの改善提案は、現場の作業量や繁忙状況を把握し、実機での比較検証を通じて受け入れ可能性を高めるべきである。\n大量の紙文書処理を行う現場でのシステム導入検討時。\n実機比較には時間とリソースが必要であり、短期間での決定は難しい。\n不動産管理\n複合機、文書管理システム\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:27:59.385794Z"
+    },
+    {
+      "id": "d69fcbe9-9e2e-58de-ae4e-589815c6b4a1",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "knowledge_type": "proposal",
+      "title": "権限制御の二軸設計と人事異動時の運用ルール",
+      "situation": "現在の共有フォルダは部署単位であり、物件担当者や経理、個人情報へのアクセス制御が不十分。",
+      "problem": "退職や異動時に権限変更が追いつかず、情報漏洩やアクセス不能のリスクがある。",
+      "judgment": "「文書種別」と「担当物件」の二軸で権限を設計し、人事異動時の変更プロセスを含める必要がある。",
+      "action": "試行段階で、誤った人物が閲覧できないこと、移動時に権限を変更できることを確認する。",
+      "reasoning": "細かな権限制御は、顧客（オーナー）への説明における安心材料となる。",
+      "outcome": null,
+      "lesson": "文書管理の権限制御は、静的な設定だけでなく、人事異動などの動的な変化に対応する運用ルールが重要である。",
+      "applicable_situations": "多様な役割（担当者、管理部門、外部顧客等）が関わる文書管理環境。",
+      "limitations": "権限設定が複雑になりすぎると、管理コストやユーザーの混乱を招く可能性がある。",
+      "industry": "不動産管理",
+      "product": "文書管理システム",
+      "sales_stage": "proposal",
+      "search_text": "権限制御の二軸設計と人事異動時の運用ルール\n現在の共有フォルダは部署単位であり、物件担当者や経理、個人情報へのアクセス制御が不十分。\n退職や異動時に権限変更が追いつかず、情報漏洩やアクセス不能のリスクがある。\n「文書種別」と「担当物件」の二軸で権限を設計し、人事異動時の変更プロセスを含める必要がある。\n試行段階で、誤った人物が閲覧できないこと、移動時に権限を変更できることを確認する。\n細かな権限制御は、顧客（オーナー）への説明における安心材料となる。\n文書管理の権限制御は、静的な設定だけでなく、人事異動などの動的な変化に対応する運用ルールが重要である。\n多様な役割（担当者、管理部門、外部顧客等）が関わる文書管理環境。\n権限設定が複雑になりすぎると、管理コストやユーザーの混乱を招く可能性がある。\n不動産管理\n文書管理システム\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:27:59.385794Z"
+    },
+    {
+      "id": "1cca68eb-9de3-5644-ae4f-6660a4f8d2d7",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "knowledge_type": "next_action",
+      "title": "失敗事例の記録と月次レビューによる継続的改善",
+      "situation": "システム導入後の運用において、検索に失敗するケースや権限で迷うケースが発生する可能性がある。",
+      "problem": "成功事例のみを重視すると、潜在的な設計上の欠陥や運用上の課題が見えなくなる。",
+      "judgment": "失敗した検索の方が、必要な属性項目や登録方法を見直すための重要な材料となる。",
+      "action": "見つからなかった例や権限で迷った例を記録し、月次で確認して改善策を検討する。",
+      "reasoning": "項目を増やし続けて入力を重くするのではなく、登録方法や検索後の改善で解決できる可能性がある。",
+      "outcome": null,
+      "lesson": "文書管理システムの運用は、失敗事例の分析と定期的なレビューを通じて、入力負荷と検索精度のバランスを最適化することが重要である。",
+      "applicable_situations": "文書管理システム導入後の運用フェーズ。",
+      "limitations": "記録とレビューに継続的なリソースを割く必要がある。",
+      "industry": "不動産管理",
+      "product": "文書管理システム",
+      "sales_stage": "follow_up",
+      "search_text": "失敗事例の記録と月次レビューによる継続的改善\nシステム導入後の運用において、検索に失敗するケースや権限で迷うケースが発生する可能性がある。\n成功事例のみを重視すると、潜在的な設計上の欠陥や運用上の課題が見えなくなる。\n失敗した検索の方が、必要な属性項目や登録方法を見直すための重要な材料となる。\n見つからなかった例や権限で迷った例を記録し、月次で確認して改善策を検討する。\n項目を増やし続けて入力を重くするのではなく、登録方法や検索後の改善で解決できる可能性がある。\n文書管理システムの運用は、失敗事例の分析と定期的なレビューを通じて、入力負荷と検索精度のバランスを最適化することが重要である。\n文書管理システム導入後の運用フェーズ。\n記録とレビューに継続的なリソースを割く必要がある。\n不動産管理\n文書管理システム\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:27:59.385794Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "276e6a40-3782-5808-ae05-9eef03e57ef5",
+      "knowledge_id": "5e07090e-d94f-5d3c-a69a-4ab471a34884",
+      "start_utterance_id": "c10cdd88-927b-5250-a2fe-a8ed5f308344",
+      "end_utterance_id": "bbb077ca-7158-59d0-abd7-a9215eaedef0"
+    },
+    {
+      "id": "a0ff84cf-26d0-5739-975a-12bb81a593da",
+      "knowledge_id": "46145d15-934c-51a4-aebe-a5f8b0b60913",
+      "start_utterance_id": "43773dc8-3443-5bab-ae59-7364553dbb40",
+      "end_utterance_id": "23e655fa-c0fd-5ec1-934e-18897096f68a"
+    },
+    {
+      "id": "bf4f8ce6-a262-576c-9a8b-acd2dade2e60",
+      "knowledge_id": "e267e992-c41c-532a-a577-4794035de69f",
+      "start_utterance_id": "27519eec-1c39-54b4-a71d-eab9db13af30",
+      "end_utterance_id": "4a1795b8-0c2d-5679-bb5e-491dc0107414"
+    },
+    {
+      "id": "c2cf8547-26bc-514c-a3d9-c0768ebee172",
+      "knowledge_id": "e267e992-c41c-532a-a577-4794035de69f",
+      "start_utterance_id": "a9ba29fe-ec9d-5a20-91db-70bc15888ac0",
+      "end_utterance_id": "88436849-c394-5852-865b-b9a5d25f7c05"
+    },
+    {
+      "id": "59beddc3-b2c7-5d32-b52b-c68a0174dfcf",
+      "knowledge_id": "4c5b0768-7a87-5f38-9e1d-a6b90ce4d7f9",
+      "start_utterance_id": "ee61a96f-5be2-529e-b849-c6bc6d4499cc",
+      "end_utterance_id": "ac8d466c-9b1b-5463-bee1-192f3d69f272"
+    },
+    {
+      "id": "d1eb8897-5a68-52f3-a5b5-1f3135fd6901",
+      "knowledge_id": "d69fcbe9-9e2e-58de-ae4e-589815c6b4a1",
+      "start_utterance_id": "823a3e5a-477d-5f2c-8519-6022050c95e9",
+      "end_utterance_id": "51610cab-5240-5d75-ad3c-b2e01e3a0916"
+    },
+    {
+      "id": "d875c2de-80ab-5042-b7f1-38937facd7ba",
+      "knowledge_id": "1cca68eb-9de3-5644-ae4f-6660a4f8d2d7",
+      "start_utterance_id": "e1dd6d74-6843-50cf-9cfd-eff5d1131be7",
+      "end_utterance_id": "b00e5909-47c3-5933-9a54-c8d761d58c78"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "da47885d-c6cc-5872-af84-4372929ef12a",
+      "data_source_id": "1ef25c17-73da-5b7a-ad86-70e0cea29f9b",
+      "summary": "不動産管理会社における紙文書電子化の課題（検索遅延、表記揺れ、権限制御不足）を把握し、複合機連携と文書管理システム（E-VALUE-V）による改善案を提案。実機比較と試行運用による検証を合意。",
+      "customer_needs": [
+        "オーナーからの問い合わせ時に迅速に資料を提供できること",
+        "物件名の表記揺れによる検索漏れを防止すること",
+        "スキャン作業の手間を減らし、現場の負荷を軽減すること",
+        "個人情報等のアクセス権限を細かく管理し、異動時に適切に変更できること"
+      ],
+      "proposals": [
+        "必須メタデータ項目の最小化と、マスターデータ（物件コード）からの選択式入力",
+        "複合機での最低限入力と後工程補完、またはその場完了方式の実機比較",
+        "文書種別と担当物件の二軸による権限制御設計",
+        "失敗事例の記録と月次レビューによる継続的改善プロセス"
+      ],
+      "decisions": [
+        "物件Aの請求書5件を用いた試行検証の実施",
+        "スキャン作業の2方式（後補完型・その場完了型）の比較検討"
+      ],
+      "next_actions": [
+        "既存の物件コードと文書管理システムとの連携可能性の確認",
+        "法務・経理部門との要件確認による紙原本の保存範囲の決定",
+        "実機を用いたスキャン・検索プロセスの比較検証"
+      ]
+    }
+  ]
+}

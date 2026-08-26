@@ -1,0 +1,693 @@
+{
+  "data_sources": [
+    {
+      "id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "source_type": "audio",
+      "file_name": "long_002.wav",
+      "occurred_at": "2026-08-24T23:49:46Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "a1f03779-11e2-5df6-a439-0fa0c502d082",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 11.0,
+      "content": "本日はありがとうございます。事前に受注入力の負担が大きいと伺っています。最後に入力が集中したのはいつでしたか?"
+    },
+    {
+      "id": "42bb419e-bab6-552b-8fda-bfccc644951c",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 11.0,
+      "end_sec": 17.0,
+      "content": "昨日です。月曜日は注文が多く、FAXが100枚近く来ました。"
+    },
+    {
+      "id": "a34ff637-17f3-5f85-96de-2f73ecd31fe0",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 17.0,
+      "end_sec": 26.0,
+      "content": "100枚というのは通常の月曜日ですか?それとも月末など特別な日でしょうか?"
+    },
+    {
+      "id": "1a4ae4a5-ea84-587b-9dc0-f8788f448ddf",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 4,
+      "speaker": "customer",
+      "start_sec": 26.0,
+      "end_sec": 36.0,
+      "content": "通常です。セールの翌日は150枚を超えることもあります。取引先は約80社です。"
+    },
+    {
+      "id": "a172b620-40b7-5481-9002-021112889996",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 5,
+      "speaker": "salesperson",
+      "start_sec": 36.0,
+      "end_sec": 41.0,
+      "content": "販房日に合わせて人を増やすことはありますか?"
+    },
+    {
+      "id": "cc7bdc82-7790-5f41-855c-1f809f553086",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 41.0,
+      "end_sec": 48.0,
+      "content": "別部署から応援を呼びますが、商品コードに慣れていないので確認が増えます。"
+    },
+    {
+      "id": "202f2df2-5ed6-5ea0-8374-ff8dae08cbf7",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 48.0,
+      "end_sec": 53.0,
+      "content": "100枚届いた後、担当者の方は最初に何をしますか?"
+    },
+    {
+      "id": "2b3ae25d-13c8-5ea7-9290-ee42f12c75e0",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 53.0,
+      "end_sec": 61.0,
+      "content": "取引先別に分けて、商品コードと数量、納品日を販売管理へ入力します。"
+    },
+    {
+      "id": "20aa7a56-98dd-5a2b-b9db-b5505cdf5f4c",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 61.0,
+      "end_sec": 64.0,
+      "content": "書式は取引先ごとに違います。"
+    },
+    {
+      "id": "8cc3f5c8-5c30-5f6b-9aa1-216b4bbba726",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 64.0,
+      "end_sec": 69.0,
+      "content": "入力後の確認はどのようにしていますか?"
+    },
+    {
+      "id": "fa3e2846-8ec6-5a2e-80da-52d6fce2b9cf",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 69.0,
+      "end_sec": 76.0,
+      "content": "別の人がFAXと画面を見比べます。それでも数量の桁を間違えることがあります。"
+    },
+    {
+      "id": "37ca7d3c-1f1c-5027-9690-ffd6ce90fb9c",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 76.0,
+      "end_sec": 81.0,
+      "content": "昨日は何人で何時頃まで対応しましたか?"
+    },
+    {
+      "id": "24d08d1f-8fe3-54e3-893d-76463c849b6a",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 81.0,
+      "end_sec": 88.0,
+      "content": "4人で午前中いっぱいです。締め時刻があるので休憩を後ろへ散らしました。"
+    },
+    {
+      "id": "2839de73-d840-5e7a-bd07-16992d282b86",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 88.0,
+      "end_sec": 93.0,
+      "content": "ご入力が行われた具体的な一件を教えてください。"
+    },
+    {
+      "id": "dc9506f5-0b84-5fcd-b8ef-0d25a09c9d0c",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 93.0,
+      "end_sec": 102.0,
+      "content": "先月、数量の10を100桃入力しました。出荷前に倉庫が気づきましたが、ピッキングをやり直しました。"
+    },
+    {
+      "id": "6489a592-d720-5c61-9ee0-d39c6126fff3",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 102.0,
+      "end_sec": 110.0,
+      "content": "気づくきっかけはシステムの警告ではなく倉庫担当者の経験だったんですね。"
+    },
+    {
+      "id": "849d6ea5-1060-5b68-9c7c-7abe3c24423b",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 110.0,
+      "end_sec": 117.0,
+      "content": "はい。その商品は通常10個程度なのでおかしいと思ったそうです。"
+    },
+    {
+      "id": "59d74bfd-13c8-572c-b3da-a6fca1e1ae93",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 117.0,
+      "end_sec": 126.0,
+      "content": "取引先ごとの通常数量や商品マスターと称号できれば、確認対象を絞れる可能性がありますね。"
+    },
+    {
+      "id": "eb49b33d-9bd2-5c33-9736-af46340165d0",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 126.0,
+      "end_sec": 132.0,
+      "content": "全件を2人で見直すのではなく、怪しいものだけ確認できると理想です。"
+    },
+    {
+      "id": "2f0f236a-c2c4-5ebb-8fd1-b93e23f932f8",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 132.0,
+      "end_sec": 138.0,
+      "content": "一方で、季節商品など本当に数量が増える注文もあります。"
+    },
+    {
+      "id": "944d6fac-cb6b-5c5a-9e87-f01ae5cc3ede",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 138.0,
+      "end_sec": 141.0,
+      "content": "その場合は誰が最終判断しますか?"
+    },
+    {
+      "id": "da30511a-573d-54eb-b169-8bccf4e69a23",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 141.0,
+      "end_sec": 144.0,
+      "content": "受注リーダーです。"
+    },
+    {
+      "id": "ca8c5bf6-c1a4-50ec-ae51-379d068eea28",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 144.0,
+      "end_sec": 153.0,
+      "content": "高額注文と通常から大きく外れる数量はリーダー承認を残したいです。"
+    },
+    {
+      "id": "f20b4404-9a8e-58d8-b22c-ab8af3026f9c",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 153.0,
+      "end_sec": 160.0,
+      "content": "入力を早くすることと確認の負担を減らすことでは、どちらがより重要でしょう?"
+    },
+    {
+      "id": "598f706d-19ec-5d6d-a538-d7b0a54294af",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 160.0,
+      "end_sec": 168.0,
+      "content": "誤入力を減らすことです。一件間違えると、出荷や請求まで直すことになります。"
+    },
+    {
+      "id": "17902daa-8651-59d5-ac74-b9164a11743a",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 168.0,
+      "end_sec": 172.0,
+      "content": "これまでOCRを試したことはありますか?"
+    },
+    {
+      "id": "24bd631f-3e8a-59bb-bd9e-826652a4061d",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 27,
+      "speaker": "customer",
+      "start_sec": 172.0,
+      "end_sec": 179.0,
+      "content": "無料のものを少し試しましたが、調表が違うと読み取れず結局やめました。"
+    },
+    {
+      "id": "58465d00-6ada-5002-9963-9145cf3c427f",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 179.0,
+      "end_sec": 183.0,
+      "content": "過去に試した結果まで教えていただけると助かります。"
+    },
+    {
+      "id": "bdde9e0b-c07c-5749-900a-58b833f982bc",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 183.0,
+      "end_sec": 188.0,
+      "content": "エニフォームOCRは取引先ごとに異なる調表を設計し、"
+    },
+    {
+      "id": "8e735937-1102-585d-be36-f9f75e64c8b8",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 30,
+      "speaker": "salesperson",
+      "start_sec": 188.0,
+      "end_sec": 192.0,
+      "content": "FAX注文書などの入力効率化を検討できる製品です。"
+    },
+    {
+      "id": "9416907b-4d32-522b-bb19-b1ae910a81f3",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 192.0,
+      "end_sec": 199.0,
+      "content": "ただ、すべてを自動確定するのではなく、どの項目を人が確認するかが重要です。"
+    },
+    {
+      "id": "c61c184a-0010-53a1-afaf-2cca06c18d2f",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 199.0,
+      "end_sec": 206.0,
+      "content": "無料OCRを試した際、読み取り制度以外に困ったことはありましたか?"
+    },
+    {
+      "id": "671bfb20-036e-51d9-b92f-ebe2812c5646",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 206.0,
+      "end_sec": 212.0,
+      "content": "読み取った文字を販売管理へ移す方法がなくコピーして貼り付けました。"
+    },
+    {
+      "id": "9fafbec1-0a32-5fa5-b62b-b9b39c8e75bd",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 34,
+      "speaker": "customer",
+      "start_sec": 212.0,
+      "end_sec": 216.0,
+      "content": "結果として早くなりませんでした。"
+    },
+    {
+      "id": "1e16b182-1f93-5e16-acea-aa9b9c314bf3",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 216.0,
+      "end_sec": 221.0,
+      "content": "読み取りだけの評価では不十分だったわけですね。"
+    },
+    {
+      "id": "5daa2513-a2c9-5b31-b211-67e060853431",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 221.0,
+      "end_sec": 229.0,
+      "content": "今回の検証では、受注確定までの時間と修正件数を測る必要があります。"
+    },
+    {
+      "id": "4dd6ea09-54bb-5d10-acbf-198a6558b611",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 37,
+      "speaker": "customer",
+      "start_sec": 229.0,
+      "end_sec": 236.0,
+      "content": "はい。認識率が高いと言われても、確認が複雑なら現場は使いません。"
+    },
+    {
+      "id": "dbdbcaf2-9a94-5e72-a732-799e27527f4b",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 236.0,
+      "end_sec": 245.0,
+      "content": "取引先張票が変更されたとき、社内で張票設計を直したいですか、それとも支援を受けたいですか?"
+    },
+    {
+      "id": "40422a41-133b-5754-b60a-44e59888d8f5",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 39,
+      "speaker": "customer",
+      "start_sec": 245.0,
+      "end_sec": 253.0,
+      "content": "簡単な変更は受注リーダーが直し、難しいものは相談できる形が良いです。"
+    },
+    {
+      "id": "93080747-0b18-5305-a29e-5e025e0c8a86",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 253.0,
+      "end_sec": 260.0,
+      "content": "商品コードと数量は必ず見たいですね。手書きの微構もあります。"
+    },
+    {
+      "id": "dbcb80f9-03ca-53dc-ac63-3efc85960300",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 260.0,
+      "end_sec": 266.0,
+      "content": "手書き日本語の認識はオプションを含めて条件確認が必要です。"
+    },
+    {
+      "id": "24422770-749b-557c-890b-25f20f41bea5",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 266.0,
+      "end_sec": 276.0,
+      "content": "まず、実際の張票を主要3社分と読みづらいもの2種類、個人情報を伏せた状態でお預かりできますか?"
+    },
+    {
+      "id": "273f4ee7-50a5-5222-bdb6-ccb7e575f634",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 43,
+      "speaker": "customer",
+      "start_sec": 276.0,
+      "end_sec": 279.0,
+      "content": "それなら用意できます。"
+    },
+    {
+      "id": "558673c1-aac6-51cf-bcdf-60dab260390d",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 279.0,
+      "end_sec": 288.0,
+      "content": "検証の合格条件を決めましょう。5種類の張票で、どの項目まで読めれば次へ進めると判断できますか?"
+    },
+    {
+      "id": "1ce13800-baee-5709-885a-2684199369b7",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 45,
+      "speaker": "customer",
+      "start_sec": 288.0,
+      "end_sec": 298.0,
+      "content": "取引先、商品コード、数量、納品日は必須です。微構は人が確認する前提でも構いません。"
+    },
+    {
+      "id": "eff24b9a-ab4e-5071-9c43-1b8c6119da82",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 298.0,
+      "end_sec": 310.0,
+      "content": "では必須4項目の修正件数と、時中確定までの時間を現行手入力と比較します。読み取れない張票も隠さず記録します。"
+    },
+    {
+      "id": "dff28ae1-484d-51a3-ac66-27dc1e97351f",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 47,
+      "speaker": "customer",
+      "start_sec": 310.0,
+      "end_sec": 316.0,
+      "content": "失敗する張票が分かる方が実際の運用を決めやすいです。"
+    },
+    {
+      "id": "c016579e-381f-52a2-b70e-1dfa7d6d2f71",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 316.0,
+      "end_sec": 324.0,
+      "content": "次回は読み取り結果だけでなく、確認後のデータを現在の販売管理へどう渡すかまで見ます。"
+    },
+    {
+      "id": "4f130ec4-b8a9-52d0-bf70-83c6305b398c",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 49,
+      "speaker": "salesperson",
+      "start_sec": 324.0,
+      "end_sec": 333.0,
+      "content": "将来、SM-IV2セカンドエディション販売との組み合わせを検討する場合も、今の運用を先に整理しましょう。"
+    },
+    {
+      "id": "aa15ee98-a684-5a88-a9f2-06c32d6d316f",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "sequence_no": 50,
+      "speaker": "customer",
+      "start_sec": 333.0,
+      "end_sec": 339.0,
+      "content": "わかりました。入力だけ自動化して後工程が増えるのは避けたいです。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "dc51f190-af9b-5e31-8bf3-41be7f122e78",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "knowledge_type": "pain_point",
+      "title": "FAX注文の書式多様性と人手による二重確認の負荷",
+      "situation": "月曜日に約100枚、セール翌日には150枚を超えるFAX注文が集中する環境。",
+      "problem": "取引先ごとに書式が異なり、別部署の応援要員は商品コードに不慣れなため確認作業が増加する。また、二重確認しても桁違いなどの誤入力が発生する。",
+      "judgment": "人手による全件二重確認では、負荷軽減と精度向上の両立が困難である。",
+      "action": "取引先ごとの通常数量や商品マスターと照合し、異常値のみを重点確認する仕組みを検討する。",
+      "reasoning": "全件確認ではなく、リスクの高い案件に人的リソースを集中させることで、確認の負担を減らす可能性がある。",
+      "outcome": null,
+      "lesson": "書式がバラバラなFAX受注処理では、二重確認の範囲を「全件」から「例外・異常値」に絞る設計が重要である。",
+      "applicable_situations": "多様な書式のFAXや手書き注文書が多い製造業・卸売業の受注部門。",
+      "limitations": "季節商品など本来数量が増える注文がある場合、閾値の設定が複雑になる。",
+      "industry": "製造業/卸売業",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "FAX注文の書式多様性と人手による二重確認の負荷\n月曜日に約100枚、セール翌日には150枚を超えるFAX注文が集中する環境。\n取引先ごとに書式が異なり、別部署の応援要員は商品コードに不慣れなため確認作業が増加する。また、二重確認しても桁違いなどの誤入力が発生する。\n人手による全件二重確認では、負荷軽減と精度向上の両立が困難である。\n取引先ごとの通常数量や商品マスターと照合し、異常値のみを重点確認する仕組みを検討する。\n全件確認ではなく、リスクの高い案件に人的リソースを集中させることで、確認の負担を減らす可能性がある。\n書式がバラバラなFAX受注処理では、二重確認の範囲を「全件」から「例外・異常値」に絞る設計が重要である。\n多様な書式のFAXや手書き注文書が多い製造業・卸売業の受注部門。\n季節商品など本来数量が増える注文がある場合、閾値の設定が複雑になる。\n製造業/卸売業\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:45.921114Z"
+    },
+    {
+      "id": "56b75743-cce0-5da2-9cf6-b486f7036b31",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "knowledge_type": "customer_need",
+      "title": "誤入力防止と後工程への影響最小化",
+      "situation": "数量の桁違い（10を100と入力）が発生し、出荷前の倉庫段階で発見された事例がある。",
+      "problem": "システムによる警告がなく、倉庫担当者の経験に頼っている。誤入力が発生すると、出荷や請求まで修正が必要になる。",
+      "judgment": "入力速度よりも、誤入力を減らし後工程の混乱を防ぐことが最優先である。",
+      "action": "高額注文や通常から大きく外れる数量については、受注リーダーの承認を残す運用を維持する。",
+      "reasoning": "一件のミスが後工程全体に波及するため、最終判断の責任所在を明確にする必要がある。",
+      "outcome": null,
+      "lesson": "自動化導入時、単なる入力効率化ではなく「ミスの影響範囲」を考慮した承認フローの設計が顧客の真のニーズである。",
+      "applicable_situations": "受注ミスが在庫・出荷・請求に連鎖的に影響を与える業務プロセス。",
+      "limitations": "リーダー承認を残すことで、ピーク時のボトルネックになる可能性がある。",
+      "industry": "製造業/卸売業",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "誤入力防止と後工程への影響最小化\n数量の桁違い（10を100と入力）が発生し、出荷前の倉庫段階で発見された事例がある。\nシステムによる警告がなく、倉庫担当者の経験に頼っている。誤入力が発生すると、出荷や請求まで修正が必要になる。\n入力速度よりも、誤入力を減らし後工程の混乱を防ぐことが最優先である。\n高額注文や通常から大きく外れる数量については、受注リーダーの承認を残す運用を維持する。\n一件のミスが後工程全体に波及するため、最終判断の責任所在を明確にする必要がある。\n自動化導入時、単なる入力効率化ではなく「ミスの影響範囲」を考慮した承認フローの設計が顧客の真のニーズである。\n受注ミスが在庫・出荷・請求に連鎖的に影響を与える業務プロセス。\nリーダー承認を残すことで、ピーク時のボトルネックになる可能性がある。\n製造業/卸売業\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:45.921114Z"
+    },
+    {
+      "id": "2a18fa9e-b794-58f8-91cc-97dcef39b950",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "knowledge_type": "operational_insight",
+      "title": "OCR導入時の「読み取り」だけでなく「データ連携」の重要性",
+      "situation": "顧客は過去に無料OCRツールを試したが、取引先ごとの書式違いで読み取れず、また販売管理への移入手段がなくコピペに頼っていた。",
+      "problem": "読み取り精度が高くても、後続システムへのデータ連携が手作業だと、結果として業務が速くならない。",
+      "judgment": "OCRの評価は「認識率」だけでなく、「受注確定までの時間」と「修正件数」、そして「販売管理へのデータ渡し方」で判断すべきである。",
+      "action": "検証フェーズで、読み取り結果を販売管理へどう渡すかまで含めて評価する。",
+      "reasoning": "現場が使いこなすためには、最終的なデータ活用までの一連の流れがシームレスである必要がある。",
+      "outcome": null,
+      "lesson": "RPAやOCRの提案時、単体の機能ではなく、既存システム（販売管理等）との連携コストを必ず確認・評価する。",
+      "applicable_situations": "既存の業務システムと連携させる形でAI/OCRツールを導入検討している案件。",
+      "limitations": "販売管理側のAPIや連携機能の制約がある場合、完全自動化が難しい。",
+      "industry": "製造業/卸売業",
+      "product": "エニフォームOCR",
+      "sales_stage": "proposal",
+      "search_text": "OCR導入時の「読み取り」だけでなく「データ連携」の重要性\n顧客は過去に無料OCRツールを試したが、取引先ごとの書式違いで読み取れず、また販売管理への移入手段がなくコピペに頼っていた。\n読み取り精度が高くても、後続システムへのデータ連携が手作業だと、結果として業務が速くならない。\nOCRの評価は「認識率」だけでなく、「受注確定までの時間」と「修正件数」、そして「販売管理へのデータ渡し方」で判断すべきである。\n検証フェーズで、読み取り結果を販売管理へどう渡すかまで含めて評価する。\n現場が使いこなすためには、最終的なデータ活用までの一連の流れがシームレスである必要がある。\nRPAやOCRの提案時、単体の機能ではなく、既存システム（販売管理等）との連携コストを必ず確認・評価する。\n既存の業務システムと連携させる形でAI/OCRツールを導入検討している案件。\n販売管理側のAPIや連携機能の制約がある場合、完全自動化が難しい。\n製造業/卸売業\nエニフォームOCR\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:45.921114Z"
+    },
+    {
+      "id": "06e848bd-2417-5ea9-9ca8-998d5aab53a5",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "knowledge_type": "sales_technique",
+      "title": "検証の合格条件を顧客と合意形成する",
+      "situation": "OCR製品の検証を進める段階。",
+      "problem": "「認識率が高い」という曖昧な指標では、現場の納得感が得られず、導入判断が先送りされやすい。",
+      "judgment": "具体的なKPI（必須項目の修正件数、確定までの時間）と、失敗ケースの記録を含めた検証計画を提示する。",
+      "action": "主要3社分と読みづらい2種類の張票を提供してもらい、必須4項目（取引先、商品コード、数量、納品日）の精度と時間を現行手入力と比較する計画を提案した。",
+      "reasoning": "失敗する張票が分かることで、実際の運用ルール（誰が確認するか）を決めやすくなる。",
+      "outcome": "顧客はサンプル提供と検証条件に同意した。",
+      "lesson": "PoC（概念実証）の段階で、成功/失敗の定義を数値化し、顧客と合意しておくことで、後の意思決定をスムーズにする。",
+      "applicable_situations": "効果測定が難しいITツールや業務改善提案の検証フェーズ。",
+      "limitations": "サンプル数が少ないと、全取引先への適用可能性を過大評価するリスクがある。",
+      "industry": null,
+      "product": "エニフォームOCR",
+      "sales_stage": "negotiation",
+      "search_text": "検証の合格条件を顧客と合意形成する\nOCR製品の検証を進める段階。\n「認識率が高い」という曖昧な指標では、現場の納得感が得られず、導入判断が先送りされやすい。\n具体的なKPI（必須項目の修正件数、確定までの時間）と、失敗ケースの記録を含めた検証計画を提示する。\n主要3社分と読みづらい2種類の張票を提供してもらい、必須4項目（取引先、商品コード、数量、納品日）の精度と時間を現行手入力と比較する計画を提案した。\n失敗する張票が分かることで、実際の運用ルール（誰が確認するか）を決めやすくなる。\n顧客はサンプル提供と検証条件に同意した。\nPoC（概念実証）の段階で、成功/失敗の定義を数値化し、顧客と合意しておくことで、後の意思決定をスムーズにする。\n効果測定が難しいITツールや業務改善提案の検証フェーズ。\nサンプル数が少ないと、全取引先への適用可能性を過大評価するリスクがある。\nエニフォームOCR\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:45.921114Z"
+    },
+    {
+      "id": "31617458-bc61-5ac1-b00b-9ee32f7cec5b",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "knowledge_type": "decision",
+      "title": "手書き文字の認識と確認範囲の決定",
+      "situation": "FAX注文書には手書きの微調整（メモ）が含まれている。",
+      "problem": "手書き文字の自動認識は難易度が高く、コストもかかる可能性がある。",
+      "judgment": "手書き部分は自動認識の対象から外し、人が確認する前提で設計する。",
+      "action": "必須項目（取引先、商品コード、数量、納品日）は自動認識し、微構（手書きメモ）は人が確認する運用を合意した。",
+      "reasoning": "全項目の自動認識を追求すると、導入コストと検証期間が膨らむため、リスクの高い部分のみ人手に残す。",
+      "outcome": "検証の範囲が明確になった。",
+      "lesson": "自動化の範囲を「全件」に限定せず、リスクとコストのバランスから「人手確認を残す項目」を明確に区別する。",
+      "applicable_situations": "構造化データと非構造化データ（手書き、メモ）が混在する文書処理。",
+      "limitations": "手書き部分の解釈が重要な場合、人手確認の負荷が依然として残る。",
+      "industry": null,
+      "product": "エニフォームOCR",
+      "sales_stage": "negotiation",
+      "search_text": "手書き文字の認識と確認範囲の決定\nFAX注文書には手書きの微調整（メモ）が含まれている。\n手書き文字の自動認識は難易度が高く、コストもかかる可能性がある。\n手書き部分は自動認識の対象から外し、人が確認する前提で設計する。\n必須項目（取引先、商品コード、数量、納品日）は自動認識し、微構（手書きメモ）は人が確認する運用を合意した。\n全項目の自動認識を追求すると、導入コストと検証期間が膨らむため、リスクの高い部分のみ人手に残す。\n検証の範囲が明確になった。\n自動化の範囲を「全件」に限定せず、リスクとコストのバランスから「人手確認を残す項目」を明確に区別する。\n構造化データと非構造化データ（手書き、メモ）が混在する文書処理。\n手書き部分の解釈が重要な場合、人手確認の負荷が依然として残る。\nエニフォームOCR\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:45.921114Z"
+    },
+    {
+      "id": "e5fa1c95-47f7-5c54-bfa8-5a421554329c",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "knowledge_type": "next_action",
+      "title": "検証用サンプルの提供と次回のデータ連携確認",
+      "situation": "検証計画が合意された直後。",
+      "problem": null,
+      "judgment": null,
+      "action": "顧客から主要3社分と読みづらい2種類の張票（個人情報伏せ）を提供してもらう。次回は、読み取り結果の販売管理への渡し方まで確認する。",
+      "reasoning": "実際のデータを用いた検証により、現実的な運用可能性を評価するため。",
+      "outcome": null,
+      "lesson": "次のアクションとして、具体的なデータ提供と、次回の検証範囲（データ連携）を明確にコミットする。",
+      "applicable_situations": "PoC開始前の準備段階。",
+      "limitations": null,
+      "industry": null,
+      "product": "エニフォームOCR",
+      "sales_stage": "follow_up",
+      "search_text": "検証用サンプルの提供と次回のデータ連携確認\n検証計画が合意された直後。\n顧客から主要3社分と読みづらい2種類の張票（個人情報伏せ）を提供してもらう。次回は、読み取り結果の販売管理への渡し方まで確認する。\n実際のデータを用いた検証により、現実的な運用可能性を評価するため。\n次のアクションとして、具体的なデータ提供と、次回の検証範囲（データ連携）を明確にコミットする。\nPoC開始前の準備段階。\nエニフォームOCR\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:45.921114Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "127d7e23-fe18-5c42-b23f-ec0b0f62c7cc",
+      "knowledge_id": "dc51f190-af9b-5e31-8bf3-41be7f122e78",
+      "start_utterance_id": "42bb419e-bab6-552b-8fda-bfccc644951c",
+      "end_utterance_id": "fa3e2846-8ec6-5a2e-80da-52d6fce2b9cf"
+    },
+    {
+      "id": "e71d60d4-1881-58a2-941f-3e3480d0eef4",
+      "knowledge_id": "dc51f190-af9b-5e31-8bf3-41be7f122e78",
+      "start_utterance_id": "59d74bfd-13c8-572c-b3da-a6fca1e1ae93",
+      "end_utterance_id": "eb49b33d-9bd2-5c33-9736-af46340165d0"
+    },
+    {
+      "id": "111541aa-ad0f-5b24-a2ff-c35a21b25298",
+      "knowledge_id": "56b75743-cce0-5da2-9cf6-b486f7036b31",
+      "start_utterance_id": "dc9506f5-0b84-5fcd-b8ef-0d25a09c9d0c",
+      "end_utterance_id": "849d6ea5-1060-5b68-9c7c-7abe3c24423b"
+    },
+    {
+      "id": "b41ecef4-f948-57c7-a423-c285a9f18505",
+      "knowledge_id": "56b75743-cce0-5da2-9cf6-b486f7036b31",
+      "start_utterance_id": "da30511a-573d-54eb-b169-8bccf4e69a23",
+      "end_utterance_id": "598f706d-19ec-5d6d-a538-d7b0a54294af"
+    },
+    {
+      "id": "e51f38eb-fc9f-5658-8144-f3a36e0530bc",
+      "knowledge_id": "2a18fa9e-b794-58f8-91cc-97dcef39b950",
+      "start_utterance_id": "24bd631f-3e8a-59bb-bd9e-826652a4061d",
+      "end_utterance_id": "1e16b182-1f93-5e16-acea-aa9b9c314bf3"
+    },
+    {
+      "id": "ffac2d8b-c8b9-5197-b7b5-9e0678c8705f",
+      "knowledge_id": "2a18fa9e-b794-58f8-91cc-97dcef39b950",
+      "start_utterance_id": "c016579e-381f-52a2-b70e-1dfa7d6d2f71",
+      "end_utterance_id": "c016579e-381f-52a2-b70e-1dfa7d6d2f71"
+    },
+    {
+      "id": "2755a0e6-18b9-537d-ab71-217f27155e56",
+      "knowledge_id": "06e848bd-2417-5ea9-9ca8-998d5aab53a5",
+      "start_utterance_id": "24422770-749b-557c-890b-25f20f41bea5",
+      "end_utterance_id": "dff28ae1-484d-51a3-ac66-27dc1e97351f"
+    },
+    {
+      "id": "bdf33549-a19f-5692-b80d-3babdac8cf1c",
+      "knowledge_id": "31617458-bc61-5ac1-b00b-9ee32f7cec5b",
+      "start_utterance_id": "93080747-0b18-5305-a29e-5e025e0c8a86",
+      "end_utterance_id": "dbcb80f9-03ca-53dc-ac63-3efc85960300"
+    },
+    {
+      "id": "3230b5aa-6620-51d8-9757-d8abb37e34ca",
+      "knowledge_id": "31617458-bc61-5ac1-b00b-9ee32f7cec5b",
+      "start_utterance_id": "1ce13800-baee-5709-885a-2684199369b7",
+      "end_utterance_id": "1ce13800-baee-5709-885a-2684199369b7"
+    },
+    {
+      "id": "f87d582a-6f6f-55d1-90b3-1fde8c6abcbe",
+      "knowledge_id": "e5fa1c95-47f7-5c54-bfa8-5a421554329c",
+      "start_utterance_id": "24422770-749b-557c-890b-25f20f41bea5",
+      "end_utterance_id": "273f4ee7-50a5-5222-bdb6-ccb7e575f634"
+    },
+    {
+      "id": "2c44ea5b-4537-57f0-827f-a6f042997e8f",
+      "knowledge_id": "e5fa1c95-47f7-5c54-bfa8-5a421554329c",
+      "start_utterance_id": "c016579e-381f-52a2-b70e-1dfa7d6d2f71",
+      "end_utterance_id": "c016579e-381f-52a2-b70e-1dfa7d6d2f71"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "46990af6-7614-50cd-b4af-b516181c6cb2",
+      "data_source_id": "a9d6eba3-caf1-582f-a73d-ace7dcb455f6",
+      "summary": "FAX注文の受注入力負荷と誤入力リスクを解消するため、エニフォームOCRの検証を進める商談。取引先ごとの書式違いと人手による二重確認の限界を把握し、誤入力防止と後工程への影響最小化を重視する顧客のニーズを特定した。検証では、必須項目の自動認識と手書き部分の人手確認を組み合わせ、受注確定までの時間と修正件数をKPIとして設定した。",
+      "customer_needs": [
+        "FAX注文の書式多様性に対応した入力効率化",
+        "数量の桁違いなどの誤入力防止",
+        "受注ミスによる出荷・請求への影響最小化",
+        "販売管理システムへのデータ連携の簡素化"
+      ],
+      "proposals": [
+        "エニフォームOCRによるFAX注文書の自動読み取り",
+        "取引先ごとの書式設計と、異常値（高額・数量逸脱）の重点確認",
+        "必須4項目（取引先、商品コード、数量、納品日）の自動認識と、手書きメモの人手確認",
+        "受注確定までの時間と修正件数を現行手入力と比較する検証計画"
+      ],
+      "decisions": [
+        "検証用サンプルとして主要3社分と読みづらい2種類の張票を提供する",
+        "手書きの微構は人が確認する前提で設計する",
+        "高額注文や通常から大きく外れる数量は受注リーダーの承認を残す"
+      ],
+      "next_actions": [
+        "顧客から検証用張票（個人情報伏せ）の提供を受ける",
+        "次回は読み取り結果の販売管理へのデータ渡し方まで確認する",
+        "将来のSM-IV2セカンドエディション販売との組み合わせを視野に入れ、現在の運用整理を行う"
+      ]
+    }
+  ]
+}

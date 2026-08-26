@@ -1,0 +1,681 @@
+{
+  "data_sources": [
+    {
+      "id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "source_type": "audio",
+      "file_name": "long_019.wav",
+      "occurred_at": "2026-08-25T01:05:20Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "acb9407f-abaa-5c9f-9a64-54b0135e64d6",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 9.0,
+      "content": "展示スペースの小型ロボット、動きが滑らかですね。小川さんが担当された案件ですか?"
+    },
+    {
+      "id": "f6cae846-d39d-5fa7-a471-5020f2635ea0",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 9.0,
+      "end_sec": 18.0,
+      "content": "はい、食品工場向けに少し仕様を変えました。その工夫は別の営業の方にも共有されていますか?"
+    },
+    {
+      "id": "6baf40c7-aa61-5d76-96ed-72aa0154a7fd",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 3,
+      "speaker": "customer",
+      "start_sec": 18.0,
+      "end_sec": 27.0,
+      "content": "収報には書かせていますが、ほとんど読まれていません。それで日報を詳しくしようと考えています。"
+    },
+    {
+      "id": "448a14e6-fa19-50ae-93b6-744404619491",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 27.0,
+      "end_sec": 33.0,
+      "content": "収報を読まない理由を営業の方は聞いたことはありますか?"
+    },
+    {
+      "id": "305159d1-c163-53b7-a8e4-65a6c58ce5bb",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 33.0,
+      "end_sec": 38.0,
+      "content": "忙しいからだと思っていました。詳しくは聞いていません。"
+    },
+    {
+      "id": "39e58097-855e-5722-9b3d-fc01c69fd274",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 38.0,
+      "end_sec": 49.0,
+      "content": "収報は案件順に並び、業界や課題で探せません。自分に関係ある情報が全部開かないとわからないんです。"
+    },
+    {
+      "id": "8de97f95-9832-54dc-855e-ce24305485ed",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 49.0,
+      "end_sec": 56.0,
+      "content": "情報量ではなく、必要な時に見つけられないことが利用を妨げているんですね。"
+    },
+    {
+      "id": "f3c43557-f4bd-5d3a-9c7a-dfd9100c7019",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 56.0,
+      "end_sec": 62.0,
+      "content": "管理者は全県読みますが、現場はそこまでしません。"
+    },
+    {
+      "id": "f984872a-bdf8-5ab7-8f86-3a2f53bff516",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 9,
+      "speaker": "salesperson",
+      "start_sec": 62.0,
+      "end_sec": 70.0,
+      "content": "記録する画面だけでなく、次の商談前にどう探すかまで設計する必要があります。"
+    },
+    {
+      "id": "4a0d8195-f7f0-5d12-8139-ba532bde1afe",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 70.0,
+      "end_sec": 77.0,
+      "content": "正直、これ以上入力欄が増えるのは困ります。訪問後に見積もりも作るので。"
+    },
+    {
+      "id": "7c00d8d2-179a-56ba-8238-7f4e3e6ed2dc",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 11,
+      "speaker": "salesperson",
+      "start_sec": 77.0,
+      "end_sec": 85.0,
+      "content": "小川さん、今回の案件で、他の営業が再利用できそうな情報は何でしょう?"
+    },
+    {
+      "id": "fb9151f3-3046-5e2b-b4cc-e4b17137aa2e",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 85.0,
+      "end_sec": 94.0,
+      "content": "製品使用より、最初に保全担当へ清掃時間を聞いたことです。それでロボット停止時間の課題がわかりました。"
+    },
+    {
+      "id": "917185ee-b52e-586c-8481-d0f159240715",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 94.0,
+      "end_sec": 99.0,
+      "content": "その質問は収報のどこに書きましたか?"
+    },
+    {
+      "id": "92748483-5351-5211-9f5a-7068631dec17",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 99.0,
+      "end_sec": 105.0,
+      "content": "経緯欄に長く書きました。検索して探す人はいないと思います。"
+    },
+    {
+      "id": "b5b422a1-077b-5684-a41a-5ed9dae3b983",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 105.0,
+      "end_sec": 111.0,
+      "content": "小川さんは今回、保全担当へ清掃時間を聞こうと、なぜ思ったんですか?"
+    },
+    {
+      "id": "a8b94c40-a967-5534-b2d6-f666dd1a8e68",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 16,
+      "speaker": "customer",
+      "start_sec": 111.0,
+      "end_sec": 120.0,
+      "content": "前の案件で、設備性能より、清掃と段取り替えに時間がかかる、と先輩から聞いたことがあったからです。"
+    },
+    {
+      "id": "93b8f4a0-8747-5056-96e1-f4eb3e3890ad",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 17,
+      "speaker": "salesperson",
+      "start_sec": 120.0,
+      "end_sec": 127.0,
+      "content": "先輩の経験が質問として再利用され、今回の提案につながったんですね。"
+    },
+    {
+      "id": "816460c7-31b3-59c6-abea-9bd00668ef69",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 18,
+      "speaker": "customer",
+      "start_sec": 127.0,
+      "end_sec": 133.0,
+      "content": "はい、でもその話も会議中の雑談で記録はありません。"
+    },
+    {
+      "id": "1752f634-5bc6-5604-a182-459bf3fc32ac",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 19,
+      "speaker": "salesperson",
+      "start_sec": 133.0,
+      "end_sec": 140.0,
+      "content": "成功結果だけでなく、どの状況でどんな質問をしたかを残す価値がありそうです。"
+    },
+    {
+      "id": "92bc1e50-52c6-57b5-8c86-c4d76aa47e3e",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 140.0,
+      "end_sec": 145.0,
+      "content": "売れた製品名だけ共有しても、他の営業は真似できません。"
+    },
+    {
+      "id": "066587f2-3a78-5fe1-9a00-aae6757cb4ba",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 145.0,
+      "end_sec": 155.0,
+      "content": "顧客業種・状況・質問・反応、次の行動を揃えると、別案件で使えるか判断しやすくなります。"
+    },
+    {
+      "id": "b4ee5911-b67c-5ff7-b315-8c21ce78b229",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 155.0,
+      "end_sec": 160.0,
+      "content": "失敗した質問も残した方がよいですか?"
+    },
+    {
+      "id": "12483384-76db-5899-b756-03c6f061ccc3",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 160.0,
+      "end_sec": 166.0,
+      "content": "はい、ただし個人評価の材料にすると書かれなくなります。"
+    },
+    {
+      "id": "634b9ffc-d22f-551b-ae1d-b9e15c4bab57",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 166.0,
+      "end_sec": 172.0,
+      "content": "学習用情報と評価用活動量を分けることが重要です。"
+    },
+    {
+      "id": "57bc3803-9c80-5a9b-bdb1-04ec0be93701",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 172.0,
+      "end_sec": 176.0,
+      "content": "失敗を書いても不利にならないと明確にします。"
+    },
+    {
+      "id": "4329edc2-64e6-557c-8e26-e506978f662f",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 176.0,
+      "end_sec": 180.0,
+      "content": "管理側は活動量も把握したいんです。"
+    },
+    {
+      "id": "916d05da-862d-58c8-95d9-6127746ff0d7",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 180.0,
+      "end_sec": 183.0,
+      "content": "目的が2つありますね。"
+    },
+    {
+      "id": "769379b0-26c0-5cf1-a7c8-e2b1606c5dd2",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 183.0,
+      "end_sec": 190.0,
+      "content": "管理のための活動記録と、次の営業が再利用する学びです。"
+    },
+    {
+      "id": "92d9ec81-4944-5c40-b09f-4fd0664de0b8",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 190.0,
+      "end_sec": 198.0,
+      "content": "同じ長文日報で両方を満たそうとすると、入力も検索も重くなる可能性があります。"
+    },
+    {
+      "id": "5ae6913e-e460-5740-aee6-d2e72214969e",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 198.0,
+      "end_sec": 201.0,
+      "content": "分けた方がいいということですか?"
+    },
+    {
+      "id": "ef985076-9739-5c6e-a7b1-c7144437abb4",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 201.0,
+      "end_sec": 210.0,
+      "content": "はい。DX統合パッケージセールスマネジメントは、営業接点情報と機関情報の活用を検討できますが、"
+    },
+    {
+      "id": "da556f9e-3310-51ce-b9bc-4ff30b118722",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 210.0,
+      "end_sec": 214.0,
+      "content": "まず何を誰が使うかを決めます。"
+    },
+    {
+      "id": "d8197f63-1872-5ecd-9fb7-a6f38ae58104",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 33,
+      "speaker": "salesperson",
+      "start_sec": 214.0,
+      "end_sec": 226.0,
+      "content": "活動実績は選択式。再利用する学びは、状況、質問、顧客反応、次の行動の4項目など、少数項目で試す案があります。"
+    },
+    {
+      "id": "47a49ee9-ff81-5085-897f-a58ecbd427d0",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 226.0,
+      "end_sec": 232.0,
+      "content": "糧が検索する場面を1つ決めるとしたら、どのタイミングですか?"
+    },
+    {
+      "id": "e0f70fc1-f5d5-5136-a8d9-277bb3db87ce",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 232.0,
+      "end_sec": 234.0,
+      "content": "訪問準備です。"
+    },
+    {
+      "id": "7f4fdb0d-c537-5b5e-bb5e-0b625d3a60bb",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 234.0,
+      "end_sec": 240.0,
+      "content": "顧客の業界と課題を入れたら、先輩がした質問を見たいです。"
+    },
+    {
+      "id": "f006f192-8a80-5936-b07e-7067b2d0b32a",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 240.0,
+      "end_sec": 249.0,
+      "content": "検索結果には、誰の案件かより適用条件と顧客反応が先に見える方が良さそうですね。"
+    },
+    {
+      "id": "8813e2e0-df35-5c23-9322-9a6ea4f98904",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 38,
+      "speaker": "customer",
+      "start_sec": 249.0,
+      "end_sec": 253.0,
+      "content": "管理者としては、原文も終えるようにしたいです。"
+    },
+    {
+      "id": "04d03622-1f95-524f-a08d-b29c0021cd5a",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 253.0,
+      "end_sec": 260.0,
+      "content": "ようやくだけで判断せず、必要時に元の商談記録を確認できる構造を検討しましょう。"
+    },
+    {
+      "id": "91f1a8c1-955b-527c-a99d-07a9bb33af39",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 260.0,
+      "end_sec": 263.0,
+      "content": "重要な条件は本人確認を通します。"
+    },
+    {
+      "id": "2e68f4d6-9d5e-5a0b-b234-d2999800ef3a",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 263.0,
+      "end_sec": 269.0,
+      "content": "AIがきれいにまとめても、元と違うと困るので安心です。"
+    },
+    {
+      "id": "68cd5ed7-fd3b-5c16-86a6-9e53794ebc98",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 269.0,
+      "end_sec": 273.0,
+      "content": "4項目なら訪問直後に入れられそうです。"
+    },
+    {
+      "id": "79013b9b-228a-51d3-bbfa-b9b438e6e397",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 273.0,
+      "end_sec": 284.0,
+      "content": "まず、5人で2週間試し、入力時間、閲覧回数、実際に別商談で使えた件数を見ましょう。"
+    },
+    {
+      "id": "5e251e6d-17c1-5b5d-9b9d-7873609706a2",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 284.0,
+      "end_sec": 287.0,
+      "content": "利用価値がなければ項目を減らします。"
+    },
+    {
+      "id": "cda33e31-c564-5a64-94ee-e922948d65b3",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 287.0,
+      "end_sec": 292.0,
+      "content": "2週間の試行中、入力時間の上限を決めませんか?"
+    },
+    {
+      "id": "f49726fd-3423-5abb-a9e4-7543a23768ab",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 46,
+      "speaker": "customer",
+      "start_sec": 292.0,
+      "end_sec": 299.0,
+      "content": "1件3分以内なら続けられます。5分を超えると後回しになります。"
+    },
+    {
+      "id": "62e936c7-727a-54c6-a8e1-54fe248c8709",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 47,
+      "speaker": "salesperson",
+      "start_sec": 299.0,
+      "end_sec": 305.0,
+      "content": "では、3分を超えた理由も記録し、項目を削る判断材料にします。"
+    },
+    {
+      "id": "45372b9f-cddc-55c6-bd57-dbf76309029f",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 305.0,
+      "end_sec": 313.0,
+      "content": "閲覧されない情報を増やさないため、利用者から役に立ったかも集めたいです。"
+    },
+    {
+      "id": "3b33807d-71fe-5fd2-8d52-b1fd5b7561b8",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 49,
+      "speaker": "salesperson",
+      "start_sec": 313.0,
+      "end_sec": 321.0,
+      "content": "別商談で使った事例は、何を参考にし、どんな結果だったか短く返してもらいましょう。"
+    },
+    {
+      "id": "b36f2553-b989-5f08-bc55-b92e7d4a7a8a",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 50,
+      "speaker": "salesperson",
+      "start_sec": 321.0,
+      "end_sec": 325.0,
+      "content": "利用が、新しい学びを生む循環を確認できます。"
+    },
+    {
+      "id": "b48aa8e3-43b7-578a-80a0-47fba26beb83",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 51,
+      "speaker": "salesperson",
+      "start_sec": 325.0,
+      "end_sec": 332.0,
+      "content": "先輩に直接聞けない時にも使えるなら、若手の心理的な負担も減りそうです。"
+    },
+    {
+      "id": "e174c148-6f3f-5564-a7f1-b874d34c8e9a",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "sequence_no": 52,
+      "speaker": "customer",
+      "start_sec": 332.0,
+      "end_sec": 337.0,
+      "content": "日本を増やす前に、その試し方でやりたいです。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "b3271bb1-c83f-55a9-bc84-fddd577d8552",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "knowledge_type": "pain_point",
+      "title": "日報・収報が読まれない根本原因は検索性の欠如",
+      "situation": "営業チームで案件情報を共有する日報や収報が存在するが、現場の営業がほとんど読まない状況。",
+      "problem": "情報が案件順に並んでおり、業界や課題で検索できないため、自分に関係ある情報を見つけるコストが高い。",
+      "judgment": "情報量の問題ではなく、必要な時に見つけられないことが利用を妨げている。",
+      "action": "記録する画面だけでなく、次の商談前にどう探すかまで設計し直す必要があると認識する。",
+      "reasoning": "管理者は全件読むが、現場は忙しいため関連性のある情報だけを効率的に取得したい。",
+      "outcome": null,
+      "lesson": "ナレッジ共有ツールは「記録」だけでなく「検索・発見」のUXを設計しないと利用されない。",
+      "applicable_situations": "営業日報やCRMの活用率が低い場合。",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": null,
+      "search_text": "日報・収報が読まれない根本原因は検索性の欠如\n営業チームで案件情報を共有する日報や収報が存在するが、現場の営業がほとんど読まない状況。\n情報が案件順に並んでおり、業界や課題で検索できないため、自分に関係ある情報を見つけるコストが高い。\n情報量の問題ではなく、必要な時に見つけられないことが利用を妨げている。\n記録する画面だけでなく、次の商談前にどう探すかまで設計し直す必要があると認識する。\n管理者は全件読むが、現場は忙しいため関連性のある情報だけを効率的に取得したい。\nナレッジ共有ツールは「記録」だけでなく「検索・発見」のUXを設計しないと利用されない。\n営業日報やCRMの活用率が低い場合。",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:33:14.785845Z"
+    },
+    {
+      "id": "62cc5ded-eb90-5953-ab88-1b8a9112722e",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "knowledge_type": "sales_technique",
+      "title": "再利用可能なナレッジは「状況・質問・反応・次の行動」で構造化する",
+      "situation": "過去の成功事例（食品工場向けロボット提案）を他の営業が真似できるようにしたい。",
+      "problem": "売れた製品名や経緯の長文だけ共有しても、他の営業は同じ質問を思いつかない。",
+      "judgment": "顧客業種・状況・質問・反応、次の行動を揃えると、別案件で使えるか判断しやすくなる。",
+      "action": "「保全担当へ清掃時間を聞いた」という具体的な質問と、それが課題発見につながった経緯を構造化して記録する。",
+      "reasoning": "先輩の経験が雑談でしかなく記録がないため、構造化することで再現性を高める。",
+      "outcome": null,
+      "lesson": "ナレッジ共有は結果だけでなく、プロセス（どの状況で何を聞いたか）を構造化して残す。",
+      "applicable_situations": "営業ノウハウの標準化や若手育成時。",
+      "limitations": null,
+      "industry": "食品製造",
+      "product": "小型ロボット",
+      "sales_stage": "discovery",
+      "search_text": "再利用可能なナレッジは「状況・質問・反応・次の行動」で構造化する\n過去の成功事例（食品工場向けロボット提案）を他の営業が真似できるようにしたい。\n売れた製品名や経緯の長文だけ共有しても、他の営業は同じ質問を思いつかない。\n顧客業種・状況・質問・反応、次の行動を揃えると、別案件で使えるか判断しやすくなる。\n「保全担当へ清掃時間を聞いた」という具体的な質問と、それが課題発見につながった経緯を構造化して記録する。\n先輩の経験が雑談でしかなく記録がないため、構造化することで再現性を高める。\nナレッジ共有は結果だけでなく、プロセス（どの状況で何を聞いたか）を構造化して残す。\n営業ノウハウの標準化や若手育成時。\n食品製造\n小型ロボット\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:33:14.785845Z"
+    },
+    {
+      "id": "9ccd526f-89c1-56e3-8622-17b44edb6464",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "knowledge_type": "operational_insight",
+      "title": "学習用情報と評価用活動量は分離すべき",
+      "situation": "失敗した質問や試行錯誤も記録したいが、個人評価に使うと書かれなくなる懸念。",
+      "problem": "管理側は活動量も把握したいが、学習目的と評価目的を混同すると心理的負担が増える。",
+      "judgment": "学習用情報（失敗も含む）と評価用活動量は分けることが重要。",
+      "action": "「失敗を書いても不利にならない」と明確にし、目的を分離する。",
+      "reasoning": "心理的安全性がなければ、真の学び（失敗事例）は共有されない。",
+      "outcome": null,
+      "lesson": "ナレッジ共有制度設計時、評価との分離を明文化して心理的安全性を確保する。",
+      "applicable_situations": "営業日報や活動記録の制度設計時。",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": null,
+      "search_text": "学習用情報と評価用活動量は分離すべき\n失敗した質問や試行錯誤も記録したいが、個人評価に使うと書かれなくなる懸念。\n管理側は活動量も把握したいが、学習目的と評価目的を混同すると心理的負担が増える。\n学習用情報（失敗も含む）と評価用活動量は分けることが重要。\n「失敗を書いても不利にならない」と明確にし、目的を分離する。\n心理的安全性がなければ、真の学び（失敗事例）は共有されない。\nナレッジ共有制度設計時、評価との分離を明文化して心理的安全性を確保する。\n営業日報や活動記録の制度設計時。",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:33:14.785845Z"
+    },
+    {
+      "id": "eaf3b8d5-8c75-5f94-ba06-88272bad1d54",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "knowledge_type": "proposal",
+      "title": "訪問準備時の検索シナリオに特化した4項目設計",
+      "situation": "日報の入力負荷を減らしつつ、次の商談前に必要な情報を見つけたい。",
+      "problem": "長文日報では入力も検索も重くなる。",
+      "judgment": "まず「訪問準備」を主な検索場面とし、顧客の業界と課題から先輩の質問を探すシナリオを定義する。",
+      "action": "活動実績は選択式にし、再利用する学びは「状況、質問、顧客反応、次の行動」の4項目で試す。",
+      "reasoning": "検索結果には誰の案件かより、適用条件と顧客反応が先に見える方が実用的。",
+      "outcome": null,
+      "lesson": "ナレッジ検索は「いつ・誰が・何のために使うか」を特定し、最小限の項目で設計する。",
+      "applicable_situations": "CRMやナレッジベースの機能設計時。",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "訪問準備時の検索シナリオに特化した4項目設計\n日報の入力負荷を減らしつつ、次の商談前に必要な情報を見つけたい。\n長文日報では入力も検索も重くなる。\nまず「訪問準備」を主な検索場面とし、顧客の業界と課題から先輩の質問を探すシナリオを定義する。\n活動実績は選択式にし、再利用する学びは「状況、質問、顧客反応、次の行動」の4項目で試す。\n検索結果には誰の案件かより、適用条件と顧客反応が先に見える方が実用的。\nナレッジ検索は「いつ・誰が・何のために使うか」を特定し、最小限の項目で設計する。\nCRMやナレッジベースの機能設計時。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:33:14.785845Z"
+    },
+    {
+      "id": "b43e054a-888e-5456-a7eb-54dbd2be935c",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "knowledge_type": "next_action",
+      "title": "5名・2週間のPoCと入力時間上限の設定",
+      "situation": "新しい記録方法が現場で機能するか検証したい。",
+      "problem": "入力負荷が高すぎると継続されない。",
+      "judgment": "まず小規模で試し、利用価値がない場合は項目を減らす。",
+      "action": "5人で2週間試行し、入力時間（1件3分以内）、閲覧回数、別商談での活用件数を計測する。",
+      "reasoning": "3分を超えると後回しになるため、上限を設け、超過理由も記録して改善材料にする。",
+      "outcome": null,
+      "lesson": "新しい業務プロセス導入時は、時間上限と成功指標を明確にした小規模PoCから始める。",
+      "applicable_situations": "営業プロセス改善やツール導入時。",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": null,
+      "search_text": "5名・2週間のPoCと入力時間上限の設定\n新しい記録方法が現場で機能するか検証したい。\n入力負荷が高すぎると継続されない。\nまず小規模で試し、利用価値がない場合は項目を減らす。\n5人で2週間試行し、入力時間（1件3分以内）、閲覧回数、別商談での活用件数を計測する。\n3分を超えると後回しになるため、上限を設け、超過理由も記録して改善材料にする。\n新しい業務プロセス導入時は、時間上限と成功指標を明確にした小規模PoCから始める。\n営業プロセス改善やツール導入時。",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:33:14.785845Z"
+    },
+    {
+      "id": "4e9a0504-98a2-5399-b9a3-14a8a50f7365",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "knowledge_type": "operational_insight",
+      "title": "利用フィードバックによる循環の確立",
+      "situation": "記録した情報が実際に役立っているか確認したい。",
+      "problem": "閲覧されない情報の蓄積を防ぎたい。",
+      "judgment": "利用者から「役に立ったか」や「別商談で使った事例」を短く返してもらう。",
+      "action": "何を参考にし、どんな結果だったかを記録し、利用が新しい学びを生む循環を確認する。",
+      "reasoning": "先輩に直接聞けない若手にとって、心理的負担を減らしつつナレッジを活用できる。",
+      "outcome": null,
+      "lesson": "ナレッジ共有は双方向であり、利用者のフィードバックを収集して品質を維持する。",
+      "applicable_situations": "ナレッジベースの運用時。",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": null,
+      "search_text": "利用フィードバックによる循環の確立\n記録した情報が実際に役立っているか確認したい。\n閲覧されない情報の蓄積を防ぎたい。\n利用者から「役に立ったか」や「別商談で使った事例」を短く返してもらう。\n何を参考にし、どんな結果だったかを記録し、利用が新しい学びを生む循環を確認する。\n先輩に直接聞けない若手にとって、心理的負担を減らしつつナレッジを活用できる。\nナレッジ共有は双方向であり、利用者のフィードバックを収集して品質を維持する。\nナレッジベースの運用時。",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:33:14.785845Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "64e7830f-167d-5aeb-8981-d774abc29da4",
+      "knowledge_id": "b3271bb1-c83f-55a9-bc84-fddd577d8552",
+      "start_utterance_id": "6baf40c7-aa61-5d76-96ed-72aa0154a7fd",
+      "end_utterance_id": "f984872a-bdf8-5ab7-8f86-3a2f53bff516"
+    },
+    {
+      "id": "9c7cab98-7b74-5004-afe8-be788690b95a",
+      "knowledge_id": "62cc5ded-eb90-5953-ab88-1b8a9112722e",
+      "start_utterance_id": "7c00d8d2-179a-56ba-8238-7f4e3e6ed2dc",
+      "end_utterance_id": "066587f2-3a78-5fe1-9a00-aae6757cb4ba"
+    },
+    {
+      "id": "fc914848-4de9-5801-9a0f-52f603e03af5",
+      "knowledge_id": "9ccd526f-89c1-56e3-8622-17b44edb6464",
+      "start_utterance_id": "b4ee5911-b67c-5ff7-b315-8c21ce78b229",
+      "end_utterance_id": "92d9ec81-4944-5c40-b09f-4fd0664de0b8"
+    },
+    {
+      "id": "4e9e2c08-43ff-53c2-bd8e-1483ec23d6d1",
+      "knowledge_id": "eaf3b8d5-8c75-5f94-ba06-88272bad1d54",
+      "start_utterance_id": "5ae6913e-e460-5740-aee6-d2e72214969e",
+      "end_utterance_id": "f006f192-8a80-5936-b07e-7067b2d0b32a"
+    },
+    {
+      "id": "bc3f9281-d424-5fcb-b65e-abc9961a3d3c",
+      "knowledge_id": "b43e054a-888e-5456-a7eb-54dbd2be935c",
+      "start_utterance_id": "79013b9b-228a-51d3-bbfa-b9b438e6e397",
+      "end_utterance_id": "62e936c7-727a-54c6-a8e1-54fe248c8709"
+    },
+    {
+      "id": "d23dc250-4f50-549e-aeaf-f14f9be8dbfd",
+      "knowledge_id": "4e9a0504-98a2-5399-b9a3-14a8a50f7365",
+      "start_utterance_id": "45372b9f-cddc-55c6-bd57-dbf76309029f",
+      "end_utterance_id": "b48aa8e3-43b7-578a-80a0-47fba26beb83"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "c69fac6a-de26-5d8c-a535-a9e580e5b951",
+      "data_source_id": "65ac0873-5d3c-5652-825d-c13732e2994b",
+      "summary": "営業日報が読まれない原因は検索性の欠如にあると認識し、再利用可能なナレッジを「状況・質問・反応・次の行動」の4項目で構造化する提案を行った。学習用と評価用を分離し、訪問準備時の検索に特化したPoC（5名・2週間・入力3分以内）を実施することで合意した。",
+      "customer_needs": [
+        "案件情報を業界や課題で検索できること",
+        "入力負荷を減らし、訪問直後に記録できること",
+        "失敗事例も心理的負担なく記録できること",
+        "別商談で実際に使える判断材料が得られること"
+      ],
+      "proposals": [
+        "活動実績と再利用する学びを分離する設計",
+        "状況、質問、顧客反応、次の行動の4項目での記録",
+        "5名・2週間のPoC実施と入力時間上限（3分）の設定",
+        "利用フィードバック（役に立ったか、活用事例）の収集"
+      ],
+      "decisions": [
+        "まず小規模な試行（PoC）を行う",
+        "入力時間が3分を超えた場合、理由を記録して項目削減の判断材料にする",
+        "学習用情報と評価用活動量は明確に分離する"
+      ],
+      "next_actions": [
+        "5名・2週間のPoCを開始する",
+        "入力時間、閲覧回数、別商談での活用件数を計測する",
+        "利用価値がない場合は項目を減らす"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,626 @@
+{
+  "data_sources": [
+    {
+      "id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "source_type": "audio",
+      "file_name": "long_009.wav",
+      "occurred_at": "2026-08-25T00:18:14Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "63241d7f-343e-509e-bda9-49de8a885b5c",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 9.0,
+      "content": "先ほど受付の方に、今日はオンライン面接が多い日だと伺いました。会議室もほぼ埋まっていますね。"
+    },
+    {
+      "id": "d2cd6bc1-f027-5493-8fec-2d6aba10b23c",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 9.0,
+      "end_sec": 17.0,
+      "content": "月曜日と金曜日は特に多いです。それでWi-Fiの問い合わせも増えます。"
+    },
+    {
+      "id": "a8a87435-2876-57ef-b063-e2740e2d4b2a",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 17.0,
+      "end_sec": 23.0,
+      "content": "最後に切断が起きたのは、どの会議室で何時頃でしたか?"
+    },
+    {
+      "id": "dab4b632-5484-5039-a34e-15c0d3b32538",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 23.0,
+      "end_sec": 27.0,
+      "content": "今朝の面接には社外の候補者も参加していたんですね。"
+    },
+    {
+      "id": "34b48ee9-ac47-55cc-8d37-533a6991c11f",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 27.0,
+      "end_sec": 34.0,
+      "content": "はい、途中で切れてしまい、こちらからお詫びして時間を延長しました。"
+    },
+    {
+      "id": "ba6dcbed-560f-51b5-9d8d-3c5997ffbb8c",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 34.0,
+      "end_sec": 39.0,
+      "content": "採用担当者はその後の面接予定にも影響しましたか?"
+    },
+    {
+      "id": "ddad18d1-4dbc-5d01-a3cc-4b31822ed3b6",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 39.0,
+      "end_sec": 46.0,
+      "content": "15分ずつ後ろへずれました。候補者の印象も心配です。"
+    },
+    {
+      "id": "e0c3c4a9-f6c8-571b-a76b-fd5276bdbd8c",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 46.0,
+      "end_sec": 52.0,
+      "content": "通信トラブルは社内の不便だけでなく、採用体験にも影響しているんですね。"
+    },
+    {
+      "id": "160e60d2-4bb9-5079-90a5-aadf5ea3d402",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 52.0,
+      "end_sec": 59.0,
+      "content": "優秀な人ほど複数者を受けているので、そこで不安を持たれたくありません。"
+    },
+    {
+      "id": "22661801-06ec-59e9-87ee-b01806c3c04e",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 59.0,
+      "end_sec": 69.0,
+      "content": "今朝10時、奥の二部屋です。面接中に映像が止まり、担当者がスマートフォンの回線へ切り替えました。"
+    },
+    {
+      "id": "2b77d801-2bc8-5438-91ee-8182c85817cb",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 11,
+      "speaker": "salesperson",
+      "start_sec": 69.0,
+      "end_sec": 76.0,
+      "content": "その時間、接続していた端末数や通信量は確認できましたか?"
+    },
+    {
+      "id": "f79a737c-f89d-5598-8e81-c9a48698388f",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 76.0,
+      "end_sec": 84.0,
+      "content": "できません。アクセスポイントは数年前に設置したままで、管理画面も私しか見られません。"
+    },
+    {
+      "id": "d30ebcb4-cb78-56f9-a197-bb9b7928f40c",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 84.0,
+      "end_sec": 89.0,
+      "content": "復旧や原因確認にどれくらい時間を使いましたか?"
+    },
+    {
+      "id": "009bc55c-4f82-51ef-986d-bc7b0b821f90",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 89.0,
+      "end_sec": 98.0,
+      "content": "1時間ほどです。でも再起動しただけで、本当の原因は分かっていないんですよね。"
+    },
+    {
+      "id": "3de3802b-0402-5781-83c5-47a2dddc4cf9",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 98.0,
+      "end_sec": 105.0,
+      "content": "再起動する前に、他の会議室や優先接続は確認しましたか?"
+    },
+    {
+      "id": "b8c35b39-82ba-5b20-a0d4-c43cb9e9badf",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 16,
+      "speaker": "customer",
+      "start_sec": 105.0,
+      "end_sec": 112.0,
+      "content": "確認していません。問い合わせが続いたので、まず戻したいと思いました。"
+    },
+    {
+      "id": "bdcdee92-491e-5bec-9999-3ae5198cd7b1",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 17,
+      "speaker": "salesperson",
+      "start_sec": 112.0,
+      "end_sec": 119.0,
+      "content": "現場対応としては自然ですが、原因を追うための情報が消えてしまうことがあります。"
+    },
+    {
+      "id": "86d83fd6-ef64-5542-9e17-620ba5f1f139",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 119.0,
+      "end_sec": 124.0,
+      "content": "次に起きたとき、何を記録すればよいですか?"
+    },
+    {
+      "id": "7daa2530-b729-553c-bfc4-64a58cd859c4",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 19,
+      "speaker": "salesperson",
+      "start_sec": 124.0,
+      "end_sec": 140.0,
+      "content": "発生時刻、場所、端末、接続方法、利用アプリ、影響人数、優先で再現するか、再起動前後の状態です。"
+    },
+    {
+      "id": "ee29c3b3-b1f3-5d83-b8a1-eb6cf3761167",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 140.0,
+      "end_sec": 143.0,
+      "content": "可能なら画面表示も残します。"
+    },
+    {
+      "id": "a2fbc7b8-910c-5276-b041-6756d4f671b6",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 143.0,
+      "end_sec": 147.0,
+      "content": "受付にも簡単な記録表をおけそうです。"
+    },
+    {
+      "id": "f7bcacd2-64d8-571e-915e-2caee77870ba",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 147.0,
+      "end_sec": 150.0,
+      "content": "問い合わせを受けた人が全部調査する必要ありません。"
+    },
+    {
+      "id": "63e41437-2eef-5800-81c5-d3d79982a263",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 150.0,
+      "end_sec": 153.0,
+      "content": "最初の情報だけ揃えば、切り分けが早くなります。"
+    },
+    {
+      "id": "41e79a99-5abc-5a55-8140-63bb9a9e13c2",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 153.0,
+      "end_sec": 159.0,
+      "content": "今は遅いという一言だけ私に届くので、毎回聞き直しています。"
+    },
+    {
+      "id": "b4a8bf04-e55a-548f-b88e-29e99bd24463",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 159.0,
+      "end_sec": 164.0,
+      "content": "同じ場所、時間帯で繰り返していますか?"
+    },
+    {
+      "id": "f03ec05e-f9a5-50b6-8025-9dc54664857c",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 164.0,
+      "end_sec": 174.0,
+      "content": "奥の部屋と昼前が多いです。社員からは回線を早くしてほしいと言われます。"
+    },
+    {
+      "id": "2e6aca4b-a870-5ead-b856-15df473b5a3f",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 175.0,
+      "end_sec": 185.0,
+      "content": "回線そのもの、電波範囲同時接続数、特定端末の通信など、原因は切り分けが必要ですね。"
+    },
+    {
+      "id": "24769de6-17c1-5fd0-9ffc-52b1dcdbc8d6",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 185.0,
+      "end_sec": 189.0,
+      "content": "速度契約だけ変更しても直らない可能性があります。"
+    },
+    {
+      "id": "f24336bb-6ce3-55f4-ab9a-c2e44877b349",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 189.0,
+      "end_sec": 195.0,
+      "content": "社内で動画配信や大容量ダウンロードが重なる時間帯はありますか?"
+    },
+    {
+      "id": "f99133de-7b85-51e8-910b-56946912de95",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 195.0,
+      "end_sec": 202.0,
+      "content": "昼前に研修動画を見る部署があります。クラウドへのバックアップも動いているかもしれません。"
+    },
+    {
+      "id": "92b45575-14b8-5f73-a9b8-a094156e4538",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 203.0,
+      "end_sec": 210.0,
+      "content": "通信量の可視化ができれば、特定用途が帯域を圧迫しているか確認できます。"
+    },
+    {
+      "id": "ba303d8a-1f83-5039-807f-dcec1cd7f70b",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 210.0,
+      "end_sec": 216.0,
+      "content": "ただし、制御する場合は業務上必要な通信を止めない判断が必要です。"
+    },
+    {
+      "id": "8c589a38-f503-5984-a188-fc37ae0e1acf",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 33,
+      "speaker": "salesperson",
+      "start_sec": 216.0,
+      "end_sec": 223.0,
+      "content": "研修を禁止するのではなく、時間をずらすだけで済むかもしれませんね。"
+    },
+    {
+      "id": "600872e9-9f61-5810-81fb-7b6f8cd5ee35",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 34,
+      "speaker": "customer",
+      "start_sec": 223.0,
+      "end_sec": 229.0,
+      "content": "はい、危機追加より運用変更が適切な可能性もあります。"
+    },
+    {
+      "id": "3a4f3a4b-e1b9-5f42-8152-5ad63b21c930",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 229.0,
+      "end_sec": 235.0,
+      "content": "製品導入ありきではなく、原因を見たいです。"
+    },
+    {
+      "id": "0030c57e-bd63-5352-8e0c-79e4bd8df8e8",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 235.0,
+      "end_sec": 238.0,
+      "content": "そこが自分では判断できません。"
+    },
+    {
+      "id": "c32c6364-05e6-5a47-844d-e620ad853043",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 238.0,
+      "end_sec": 248.0,
+      "content": "通レール楽楽Wi-Fiでは、Wi-Fi環境も構築や運用管理、端末、通信量の可視化を検討できます。"
+    },
+    {
+      "id": "7dc56bd7-6d34-5831-b3ac-3c1e828a113a",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 248.0,
+      "end_sec": 254.0,
+      "content": "監視範囲は機種やサービスで異なるため、現地と構成を確認してからご案内します。"
+    },
+    {
+      "id": "bbbe40f4-d12b-532f-8b96-0f16cad1a52f",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 39,
+      "speaker": "customer",
+      "start_sec": 254.0,
+      "end_sec": 262.0,
+      "content": "面接を止めないことが一番なので、安定性を見たいです。"
+    },
+    {
+      "id": "4c3a21e2-e5f1-5521-8225-98d0ce1a4d5b",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 262.0,
+      "end_sec": 271.0,
+      "content": "現地調査では、面接のない時間だけ測るのではなく、実際に負荷がかかる時間帯も確認したいです。調整できますか?"
+    },
+    {
+      "id": "3a54b711-877c-5620-9778-201baefdd0e6",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 271.0,
+      "end_sec": 277.0,
+      "content": "候補者情報を映さない形なら、社内テスト会議を複数部屋で行います。"
+    },
+    {
+      "id": "65611bb0-e0da-583e-bf74-e9b0d65dd1fd",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 277.0,
+      "end_sec": 285.0,
+      "content": "ありがとうございます。平常時と不可時を比較し、改善後も同じ条件で再確認しましょう。"
+    },
+    {
+      "id": "822c63a9-4f0c-5a7e-914f-bff797bc3c31",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 43,
+      "speaker": "customer",
+      "start_sec": 285.0,
+      "end_sec": 291.0,
+      "content": "面接中の切断件数と、私への問い合わせ件数も記録します。"
+    },
+    {
+      "id": "88188ca4-9164-5d04-beda-6f41ffe7770e",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 291.0,
+      "end_sec": 296.0,
+      "content": "安定性と管理負担の両方を評価できますね。"
+    },
+    {
+      "id": "0568c6e6-3306-5f6a-93f1-5c4b51c8ca51",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 45,
+      "speaker": "customer",
+      "start_sec": 296.0,
+      "end_sec": 303.0,
+      "content": "採用担当にも結果を共有し、候補者対応への影響が減ったか確認します。"
+    },
+    {
+      "id": "60459893-90f9-55ba-81a6-1d418a063e2f",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 303.0,
+      "end_sec": 309.0,
+      "content": "技術指標だけでなく、実際の業務が止まらなかったかで最終判断しましょう。"
+    },
+    {
+      "id": "c2f15f12-2f14-5673-b9a9-c196d9339069",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 47,
+      "speaker": "salesperson",
+      "start_sec": 309.0,
+      "end_sec": 320.0,
+      "content": "はい、次回は平面図、現在の危機、障害が起きる時間帯を確認し、電波と接続状況を調査しましょう。"
+    },
+    {
+      "id": "1ab663f4-39df-5074-afaa-98ce6c3a88b5",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 320.0,
+      "end_sec": 324.0,
+      "content": "利用者の体感と計測結果の両方で見ます。"
+    },
+    {
+      "id": "5670381e-07cb-500d-bdf5-95c466c5e65a",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "sequence_no": 49,
+      "speaker": "customer",
+      "start_sec": 324.0,
+      "end_sec": 326.0,
+      "content": "お願いします。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "1725bc6b-8142-5c8e-9547-fd0b934e13c1",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "knowledge_type": "pain_point",
+      "title": "採用面接中の通信障害が候補者体験と業務効率に悪影響",
+      "situation": "オンライン面接が集中する月曜・金曜日にWi-Fi切断が発生",
+      "problem": "面接中の映像停止により候補者に不快感を与え、後続の面接スケジュールが15分ずつ遅延",
+      "judgment": "単なる社内不便ではなく、採用プロセス全体のリスクとして捉える必要がある",
+      "action": "障害発生時の影響範囲（採用担当者、候補者）を確認",
+      "reasoning": "優秀な候補者は複数企業から選考を受けており、不安要素が採用辞退に直結する可能性",
+      "outcome": "顧客は採用体験の毀損を深刻な問題として認識",
+      "lesson": "IT障害は業務効率だけでなく、対外サービス（採用含む）の品質にも影響するため、ビジネスインパクトを評価する",
+      "applicable_situations": "外部関係者（顧客、候補者、パートナー）が参加するオンライン会議や面接が多い環境",
+      "limitations": "障害頻度や影響範囲が顧客の報告に依存する",
+      "industry": "採用・人事",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "採用面接中の通信障害が候補者体験と業務効率に悪影響\nオンライン面接が集中する月曜・金曜日にWi-Fi切断が発生\n面接中の映像停止により候補者に不快感を与え、後続の面接スケジュールが15分ずつ遅延\n単なる社内不便ではなく、採用プロセス全体のリスクとして捉える必要がある\n障害発生時の影響範囲（採用担当者、候補者）を確認\n優秀な候補者は複数企業から選考を受けており、不安要素が採用辞退に直結する可能性\n顧客は採用体験の毀損を深刻な問題として認識\nIT障害は業務効率だけでなく、対外サービス（採用含む）の品質にも影響するため、ビジネスインパクトを評価する\n外部関係者（顧客、候補者、パートナー）が参加するオンライン会議や面接が多い環境\n障害頻度や影響範囲が顧客の報告に依存する\n採用・人事\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:24:09.591187Z"
+    },
+    {
+      "id": "ff99eb4a-94d5-5f06-aba9-00a5ab3d3702",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "knowledge_type": "operational_insight",
+      "title": "障害対応時のログ記録不足が原因特定を困難にする",
+      "situation": "Wi-Fi切断発生時に再起動のみで復旧し、詳細な記録を残していない",
+      "problem": "原因追跡に必要な情報（端末数、通信量、接続状態）が失われ、再発防止策が講じられない",
+      "judgment": "現場対応として自然な行動だが、技術的な解決には構造化された記録が不可欠",
+      "action": "発生時刻、場所、端末、接続方法、影響人数などの記録項目を提案",
+      "reasoning": "受付や問い合わせ窓口が初期情報を集約することで、専門家の切り分け時間を短縮できる",
+      "outcome": "顧客は記録表の設置と初期情報収集の重要性に同意",
+      "lesson": "障害対応フローに「記録」のステップを組み込むことで、根本原因の特定と再発防止が可能になる",
+      "applicable_situations": "IT障害の頻発する環境、または障害対応が属人化している組織",
+      "limitations": "記録項目が多すぎると現場の負担になるため、最小限の必須項目に絞る必要がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "障害対応時のログ記録不足が原因特定を困難にする\nWi-Fi切断発生時に再起動のみで復旧し、詳細な記録を残していない\n原因追跡に必要な情報（端末数、通信量、接続状態）が失われ、再発防止策が講じられない\n現場対応として自然な行動だが、技術的な解決には構造化された記録が不可欠\n発生時刻、場所、端末、接続方法、影響人数などの記録項目を提案\n受付や問い合わせ窓口が初期情報を集約することで、専門家の切り分け時間を短縮できる\n顧客は記録表の設置と初期情報収集の重要性に同意\n障害対応フローに「記録」のステップを組み込むことで、根本原因の特定と再発防止が可能になる\nIT障害の頻発する環境、または障害対応が属人化している組織\n記録項目が多すぎると現場の負担になるため、最小限の必須項目に絞る必要がある\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:24:09.591187Z"
+    },
+    {
+      "id": "b1e8f7b4-74eb-5bba-818c-f733089ee492",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "knowledge_type": "sales_technique",
+      "title": "原因切り分けの重要性を強調し、安易な機器増設を避ける",
+      "situation": "顧客が「回線を早くしてほしい」と要求している",
+      "problem": "速度契約の変更だけでは、電波干渉や同時接続数、特定アプリの帯域圧迫など多様な原因を解決できない",
+      "judgment": "製品導入ありきではなく、まず原因を特定すべき",
+      "action": "回線、電波、端末、用途別の帯域利用状況の切り分けを提案",
+      "reasoning": "不要な投資を防ぎ、本当に必要な対策（例：研修動画の時間変更）を導き出すため",
+      "outcome": "顧客は「運用変更が適切な可能性もある」と認め、原因調査への協力を約束",
+      "lesson": "顧客の表面的な要求（速度向上）に対し、根本原因（帯域圧迫、電波環境）を掘り下げることで、過剰な提案を避け信頼を得られる",
+      "applicable_situations": "ネットワーク性能への不満があるが、原因が不明確な場合",
+      "limitations": "顧客が原因調査に時間を割く意欲がない場合は、簡易的な診断ツールから始める必要がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "原因切り分けの重要性を強調し、安易な機器増設を避ける\n顧客が「回線を早くしてほしい」と要求している\n速度契約の変更だけでは、電波干渉や同時接続数、特定アプリの帯域圧迫など多様な原因を解決できない\n製品導入ありきではなく、まず原因を特定すべき\n回線、電波、端末、用途別の帯域利用状況の切り分けを提案\n不要な投資を防ぎ、本当に必要な対策（例：研修動画の時間変更）を導き出すため\n顧客は「運用変更が適切な可能性もある」と認め、原因調査への協力を約束\n顧客の表面的な要求（速度向上）に対し、根本原因（帯域圧迫、電波環境）を掘り下げることで、過剰な提案を避け信頼を得られる\nネットワーク性能への不満があるが、原因が不明確な場合\n顧客が原因調査に時間を割く意欲がない場合は、簡易的な診断ツールから始める必要がある\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:24:09.591187Z"
+    },
+    {
+      "id": "afde0d4a-17ac-5704-ac4f-6f0d2ac96c98",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "knowledge_type": "proposal",
+      "title": "通レール楽楽Wi-Fiによる可視化と運用管理の提案",
+      "situation": "顧客が原因特定と安定性確保を希望",
+      "problem": "既存のアクセスポイントは管理画面が限定的で、通信量の可視化や詳細な監視ができない",
+      "judgment": "Wi-Fi環境の構築、運用管理、端末・通信量の可視化を含む包括的なソリューションが必要",
+      "action": "「通レール楽楽Wi-Fi」の導入を提案し、現地調査で負荷時間帯の計測を行う",
+      "reasoning": "監視範囲は機種やサービスで異なるため、現地の構成を確認した上で最適なプランを提示する",
+      "outcome": "顧客は安定性重視の姿勢を示し、現地調査への協力を同意",
+      "lesson": "製品提案時は、顧客の課題（可視化、安定性）に合致する機能を中心に説明し、現地調査の必要性を強調する",
+      "applicable_situations": "Wi-Fi環境の最適化や監視強化を必要とする企業",
+      "limitations": "現地調査の日程調整や、顧客側の協力（テスト会議の実施）が必要",
+      "industry": null,
+      "product": "通レール楽楽Wi-Fi",
+      "sales_stage": "proposal",
+      "search_text": "通レール楽楽Wi-Fiによる可視化と運用管理の提案\n顧客が原因特定と安定性確保を希望\n既存のアクセスポイントは管理画面が限定的で、通信量の可視化や詳細な監視ができない\nWi-Fi環境の構築、運用管理、端末・通信量の可視化を含む包括的なソリューションが必要\n「通レール楽楽Wi-Fi」の導入を提案し、現地調査で負荷時間帯の計測を行う\n監視範囲は機種やサービスで異なるため、現地の構成を確認した上で最適なプランを提示する\n顧客は安定性重視の姿勢を示し、現地調査への協力を同意\n製品提案時は、顧客の課題（可視化、安定性）に合致する機能を中心に説明し、現地調査の必要性を強調する\nWi-Fi環境の最適化や監視強化を必要とする企業\n現地調査の日程調整や、顧客側の協力（テスト会議の実施）が必要\n通レール楽楽Wi-Fi\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:24:09.591187Z"
+    },
+    {
+      "id": "8b94a299-98b7-5480-945e-ad09e85a7c97",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "knowledge_type": "next_action",
+      "title": "現地調査と改善効果の定量的評価計画",
+      "situation": "提案後の具体的なアクションプラン策定",
+      "problem": "改善の効果を客観的に示すための指標と手順が未定義",
+      "judgment": "平常時と障害時の比較、および業務影響（面接停止件数、問い合わせ件数）の記録が必要",
+      "action": "平面図、既存機器、障害時間帯の確認、電波・接続状況の調査、採用担当者への結果共有",
+      "reasoning": "技術指標だけでなく、実際の業務が止まらなかったかというビジネス指標で最終判断するため",
+      "outcome": "次回の調査内容と評価基準について合意",
+      "lesson": "IT導入の効果測定は、技術的なKPI（速度、遅延）と業務的なKPI（停止時間、問い合わせ数）の両面から行うべき",
+      "applicable_situations": "ネットワーク改善プロジェクトの計画段階",
+      "limitations": "調査期間中に障害が発生しない場合は、シミュレーションによる負荷テストが必要になる可能性がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "follow_up",
+      "search_text": "現地調査と改善効果の定量的評価計画\n提案後の具体的なアクションプラン策定\n改善の効果を客観的に示すための指標と手順が未定義\n平常時と障害時の比較、および業務影響（面接停止件数、問い合わせ件数）の記録が必要\n平面図、既存機器、障害時間帯の確認、電波・接続状況の調査、採用担当者への結果共有\n技術指標だけでなく、実際の業務が止まらなかったかというビジネス指標で最終判断するため\n次回の調査内容と評価基準について合意\nIT導入の効果測定は、技術的なKPI（速度、遅延）と業務的なKPI（停止時間、問い合わせ数）の両面から行うべき\nネットワーク改善プロジェクトの計画段階\n調査期間中に障害が発生しない場合は、シミュレーションによる負荷テストが必要になる可能性がある\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:24:09.591187Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "b7fdfc55-160c-517d-9ae5-a025fe7217c6",
+      "knowledge_id": "1725bc6b-8142-5c8e-9547-fd0b934e13c1",
+      "start_utterance_id": "63241d7f-343e-509e-bda9-49de8a885b5c",
+      "end_utterance_id": "160e60d2-4bb9-5079-90a5-aadf5ea3d402"
+    },
+    {
+      "id": "d92c7bcb-4b55-52ac-8532-169834452029",
+      "knowledge_id": "ff99eb4a-94d5-5f06-aba9-00a5ab3d3702",
+      "start_utterance_id": "22661801-06ec-59e9-87ee-b01806c3c04e",
+      "end_utterance_id": "63e41437-2eef-5800-81c5-d3d79982a263"
+    },
+    {
+      "id": "0e4f2331-d66a-5cbf-b72d-722a5a11bcda",
+      "knowledge_id": "b1e8f7b4-74eb-5bba-818c-f733089ee492",
+      "start_utterance_id": "41e79a99-5abc-5a55-8140-63bb9a9e13c2",
+      "end_utterance_id": "0030c57e-bd63-5352-8e0c-79e4bd8df8e8"
+    },
+    {
+      "id": "459200bd-53d5-535f-8965-9dec23d1a7ac",
+      "knowledge_id": "afde0d4a-17ac-5704-ac4f-6f0d2ac96c98",
+      "start_utterance_id": "c32c6364-05e6-5a47-844d-e620ad853043",
+      "end_utterance_id": "3a54b711-877c-5620-9778-201baefdd0e6"
+    },
+    {
+      "id": "b889c1c7-c9f3-55fd-aede-56ce45d93a8c",
+      "knowledge_id": "8b94a299-98b7-5480-945e-ad09e85a7c97",
+      "start_utterance_id": "65611bb0-e0da-583e-bf74-e9b0d65dd1fd",
+      "end_utterance_id": "5670381e-07cb-500d-bdf5-95c466c5e65a"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "b3547815-ff78-5d50-8c11-9d932e43de95",
+      "data_source_id": "f798f8c7-f72a-5526-8b43-ed8cf5dd0167",
+      "summary": "オンライン面接中のWi-Fi切断問題について、原因特定と安定性向上を目的とした商談。障害時の記録不足や原因の多様性を指摘し、通レール楽楽Wi-Fiによる可視化と現地調査を提案。業務影響を指標とした改善計画で合意。",
+      "customer_needs": [
+        "採用面接中の通信安定性の確保",
+        "障害原因の特定と再発防止",
+        "通信量や接続状況の可視化",
+        "管理負担の軽減"
+      ],
+      "proposals": [
+        "障害発生時の記録項目（時刻、場所、端末等）の標準化",
+        "通レール楽楽Wi-FiによるWi-Fi環境の構築・運用管理・可視化",
+        "負荷がかかる時間帯を含む現地調査の実施"
+      ],
+      "decisions": [
+        "製品導入前に原因切り分けを行う方針",
+        "面接中の切断件数と問い合わせ件数を記録し、業務影響を評価する方針",
+        "採用担当者にも改善結果を共有する方針"
+      ],
+      "next_actions": [
+        "平面図、既存機器、障害時間帯の確認",
+        "電波と接続状況の現地調査",
+        "社内テスト会議による負荷検証",
+        "平常時と障害時の比較データ収集"
+      ]
+    }
+  ]
+}

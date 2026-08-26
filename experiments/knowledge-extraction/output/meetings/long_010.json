@@ -1,0 +1,627 @@
+{
+  "data_sources": [
+    {
+      "id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "source_type": "audio",
+      "file_name": "long_010.wav",
+      "occurred_at": "2026-08-25T00:21:54Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "32a0b979-85e4-5fd2-b990-a59844daa5a7",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 9.0,
+      "content": "セキュリティ研修の受講率が上がらないとのことでした。直近の研修ではどのように案内しましたか?"
+    },
+    {
+      "id": "0725ca98-7f91-574b-981c-b6971a27d97d",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 9.0,
+      "end_sec": 18.0,
+      "content": "全社員へ1時間の動画URLをメールしました。期限までに見たのは半分くらいです。"
+    },
+    {
+      "id": "de1108fb-f9c0-5ea4-8d44-12a32e526a0f",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 18.0,
+      "end_sec": 26.0,
+      "content": "未受講の方へ理由を聞いたことはありますか?1時間の動画は勤務時間内に見るルールですか?"
+    },
+    {
+      "id": "9f5a6a30-0fba-5c06-b063-a429e1ce67e2",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 4,
+      "speaker": "customer",
+      "start_sec": 26.0,
+      "end_sec": 35.0,
+      "content": "そう伝えていますが、倉庫は交代制で全員が1時間端末を開けるのは難しいです。"
+    },
+    {
+      "id": "b20754e7-464e-5d5d-b5cf-c21d2ac18df2",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 5,
+      "speaker": "salesperson",
+      "start_sec": 35.0,
+      "end_sec": 42.0,
+      "content": "未受講者の中には見たくない人だけでなく、見る機会を確保できない人もいるんですね。"
+    },
+    {
+      "id": "d27f84f6-c6e4-548a-8f65-a7bd7c1fc5e8",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 42.0,
+      "end_sec": 49.0,
+      "content": "店長が忙しい時間を避けてというだけで、具体的な時間は決めていません。"
+    },
+    {
+      "id": "0fd2a09e-d19e-5380-9af3-3032b3b649bb",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 49.0,
+      "end_sec": 55.0,
+      "content": "受講時間を業務計画へ組み込まないまま、個人の努力に任せていた可能性があります。"
+    },
+    {
+      "id": "18f26e6e-0392-534d-a5db-69cbaa4721d2",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 55.0,
+      "end_sec": 61.0,
+      "content": "確かに期限メールを送るだけでした。"
+    },
+    {
+      "id": "e00f789d-39ce-5e56-8b09-7c68f37f31ef",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 61.0,
+      "end_sec": 73.0,
+      "content": "現場は教養端末が多い、動画が長い、忙しいという声です。正直意識が低いとも思っています。"
+    },
+    {
+      "id": "d9b6ad45-a7bb-5324-8ece-0ecd7afcc941",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 73.0,
+      "end_sec": 78.0,
+      "content": "最後に不信メールでヒヤリとしたのはいつでしたか?"
+    },
+    {
+      "id": "3590e647-8391-5675-852c-2a0e57c5b9c5",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 78.0,
+      "end_sec": 89.0,
+      "content": "先月、配送通知をよそったメールのリンクを1人が開きました。すぐ報告があり、被害は確認されませんでした。"
+    },
+    {
+      "id": "48f365e0-f173-5502-a728-e88301ab7ea3",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 89.0,
+      "end_sec": 92.0,
+      "content": "その方は検証を受けていましたか?"
+    },
+    {
+      "id": "ca06975a-0754-5a7b-add5-617f421fa407",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 92.0,
+      "end_sec": 98.0,
+      "content": "受けていました。ただ、内容を覚えていなかったと言っています。"
+    },
+    {
+      "id": "5b5f02d7-64e0-556b-9493-209ad1d7b33d",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 98.0,
+      "end_sec": 105.0,
+      "content": "リンクを開いた方がすぐ報告できたのは何か以前の経験があったからでしょうか?"
+    },
+    {
+      "id": "212f32ce-f2b8-5dd9-939a-941c42c5483d",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 106.0,
+      "end_sec": 114.0,
+      "content": "メールの日本語がおかしいと同僚に言われ、ソムへ連絡したそうです。報告先はたまたま知っていました。"
+    },
+    {
+      "id": "f5dc3dde-dc68-5e2f-b8bd-9341d073cc39",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 114.0,
+      "end_sec": 121.0,
+      "content": "個人の知識だけでなく、同僚へ相談できたことが被害防止につながったんですね。"
+    },
+    {
+      "id": "8e1a99d5-1638-5dd4-abc3-cd0cb2dbaf0a",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 121.0,
+      "end_sec": 126.0,
+      "content": "一人で判断していたら、そのまま進んだかもしれません。"
+    },
+    {
+      "id": "6e514c52-7a6b-5980-bf8c-c7de6b09bb90",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 127.0,
+      "end_sec": 138.0,
+      "content": "研修では見分け方に加えて、迷ったときは開かず、どこへ報告するかを全員が実行できるようにしたいです。"
+    },
+    {
+      "id": "3ab2a903-1afa-565f-95a7-fcd0377bb7fc",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 138.0,
+      "end_sec": 144.0,
+      "content": "報告先は部署ごとに違っていたので、統一します。"
+    },
+    {
+      "id": "8913d108-42dd-54df-b0de-b968db6dc828",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 144.0,
+      "end_sec": 153.0,
+      "content": "謝って報告しても責められないことも伝えた方がよいですね。報告をためらう文化では、検知が遅れます。"
+    },
+    {
+      "id": "4cc74424-ad6e-5630-80ce-a3a2edf70714",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 21,
+      "speaker": "customer",
+      "start_sec": 153.0,
+      "end_sec": 156.0,
+      "content": "現場向けのメッセージとして入れたいです。"
+    },
+    {
+      "id": "9257681c-c0d8-5ef6-ad02-453d1c58870e",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 156.0,
+      "end_sec": 163.0,
+      "content": "すると受講率だけでなく、実務で気づいて報告できるかが評価指標になりそうですね。"
+    },
+    {
+      "id": "1196db59-d288-5b43-829d-896fc8e5a2a5",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 163.0,
+      "end_sec": 170.0,
+      "content": "そうですね。受けた証拠を残すことが目的になっていました。"
+    },
+    {
+      "id": "14cb0175-c183-5ac8-a194-3f5e372521cd",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 170.0,
+      "end_sec": 177.0,
+      "content": "Easy Learning Expressでは、管理者が受講履歴や進捗を確認できます。"
+    },
+    {
+      "id": "98c87108-8fc2-5f38-ba44-5b9c4224f432",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 177.0,
+      "end_sec": 181.0,
+      "content": "ただ、システムだけで学習効果は保障できません。"
+    },
+    {
+      "id": "463c5379-27dd-5004-982b-a2b3610966e3",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 181.0,
+      "end_sec": 189.0,
+      "content": "短い単位にする、職種別の事例にする、報告訓練と組み合わせるなど、運用設計が必要です。"
+    },
+    {
+      "id": "5a4ceba6-b845-549a-aa61-b2a634a139ea",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 189.0,
+      "end_sec": 197.0,
+      "content": "管理者が進捗を見た後、未受講者へ、誰が声を掛けますか?"
+    },
+    {
+      "id": "d3c3d852-e30a-5777-a7b1-032f410d5d75",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 28,
+      "speaker": "customer",
+      "start_sec": 197.0,
+      "end_sec": 203.0,
+      "content": "今は総務です。ただ、拠点が多く、本人の勤務状況まで分かりません。"
+    },
+    {
+      "id": "dc67d33c-4bd8-57e4-a488-45051f147f51",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 203.0,
+      "end_sec": 212.0,
+      "content": "本部は全体進捗、現場責任者は受講時間の確保、と役割を分ける方が良さそうです。"
+    },
+    {
+      "id": "1b00d244-4c85-554a-9655-7e46c809c6f9",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 212.0,
+      "end_sec": 216.0,
+      "content": "店長に負担が増えると反発されそうです。"
+    },
+    {
+      "id": "d18c7c6a-7143-5e41-ae1b-b1d618620127",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 216.0,
+      "end_sec": 227.0,
+      "content": "追加作業を増やさず、朝礼で15分の時効枠を設けるなど、既存運用へ組み込めるか、現場と一緒に考えましょう。"
+    },
+    {
+      "id": "d14b13f6-d46a-5689-83d9-2517bdeebc0b",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 32,
+      "speaker": "customer",
+      "start_sec": 227.0,
+      "end_sec": 231.0,
+      "content": "一時間を一度に見るより現実的です。"
+    },
+    {
+      "id": "bcb17298-4f61-567c-b251-966be25bba58",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 231.0,
+      "end_sec": 236.0,
+      "content": "そう、この強要端末でも受けやすい方法を考えたいです。"
+    },
+    {
+      "id": "98683509-0deb-53e1-9823-e4f44a5aae1f",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 236.0,
+      "end_sec": 251.0,
+      "content": "次回、内筋、倉庫、ドライバーで受講環境を分け、各職種一人ずつに現在の動画を見てもらって、止まる理由を確認しませんか?"
+    },
+    {
+      "id": "103c2071-be46-55af-b796-00a6b51be360",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 251.0,
+      "end_sec": 255.0,
+      "content": "その結果をもとにコースと運用をご提案します。"
+    },
+    {
+      "id": "28fc5904-8dd7-5777-ae73-7e29e0e24268",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 255.0,
+      "end_sec": 263.0,
+      "content": "試行では受講率だけでなく、不審メールを見た時の初動を確認する短いテストも行いたいです。"
+    },
+    {
+      "id": "21782214-c36a-5040-b24d-a454654ac6b3",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 37,
+      "speaker": "customer",
+      "start_sec": 263.0,
+      "end_sec": 269.0,
+      "content": "点数できそわせるより、報告できた顔を見たいです。"
+    },
+    {
+      "id": "98f5174c-c1d1-519a-bab5-e43a3bd17118",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 269.0,
+      "end_sec": 278.0,
+      "content": "その通りです。職種別に起こりそうな事例を使い、分からない場合に相談する行動も正解として扱いましょう。"
+    },
+    {
+      "id": "4aad2689-501b-5597-9bb7-341a3bd904e9",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 39,
+      "speaker": "customer",
+      "start_sec": 278.0,
+      "end_sec": 284.0,
+      "content": "現場を責める研修ではなく、守るための訓練にしたいです。"
+    },
+    {
+      "id": "720a0058-cb3b-55a9-af5f-6602bed2e97b",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 284.0,
+      "end_sec": 296.0,
+      "content": "一拠点で4週間試し、受講完了を立会確認、報告行動、管理者の手間を図ってから広げます。"
+    },
+    {
+      "id": "080196bb-237f-5d60-ae6e-3a3a90a7fa55",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 296.0,
+      "end_sec": 300.0,
+      "content": "その結果なら経営会議にも説明できます。"
+    },
+    {
+      "id": "aa610b1a-1e11-5ab6-b920-d592d2fcda57",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 300.0,
+      "end_sec": 312.0,
+      "content": "受講できなかった人についても、責任追求ではなく、時間、端末、内容、周囲の支援のどこに障壁があったかを残します。"
+    },
+    {
+      "id": "e9153d1d-4f0c-5113-9a7c-2d72733b5ea0",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 313.0,
+      "end_sec": 319.0,
+      "content": "次の研修で同じ未受講理由を繰り返さないために使います。"
+    },
+    {
+      "id": "f4c6eda4-7b14-593c-84db-6435ea4bccd3",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 319.0,
+      "end_sec": 326.0,
+      "content": "受講しない人の意識の問題等を決めつけず、環境も見てみます。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "8041fdd7-53e5-5905-9557-743336d4e08a",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "knowledge_type": "pain_point",
+      "title": "交代制現場における長時間動画研修の受講障壁",
+      "situation": "倉庫や配送部門など交代制で働く現場において、1時間のセキュリティ研修動画を全社員に受講させる必要がある状況。",
+      "problem": "勤務時間内に1時間端末を開けることが困難であり、未受講者が発生している。",
+      "judgment": "個人の意識不足だけでなく、業務体制（交代制）と研修形式（長時間動画）のミスマッチが原因である。",
+      "action": "職種別の受講環境調査を実施し、短時間・分割受講への見直しを検討する。",
+      "reasoning": "現場の制約を無視した画一的な研修は、受講率向上に繋がらない。",
+      "outcome": null,
+      "lesson": "現場の業務形態（交代制など）を考慮し、研修の時間配分と提供形式を設計する必要がある。",
+      "applicable_situations": "製造業、物流、小売などシフト制で働く従業員が多い組織でのe-learning導入時。",
+      "limitations": "現場の具体的なシフト表や業務負荷が不明な場合、最適な分割単位を決定できない。",
+      "industry": "物流・倉庫",
+      "product": "セキュリティ研修",
+      "sales_stage": "discovery",
+      "search_text": "交代制現場における長時間動画研修の受講障壁\n倉庫や配送部門など交代制で働く現場において、1時間のセキュリティ研修動画を全社員に受講させる必要がある状況。\n勤務時間内に1時間端末を開けることが困難であり、未受講者が発生している。\n個人の意識不足だけでなく、業務体制（交代制）と研修形式（長時間動画）のミスマッチが原因である。\n職種別の受講環境調査を実施し、短時間・分割受講への見直しを検討する。\n現場の制約を無視した画一的な研修は、受講率向上に繋がらない。\n現場の業務形態（交代制など）を考慮し、研修の時間配分と提供形式を設計する必要がある。\n製造業、物流、小売などシフト制で働く従業員が多い組織でのe-learning導入時。\n現場の具体的なシフト表や業務負荷が不明な場合、最適な分割単位を決定できない。\n物流・倉庫\nセキュリティ研修\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:25:06.826464Z"
+    },
+    {
+      "id": "7bfe5f35-d180-5041-97c5-6e44e6bae63c",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "knowledge_type": "customer_need",
+      "title": "不審メールへの初動対応能力の向上と報告文化の醸成",
+      "situation": "フィッシングメールの被害事例が発生し、従業員が不審メールを見分ける能力と、迷った際の報告行動が求められている。",
+      "problem": "報告先が部署ごとに異なり、また「誤報を責められる」という心理的障壁により、報告が遅れるリスクがある。",
+      "judgment": "単なる知識の習得ではなく、行動（報告・相談）を定着させることが重要である。",
+      "action": "報告先の統一、誤報を責めない方針の明示、相談行動を正解とする評価基準の導入。",
+      "reasoning": "個人の判断に依存せず、組織的なセーフティネット（報告・相談）を機能させることで被害を最小限に抑えられる。",
+      "outcome": null,
+      "lesson": "セキュリティ研修は「見分け方」だけでなく、「迷った時の行動（報告先・報告方法）」を明確にし、心理的安全性を確保することが不可欠。",
+      "applicable_situations": "フィッシング対策、情報セキュリティ意識向上プログラム。",
+      "limitations": "報告先の統一や文化変革には経営層のコミットメントと継続的な運用が必要。",
+      "industry": "全業種",
+      "product": "セキュリティ研修",
+      "sales_stage": "discovery",
+      "search_text": "不審メールへの初動対応能力の向上と報告文化の醸成\nフィッシングメールの被害事例が発生し、従業員が不審メールを見分ける能力と、迷った際の報告行動が求められている。\n報告先が部署ごとに異なり、また「誤報を責められる」という心理的障壁により、報告が遅れるリスクがある。\n単なる知識の習得ではなく、行動（報告・相談）を定着させることが重要である。\n報告先の統一、誤報を責めない方針の明示、相談行動を正解とする評価基準の導入。\n個人の判断に依存せず、組織的なセーフティネット（報告・相談）を機能させることで被害を最小限に抑えられる。\nセキュリティ研修は「見分け方」だけでなく、「迷った時の行動（報告先・報告方法）」を明確にし、心理的安全性を確保することが不可欠。\nフィッシング対策、情報セキュリティ意識向上プログラム。\n報告先の統一や文化変革には経営層のコミットメントと継続的な運用が必要。\n全業種\nセキュリティ研修\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:25:06.826464Z"
+    },
+    {
+      "id": "a6441ae4-dd6b-5e04-b8e4-48ec5303ba45",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "knowledge_type": "sales_technique",
+      "title": "受講率ではなく「行動変容」をKPIとする提案手法",
+      "situation": "顧客が「受講率」を重視しているが、それだけではセキュリティリスク低減に繋がらないと認識している。",
+      "problem": "受講完了の証拠を残すことに目的が偏り、実務での効果（不審メールへの対応）が測定されていない。",
+      "judgment": "評価指標を「受講完了」から「報告行動・初動対応」へシフトさせることで、研修の実効性を高める。",
+      "action": "試行期間中に、不審メールを見た時の初動（報告・相談）を確認する短いテストを実施し、その結果を評価指標とする。",
+      "reasoning": "行動が変容したことを示すデータは、経営層への説明責任を果たし、継続的な投資を正当化する。",
+      "outcome": null,
+      "lesson": "e-learningの効果を測る際は、完了率だけでなく、業務現場での具体的な行動変化（KPI）を設計し、顧客と合意形成することが重要。",
+      "applicable_situations": "研修効果の測定、ROIの訴求、経営層への報告資料作成。",
+      "limitations": "行動変容を測定するためのテスト設計や、現場でのモニタリング体制が整っていない場合、実施が困難。",
+      "industry": "全業種",
+      "product": "e-learningプラットフォーム",
+      "sales_stage": "proposal",
+      "search_text": "受講率ではなく「行動変容」をKPIとする提案手法\n顧客が「受講率」を重視しているが、それだけではセキュリティリスク低減に繋がらないと認識している。\n受講完了の証拠を残すことに目的が偏り、実務での効果（不審メールへの対応）が測定されていない。\n評価指標を「受講完了」から「報告行動・初動対応」へシフトさせることで、研修の実効性を高める。\n試行期間中に、不審メールを見た時の初動（報告・相談）を確認する短いテストを実施し、その結果を評価指標とする。\n行動が変容したことを示すデータは、経営層への説明責任を果たし、継続的な投資を正当化する。\ne-learningの効果を測る際は、完了率だけでなく、業務現場での具体的な行動変化（KPI）を設計し、顧客と合意形成することが重要。\n研修効果の測定、ROIの訴求、経営層への報告資料作成。\n行動変容を測定するためのテスト設計や、現場でのモニタリング体制が整っていない場合、実施が困難。\n全業種\ne-learningプラットフォーム\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:25:06.826464Z"
+    },
+    {
+      "id": "f2b98768-612d-51fe-992d-f71308f39fde",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "knowledge_type": "operational_insight",
+      "title": "本部と現場責任者の役割分担による運用設計",
+      "situation": "研修の進捗管理や未受講者へのフォローアップにおいて、総務（本部）と店長（現場）の役割が曖昧になっている。",
+      "problem": "本部は現場の個別状況（勤務時間など）を把握できず、現場責任者には追加作業の負担が懸念される。",
+      "judgment": "「全体進捗管理」は本部、「受講時間の確保・現場対応」は現場責任者、と役割を明確に分離する。",
+      "action": "朝礼などの既存業務に15分の研修枠を組み込むなど、現場の負担を増やさない運用方法を設計する。",
+      "reasoning": "役割の明確化と既存業務への組み込みにより、現場の反発を避けつつ、研修の実施を定着させる。",
+      "outcome": null,
+      "lesson": "組織横断的な研修運用では、管理部門と現場の責任範囲を明確にし、現場の業務フローに自然に組み込む設計が成功の鍵。",
+      "applicable_situations": "多拠点展開企業での研修管理、現場業務との両立が必要なe-learning導入。",
+      "limitations": "現場責任者の協力体制が整っていない場合、運用が機能しない。",
+      "industry": "物流・小売",
+      "product": "e-learning運用",
+      "sales_stage": "proposal",
+      "search_text": "本部と現場責任者の役割分担による運用設計\n研修の進捗管理や未受講者へのフォローアップにおいて、総務（本部）と店長（現場）の役割が曖昧になっている。\n本部は現場の個別状況（勤務時間など）を把握できず、現場責任者には追加作業の負担が懸念される。\n「全体進捗管理」は本部、「受講時間の確保・現場対応」は現場責任者、と役割を明確に分離する。\n朝礼などの既存業務に15分の研修枠を組み込むなど、現場の負担を増やさない運用方法を設計する。\n役割の明確化と既存業務への組み込みにより、現場の反発を避けつつ、研修の実施を定着させる。\n組織横断的な研修運用では、管理部門と現場の責任範囲を明確にし、現場の業務フローに自然に組み込む設計が成功の鍵。\n多拠点展開企業での研修管理、現場業務との両立が必要なe-learning導入。\n現場責任者の協力体制が整っていない場合、運用が機能しない。\n物流・小売\ne-learning運用\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:25:06.826464Z"
+    },
+    {
+      "id": "c5e3d234-f8c6-5414-ae64-ac07a031a776",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "knowledge_type": "next_action",
+      "title": "職種別環境調査と4週間の一拠点試行",
+      "situation": "全社展開の前に、現場の具体的な障壁を把握し、研修内容と運用の妥当性を検証する必要がある。",
+      "problem": "内勤、倉庫、ドライバーなど職種によって受講環境や業務負荷が異なるため、画一的な対応が難しい。",
+      "judgment": "各職種から代表者1名ずつに現状の動画を見てもらい、止まる理由（UI、内容、時間など）をヒアリングする。",
+      "action": "1拠点で4週間試行し、受講完了の立会確認、報告行動、管理者の手間を測定する。",
+      "reasoning": "小規模な試行により、現場のフィードバックを得て、コース設計と運用ルールを最適化できる。",
+      "outcome": null,
+      "lesson": "大規模展開前に、ターゲット層の代表者によるPoC（概念実証）と、限定拠点での試行を通じて、運用上の課題を早期発見する。",
+      "applicable_situations": "新研修プログラムの導入、既存研修の改善。",
+      "limitations": "試行期間が短すぎると、長期的な定着効果は評価できない。",
+      "industry": "物流・倉庫",
+      "product": "セキュリティ研修",
+      "sales_stage": "closing",
+      "search_text": "職種別環境調査と4週間の一拠点試行\n全社展開の前に、現場の具体的な障壁を把握し、研修内容と運用の妥当性を検証する必要がある。\n内勤、倉庫、ドライバーなど職種によって受講環境や業務負荷が異なるため、画一的な対応が難しい。\n各職種から代表者1名ずつに現状の動画を見てもらい、止まる理由（UI、内容、時間など）をヒアリングする。\n1拠点で4週間試行し、受講完了の立会確認、報告行動、管理者の手間を測定する。\n小規模な試行により、現場のフィードバックを得て、コース設計と運用ルールを最適化できる。\n大規模展開前に、ターゲット層の代表者によるPoC（概念実証）と、限定拠点での試行を通じて、運用上の課題を早期発見する。\n新研修プログラムの導入、既存研修の改善。\n試行期間が短すぎると、長期的な定着効果は評価できない。\n物流・倉庫\nセキュリティ研修\nclosing",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:25:06.826464Z"
+    },
+    {
+      "id": "231c16e2-3d1f-5b36-ae55-e860f6969c95",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "knowledge_type": "decision",
+      "title": "未受講理由の環境要因分析と責任追求の回避",
+      "situation": "研修を受講できなかった従業員に対して、その理由を分析し、今後の改善に活かす必要がある。",
+      "problem": "未受講を個人の意識不足として決めつけると、現場の心理的負担が増え、報告文化が阻害される。",
+      "judgment": "未受講の原因を「時間」「端末」「内容」「周囲の支援」の4つの環境要因に分類して記録する。",
+      "action": "責任追求ではなく、障壁の特定と除去に焦点を当てた分析を行う。",
+      "reasoning": "環境要因を可視化することで、組織的な改善策（端末の整備、時間枠の設定など）を講じ、再発防止につなげる。",
+      "outcome": null,
+      "lesson": "研修の未受講者分析では、個人の責任を問うのではなく、組織や環境の障壁を特定する視点を持つことが、持続可能な改善につながる。",
+      "applicable_situations": "e-learningの未受講者フォロー、組織開発、人材育成。",
+      "limitations": "環境要因の分類が適切でないと、根本原因の特定が困難になる。",
+      "industry": "全業種",
+      "product": "e-learning運用",
+      "sales_stage": "follow_up",
+      "search_text": "未受講理由の環境要因分析と責任追求の回避\n研修を受講できなかった従業員に対して、その理由を分析し、今後の改善に活かす必要がある。\n未受講を個人の意識不足として決めつけると、現場の心理的負担が増え、報告文化が阻害される。\n未受講の原因を「時間」「端末」「内容」「周囲の支援」の4つの環境要因に分類して記録する。\n責任追求ではなく、障壁の特定と除去に焦点を当てた分析を行う。\n環境要因を可視化することで、組織的な改善策（端末の整備、時間枠の設定など）を講じ、再発防止につなげる。\n研修の未受講者分析では、個人の責任を問うのではなく、組織や環境の障壁を特定する視点を持つことが、持続可能な改善につながる。\ne-learningの未受講者フォロー、組織開発、人材育成。\n環境要因の分類が適切でないと、根本原因の特定が困難になる。\n全業種\ne-learning運用\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:25:06.826464Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "70110aae-2034-52ec-a6bf-95d5cb2f4d66",
+      "knowledge_id": "8041fdd7-53e5-5905-9557-743336d4e08a",
+      "start_utterance_id": "0725ca98-7f91-574b-981c-b6971a27d97d",
+      "end_utterance_id": "b20754e7-464e-5d5d-b5cf-c21d2ac18df2"
+    },
+    {
+      "id": "299fc05f-4bd1-5f25-a79f-e842cfe1b150",
+      "knowledge_id": "8041fdd7-53e5-5905-9557-743336d4e08a",
+      "start_utterance_id": "e00f789d-39ce-5e56-8b09-7c68f37f31ef",
+      "end_utterance_id": "e00f789d-39ce-5e56-8b09-7c68f37f31ef"
+    },
+    {
+      "id": "70dc896c-8acd-57a5-8efa-f462ca48f8a2",
+      "knowledge_id": "7bfe5f35-d180-5041-97c5-6e44e6bae63c",
+      "start_utterance_id": "d9b6ad45-a7bb-5324-8ece-0ecd7afcc941",
+      "end_utterance_id": "8e1a99d5-1638-5dd4-abc3-cd0cb2dbaf0a"
+    },
+    {
+      "id": "ab235da1-e186-58dc-a5a4-61affb1ce40a",
+      "knowledge_id": "7bfe5f35-d180-5041-97c5-6e44e6bae63c",
+      "start_utterance_id": "6e514c52-7a6b-5980-bf8c-c7de6b09bb90",
+      "end_utterance_id": "4cc74424-ad6e-5630-80ce-a3a2edf70714"
+    },
+    {
+      "id": "5f91366c-b15a-54a9-99dd-ec1c5d7a5b18",
+      "knowledge_id": "a6441ae4-dd6b-5e04-b8e4-48ec5303ba45",
+      "start_utterance_id": "9257681c-c0d8-5ef6-ad02-453d1c58870e",
+      "end_utterance_id": "1196db59-d288-5b43-829d-896fc8e5a2a5"
+    },
+    {
+      "id": "33035986-743d-5d1c-88ce-ff5e580885d1",
+      "knowledge_id": "a6441ae4-dd6b-5e04-b8e4-48ec5303ba45",
+      "start_utterance_id": "28fc5904-8dd7-5777-ae73-7e29e0e24268",
+      "end_utterance_id": "98f5174c-c1d1-519a-bab5-e43a3bd17118"
+    },
+    {
+      "id": "1be2137f-a412-5ae7-afd4-c0828a88193c",
+      "knowledge_id": "f2b98768-612d-51fe-992d-f71308f39fde",
+      "start_utterance_id": "5a4ceba6-b845-549a-aa61-b2a634a139ea",
+      "end_utterance_id": "bcb17298-4f61-567c-b251-966be25bba58"
+    },
+    {
+      "id": "3601a2d0-16a7-5871-99b9-3bec0dbd144b",
+      "knowledge_id": "c5e3d234-f8c6-5414-ae64-ac07a031a776",
+      "start_utterance_id": "98683509-0deb-53e1-9823-e4f44a5aae1f",
+      "end_utterance_id": "080196bb-237f-5d60-ae6e-3a3a90a7fa55"
+    },
+    {
+      "id": "aeaedddb-dda7-5c4d-88a3-63e7f16ae181",
+      "knowledge_id": "231c16e2-3d1f-5b36-ae55-e860f6969c95",
+      "start_utterance_id": "aa610b1a-1e11-5ab6-b920-d592d2fcda57",
+      "end_utterance_id": "f4c6eda4-7b14-593c-84db-6435ea4bccd3"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "d4b96af7-9ad5-56ff-a477-08bd58157466",
+      "data_source_id": "06f013dd-8d40-5736-bfb3-c877d710c4b0",
+      "summary": "セキュリティ研修の受講率低下と不審メールへの対応力不足を課題として、現場の業務制約（交代制）を考慮した研修設計と運用改善について協議した。受講率ではなく行動変容（報告・相談）をKPIとし、職種別の環境調査と1拠点での4週間試行を次のステップとして合意した。",
+      "customer_needs": [
+        "交代制現場でも受講可能な短時間・分割型の研修形式",
+        "不審メールへの初動対応（報告・相談）を定着させるための明確なガイドライン",
+        "誤報を責めない心理的安全性のある報告文化の醸成",
+        "本部と現場の役割分担が明確で、現場負担を増やさない運用体制"
+      ],
+      "proposals": [
+        "職種別（内勤、倉庫、ドライバー）の受講環境調査とフィードバック収集",
+        "報告先の統一と、相談行動を正解とする評価基準の導入",
+        "1拠点で4週間試行し、受講完了、報告行動、管理者の手間を測定するPoC",
+        "朝礼などの既存業務に15分の研修枠を組み込む運用設計"
+      ],
+      "decisions": [
+        "研修の目的を「受講完了」から「実務での行動変容」へシフトする",
+        "未受講理由を個人の責任ではなく、時間・端末・内容・支援の環境要因として分析する",
+        "試行結果をもとに、コース内容と運用ルールの最終提案を行う"
+      ],
+      "next_actions": [
+        "各職種から代表者1名ずつに現状の動画を見てもらい、止まる理由をヒアリングする",
+        "1拠点での4週間試行を開始し、KPI（報告行動など）をモニタリングする",
+        "試行結果をまとめ、経営会議向けの説明資料を作成する"
+      ]
+    }
+  ]
+}

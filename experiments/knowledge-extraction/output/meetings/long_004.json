@@ -1,0 +1,642 @@
+{
+  "data_sources": [
+    {
+      "id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "source_type": "audio",
+      "file_name": "long_004.wav",
+      "occurred_at": "2026-08-24T23:57:18Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "88e2345d-4f7e-5030-85b0-46d685304f51",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 9.0,
+      "content": "受付に七夕の飾りがありました。短冊がたくさんで皆さん参加されているんですね。"
+    },
+    {
+      "id": "e0a600c8-9cdd-5285-9ec8-fde1c1ee04a8",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 9.0,
+      "end_sec": 15.0,
+      "content": "各施設から送ってもらったんです。利用者さんの作品もあるんですよ。"
+    },
+    {
+      "id": "9d4a8d92-5152-54d2-afc1-c90197103b42",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 15.0,
+      "end_sec": 22.0,
+      "content": "素敵ですね。複数施設を運営されていると、本部へ集まる情報も多そうです。"
+    },
+    {
+      "id": "07de9337-902d-5822-9422-40bd93131c03",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 22.0,
+      "end_sec": 28.0,
+      "content": "今日は給与締めの負担について直近の処理を教えていただけますか?"
+    },
+    {
+      "id": "a1ee8ca5-9b32-54b3-b6f2-0a4d95b2675f",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 5,
+      "speaker": "salesperson",
+      "start_sec": 28.0,
+      "end_sec": 35.0,
+      "content": "担当者の方が休まれた2日間、締め日まで残り何日でしたか?"
+    },
+    {
+      "id": "5f5c63e2-34f8-54a4-87f1-00afe5d26275",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 35.0,
+      "end_sec": 43.0,
+      "content": "3日でした。もし復帰が1日遅ければ、銀行へのデータ送信に間に合わないところでした。"
+    },
+    {
+      "id": "34c2c012-3194-5900-887a-d919d2e31dea",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 43.0,
+      "end_sec": 48.0,
+      "content": "代わりに作業した方はどこまで進められましたか?"
+    },
+    {
+      "id": "c66894d1-9dae-521e-8513-56ace4cc98f8",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 48.0,
+      "end_sec": 55.0,
+      "content": "近代データの取り込みまではできましたが、例外を見つけても直し方がわかりませんでした。"
+    },
+    {
+      "id": "408690e6-2664-5448-9970-ec61f8d18ca8",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 9,
+      "speaker": "salesperson",
+      "start_sec": 55.0,
+      "end_sec": 60.0,
+      "content": "手順書に操作はあっても判断条件が書かれていなかったんですね。"
+    },
+    {
+      "id": "50e88d21-598a-53ac-b087-0c49f2e247cf",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 60.0,
+      "end_sec": 66.0,
+      "content": "はい。担当者は見ればわかるというのですが、他の人にはわかりません。"
+    },
+    {
+      "id": "3891e3c4-37ee-5de1-8a5b-58225b1e2e9e",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 66.0,
+      "end_sec": 73.0,
+      "content": "先月、担当者が体調を崩して2日休みまして、給与計算が止まりかけました。"
+    },
+    {
+      "id": "86ed45e2-b184-5214-b126-7550172210f2",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 73.0,
+      "end_sec": 81.0,
+      "content": "その時代わりの方は何がわからなかったのでしょう?"
+    },
+    {
+      "id": "88768f5e-2e9d-5671-b815-05ac90b09c58",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 81.0,
+      "end_sec": 87.0,
+      "content": "施設ごとの手当の扱いと、前月修正の方法です。"
+    },
+    {
+      "id": "86edb9d7-5cf5-574a-bb26-11a6389db4fe",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 87.0,
+      "end_sec": 91.0,
+      "content": "担当者の手順書も古く、結局自宅へ電話しました。"
+    },
+    {
+      "id": "2a39e3c2-c35c-5276-8082-c71d993964ca",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 91.0,
+      "end_sec": 98.0,
+      "content": "給与データ自体だけでなく、例外処理の判断が1人に集中しているんですね。"
+    },
+    {
+      "id": "4b4c77b5-7155-574e-ae4a-1f5f147e1469",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 98.0,
+      "end_sec": 102.0,
+      "content": "年間では同じような例外が何回ほどありますか?"
+    },
+    {
+      "id": "45f87157-7afb-5d81-9b1f-76bc2e3ee552",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 102.0,
+      "end_sec": 110.0,
+      "content": "移動や休職もあるので、毎月何かしらあります。施設も増えて、確認先がわかりづらくなりました。"
+    },
+    {
+      "id": "64e25db0-5149-5b2c-a161-9eb31d5ac9e3",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 110.0,
+      "end_sec": 115.0,
+      "content": "施設から勤体修正が届く締め時刻は決まっていますか?"
+    },
+    {
+      "id": "365e2233-c529-5ddb-9368-7d398520dc21",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 115.0,
+      "end_sec": 123.0,
+      "content": "決まっていますが、紙やメールで遅れて届きます。本部が電話で再続します。"
+    },
+    {
+      "id": "22b93e8d-5471-5941-9e4e-57bbc2a2e6e7",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 123.0,
+      "end_sec": 131.0,
+      "content": "給与担当者の俗人化だけでなく、施設から情報を集める工程にも不安定さがありますね。"
+    },
+    {
+      "id": "60644f71-2aa0-58f2-9af9-008afca10128",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 21,
+      "speaker": "customer",
+      "start_sec": 131.0,
+      "end_sec": 137.0,
+      "content": "施設庁によって提出の仕方が違います。写真だけ送ってくる人もいます。"
+    },
+    {
+      "id": "5390431f-8b54-5952-86c9-c7dda3daf227",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 137.0,
+      "end_sec": 141.0,
+      "content": "先月は何施設へ再速しましたか?"
+    },
+    {
+      "id": "5e9fded4-65b9-5127-aa5b-3951c6506975",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 141.0,
+      "end_sec": 147.0,
+      "content": "12施設のうち5施設です。確認電話は10回以上でした。"
+    },
+    {
+      "id": "9bd5dee2-860e-52a4-ad30-f3cdc52b3ff7",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 147.0,
+      "end_sec": 156.0,
+      "content": "その回収工程を残したままだと、給与計算画面だけ変えても締めリスクは残ります。"
+    },
+    {
+      "id": "8e16d5e5-2ba3-5d7f-ab2b-7fe1377a7649",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 156.0,
+      "end_sec": 160.0,
+      "content": "施設側の申請方法も合わせて考えないといけませんね。"
+    },
+    {
+      "id": "2e242f0c-fd90-5027-a283-84333cffb402",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 160.0,
+      "end_sec": 165.0,
+      "content": "今は社員情報の変更履歴をどこで管理していますか?"
+    },
+    {
+      "id": "92de5fb4-cf10-5d56-b1d9-f595b7e90b5f",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 27,
+      "speaker": "customer",
+      "start_sec": 165.0,
+      "end_sec": 173.0,
+      "content": "給与ソフトと表計算と紙の申請書です。移動日を見落としたこともあります。"
+    },
+    {
+      "id": "53e3ba29-4899-5505-8863-7fbfd35f7082",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 173.0,
+      "end_sec": 180.0,
+      "content": "もし担当者が1週間不在でも、別の方が占められる状態を作ることが優先ですか?"
+    },
+    {
+      "id": "baf10b02-b22c-55e6-a145-c9630724ff8a",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 180.0,
+      "end_sec": 183.0,
+      "content": "それとも処理時間の短縮が先ですか?"
+    },
+    {
+      "id": "8cd28d3f-6485-58c0-81c4-74120a3a126c",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 30,
+      "speaker": "salesperson",
+      "start_sec": 183.0,
+      "end_sec": 190.0,
+      "content": "社員情報について、最も間違えると影響が大きい項目は何でしょう?"
+    },
+    {
+      "id": "b0eeeae9-87c4-5f63-9c5a-2446983a56ec",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 190.0,
+      "end_sec": 200.0,
+      "content": "雇用区分、所属施設、手当の開始日です。移動が月途中だと特に複雑です。"
+    },
+    {
+      "id": "b4e39de5-33d4-5006-b68a-a7985c8e608b",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 200.0,
+      "end_sec": 206.0,
+      "content": "誰が変更を申請し、誰が内容を承認していますか?"
+    },
+    {
+      "id": "17ed73e0-4bd7-58ac-a4bb-d9de5dffe132",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 206.0,
+      "end_sec": 216.0,
+      "content": "施設長が紙で申請し、人事が確認します。ただ、口頭連絡が先で紙が後になることがあります。"
+    },
+    {
+      "id": "a55f708c-1bdf-5ae0-b44a-58b67877de72",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 216.0,
+      "end_sec": 224.0,
+      "content": "人事履歴を管理できても、正式な申請日と適応日のルールが曖昧なら、誤りは残ります。"
+    },
+    {
+      "id": "4baed954-e166-5d65-8a9c-69dbde9beb3a",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 224.0,
+      "end_sec": 230.0,
+      "content": "現場には早く反映して欲しい事情もあるので、例外の扱いを決めたいです。"
+    },
+    {
+      "id": "69bb18f6-3fcf-5c4f-8bf9-9f596774f8fc",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 230.0,
+      "end_sec": 235.0,
+      "content": "まず、止まらないことです。給与は遅らせられません。"
+    },
+    {
+      "id": "481f63b0-71f7-5452-bfa9-9b315ba45b25",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 235.0,
+      "end_sec": 245.0,
+      "content": "スマイルV2セカンドエリション人事給与は、人事情報と給与業務を扱い、履歴情報の管理にも使えます。"
+    },
+    {
+      "id": "72ec2e40-d281-519d-a240-3beb04c3c30a",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 245.0,
+      "end_sec": 252.0,
+      "content": "ただし、今ある例外ルールを整理せず移すと、俗人化も一緒に移ってしまいます。"
+    },
+    {
+      "id": "06af4c7f-545a-5073-b2a3-d9b8009a182a",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 39,
+      "speaker": "customer",
+      "start_sec": 252.0,
+      "end_sec": 260.0,
+      "content": "確かに、システムよりルールの棚下ろしが必要ですね。"
+    },
+    {
+      "id": "a29637d3-4dab-511d-bdce-462bd5f0fd59",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 260.0,
+      "end_sec": 267.0,
+      "content": "担当者本人は業務を共有することに抵抗がありますか?"
+    },
+    {
+      "id": "ebe8068f-ad63-58c0-8866-7325def46b47",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 267.0,
+      "end_sec": 274.0,
+      "content": "自分の仕事を取られるとは思っていませんが、教える時間がないと言っています。"
+    },
+    {
+      "id": "bb2b50ca-eb71-57fc-ab75-da816a4f9555",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 274.0,
+      "end_sec": 286.0,
+      "content": "では、マニュアルを1から書いてもらうのではなく、次回締めで例外判断を記録し、別担当が同じ手順を再現できるか試しましょう。"
+    },
+    {
+      "id": "9dd427fa-1749-5c4f-b9a5-664b15f39ed5",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 43,
+      "speaker": "customer",
+      "start_sec": 286.0,
+      "end_sec": 291.0,
+      "content": "質問をしながら記録する方が現実的です。"
+    },
+    {
+      "id": "d54b167d-7466-5fda-9806-fa615081123e",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 291.0,
+      "end_sec": 300.0,
+      "content": "システム選定と並行して、代替担当が1回締め処理を完了できることを業務継続の合格条件にしましょう。"
+    },
+    {
+      "id": "ceadd7ac-8a69-5fab-bb0b-be6aad941137",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 45,
+      "speaker": "customer",
+      "start_sec": 300.0,
+      "end_sec": 304.0,
+      "content": "それなら導入効果もわかりやすいですね。"
+    },
+    {
+      "id": "8c7282c7-3dd7-56d3-9b65-ded560f59778",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 304.0,
+      "end_sec": 312.0,
+      "content": "次回は、直近3ヶ月の例外処理を誰が判断し、何を根拠にしたかで分類しましょう。"
+    },
+    {
+      "id": "cde51638-c5a3-5b18-b9d9-4d677b5dd129",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 47,
+      "speaker": "salesperson",
+      "start_sec": 312.0,
+      "end_sec": 319.0,
+      "content": "電子申請の対象や連携範囲は、その後に実際の手続きと照らして確認します。"
+    },
+    {
+      "id": "233d8d54-cbb8-56c7-bc14-9478cfc2e031",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 319.0,
+      "end_sec": 322.0,
+      "content": "担当者にも入ってもらいます。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "2600da94-b889-5bd1-ae5a-2a8aeb1dcdb0",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "knowledge_type": "pain_point",
+      "title": "給与計算における単一担当者依存と業務停止リスク",
+      "situation": "複数施設を運営する顧客において、給与担当者が体調不良で欠勤した場合の対応状況",
+      "problem": "例外処理の判断基準が手順書に明文化されておらず、担当者の頭の中だけに存在しているため、代替者が処理を完遂できない",
+      "judgment": "担当者の不在時に業務が止まるリスクは、システム導入以前に解決すべき重大な課題である",
+      "action": "担当者の欠勤時の代替処理の進捗と、判断に詰まった箇所（手当の扱い、前月修正）を確認する",
+      "reasoning": "銀行へのデータ送信期限が迫っている状況で、代替者が例外を処理できないと給与支払いに遅れが生じる",
+      "outcome": "顧客は担当者の自宅に電話して確認するなどの非効率な対応を余儀なくされている現状が判明した",
+      "lesson": "重要業務の属人化は、担当者の健康状態や休暇に直結する事業リスクとなる。例外処理の判断ロジックの可視化が最優先である",
+      "applicable_situations": "バックオフィス業務、特に給与計算や経理処理において特定人物に依存している場合",
+      "limitations": "担当者が教える時間がない場合、記録化のハードルが高くなる",
+      "industry": "介護・福祉",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "給与計算における単一担当者依存と業務停止リスク\n複数施設を運営する顧客において、給与担当者が体調不良で欠勤した場合の対応状況\n例外処理の判断基準が手順書に明文化されておらず、担当者の頭の中だけに存在しているため、代替者が処理を完遂できない\n担当者の不在時に業務が止まるリスクは、システム導入以前に解決すべき重大な課題である\n担当者の欠勤時の代替処理の進捗と、判断に詰まった箇所（手当の扱い、前月修正）を確認する\n銀行へのデータ送信期限が迫っている状況で、代替者が例外を処理できないと給与支払いに遅れが生じる\n顧客は担当者の自宅に電話して確認するなどの非効率な対応を余儀なくされている現状が判明した\n重要業務の属人化は、担当者の健康状態や休暇に直結する事業リスクとなる。例外処理の判断ロジックの可視化が最優先である\nバックオフィス業務、特に給与計算や経理処理において特定人物に依存している場合\n担当者が教える時間がない場合、記録化のハードルが高くなる\n介護・福祉\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:52.014051Z"
+    },
+    {
+      "id": "6277c095-2eeb-506d-8de8-6e1122b41b94",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "knowledge_type": "pain_point",
+      "title": "施設からの情報回収工程の非効率と不確実性",
+      "situation": "本部が12の施設から勤怠修正や手当申請などの情報を集めるプロセス",
+      "problem": "提出方法が施設ごとに異なり、紙やメール、写真など非構造化データで遅れて届くため、本部が電話で再確認する手間が発生している",
+      "judgment": "給与計算画面のシステム変更だけでは、前段の情報回収工程の不安定さが残る限り締めリスクは解消されない",
+      "action": "先月の再確認電話の回数（10回以上）と対象施設数（5施設）を定量データとして確認する",
+      "reasoning": "情報源の品質とタイミングが管理されていないため、本部の作業負荷が増大し、ミスや遅延の原因になっている",
+      "outcome": "顧客は施設側の申請方法も合わせて改善する必要があると認識した",
+      "lesson": "業務プロセスのボトルネックは、処理するシステムだけでなく、入力される情報の収集・確認工程にも存在する。エンドツーエンドで課題を把握する必要がある",
+      "applicable_situations": "本社・支社・現場など複数拠点から情報を集約して処理を行う業務",
+      "limitations": "現場の事情（早く反映したい等）により、厳格なルール適用が難しい場合がある",
+      "industry": "介護・福祉",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "施設からの情報回収工程の非効率と不確実性\n本部が12の施設から勤怠修正や手当申請などの情報を集めるプロセス\n提出方法が施設ごとに異なり、紙やメール、写真など非構造化データで遅れて届くため、本部が電話で再確認する手間が発生している\n給与計算画面のシステム変更だけでは、前段の情報回収工程の不安定さが残る限り締めリスクは解消されない\n先月の再確認電話の回数（10回以上）と対象施設数（5施設）を定量データとして確認する\n情報源の品質とタイミングが管理されていないため、本部の作業負荷が増大し、ミスや遅延の原因になっている\n顧客は施設側の申請方法も合わせて改善する必要があると認識した\n業務プロセスのボトルネックは、処理するシステムだけでなく、入力される情報の収集・確認工程にも存在する。エンドツーエンドで課題を把握する必要がある\n本社・支社・現場など複数拠点から情報を集約して処理を行う業務\n現場の事情（早く反映したい等）により、厳格なルール適用が難しい場合がある\n介護・福祉\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:52.014051Z"
+    },
+    {
+      "id": "e69a1b9d-7045-586b-ba7a-d0f97d52479f",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "knowledge_type": "customer_need",
+      "title": "業務継続性（BCP）と処理効率の優先順位",
+      "situation": "システム選定や業務改善の方向性を検討する段階",
+      "problem": "担当者が長期不在になった場合の代替処理の可否と、処理時間の短縮のどちらを優先すべきか明確でない",
+      "judgment": "顧客にとっての最優先課題は「給与計算が止まらないこと」であり、業務継続性が第一である",
+      "action": "優先順位を確認する質問を行い、顧客の真のニーズ（安定性）を特定する",
+      "reasoning": "給与は法定の支払い期限があり、遅延は重大なコンプライアンス違反や従業員不信につながるため、効率化より安定性が優先される",
+      "outcome": "顧客は「まず、止まらないことです」と明確に優先順位を示した",
+      "lesson": "商談では、機能の追加や効率化よりも、顧客の事業リスク（業務停止）を回避できるかどうかを軸に提案すべきである",
+      "applicable_situations": "法定期限や納期が厳格な業務（給与、経理、物流など）のシステム導入時",
+      "limitations": null,
+      "industry": "介護・福祉",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "業務継続性（BCP）と処理効率の優先順位\nシステム選定や業務改善の方向性を検討する段階\n担当者が長期不在になった場合の代替処理の可否と、処理時間の短縮のどちらを優先すべきか明確でない\n顧客にとっての最優先課題は「給与計算が止まらないこと」であり、業務継続性が第一である\n優先順位を確認する質問を行い、顧客の真のニーズ（安定性）を特定する\n給与は法定の支払い期限があり、遅延は重大なコンプライアンス違反や従業員不信につながるため、効率化より安定性が優先される\n顧客は「まず、止まらないことです」と明確に優先順位を示した\n商談では、機能の追加や効率化よりも、顧客の事業リスク（業務停止）を回避できるかどうかを軸に提案すべきである\n法定期限や納期が厳格な業務（給与、経理、物流など）のシステム導入時\n介護・福祉\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:52.014051Z"
+    },
+    {
+      "id": "b65a0978-5112-5ea8-a551-58ee1bb02fba",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "knowledge_type": "sales_technique",
+      "title": "属人化の解消に向けた「再現性テスト」の提案",
+      "situation": "担当者が業務共有に抵抗（教える時間がない）を示している場合",
+      "problem": "マニュアル作成を依頼しても、担当者の負担増や抵抗感から進まない可能性がある",
+      "judgment": "ゼロから文書化させるのではなく、実際の業務（次の締め）の中で例外判断を記録し、別担当者が再現できるかを試すアプローチが現実的である",
+      "action": "「次回締めで例外判断を記録し、別担当が同じ手順を再現できるか試す」という具体的なアクションを提案する",
+      "reasoning": "質問しながら記録する形であれば、担当者の心理的ハードルが低く、かつ業務継続性の検証にも直結する",
+      "outcome": "顧客は「質問をしながら記録する方が現実的です」と同意した",
+      "lesson": "顧客の抵抗がある場合、大掛かりなドキュメント作成ではなく、業務フローの中で自然に知識を抽出・検証する手法を提案すると受け入れられやすい",
+      "applicable_situations": "ベテラン担当者の退職や異動を控えた業務承継、属人化の解消",
+      "limitations": "例外が頻繁に発生しない月では、十分な記録が得られない可能性がある",
+      "industry": "介護・福祉",
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "属人化の解消に向けた「再現性テスト」の提案\n担当者が業務共有に抵抗（教える時間がない）を示している場合\nマニュアル作成を依頼しても、担当者の負担増や抵抗感から進まない可能性がある\nゼロから文書化させるのではなく、実際の業務（次の締め）の中で例外判断を記録し、別担当者が再現できるかを試すアプローチが現実的である\n「次回締めで例外判断を記録し、別担当が同じ手順を再現できるか試す」という具体的なアクションを提案する\n質問しながら記録する形であれば、担当者の心理的ハードルが低く、かつ業務継続性の検証にも直結する\n顧客は「質問をしながら記録する方が現実的です」と同意した\n顧客の抵抗がある場合、大掛かりなドキュメント作成ではなく、業務フローの中で自然に知識を抽出・検証する手法を提案すると受け入れられやすい\nベテラン担当者の退職や異動を控えた業務承継、属人化の解消\n例外が頻繁に発生しない月では、十分な記録が得られない可能性がある\n介護・福祉\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:52.014051Z"
+    },
+    {
+      "id": "4422799c-91a2-5552-944f-5e293c8a22c6",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "knowledge_type": "next_action",
+      "title": "システム導入と並行する業務継続性の合格条件設定",
+      "situation": "システム選定と業務改善を並行して進める計画段階",
+      "problem": "システム導入だけで解決するのではなく、人的な業務継続性も担保する必要がある",
+      "judgment": "代替担当者が1回締め処理を完了できることを、業務継続の合格条件として明確にする",
+      "action": "直近3ヶ月の例外処理を「誰が判断し、何を根拠にしたか」で分類する作業を次回アクションとして設定する",
+      "reasoning": "例外処理のロジックを可視化することで、システムへの移行や代替担当者の育成が可能になる",
+      "outcome": "顧客は「導入効果もわかりやすい」と前向きに反応した",
+      "lesson": "システム導入プロジェクトでは、技術的な要件だけでなく、人的な業務継続性（BCP）の達成基準をKPIとして設定すると、顧客の納得感が高まる",
+      "applicable_situations": "バックオフィスシステム導入、業務プロセス再設計",
+      "limitations": null,
+      "industry": "介護・福祉",
+      "product": "スマイルV2セカンドエリション人事給与",
+      "sales_stage": "proposal",
+      "search_text": "システム導入と並行する業務継続性の合格条件設定\nシステム選定と業務改善を並行して進める計画段階\nシステム導入だけで解決するのではなく、人的な業務継続性も担保する必要がある\n代替担当者が1回締め処理を完了できることを、業務継続の合格条件として明確にする\n直近3ヶ月の例外処理を「誰が判断し、何を根拠にしたか」で分類する作業を次回アクションとして設定する\n例外処理のロジックを可視化することで、システムへの移行や代替担当者の育成が可能になる\n顧客は「導入効果もわかりやすい」と前向きに反応した\nシステム導入プロジェクトでは、技術的な要件だけでなく、人的な業務継続性（BCP）の達成基準をKPIとして設定すると、顧客の納得感が高まる\nバックオフィスシステム導入、業務プロセス再設計\n介護・福祉\nスマイルV2セカンドエリション人事給与\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:52.014051Z"
+    },
+    {
+      "id": "59aa6352-5ce3-50f8-aa3d-a2a44f5c8f85",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "knowledge_type": "operational_insight",
+      "title": "人事情報管理の分散とルール曖昧さ",
+      "situation": "社員情報の変更履歴管理と申請プロセス",
+      "problem": "給与ソフト、表計算、紙の申請書と管理先が分散しており、口頭連絡が先で紙が後になるなど、正式な申請日と適応日のルールが曖昧である",
+      "judgment": "履歴管理のシステム化だけでなく、変更申請と承認のルール（誰が、いつ、何を根拠に）の明確化が誤りを防ぐ鍵である",
+      "action": "変更申請と承認のフロー、および最も影響の大きい項目（雇用区分、所属施設、手当開始日）を確認する",
+      "reasoning": "月途中の移動など複雑なケースでは、ルールの曖昧さがそのまま給与計算の誤りに直結する",
+      "outcome": "顧客は現場の事情（早く反映したい）もあるため、例外の扱いを決めたい意向を示した",
+      "lesson": "データ管理の課題は、ツールだけでなく「業務ルール」の欠如に起因していることが多い。ツール導入前にルールの棚卸しが必要である",
+      "applicable_situations": "人事・給与管理、マスターデータ管理",
+      "limitations": null,
+      "industry": "介護・福祉",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "人事情報管理の分散とルール曖昧さ\n社員情報の変更履歴管理と申請プロセス\n給与ソフト、表計算、紙の申請書と管理先が分散しており、口頭連絡が先で紙が後になるなど、正式な申請日と適応日のルールが曖昧である\n履歴管理のシステム化だけでなく、変更申請と承認のルール（誰が、いつ、何を根拠に）の明確化が誤りを防ぐ鍵である\n変更申請と承認のフロー、および最も影響の大きい項目（雇用区分、所属施設、手当開始日）を確認する\n月途中の移動など複雑なケースでは、ルールの曖昧さがそのまま給与計算の誤りに直結する\n顧客は現場の事情（早く反映したい）もあるため、例外の扱いを決めたい意向を示した\nデータ管理の課題は、ツールだけでなく「業務ルール」の欠如に起因していることが多い。ツール導入前にルールの棚卸しが必要である\n人事・給与管理、マスターデータ管理\n介護・福祉\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:52.014051Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "8229bbd1-cf1c-5c59-88bc-ff32ed796839",
+      "knowledge_id": "2600da94-b889-5bd1-ae5a-2a8aeb1dcdb0",
+      "start_utterance_id": "a1ee8ca5-9b32-54b3-b6f2-0a4d95b2675f",
+      "end_utterance_id": "86edb9d7-5cf5-574a-bb26-11a6389db4fe"
+    },
+    {
+      "id": "4b005b9c-fa07-505b-8c9f-5a6e9b1aa32a",
+      "knowledge_id": "6277c095-2eeb-506d-8de8-6e1122b41b94",
+      "start_utterance_id": "64e25db0-5149-5b2c-a161-9eb31d5ac9e3",
+      "end_utterance_id": "8e16d5e5-2ba3-5d7f-ab2b-7fe1377a7649"
+    },
+    {
+      "id": "ec406c61-d6d5-5d8e-8042-8d773487634f",
+      "knowledge_id": "e69a1b9d-7045-586b-ba7a-d0f97d52479f",
+      "start_utterance_id": "53e3ba29-4899-5505-8863-7fbfd35f7082",
+      "end_utterance_id": "69bb18f6-3fcf-5c4f-8bf9-9f596774f8fc"
+    },
+    {
+      "id": "cea974e6-74dc-51cb-b3f8-3e4dc0064c0d",
+      "knowledge_id": "b65a0978-5112-5ea8-a551-58ee1bb02fba",
+      "start_utterance_id": "a29637d3-4dab-511d-bdce-462bd5f0fd59",
+      "end_utterance_id": "9dd427fa-1749-5c4f-b9a5-664b15f39ed5"
+    },
+    {
+      "id": "239971de-f204-502d-be52-6d9977fdbd7e",
+      "knowledge_id": "4422799c-91a2-5552-944f-5e293c8a22c6",
+      "start_utterance_id": "d54b167d-7466-5fda-9806-fa615081123e",
+      "end_utterance_id": "233d8d54-cbb8-56c7-bc14-9478cfc2e031"
+    },
+    {
+      "id": "88281742-df88-56fe-ad86-8b50122acfbb",
+      "knowledge_id": "59aa6352-5ce3-50f8-aa3d-a2a44f5c8f85",
+      "start_utterance_id": "2e242f0c-fd90-5027-a283-84333cffb402",
+      "end_utterance_id": "4baed954-e166-5d65-8a9c-69dbde9beb3a"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "9917a5ca-4acc-5cdd-8343-c0c6a284a27b",
+      "data_source_id": "5f7bcd29-c3ed-58c4-aa8e-3b69f399aba8",
+      "summary": "介護施設を複数運営する顧客に対し、給与計算の属人化と施設からの情報回収の非効率性が課題であることを特定した。担当者の不在時の業務停止リスクを重視する顧客に対し、システム導入と並行して例外処理の記録化と代替担当者の再現性テストを提案し、次回のアクションとして直近3ヶ月の例外処理の分類作業を合意した。",
+      "customer_needs": [
+        "給与計算業務の属人化解消と業務継続性の確保",
+        "施設からの情報回収工程の効率化と標準化",
+        "人事情報の変更ルールと履歴管理の明確化"
+      ],
+      "proposals": [
+        "次回締めで例外判断を記録し、別担当が再現できるか試す",
+        "直近3ヶ月の例外処理を判断者・根拠別に分類する",
+        "スマイルV2セカンドエリション人事給与の活用検討"
+      ],
+      "decisions": [
+        "業務継続の合格条件として、代替担当者の1回締め処理完了を重視する",
+        "システム選定と並行して、例外ルールの棚卸しを行う"
+      ],
+      "next_actions": [
+        "直近3ヶ月の例外処理の分類作業を行う",
+        "電子申請の対象や連携範囲を確認する",
+        "担当者を含めた次回会議を設定する"
+      ]
+    }
+  ]
+}

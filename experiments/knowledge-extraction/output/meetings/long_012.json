@@ -1,0 +1,591 @@
+{
+  "data_sources": [
+    {
+      "id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "source_type": "audio",
+      "file_name": "long_012.wav",
+      "occurred_at": "2026-08-25T00:29:38Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "aba0f4bc-ab5f-5804-9b8b-72907de2f044",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 8.0,
+      "content": "受付のタブレットで入管手続きができて便利ですね。安倍さんが設定されたんですか?"
+    },
+    {
+      "id": "b4143995-dff7-52af-9840-df7523a5866a",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 8.0,
+      "end_sec": 13.0,
+      "content": "はい。こういう小さな改善も全部私の担当です。"
+    },
+    {
+      "id": "c45da8eb-c9e7-5c08-a551-c496fe9fa3aa",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 13.0,
+      "end_sec": 23.0,
+      "content": "前回、一人で日常運用を抱えていると伺いました。今月、最も時間を取られた作業は何でしたか?"
+    },
+    {
+      "id": "9bae6cef-ddc6-57e9-98e2-652b948b4e6d",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 23.0,
+      "end_sec": 28.0,
+      "content": "15台の準備には1台ごとにどれくらい掛かりましたか?"
+    },
+    {
+      "id": "bbc515b4-2ae0-5947-acf8-8485e43c634e",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 28.0,
+      "end_sec": 39.0,
+      "content": "標準なら1時間半です。ただ、営業用ソフトやプリンター設定が違い、長いものは3時間掛かりました。"
+    },
+    {
+      "id": "3427afa1-3ea5-530a-965c-2f36efea80c5",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 39.0,
+      "end_sec": 45.0,
+      "content": "同じ設定を繰り返している部分と、部署固有の部分がありそうですね。"
+    },
+    {
+      "id": "71985fb4-7e0a-5222-abe8-bde9582f78b8",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 45.0,
+      "end_sec": 53.0,
+      "content": "標準イメージを作りたいのですが、その作業を考える時間もありません。"
+    },
+    {
+      "id": "be620320-4b1a-54db-9679-3dd6fb7dad7f",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 53.0,
+      "end_sec": 62.0,
+      "content": "日常作業が標準化の時間を奪い、標準化できないので日常作業が減らない循環になっていますね。"
+    },
+    {
+      "id": "24752e78-916f-5955-8508-26153bfaf73a",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 62.0,
+      "end_sec": 76.0,
+      "content": "まさにそれです。新入社員15人のPC準備です。アカウント作成、ソフト設定、権限確認をして、3日間ほぼそれだけでした。"
+    },
+    {
+      "id": "bb5775eb-264f-52d2-95e7-3ffab6c59808",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 76.0,
+      "end_sec": 81.0,
+      "content": "その間、本来予定していた仕事はどうなりましたか?"
+    },
+    {
+      "id": "06d97dc3-8e17-5653-8b0c-db68e09bd81f",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 81.0,
+      "end_sec": 90.0,
+      "content": "時間システム更新の検討を後回しにしました。経営からは進捗を聞かれています。"
+    },
+    {
+      "id": "e097d68c-2e56-5c9a-a3d7-cbadd1d1173e",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 90.0,
+      "end_sec": 95.0,
+      "content": "入社時の手順書や申請情報は揃っていますか?"
+    },
+    {
+      "id": "d8d4916e-8639-5bd5-ab03-dea3b83f04f1",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 95.0,
+      "end_sec": 104.0,
+      "content": "部署によって必要ソフトが違い、上司の申請漏れもあります。私が個別に聞いています。"
+    },
+    {
+      "id": "c47ccf19-d2de-5a4f-a976-e00f0e01400d",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 104.0,
+      "end_sec": 110.0,
+      "content": "申請漏れがある場合、新入社員本人にはどんな影響が出ますか?"
+    },
+    {
+      "id": "db41d6af-3d66-5884-9b9e-4460fb275fcf",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 110.0,
+      "end_sec": 119.0,
+      "content": "初日にメールへ入れない、共有フォルダが見られない名刺発注が送れるといったことがあります。"
+    },
+    {
+      "id": "3ba627c7-4376-5e92-84b2-07fa7ab8c516",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 119.0,
+      "end_sec": 127.0,
+      "content": "安倍さんの残業だけでなく、新入社員の立ち上がりと会社への第一印象にも影響していますね。"
+    },
+    {
+      "id": "5d46b3bb-6801-59d1-a388-23ed5909aba4",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 127.0,
+      "end_sec": 131.0,
+      "content": "初日から待たせると申し訳ないです。"
+    },
+    {
+      "id": "9cb7a050-04e2-5e5d-8abe-704dd621c3f4",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 131.0,
+      "end_sec": 138.0,
+      "content": "必要情報をいつまでに誰が出すか?入社日から客さんして締め切りを設けていますか?"
+    },
+    {
+      "id": "1ba506af-498b-5ee3-a1ce-7cb914d541b6",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 138.0,
+      "end_sec": 146.0,
+      "content": "1週間前と書いていますが、人事移動が急で守られないことがあります。"
+    },
+    {
+      "id": "4d61ad07-b5c9-54ed-967c-6af3baf75a75",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 146.0,
+      "end_sec": 156.0,
+      "content": "通常採用と緊急移動でルートを分け、緊急時に最低限使える状態を定義する必要があります。"
+    },
+    {
+      "id": "4afd2abf-8d56-5971-916d-9a9d030ca480",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 21,
+      "speaker": "customer",
+      "start_sec": 156.0,
+      "end_sec": 163.0,
+      "content": "緊急時はメールと基本ソフトだけ。追加権限は後でもよいです。"
+    },
+    {
+      "id": "a9e0e994-ad8b-5425-8b56-4b241633e760",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 163.0,
+      "end_sec": 170.0,
+      "content": "作業を外へ任せる前に、依頼元から必要情報が揃う仕組みも必要ですね。"
+    },
+    {
+      "id": "4fac08a8-5b1b-510f-9c1e-030115600d68",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 170.0,
+      "end_sec": 177.0,
+      "content": "そうなんです。単純作業だけ渡しても確認の電話は残りそうです。"
+    },
+    {
+      "id": "00301c8e-64f5-5a17-b663-6abaf7350ede",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 177.0,
+      "end_sec": 189.0,
+      "content": "タヨレールラクラクオフィスシリーズでは、PCセットアップやアカウント追加、セキュリティ設定、障害対応など、日々のIT運用を支援するメニューがあります。"
+    },
+    {
+      "id": "0bd3d3a6-9237-5b26-a6ff-72ff03e18ac5",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 189.0,
+      "end_sec": 197.0,
+      "content": "対応範囲は契約ごとに確認しますが、まず音社で残す判断と任せる作業を分けましょう。"
+    },
+    {
+      "id": "60899961-f14e-5b7f-bd00-db37aade4687",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 197.0,
+      "end_sec": 203.0,
+      "content": "障害対応についても、直近で長引いたものはありますか?"
+    },
+    {
+      "id": "0734a3ef-bada-53ef-a6c5-28febb04daef",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 27,
+      "speaker": "customer",
+      "start_sec": 203.0,
+      "end_sec": 213.0,
+      "content": "先月、プリンターにつながらないという問い合わせがありまして、原因はLANケーブルでしたが、2時間調べました。"
+    },
+    {
+      "id": "13fcc91e-8f1d-5e0c-97e7-3bebb0e3e069",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 213.0,
+      "end_sec": 218.0,
+      "content": "問い合わせ時に利用者からどんな情報が来ましたか?"
+    },
+    {
+      "id": "c2471c10-bc4f-59df-a739-3f821142f418",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 29,
+      "speaker": "customer",
+      "start_sec": 218.0,
+      "end_sec": 227.0,
+      "content": "印刷できないだけです。端末名やエラー表示を後から聞きました。"
+    },
+    {
+      "id": "a1920879-e414-5494-90c7-2397f06242a0",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 30,
+      "speaker": "salesperson",
+      "start_sec": 227.0,
+      "end_sec": 235.0,
+      "content": "窓口を外へ出す場合も、受付時に必要情報を揃える仕組みがあると解決が早くなります。"
+    },
+    {
+      "id": "5d41991a-9906-58ef-bddf-1d12908d2055",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 235.0,
+      "end_sec": 243.0,
+      "content": "社員がどこへ連絡するかも統一したいです。今は私へ個別チャットが来ます。"
+    },
+    {
+      "id": "13e6ffa3-fde1-532d-b7c5-851df689ac77",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 32,
+      "speaker": "customer",
+      "start_sec": 243.0,
+      "end_sec": 249.0,
+      "content": "権限の最終承認は社内に残したいです。セットアップは任せたいですね。"
+    },
+    {
+      "id": "d786512d-c719-57a0-b388-187f37204b2f",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 33,
+      "speaker": "salesperson",
+      "start_sec": 249.0,
+      "end_sec": 260.0,
+      "content": "次回は、直近15人分の作業を一覧にし、標準化できる作業を社内承認が必要な判断、例外対応に分類します。"
+    },
+    {
+      "id": "2b73a2ec-6493-5d9e-96f1-9c041811a165",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 260.0,
+      "end_sec": 263.0,
+      "content": "問い合わせ窓口も一緒に設計しましょう。"
+    },
+    {
+      "id": "df9bbfde-522d-55f8-b0b0-6b02d75bd03b",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 263.0,
+      "end_sec": 270.0,
+      "content": "外部へ任せた後、安倍さんが取り戻した時間で最初に進めたい仕事は何ですか?"
+    },
+    {
+      "id": "2f4732ec-a498-5e2a-9096-485f82d25d91",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 270.0,
+      "end_sec": 279.0,
+      "content": "機関システム更新と、全社のアカウント棚下ろしです。経営に示せる成果になります。"
+    },
+    {
+      "id": "e4ee4890-df94-5cef-9f8f-b8580be13325",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 279.0,
+      "end_sec": 287.0,
+      "content": "単なる工数削減ではなく、延期されていた改善を進められることを効果としておりましょう。"
+    },
+    {
+      "id": "ea2391d8-fba2-5bfe-a778-535898405f13",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 38,
+      "speaker": "customer",
+      "start_sec": 287.0,
+      "end_sec": 293.0,
+      "content": "月に何時間減ったかだけより説明しやすいですね。"
+    },
+    {
+      "id": "5cffff35-152b-5322-b2c1-132f9e17f7bd",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 294.0,
+      "end_sec": 305.0,
+      "content": "試行期間中に、依頼件数、解決時間、安倍さんへの差し戻し件数、重要プロジェクトへ使えた時間を測ります。"
+    },
+    {
+      "id": "2089b4d8-503e-5a63-a1ee-31862919372b",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 305.0,
+      "end_sec": 310.0,
+      "content": "判断を外へ出しすぎていないかもを確認したいです。"
+    },
+    {
+      "id": "98bf8794-d4f7-5daa-baa2-34a16b690b58",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 310.0,
+      "end_sec": 318.0,
+      "content": "はい。権限付与や例外判断は記録し、最終承認が社内に残っているかを点検します。"
+    },
+    {
+      "id": "2810afde-6886-5064-ae5b-7b1307f3701e",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 318.0,
+      "end_sec": 323.0,
+      "content": "それなら外注しても混乱しにくそうです。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "8a0eb7e6-2369-5503-b622-8e5fb3155afd",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "knowledge_type": "pain_point",
+      "title": "日常運用の標準化不足による負の循環",
+      "situation": "IT担当者が1人で日常運用を抱えている環境",
+      "problem": "新入社員PC準備などの個別対応に時間を取られ、標準イメージ作成などの改善活動を行う時間が確保できない",
+      "judgment": "日常作業の標準化ができていないため、作業量が増え続ける構造になっている",
+      "action": null,
+      "reasoning": "標準化の検討自体が後回しになるため、根本的な解決策が講じられない",
+      "outcome": null,
+      "lesson": "個別対応の積み重ねが標準化の時間を奪う場合、まず作業の分類と標準化の優先順位付けを行う必要がある",
+      "applicable_situations": "IT部門が少人数で多様な業務を抱えている場合",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "日常運用の標準化不足による負の循環\nIT担当者が1人で日常運用を抱えている環境\n新入社員PC準備などの個別対応に時間を取られ、標準イメージ作成などの改善活動を行う時間が確保できない\n日常作業の標準化ができていないため、作業量が増え続ける構造になっている\n標準化の検討自体が後回しになるため、根本的な解決策が講じられない\n個別対応の積み重ねが標準化の時間を奪う場合、まず作業の分類と標準化の優先順位付けを行う必要がある\nIT部門が少人数で多様な業務を抱えている場合\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:26:37.267750Z"
+    },
+    {
+      "id": "805202e0-9dda-516f-8947-c4de5a5fbf23",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "knowledge_type": "customer_need",
+      "title": "緊急時と通常時の対応ルートの分離",
+      "situation": "人事異動が急な場合、事前準備が間に合わない",
+      "problem": "通常採用と緊急移動で同じ手順を踏むため、新入社員の立ち上がりが遅れる",
+      "judgment": "緊急時には最低限使える状態（メール・基本ソフト）を定義し、追加権限は後回しにする",
+      "action": "通常採用と緊急移動でルートを分け、緊急時の最低限の要件を定義する",
+      "reasoning": "初日から待たせることを避けるため、迅速なアクセス提供が優先される",
+      "outcome": null,
+      "lesson": "業務の緊急度に応じて、提供サービスの範囲（SLA）を段階的に設定することで、対応の迅速性と品質のバランスを取れる",
+      "applicable_situations": "オンボーディングやシステム導入時の初期設定",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "緊急時と通常時の対応ルートの分離\n人事異動が急な場合、事前準備が間に合わない\n通常採用と緊急移動で同じ手順を踏むため、新入社員の立ち上がりが遅れる\n緊急時には最低限使える状態（メール・基本ソフト）を定義し、追加権限は後回しにする\n通常採用と緊急移動でルートを分け、緊急時の最低限の要件を定義する\n初日から待たせることを避けるため、迅速なアクセス提供が優先される\n業務の緊急度に応じて、提供サービスの範囲（SLA）を段階的に設定することで、対応の迅速性と品質のバランスを取れる\nオンボーディングやシステム導入時の初期設定\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:26:37.267750Z"
+    },
+    {
+      "id": "1afff378-26cb-5970-9b93-1f03c96dbe9c",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "knowledge_type": "sales_technique",
+      "title": "外注化における「判断」と「作業」の分離提案",
+      "situation": "IT運用の一部を外部に委託したいが、権限管理を社内に残したい",
+      "problem": "単純作業を渡しても確認の電話が残るため、負荷が軽減されない",
+      "judgment": "依頼元から必要情報が揃う仕組みを作ることで、外部委託の効果を最大化する",
+      "action": "PCセットアップ等の作業は外部に任せ、権限の最終承認は社内に残す方針を提示する",
+      "reasoning": "情報の欠落が原因で差し戻しが発生するため、入力情報の標準化が重要",
+      "outcome": null,
+      "lesson": "アウトソーシングを提案する際は、単なる作業の移管ではなく、プロセスの標準化（入力情報の整備）をセットで提案することで顧客の懸念を払拭できる",
+      "applicable_situations": "BPOやIT運用保守の提案時",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "外注化における「判断」と「作業」の分離提案\nIT運用の一部を外部に委託したいが、権限管理を社内に残したい\n単純作業を渡しても確認の電話が残るため、負荷が軽減されない\n依頼元から必要情報が揃う仕組みを作ることで、外部委託の効果を最大化する\nPCセットアップ等の作業は外部に任せ、権限の最終承認は社内に残す方針を提示する\n情報の欠落が原因で差し戻しが発生するため、入力情報の標準化が重要\nアウトソーシングを提案する際は、単なる作業の移管ではなく、プロセスの標準化（入力情報の整備）をセットで提案することで顧客の懸念を払拭できる\nBPOやIT運用保守の提案時\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:26:37.267750Z"
+    },
+    {
+      "id": "468441eb-9951-5907-a065-696ede95dc41",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "knowledge_type": "operational_insight",
+      "title": "障害対応時の初期情報収集の重要性",
+      "situation": "プリンター接続障害の問い合わせ",
+      "problem": "利用者から「印刷できない」のみで詳細情報がなく、原因特定に2時間かかった",
+      "judgment": "受付時に端末名やエラー表示などの必要情報を揃える仕組みがあると解決が早くなる",
+      "action": "問い合わせ窓口の設計時に、初期情報として収集すべき項目を定義する",
+      "reasoning": "情報の欠落が調査時間を延ばしている",
+      "outcome": null,
+      "lesson": "サポート窓口の効率化には、ユーザー側の入力負荷を減らしつつ、技術者が必要とする最小限の情報を構造化して取得するプロセス設計が有効",
+      "applicable_situations": "ヘルプデスクやITサポートの運用改善",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "障害対応時の初期情報収集の重要性\nプリンター接続障害の問い合わせ\n利用者から「印刷できない」のみで詳細情報がなく、原因特定に2時間かかった\n受付時に端末名やエラー表示などの必要情報を揃える仕組みがあると解決が早くなる\n問い合わせ窓口の設計時に、初期情報として収集すべき項目を定義する\n情報の欠落が調査時間を延ばしている\nサポート窓口の効率化には、ユーザー側の入力負荷を減らしつつ、技術者が必要とする最小限の情報を構造化して取得するプロセス設計が有効\nヘルプデスクやITサポートの運用改善\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:26:37.267750Z"
+    },
+    {
+      "id": "b6b59474-ec9b-5a98-85cb-663f6608bf09",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "knowledge_type": "proposal",
+      "title": "効果測定指標の設計",
+      "situation": "外部委託後の効果をどう示すか",
+      "problem": "単なる工数削減では経営層への説明が難しい",
+      "judgment": "延期されていた重要プロジェクト（機関システム更新等）へ使えた時間を成果として定義する",
+      "action": "依頼件数、解決時間、差し戻し件数、重要プロジェクトへ充てた時間をKPIとして設定する",
+      "reasoning": "経営視点で価値を伝えるため、業務の質的変化（本来業務への回帰）を可視化する",
+      "outcome": null,
+      "lesson": "IT投資のROIを説明する際は、コスト削減だけでなく、ビジネス価値の創出（本来業務の加速）に焦点を当てる指標設計が有効",
+      "applicable_situations": "IT部門の経営層への報告や、IT投資の正当化",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "効果測定指標の設計\n外部委託後の効果をどう示すか\n単なる工数削減では経営層への説明が難しい\n延期されていた重要プロジェクト（機関システム更新等）へ使えた時間を成果として定義する\n依頼件数、解決時間、差し戻し件数、重要プロジェクトへ充てた時間をKPIとして設定する\n経営視点で価値を伝えるため、業務の質的変化（本来業務への回帰）を可視化する\nIT投資のROIを説明する際は、コスト削減だけでなく、ビジネス価値の創出（本来業務の加速）に焦点を当てる指標設計が有効\nIT部門の経営層への報告や、IT投資の正当化\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:26:37.267750Z"
+    },
+    {
+      "id": "e37ad1a9-1b21-5fa8-985e-ed75ebee7fa5",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "knowledge_type": "decision",
+      "title": "権限管理の社内残留方針",
+      "situation": "IT運用の外部委託検討",
+      "problem": "外注先への権限委譲によるリスク",
+      "judgment": "権限の最終承認は社内に残し、セットアップ作業のみを外部に任せる",
+      "action": "権限付与や例外判断は記録し、最終承認が社内に残っているかを点検するプロセスを確立する",
+      "reasoning": "セキュリティとガバナンスの観点から、最終的な決定権は社内に保持する",
+      "outcome": null,
+      "lesson": "外部委託を行う場合でも、セキュリティ上重要な権限管理は社内に留め、委託範囲を明確に線引きすることでリスクを管理できる",
+      "applicable_situations": "ITアウトソーシング契約時のスコープ定義",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "権限管理の社内残留方針\nIT運用の外部委託検討\n外注先への権限委譲によるリスク\n権限の最終承認は社内に残し、セットアップ作業のみを外部に任せる\n権限付与や例外判断は記録し、最終承認が社内に残っているかを点検するプロセスを確立する\nセキュリティとガバナンスの観点から、最終的な決定権は社内に保持する\n外部委託を行う場合でも、セキュリティ上重要な権限管理は社内に留め、委託範囲を明確に線引きすることでリスクを管理できる\nITアウトソーシング契約時のスコープ定義\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:26:37.267750Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "b2535fa5-18fa-55d7-918c-604059cbedfa",
+      "knowledge_id": "8a0eb7e6-2369-5503-b622-8e5fb3155afd",
+      "start_utterance_id": "c45da8eb-c9e7-5c08-a551-c496fe9fa3aa",
+      "end_utterance_id": "be620320-4b1a-54db-9679-3dd6fb7dad7f"
+    },
+    {
+      "id": "c6df7f95-a5e8-502f-b9ce-8b02b087224a",
+      "knowledge_id": "805202e0-9dda-516f-8947-c4de5a5fbf23",
+      "start_utterance_id": "9cb7a050-04e2-5e5d-8abe-704dd621c3f4",
+      "end_utterance_id": "4afd2abf-8d56-5971-916d-9a9d030ca480"
+    },
+    {
+      "id": "a2a43b35-158b-5dd4-a417-da571bba7c7f",
+      "knowledge_id": "1afff378-26cb-5970-9b93-1f03c96dbe9c",
+      "start_utterance_id": "a9e0e994-ad8b-5425-8b56-4b241633e760",
+      "end_utterance_id": "0bd3d3a6-9237-5b26-a6ff-72ff03e18ac5"
+    },
+    {
+      "id": "00c426c2-777b-5e80-b7c9-108fde64982e",
+      "knowledge_id": "468441eb-9951-5907-a065-696ede95dc41",
+      "start_utterance_id": "60899961-f14e-5b7f-bd00-db37aade4687",
+      "end_utterance_id": "a1920879-e414-5494-90c7-2397f06242a0"
+    },
+    {
+      "id": "fcc63857-8dba-55ea-9874-fbb4822df026",
+      "knowledge_id": "b6b59474-ec9b-5a98-85cb-663f6608bf09",
+      "start_utterance_id": "df9bbfde-522d-55f8-b0b0-6b02d75bd03b",
+      "end_utterance_id": "5cffff35-152b-5322-b2c1-132f9e17f7bd"
+    },
+    {
+      "id": "a5b6357c-5f02-57e4-9dc0-611ca65a657e",
+      "knowledge_id": "e37ad1a9-1b21-5fa8-985e-ed75ebee7fa5",
+      "start_utterance_id": "13e6ffa3-fde1-532d-b7c5-851df689ac77",
+      "end_utterance_id": "2810afde-6886-5064-ae5b-7b1307f3701e"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "2e086f48-90fc-53ed-8ca7-371672993f5b",
+      "data_source_id": "eefc2dc5-2bb0-5f38-bf74-80f077795b0d",
+      "summary": "IT担当者が1人で抱える日常運用の負荷と、新入社員PC準備などの個別対応が標準化の時間を奪っている現状を把握した。外部委託（タヨレールラクラクオフィスシリーズ）を提案し、作業と判断の分離、緊急時ルートの定義、効果測定指標の設定について合意形成を進めた。",
+      "customer_needs": [
+        "新入社員PC準備の標準化と時間短縮",
+        "緊急時のオンボーディング手順の明確化",
+        "IT障害対応の初期情報収集プロセスの改善",
+        "本来業務（システム更新等）への時間回帰"
+      ],
+      "proposals": [
+        "タヨレールラクラクオフィスシリーズによるIT運用支援",
+        "通常採用と緊急移動での対応ルート分離",
+        "権限最終承認の社内残留と作業の外部委託",
+        "KPI（解決時間、差し戻し件数等）による効果測定"
+      ],
+      "decisions": [
+        "次回は直近15人分の作業を標準化・承認・例外に分類する",
+        "問い合わせ窓口の設計を行う",
+        "試行期間中にKPIを測定する"
+      ],
+      "next_actions": [
+        "作業一覧の作成と分類",
+        "問い合わせ窓口の設計",
+        "KPI測定の実施"
+      ]
+    }
+  ]
+}

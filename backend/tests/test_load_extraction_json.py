@@ -23,21 +23,29 @@ from app.models.tables import (
     UtteranceSegmentTable,
 )
 from scripts.load_extraction_json import (
-    DEFAULT_JSON,
+    DEFAULT_DIR,
+    LEGACY_JSON,
     ExtractionResult,
     delete_sources,
     find_existing,
     insert_result,
     load_result,
+    merge_results,
     source_ids,
 )
 
 
 @pytest.fixture(scope="module")
 def result() -> ExtractionResult:
-    if not DEFAULT_JSON.exists():
-        pytest.skip(f"検証済みJSONがありません: {DEFAULT_JSON}")
-    return load_result(DEFAULT_JSON)
+    """1商談ぶんの実データ。
+
+    複数商談をまとめる経路は `test_merge_*` で見る。ここは
+    「1商談が5テーブルに正しく入るか」を確かめる場所なので、
+    件数が固定のファイルを使う方が assert を具体的に書ける。
+    """
+    if not LEGACY_JSON.exists():
+        pytest.skip(f"検証済みJSONがありません: {LEGACY_JSON}")
+    return load_result(LEGACY_JSON)
 
 
 @pytest.fixture
@@ -70,6 +78,44 @@ def test_json_matches_expected_shape(result: ExtractionResult) -> None:
     assert result.knowledge_units, "ナレッジが空"
     assert result.knowledge_evidence, "根拠が空"
     assert len(result.call_summaries) == 1
+
+
+def test_merge_reads_every_meeting_in_the_directory() -> None:
+    """既定のディレクトリを丸ごと読めること。
+
+    チームは `git pull` 後に引数なしでこのスクリプトを実行する。
+    ここが黙って一部しか読まなくなると、**人によってDBの中身が違う**
+    状態になり、検索結果の差がデータ由来なのかコード由来なのか分からなくなる。
+    """
+    if not DEFAULT_DIR.is_dir():
+        pytest.skip(f"商談JSONがありません: {DEFAULT_DIR}")
+    paths = sorted(DEFAULT_DIR.glob("*.json"))
+    merged = merge_results(paths)
+
+    assert len(merged.data_sources) == len(paths), "ファイル数と商談数が一致しない"
+    assert len({s.id for s in merged.data_sources}) == len(paths), "商談IDが重複している"
+
+    # 外部キーが商談をまたいで壊れていないこと
+    utterance_ids = {u.id for u in merged.utterance_segments}
+    source_ids_set = {s.id for s in merged.data_sources}
+    assert {u.data_source_id for u in merged.utterance_segments} <= source_ids_set
+    assert {k.data_source_id for k in merged.knowledge_units} <= source_ids_set
+    for evidence in merged.knowledge_evidence:
+        assert evidence.start_utterance_id in utterance_ids
+        assert evidence.end_utterance_id in utterance_ids
+
+
+def test_merge_rejects_the_same_meeting_twice() -> None:
+    """同じ商談を2回渡したら、投入前に止まること。
+
+    UUIDは決定的なので、通すと主キー衝突で落ちる。DBまで行くと
+    「途中まで入った」状態になり、原因が分かりにくい。
+    """
+    if not DEFAULT_DIR.is_dir():
+        pytest.skip(f"商談JSONがありません: {DEFAULT_DIR}")
+    path = sorted(DEFAULT_DIR.glob("*.json"))[0]
+    with pytest.raises(ValueError, match="同じ商談"):
+        merge_results([path, path])
 
 
 def test_evidence_points_to_existing_utterances(result: ExtractionResult) -> None:
