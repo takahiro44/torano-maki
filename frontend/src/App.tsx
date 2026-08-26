@@ -2,8 +2,8 @@
  * MVPの画面。
  *
  * 「テキストを保存 → Embedding化 → 自然言語で検索」を1画面で確認できるようにする。
- * ルーターは入れていない。画面が4つしかなく、URLを分ける必要が出てから
- * 導入すれば足りるため（依存を増やさない）。
+ * 依存を増やさず、History API を薄く包んだルーターで表示をURLから導く。
+ * ロープレは数分続くため、再読込や戻る・進むから復帰できる必要がある。
  *
  * **画面の高さを固定し、内側だけをスクロールさせる。** チャットは会話が伸びても
  * 入力欄が下に固定されている必要があり、ページ全体が伸びる作りだと成立しない。
@@ -20,9 +20,11 @@ import { AudioIngest } from "./components/AudioIngest";
 import { KnowledgeInput } from "./components/KnowledgeInput";
 import { KnowledgeList } from "./components/KnowledgeList";
 import { KnowledgeSearch } from "./components/KnowledgeSearch";
+import { Roleplay } from "./components/roleplay/Roleplay";
+import { navigate, readKnowledgeIdParam, useRoutePath } from "./lib/router";
 import type { KnowledgeCounts } from "./types/api";
 
-type Tab = "chat" | "search" | "input" | "audio" | "list";
+type Tab = "chat" | "search" | "input" | "audio" | "list" | "roleplay";
 
 const TABS: { key: Tab; label: string }[] = [
   { key: "chat", label: "AIに聞く" },
@@ -30,10 +32,26 @@ const TABS: { key: Tab; label: string }[] = [
   { key: "input", label: "登録" },
   { key: "audio", label: "音声" },
   { key: "list", label: "一覧" },
+  { key: "roleplay", label: "ロープレ" },
 ];
 
+function tabFromRoute(route: string): Tab {
+  const path = route.split("?", 1)[0];
+  if (path === "/search") return "search";
+  if (path === "/input") return "input";
+  if (path === "/audio") return "audio";
+  if (path === "/list") return "list";
+  if (path === "/roleplay" || path.startsWith("/roleplay/")) return "roleplay";
+  return "chat";
+}
+
+function tabPath(tab: Tab): string {
+  return `/${tab}`;
+}
+
 export default function App() {
-  const [tab, setTab] = useState<Tab>("chat");
+  const route = useRoutePath();
+  const tab = tabFromRoute(route);
   // 登録・更新のたびに一覧と件数を取り直すためのトリガー
   const [reloadKey, setReloadKey] = useState(0);
   const [counts, setCounts] = useState<KnowledgeCounts | null>(null);
@@ -69,7 +87,7 @@ export default function App() {
             {TABS.map((t) => (
               <button
                 key={t.key}
-                onClick={() => setTab(t.key)}
+                onClick={() => navigate(tabPath(t.key))}
                 aria-current={tab === t.key ? "page" : undefined}
                 className={
                   "-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors " +
@@ -110,6 +128,9 @@ export default function App() {
               {tab === "audio" && <AudioIngest onChanged={() => setReloadKey((n) => n + 1)} />}
               {tab === "list" && (
                 <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
+              )}
+              {tab === "roleplay" && (
+                <Roleplay knowledgeId={readKnowledgeIdParam() ?? undefined} />
               )}
             </div>
           </div>

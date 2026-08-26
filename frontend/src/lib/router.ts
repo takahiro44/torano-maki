@@ -26,14 +26,21 @@
 import { useSyncExternalStore } from "react";
 
 /** パスの正規化。末尾スラッシュの有無で別ルート扱いにしない */
-function normalize(path: string): string {
-  if (path.length > 1 && path.endsWith("/")) return path.slice(0, -1);
-  return path || "/";
+function normalize(route: string): string {
+  const queryStart = route.indexOf("?");
+  const path = queryStart === -1 ? route : route.slice(0, queryStart);
+  const search = queryStart === -1 ? "" : route.slice(queryStart);
+  const normalizedPath = path.length > 1 && path.endsWith("/") ? path.slice(0, -1) : path || "/";
+  return normalizedPath + search;
+}
+
+function browserRoute(): string {
+  return normalize(window.location.pathname + window.location.search);
 }
 
 const listeners = new Set<() => void>();
 
-let currentPath = typeof window === "undefined" ? "/" : normalize(window.location.pathname);
+let currentPath = typeof window === "undefined" ? "/" : browserRoute();
 
 function emit(): void {
   for (const listener of listeners) listener();
@@ -55,7 +62,7 @@ if (typeof window !== "undefined") {
   // 戻る・進むはブラウザ側で起きるため、popstate を拾わないと
   // URLだけ変わって画面が変わらない状態になる
   window.addEventListener("popstate", () => {
-    currentPath = normalize(window.location.pathname);
+    currentPath = browserRoute();
     emit();
   });
 }
@@ -85,6 +92,16 @@ export function useRoutePath(): string {
 
 export const ROLEPLAY_PATH = "/roleplay";
 
+export function roleplayStartPath(knowledgeId?: string): string {
+  if (!knowledgeId) return ROLEPLAY_PATH;
+  return `${ROLEPLAY_PATH}?knowledge_id=${encodeURIComponent(knowledgeId)}`;
+}
+
+export function readKnowledgeIdParam(): string | null {
+  if (typeof window === "undefined") return null;
+  return new URLSearchParams(window.location.search).get("knowledge_id");
+}
+
 export function roleplaySessionPath(sessionId: string): string {
   return `${ROLEPLAY_PATH}/sessions/${sessionId}`;
 }
@@ -96,6 +113,7 @@ export function roleplaySessionPath(sessionId: string): string {
  * 直す場所を1つにしておかないと、片方だけ直して静かに壊れる。
  */
 export function matchRoleplaySession(path: string): string | null {
-  const matched = /^\/roleplay\/sessions\/([0-9a-fA-F-]{36})$/.exec(normalize(path));
+  const pathname = normalize(path).split("?", 1)[0];
+  const matched = /^\/roleplay\/sessions\/([0-9a-fA-F-]{36})$/.exec(pathname);
   return matched ? matched[1] : null;
 }
