@@ -156,3 +156,25 @@ CREATE TABLE call_summaries (
     next_actions    JSONB NOT NULL DEFAULT '[]',
     created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
 );
+
+-- ============================================================================
+-- 6. CHAT_REVIEWS
+-- ============================================================================
+-- AIチャットの会話ログを上司に確認してもらい、回答をナレッジ化するための記録。
+-- チャット自体はサーバに永続化しない設計（models/chat.py）のため、
+-- 上司に見せる文脈はここで chat_history にスナップショットする。
+CREATE TABLE chat_reviews (
+    id                      UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    chat_history            JSONB NOT NULL,
+    summary                 TEXT NOT NULL,
+    understood_points       JSONB NOT NULL DEFAULT '[]',
+    knowledge_gaps          JSONB NOT NULL DEFAULT '[]',
+    status                  VARCHAR(20) NOT NULL DEFAULT 'pending'
+                            CHECK (status IN ('pending', 'answered')),
+    supervisor_response     TEXT,
+    answered_data_source_id UUID REFERENCES data_sources(id),
+    created_at              TIMESTAMPTZ NOT NULL DEFAULT now(),
+    answered_at             TIMESTAMPTZ
+);
+
+CREATE INDEX idx_chat_reviews_status ON chat_reviews (status);
