@@ -7,9 +7,16 @@
  *
  * **AIの作業を畳まずに見せる。** 「本当にDBを見たのか」を利用者が確認できる
  * ことがこのプロダクトの価値であり、隠すと回答を信じる手がかりが無くなる。
+ *
+ * **調査の様子は右の面に分ける。** 経過を会話の中に全部積むと質問と回答の間が
+ * 遠くなり、会話として読めなくなる。横幅の足りない画面では出さない
+ * （会話が細くなる方が損失が大きい）。
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { AgentPet } from "./AgentPet";
+import { AgentWorkspace } from "./AgentWorkspace";
+import { currentPhase } from "./phase";
 import { ChatReviewPanel } from "./ChatReviewPanel";
 import { Composer } from "./Composer";
 import { AgentTimeline, Spinner } from "./AgentTimeline";
@@ -27,8 +34,21 @@ const EXAMPLE_QUESTIONS = [
 /** 下端からこの距離以内なら「追いかけている」とみなす */
 const STICK_THRESHOLD_PX = 120;
 
+/** 調査ビューの開閉。毎回開き直させないため端末に覚えさせる */
+const WORKSPACE_KEY = "torano-maki:chat:workspace";
+
+function loadWorkspaceOpen(): boolean {
+  try {
+    return localStorage.getItem(WORKSPACE_KEY) !== "0";
+  } catch {
+    // プライベートモードで読めないことがある。既定（開く）で始めればよい
+    return true;
+  }
+}
+
 export function AiChat({ knowledgeCount }: { knowledgeCount: number | null }) {
   const { turns, busy, send, stop, reset, retry } = useChat();
+  const [workspaceOpen, setWorkspaceOpen] = useState(loadWorkspaceOpen);
   const scrollRef = useRef<HTMLDivElement>(null);
   // 利用者が上へスクロールして読んでいる間は追わない。
   // トークンが届くたびに引き戻されると、過去の回答を読めない
@@ -47,46 +67,89 @@ export function AiChat({ knowledgeCount }: { knowledgeCount: number | null }) {
     el.scrollTop = el.scrollHeight;
   }, [turns]);
 
+  useEffect(() => {
+    try {
+      localStorage.setItem(WORKSPACE_KEY, workspaceOpen ? "1" : "0");
+    } catch {
+      // 覚えられなくても開閉そのものは動く
+    }
+  }, [workspaceOpen]);
+
   const empty = turns.length === 0;
+  // 調査ビューは最新のターンだけを映す。過去の分まで重ねると、
+  // どれが今の質問のグラフなのか分からなくなる
+  const latest = turns.length > 0 ? turns[turns.length - 1] : null;
 
   return (
-    <div className="flex h-full flex-col">
-      <div
-        ref={scrollRef}
-        onScroll={onScroll}
-        className="flex-1 overflow-y-auto overscroll-contain"
-      >
-        <div className="mx-auto max-w-3xl px-4 py-6">
-          {empty ? (
-            <EmptyState
-              knowledgeCount={knowledgeCount}
-              onPick={(q) => void send(q)}
-              disabled={busy}
-            />
-          ) : (
-            <div className="space-y-8">
-              {turns.map((turn) => (
-                <TurnView key={turn.id} turn={turn} onRetry={() => retry(turn.id)} busy={busy} />
-              ))}
-            </div>
-          )}
-        </div>
-      </div>
-
-      {!empty && (
-        <div className="mx-auto flex w-full max-w-3xl justify-end px-4">
-          <button
-            onClick={reset}
-            className="rounded-lg px-2 py-1 text-xs text-slate-400 hover:bg-slate-100 hover:text-slate-600"
-          >
-            会話をリセット
-          </button>
+    <div className="flex h-full">
+      {/* 調査ビューは会話の左。読む列（会話）を画面の同じ位置に置いたまま、
+          開閉できる面を外側に足す */}
+      {workspaceOpen && (
+        <div className="hidden w-[360px] shrink-0 lg:block xl:w-[420px]">
+          <AgentWorkspace turn={latest} onClose={() => setWorkspaceOpen(false)} />
         </div>
       )}
 
-      <ChatReviewPanel turns={turns} />
+      {/* 画面全体を歩く。パネルを閉じていても、AIが今どこを見ているかは伝わる */}
+      <AgentPet phase={currentPhase(latest)} foundCount={latest?.citations.length ?? 0} />
 
-      <Composer busy={busy} onSend={(t) => void send(t)} onStop={stop} />
+      <div className="flex min-w-0 flex-1 flex-col">
+        <div
+          ref={scrollRef}
+          onScroll={onScroll}
+          className="flex-1 overflow-y-auto overscroll-contain"
+        >
+          <div className="mx-auto max-w-3xl px-4 py-6">
+            {empty ? (
+              <EmptyState
+                knowledgeCount={knowledgeCount}
+                onPick={(q) => void send(q)}
+                disabled={busy}
+              />
+            ) : (
+              <div className="space-y-8">
+                {turns.map((turn) => (
+                  <TurnView
+                    key={turn.id}
+                    turn={turn}
+                    onRetry={() => retry(turn.id)}
+                    busy={busy}
+                    latest={turn.id === latest?.id}
+                  />
+                ))}
+              </div>
+            )}
+          </div>
+        </div>
+
+        <div className="mx-auto flex w-full max-w-3xl items-center justify-end gap-1 px-4">
+          {!workspaceOpen && (
+            <button
+              onClick={() => setWorkspaceOpen(true)}
+              className="hidden rounded-lg px-2 py-1 text-xs text-slate-400 hover:bg-slate-100 hover:text-slate-600 lg:block"
+            >
+              調査ビューを開く
+            </button>
+          )}
+          {!empty && (
+            <button
+              onClick={reset}
+              className="rounded-lg px-2 py-1 text-xs text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+            >
+              会話をリセット
+            </button>
+          )}
+        </div>
+
+        <ChatReviewPanel turns={turns} />
+
+        {/* アシスタントが寄ってくる先。入力欄そのものに印を付けると
+            Composer 側の都合に引きずられるので、隣に置いておく */}
+        <div data-pet-anchor="composer" aria-hidden="true" className="mx-auto w-full max-w-3xl" />
+
+        <Composer busy={busy} onSend={(t) => void send(t)} onStop={stop} />
+      </div>
+
     </div>
   );
 }
@@ -146,7 +209,18 @@ function EmptyState({
   );
 }
 
-function TurnView({ turn, onRetry, busy }: { turn: Turn; onRetry: () => void; busy: boolean }) {
+function TurnView({
+  turn,
+  onRetry,
+  busy,
+  latest,
+}: {
+  turn: Turn;
+  onRetry: () => void;
+  busy: boolean;
+  /** 最新のターンだけがアシスタントの行き先になる。過去の回答を指されても困る */
+  latest: boolean;
+}) {
   const streaming = turn.status === "streaming";
 
   return (
@@ -166,7 +240,7 @@ function TurnView({ turn, onRetry, busy }: { turn: Turn; onRetry: () => void; bu
           )}
 
           {turn.answer && (
-            <div>
+            <div data-pet-anchor={latest ? "answer" : undefined}>
               <Markdown text={turn.answer} />
               {streaming && (
                 <span className="ml-0.5 inline-block h-4 w-[2px] animate-pulse bg-slate-400 align-text-bottom" />
@@ -198,7 +272,9 @@ function TurnView({ turn, onRetry, busy }: { turn: Turn; onRetry: () => void; bu
             </div>
           )}
 
-          <Citations citations={turn.citations} />
+          <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
+            <Citations citations={turn.citations} />
+          </div>
 
           {turn.status === "done" && <TurnFooter turn={turn} />}
         </div>
