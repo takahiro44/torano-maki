@@ -55,6 +55,8 @@ class ConfigHealthResponse(BaseModel):
     llm_configured: bool
     base_url: str | None
     model_name: str | None
+    # 音声認識サーバは他と独立して落ちうる。未設定なら「音声」タブだけが
+    # 使えなくなるので、どこが欠けているのかを画面から切り分けられるようにする
     stt_configured: bool
     stt_base_url: str | None
     stt_model: str | None

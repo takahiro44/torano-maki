@@ -5,11 +5,12 @@ from __future__ import annotations
 import json
 import logging
 import re
+from bisect import bisect_right
 from typing import Any
 from uuid import UUID
 
 import httpx
-from sqlalchemy import func, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
@@ -33,7 +34,8 @@ logger = logging.getLogger(__name__)
 _SCHEMA_NAME = "knowledge_extraction"
 
 _SYSTEM_PROMPT = """あなたは営業ナレッジ抽出の専門家です。
-入力テキストから営業担当者の経験・ノウハウを構造化して抽出してください。
+入力テキストから、営業担当者が次の商談でも使える具体的な経験・ノウハウだけを構造化して抽出してください。
+教科書的な一般論や、入力にないきれいな言い換えは不要です。
 
 ## 抽出フォーマット
 
@@ -46,22 +48,55 @@ _SYSTEM_PROMPT = """あなたは営業ナレッジ抽出の専門家です。
 - action: 行動（具体的に何をしたか）
 - reasoning: 理由（なぜその判断・行動を選んだか）
 - outcome: 結果（どうなったか）
-- lesson: 学び（他の商談でも使える教訓）
+- lesson: 学び（他の商談でも使える教訓。次に同じ場面が来たら何をするか）
 - applicable_situations: 適用場面（どんな場面で使えるか）
 - limitations: 制約・非適用場面（使えない場面や注意点）
 - industry: 業界（該当する場合のみ）
 - product: 商材（該当する場合のみ）
 - sales_stage: 商談フェーズ（初回/提案/クロージング等、該当する場合のみ）
 
-## ルール
+## 抽出する／しない
 
-- 1テキストから複数件抽出可
-- 抽出できなければ空配列を返す
+抽出するもの:
+- 特定の顧客・状況に対して取った具体的な行動
+- その行動を選んだ理由
+- 結果としてどうなったか（書かれている場合）
+- 次に同じ場面が来たらどうすべきかの示唆
+
+抽出しないもの:
+- 天気・雑談・社内の事務連絡
+- 「頑張ります」のような感情表現のみ
+- 「傾聴が大事」「信頼関係を築く」など、入力に具体エピソードがない一般常識だけのもの
+- ただし短い走り書きでも、会社名・状況・リスクや次にやるべきことが書かれている場合は抽出する
+  （例: 担当交代で引き継がないと更新が止まる、など）
+- 根拠のない一般論だけを無理に1件にするより、空配列の方がよい
+
+## 必須ルール（具体性）
+
+- 入力にある固有名詞（会社名、人名、役職、製品名）と数値（金額、人数、期間）は、
+  situation / problem / action / outcome / lesson のいずれかに必ず残す
+- 抽象的な言い換えをせず、営業が実際に言った・やった表現を優先する
+- 「〜という考え方もある」「〜が望ましい」「〜することが有効である」のような弱い表現は避け、
+  何をしたか・何が起きたかを書く
+- 情報不足の項目は null（一般論で埋めない）
+- 1テキストから複数件抽出可。抽出できなければ空配列
 - 各項目は1〜3文で簡潔に
 - テキストに書かれた事実に基づく（推測しない）
-- 情報不足の項目は null（無理に埋めない）
 - title は「〜の対応法」「〜への切り返し」のような検索しやすい表現
 - 出力は指定の JSON Schema に厳密に従う。説明文やコードフェンスは付けない
+
+## 抽出例
+
+悪い例（一般論・抽象）:
+- lesson: 「顧客の話をよく聞くことが大切」
+- action: 「適切な提案を行った」
+- title: 「提案のコツ」
+
+良い例（具体）:
+- lesson: 「価格を指摘されたら値引きの前に比較軸を聞く。
+  今回は保守対応の質が争点で、24時間対応と現地エンジニア常駐を説明して受注した」
+- action: 「営業部30名だけの段階導入を出し、初年度を予算内に収める提案をした」
+- title: 「価格指摘時の比較軸確認と価値訴求の対応法」
 """
 
 _CHUNK_CHARS = 4000
@@ -87,6 +122,7 @@ def build_extraction_payload(text: str, *, model: str) -> dict[str, Any]:
     schema_text = json.dumps(schema, ensure_ascii=False)
     user_content = (
         "次の JSON Schema に従って、ナレッジ配列を JSON だけ出力してください。\n"
+        "一般論ではなく、入力に書かれた具体的な行動・固有名詞・数値を残してください。\n"
         f"{schema_text}\n\n"
         "以下のテキストからナレッジを抽出してください:\n\n"
         f"{text}"
@@ -266,6 +302,42 @@ def knowledge_row_from_extracted(
     )
 
 
+class _SegmentLocator:
+    """抽出に使った原文が、既存のどの発話にあたるかを引く。
+
+    音声から取り込んだデータソースには、時刻つきの本物の発話が既に入っている。
+    そこへ抽出のたびに合成セグメントを足すと、同じ内容が二重に並び、
+    根拠を「何分何秒の発話か」まで辿れなくなる（CLAUDE.md 6章の出典要件）。
+
+    照合は文字オフセットで行う。文字起こし本文は発話を順に連結したものなので、
+    抽出に渡したチャンクは連結文字列の中にそのまま現れる。
+    **人が本文を修正した場合は見つからない。** その場合は呼び出し側が
+    従来どおり合成セグメントを作る（誤った発話に紐づけるよりは良い）。
+    """
+
+    def __init__(self, segments: list[UtteranceSegmentTable]) -> None:
+        self._segments = segments
+        self._starts: list[int] = []
+        position = 0
+        for segment in segments:
+            self._starts.append(position)
+            position += len(segment.content)
+        self._joined = "".join(segment.content for segment in segments)
+
+    def locate(self, excerpt: str) -> tuple[UtteranceSegmentTable, UtteranceSegmentTable] | None:
+        if not self._segments or not excerpt:
+            return None
+        begin = self._joined.find(excerpt)
+        if begin < 0:
+            return None
+        last = begin + len(excerpt) - 1
+        return self._segments[self._index_of(begin)], self._segments[self._index_of(last)]
+
+    def _index_of(self, offset: int) -> int:
+        index = bisect_right(self._starts, offset) - 1
+        return max(0, min(index, len(self._segments) - 1))
+
+
 def process_text_to_knowledge(
     text: str,
     db: Session,
@@ -289,12 +361,17 @@ def process_text_to_knowledge(
     pairs = extract_knowledge_with_sources(text)
     saved: list[KnowledgeUnitTable] = []
     excerpt_to_segment: dict[str, UtteranceSegmentTable] = {}
-    max_seq = db.execute(
-        select(func.max(UtteranceSegmentTable.sequence_no)).where(
-            UtteranceSegmentTable.data_source_id == data_source_id
+    existing_segments = list(
+        db.execute(
+            select(UtteranceSegmentTable)
+            .where(UtteranceSegmentTable.data_source_id == data_source_id)
+            .order_by(UtteranceSegmentTable.sequence_no.asc())
         )
-    ).scalar()
-    next_seq = int(max_seq or 0) + 1
+        .scalars()
+        .all()
+    )
+    locator = _SegmentLocator(existing_segments)
+    next_seq = (existing_segments[-1].sequence_no + 1) if existing_segments else 1
 
     for item, excerpt in pairs:
         if not item.title.strip():
@@ -307,26 +384,31 @@ def process_text_to_knowledge(
         db.add(row)
         db.flush()
 
-        segment = excerpt_to_segment.get(excerpt)
-        if segment is None:
-            segment = UtteranceSegmentTable(
-                data_source_id=data_source_id,
-                sequence_no=next_seq,
-                speaker="source",
-                start_sec=0.0,
-                end_sec=0.01,
-                content=excerpt,
-            )
-            next_seq += 1
-            db.add(segment)
-            db.flush()
-            excerpt_to_segment[excerpt] = segment
+        # 既存の発話に対応づけられるならそちらを使う（音声から取り込んだ場合）。
+        # 対応づかない場合だけ、原文を保持するための合成セグメントを作る
+        span = locator.locate(excerpt)
+        if span is None:
+            segment = excerpt_to_segment.get(excerpt)
+            if segment is None:
+                segment = UtteranceSegmentTable(
+                    data_source_id=data_source_id,
+                    sequence_no=next_seq,
+                    speaker="source",
+                    start_sec=0.0,
+                    end_sec=0.01,
+                    content=excerpt,
+                )
+                next_seq += 1
+                db.add(segment)
+                db.flush()
+                excerpt_to_segment[excerpt] = segment
+            span = (segment, segment)
 
         db.add(
             KnowledgeEvidenceTable(
                 knowledge_id=row.id,
-                start_utterance_id=segment.id,
-                end_utterance_id=segment.id,
+                start_utterance_id=span[0].id,
+                end_utterance_id=span[1].id,
             )
         )
         saved.append(row)
