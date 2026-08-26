@@ -107,6 +107,7 @@ export type ConfigHealthResponse = {
   model_name: string | null;
   stt_configured: boolean;
   stt_base_url: string | null;
+  stt_model: string | null;
 };
 
 // --- 音声の取り込み ---

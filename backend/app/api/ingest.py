@@ -29,7 +29,12 @@ from app.services.extraction import (
     process_text_to_knowledge,
     source_was_truncated,
 )
-from app.services.transcription import SttNotConfiguredError, TranscriptionError
+from app.services.transcription import (
+    EmptyTranscriptError,
+    SttNotConfiguredError,
+    SttRequestError,
+    SttResponseError,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -200,7 +205,10 @@ def transcribe_audio(
         source, transcript = process_audio_to_source(audio_path, file_name, db)
     except SttNotConfiguredError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
-    except TranscriptionError as exc:
+    except EmptyTranscriptError as exc:
+        # 送られた音声の問題なので、サーバ障害（502）と区別する
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except (SttRequestError, SttResponseError) as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     finally:
         # 音声はリポジトリにもサーバにも残さない（CLAUDE.md 4.2）

@@ -82,8 +82,11 @@ class Settings(BaseSettings):
     model_name: str = ""
 
     # 音声認識サーバ（DGX Spark 上の faster-whisper / OpenAI互換）。
+    # STT_BASE_URL は /v1 まででも /v1/audio/transcriptions まででも動く
+    # （transcription.py が吸収する）。
     # 空なら音声の投入だけが使えなくなり、他の機能は動く。
     stt_base_url: str = ""
+    stt_model: str = "medium"
 
     # 埋め込みは確定済み。DBの vector(N) と embedding_dim は必ず一致させること。
     embedding_model: str = DEFAULT_EMBEDDING_MODEL
@@ -118,12 +121,12 @@ class Settings(BaseSettings):
         return bool(self.base_url) and bool(self.model_name)
 
     @property
-    def is_embedding_configured(self) -> bool:
-        return bool(self.embedding_model) and bool(self.embedding_dim)
+    def is_stt_configured(self) -> bool:
+        return bool(self.stt_base_url) and bool(self.stt_model)
 
     @property
-    def is_stt_configured(self) -> bool:
-        return bool(self.stt_base_url)
+    def is_embedding_configured(self) -> bool:
+        return bool(self.embedding_model) and bool(self.embedding_dim)
 
 
 @lru_cache
