@@ -2,13 +2,20 @@
  * MVPの画面。
  *
  * 「テキストを保存 → Embedding化 → 自然言語で検索」を1画面で確認できるようにする。
- * ルーターは入れていない。画面が3つしかなく、URLを分ける必要が出てから
+ * ルーターは入れていない。画面が4つしかなく、URLを分ける必要が出てから
  * 導入すれば足りるため（依存を増やさない）。
+ *
+ * **画面の高さを固定し、内側だけをスクロールさせる。** チャットは会話が伸びても
+ * 入力欄が下に固定されている必要があり、ページ全体が伸びる作りだと成立しない。
+ *
+ * **チャットだけは常にマウントしたままにする。** 条件レンダーで切り替えると、
+ * 他のタブを見て戻ったときに会話が消える。回答に数十秒かかるので、
+ * 待っている間に「探す」を見に行くのは自然な操作であり、そこで消えるのは困る。
  */
 
 import { useEffect, useState } from "react";
 import { countKnowledge, getDbHealth } from "./api/client";
-import { AiChat } from "./components/AiChat";
+import { AiChat } from "./components/chat/AiChat";
 import { KnowledgeInput } from "./components/KnowledgeInput";
 import { KnowledgeList } from "./components/KnowledgeList";
 import { KnowledgeSearch } from "./components/KnowledgeSearch";
@@ -47,47 +54,62 @@ export default function App() {
   }, []);
 
   return (
-    <div className="mx-auto max-w-3xl px-4 py-10">
-      <header className="mb-8">
-        <h1 className="text-2xl font-bold tracking-tight">torano-maki</h1>
-        <p className="mt-1 text-sm text-slate-500">
-          自由テキストを構造化して貯め、意味で探す
-          {counts && <span className="ml-2 text-slate-400">登録 {counts.confirmed} 件</span>}
-        </p>
+    <div className="flex h-dvh flex-col">
+      <header className="shrink-0 border-b border-slate-200/80 bg-white/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-3xl px-4">
+          <div className="flex items-baseline justify-between pt-4 pb-3">
+            <h1 className="text-lg font-semibold tracking-tight">torano-maki</h1>
+            <p className="text-xs text-slate-400">
+              {counts ? `ナレッジ ${counts.confirmed} 件` : "　"}
+            </p>
+          </div>
+          <nav className="flex gap-1">
+            {TABS.map((t) => (
+              <button
+                key={t.key}
+                onClick={() => setTab(t.key)}
+                aria-current={tab === t.key ? "page" : undefined}
+                className={
+                  "-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors " +
+                  (tab === t.key
+                    ? "border-indigo-600 text-slate-900"
+                    : "border-transparent text-slate-400 hover:text-slate-600")
+                }
+              >
+                {t.label}
+              </button>
+            ))}
+          </nav>
+        </div>
       </header>
 
       {apiError && (
-        <div className="mb-6 rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
-          {apiError}
-          <div className="mt-1 font-mono text-xs text-red-600">
-            cd backend &amp;&amp; uv run uvicorn app.main:app --reload
+        <div className="shrink-0 border-b border-rose-200 bg-rose-50 px-4 py-2.5">
+          <div className="mx-auto max-w-3xl text-sm text-rose-800">
+            {apiError}
+            <div className="mt-1 font-mono text-xs text-rose-600">
+              cd backend &amp;&amp; uv run uvicorn app.main:app --reload
+            </div>
           </div>
         </div>
       )}
 
-      <nav className="mb-6 flex gap-1 border-b border-slate-200">
-        {TABS.map((t) => (
-          <button
-            key={t.key}
-            onClick={() => setTab(t.key)}
-            className={
-              "-mb-px border-b-2 px-4 py-2 text-sm font-medium transition-colors " +
-              (tab === t.key
-                ? "border-slate-900 text-slate-900"
-                : "border-transparent text-slate-400 hover:text-slate-600")
-            }
-          >
-            {t.label}
-          </button>
-        ))}
-      </nav>
+      <main className="min-h-0 flex-1">
+        {/* チャットは隠すだけでアンマウントしない（会話と実行中の応答を保つ） */}
+        <div className={tab === "chat" ? "h-full" : "hidden"}>
+          <AiChat knowledgeCount={counts?.confirmed ?? null} />
+        </div>
 
-      <main>
-        {tab === "chat" && <AiChat />}
-        {tab === "search" && <KnowledgeSearch />}
-        {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
-        {tab === "list" && (
-          <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
+        {tab !== "chat" && (
+          <div className="h-full overflow-y-auto">
+            <div className="mx-auto max-w-3xl px-4 py-8">
+              {tab === "search" && <KnowledgeSearch />}
+              {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
+              {tab === "list" && (
+                <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
+              )}
+            </div>
+          </div>
         )}
       </main>
     </div>
