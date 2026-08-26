@@ -15,3 +15,91 @@
 body {
   @apply overflow-hidden bg-slate-50 text-slate-900 antialiased;
 }
+
+/* 調査ビュー（AgentWorkspace）とアシスタントの動き。
+
+   Tailwind のユーティリティでは書けない keyframes だけをここに置く。
+   **動きは「今どこを見ているか」を伝えるためにある。** 見つけたものが
+   1つずつ現れることで、待っている数十秒が経過として読める。 */
+
+/* 見つけたナレッジが1枚ずつ積み上がる */
+@keyframes agent-rise {
+  from {
+    transform: translateY(6px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.agent-rise {
+  animation: agent-rise 0.38s ease-out both;
+}
+
+/* 動きに弱い利用者には出さない。情報は文字と形で足りている */
+@media (prefers-reduced-motion: reduce) {
+  .agent-rise {
+    animation: none;
+  }
+}
+
+/* 調査ビューのロボット。**動きだけで生きている感じを出す。**
+   セリフを増やして賑やかにすると読む量が増えるが、浮き沈みと瞬きは
+   視界の端に置いておける。 */
+@keyframes agent-pet-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-4px);
+  }
+}
+
+.agent-pet {
+  animation: agent-pet-float 3.4s ease-in-out infinite;
+}
+
+@keyframes agent-pet-blink {
+  0%,
+  92%,
+  100% {
+    transform: scaleY(1);
+  }
+  96% {
+    transform: scaleY(0.1);
+  }
+}
+
+.agent-pet-eye {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: agent-pet-blink 4.5s ease-in-out infinite;
+}
+
+/* 探しているときは目が左右に動く */
+@keyframes agent-pet-scan {
+  0%,
+  100% {
+    transform: translateX(-1.5px);
+  }
+  50% {
+    transform: translateX(1.5px);
+  }
+}
+
+.agent-pet-scan {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: agent-pet-scan 1.1s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .agent-pet,
+  .agent-pet-eye,
+  .agent-pet-scan {
+    animation: none;
+  }
+}
