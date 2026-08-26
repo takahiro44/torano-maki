@@ -196,6 +196,87 @@ export type ChatResponse = {
   usage: ChatUsage;
 };
 
+// --- AIチャット（ストリーミング） ---
+//
+// SSEで届くイベント。契約は docs/chat-stream-contract.md、
+// 実装の正はバックエンドの models/chat.py（OpenAPIスキーマ）。
+//
+// **イベント列にしているのは、Agentが何をしたかを見せること自体が価値だから。**
+// 「検索した → 3件見つけた → 答えた」が見えないと、利用者は回答を信じる
+// 手がかりを持てない。加えて、最終回答を1トークンずつ流すことで
+// 待ち時間の体感が32秒から1〜2秒になる（実測）。
+
+/** Toolを呼ぶと決めた時点。実行前に届く */
+export type ChatToolCallEvent = {
+  type: "tool_call";
+  step: number;
+  tool: string;
+  /** 画面に出す日本語。サーバが決めるので、フロントにtool名の対応表を持たせない */
+  label: string;
+  arguments: Record<string, unknown>;
+};
+
+/** Toolの実行結果 */
+export type ChatToolResultEvent = {
+  type: "tool_result";
+  step: number;
+  tool: string;
+  ok: boolean;
+  summary: string;
+  error_code: string | null;
+};
+
+/** 出典。差分ではなく毎回すべて届くので、置き換えるだけでよい */
+export type ChatCitationsEvent = {
+  type: "citations";
+  citations: Citation[];
+};
+
+/** 最終回答のトークン */
+export type ChatTextEvent = {
+  type: "text";
+  delta: string;
+};
+
+/**
+ * ここまで受け取った `text` を破棄する指示。
+ *
+ * **最終回答のラウンドかどうかは投げてみるまで分からない。** AIは
+ * 「根拠の発言を確認します」と前置きしてからToolを呼ぶことがあり、
+ * その時点で前置きは既に流れている。破棄できないと前置きが回答として
+ * 確定し、本当の回答が返らない。
+ */
+export type ChatAnswerResetEvent = {
+  type: "answer_reset";
+  reason: "tool_call";
+};
+
+export type ChatDoneEvent = {
+  type: "done";
+  usage: ChatUsage;
+};
+
+/**
+ * 異常終了。
+ *
+ * **HTTPステータスでは表現できない。** SSEは接続確立の時点で200が返るため、
+ * そのあとに起きた失敗はイベントとして流すしかない。
+ */
+export type ChatErrorEvent = {
+  type: "error";
+  code: "llm_not_configured" | "llm_unreachable" | "internal" | (string & {});
+  message: string;
+};
+
+export type ChatStreamEvent =
+  | ChatToolCallEvent
+  | ChatToolResultEvent
+  | ChatCitationsEvent
+  | ChatTextEvent
+  | ChatAnswerResetEvent
+  | ChatDoneEvent
+  | ChatErrorEvent;
+
 // --- ロープレ ---
 //
 // バックエンドの models/roleplay.py と対応させる。形の正は OpenAPI スキーマ

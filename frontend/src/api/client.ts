@@ -10,6 +10,7 @@ import type {
   CategoryOption,
   ChatMessage,
   ChatResponse,
+  ChatStreamEvent,
   ConfigHealthResponse,
   DbHealthResponse,
   InputMode,
@@ -166,6 +167,10 @@ export function deleteKnowledge(id: string) {
   return request<void>(`/knowledge/${id}`, { method: "DELETE" });
 }
 
+export function getKnowledge(id: string) {
+  return request<Knowledge>(`/knowledge/${id}`);
+}
+
 export function getKnowledgeEvidence(id: string) {
   return request<KnowledgeEvidenceSpan[]>(`/knowledge/${id}/evidence`);
 }
@@ -296,3 +301,93 @@ export async function transcribeRoleplayAnswer(
 
 export const getDbHealth = () => request<DbHealthResponse>("/health/db");
 export const getConfigHealth = () => request<ConfigHealthResponse>("/health/config");
+
+/**
+ * AIチャットをSSEで受け取る。
+ *
+ * **なぜ `sendChat` と別にするか。**
+ * 実測でDGXのdecode速度は約20 tok/s、回答561トークンで約28秒かかる。
+ * つまり一括応答の待ち時間の大半は「回答を書いている時間」で、
+ * プロンプトを削っても縮まない（4,151→1,838トークンにしても10.5s→10.7s）。
+ * 一方、最初の1トークンまでは1.2秒で届く。逐次受け取るだけで
+ * 体感の待ち時間が32秒から1〜2秒になる。
+ *
+ * **EventSource を使えない。** 会話履歴をPOSTのボディで送る必要があり、
+ * EventSource は GET しか投げられないため、fetch でストリームを読む。
+ *
+ * `signal` で中止できる。中止は正常系なので例外にせず、静かに返る。
+ */
+export async function streamChat(
+  messages: ChatMessage[],
+  onEvent: (event: ChatStreamEvent) => void,
+  options: { topK?: number; signal?: AbortSignal } = {},
+): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}/chat/stream`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json", Accept: "text/event-stream" },
+    body: JSON.stringify({ messages, top_k: options.topK ?? 5 }),
+    signal: options.signal,
+  });
+
+  // ストリームが始まる前の失敗（503 = 未設定 / 502 = DGXに届かない）は
+  // ここで捕まる。始まったあとの失敗は error イベントで届く
+  if (!res.ok) {
+    let detail = `POST /chat/stream failed (${res.status})`;
+    try {
+      const body = await res.json();
+      if (typeof body?.detail === "string") detail = body.detail;
+    } catch {
+      // JSONでないエラー応答は既定のメッセージのまま
+    }
+    throw new ApiError(detail, res.status);
+  }
+  if (!res.body) throw new ApiError("応答が空でした", res.status);
+
+  const reader = res.body.getReader();
+  const decoder = new TextDecoder();
+  let buffer = "";
+
+  try {
+    for (;;) {
+      const { done, value } = await reader.read();
+      if (done) break;
+      // CRLF で送ってくる実装もあるため正規化してから区切る
+      buffer += decoder.decode(value, { stream: true }).replace(/\r\n/g, "\n");
+
+      // イベントの区切りは空行。最後の断片は次のチャンクに繰り越す
+      let boundary = buffer.indexOf("\n\n");
+      while (boundary !== -1) {
+        const block = buffer.slice(0, boundary);
+        buffer = buffer.slice(boundary + 2);
+        const event = parseSseBlock(block);
+        if (event) onEvent(event);
+        boundary = buffer.indexOf("\n\n");
+      }
+    }
+  } catch (e) {
+    // 中止は利用者の操作であって異常ではない。呼び出し側に投げ返さない
+    if (options.signal?.aborted) return;
+    throw e;
+  } finally {
+    reader.cancel().catch(() => {
+      // 既に閉じているストリームのキャンセルは失敗しうる。無視してよい
+    });
+  }
+}
+
+/** SSEの1ブロックを解釈する。壊れた行で全体を止めないよう、駄目なら null を返す */
+function parseSseBlock(block: string): ChatStreamEvent | null {
+  const data = block
+    .split("\n")
+    // ":" 始まりはコメント（キープアライブ）。"event:" はこの契約では使わない
+    .filter((line) => line.startsWith("data:"))
+    .map((line) => line.slice(5).trimStart())
+    .join("\n");
+  if (!data) return null;
+  try {
+    return JSON.parse(data) as ChatStreamEvent;
+  } catch {
+    console.warn("解釈できないSSEイベントを無視しました", data);
+    return null;
+  }
+}

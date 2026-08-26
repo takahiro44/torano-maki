@@ -10,6 +10,8 @@
     "Yu Gothic UI", sans-serif;
 }
 
+/* 画面の高さを App 側で固定し、内側のコンテナだけをスクロールさせる。
+   ページ全体がスクロールできると、チャットの入力欄を下に固定できない。 */
 body {
-  @apply bg-slate-50 text-slate-900 antialiased;
+  @apply overflow-hidden bg-slate-50 text-slate-900 antialiased;
 }
