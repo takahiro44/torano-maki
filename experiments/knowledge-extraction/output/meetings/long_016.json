@@ -1,0 +1,583 @@
+{
+  "data_sources": [
+    {
+      "id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "source_type": "audio",
+      "file_name": "long_016.wav",
+      "occurred_at": "2026-08-25T00:44:30Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "4d0cf577-01ae-5ffc-8f6b-189403138e01",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 10.0,
+      "content": "はい。オンライン接続、問題なさそうですね。背景の本棚がきれいですが、出社と在宅は半々くらいですか?"
+    },
+    {
+      "id": "54aadf44-c70c-5def-b425-adfedba975bc",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 10.0,
+      "end_sec": 17.0,
+      "content": "そうですね。社員ごとに出社日が違うので会議調整が大変になりました。"
+    },
+    {
+      "id": "efb81567-a602-54a9-be74-bd6027bed2f6",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 17.0,
+      "end_sec": 28.0,
+      "content": "直近で調整に時間がかかった会議を教えてください。メール3往復は具体的にどんな確認でしたか?"
+    },
+    {
+      "id": "ad4bfddb-879a-5f7d-8e36-ffa626649707",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 4,
+      "speaker": "customer",
+      "start_sec": 28.0,
+      "end_sec": 39.0,
+      "content": "広報日を3つ送り、技術側から1人だけ合わないと返信が来て、別日を出しました。その間に会議室が埋まりました。"
+    },
+    {
+      "id": "76d23b61-f1c7-5c63-b103-2893973548d3",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 5,
+      "speaker": "salesperson",
+      "start_sec": 39.0,
+      "end_sec": 45.0,
+      "content": "人の予定を合わせる間に施設の空きが変わり、調整をやり直したんですね。"
+    },
+    {
+      "id": "16e54952-0921-5f83-982f-699ac16c5509",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 45.0,
+      "end_sec": 50.0,
+      "content": "はい。全員の返信を待っていると1日以上かかります。"
+    },
+    {
+      "id": "3d3239b2-6519-574a-bd3a-35da12eb1b5c",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 50.0,
+      "end_sec": 56.0,
+      "content": "返信がない場合、営業事務の方はどのように採測しますか?"
+    },
+    {
+      "id": "dfc0bb5a-03fe-5480-a410-22762e168f18",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 56.0,
+      "end_sec": 65.0,
+      "content": "個別チャットです。役職者には電話することもあり、気を使うと言っています。"
+    },
+    {
+      "id": "5c457617-8b1f-5c78-b455-73c9ecd798b4",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 65.0,
+      "end_sec": 77.0,
+      "content": "昨日営業6人と技術3人の提案会議を設定しました。事務担当がメールを3往復して会議室も取り回しました。"
+    },
+    {
+      "id": "9d06cc97-8cf1-5068-86af-fa2278fbc16c",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 77.0,
+      "end_sec": 81.0,
+      "content": "各時の予定はどこに登録されていますか?"
+    },
+    {
+      "id": "6acdf114-ef9c-59a3-811b-060bff500e16",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 82.0,
+      "end_sec": 90.0,
+      "content": "会社のカレンダー、個人のカレンダー、営業部の表計算が混在しています。"
+    },
+    {
+      "id": "977d9cbc-deed-5d9a-a129-438f3201dfa5",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 90.0,
+      "end_sec": 93.0,
+      "content": "顧客訪問が反映されないこともあります。"
+    },
+    {
+      "id": "51c05c76-2e98-5332-9756-9ba9e00b2729",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 93.0,
+      "end_sec": 99.0,
+      "content": "会議室やオンライン会議URLの管理はどうしていますか?"
+    },
+    {
+      "id": "a11b8dbe-9222-5ea6-83ec-aa5cbba4eee7",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 99.0,
+      "end_sec": 110.0,
+      "content": "会議室は別の表、URLは主催者が作ります。同じ会議室を2つの部署が押さえたことがあります。"
+    },
+    {
+      "id": "00eb9412-7324-5dc3-ad9d-4b0345baf4f7",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 110.0,
+      "end_sec": 115.0,
+      "content": "予定が複数のカレンダーに分かれた理由は分かりますか?"
+    },
+    {
+      "id": "74d5c245-4018-5cc1-95ad-e81329f00850",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 16,
+      "speaker": "customer",
+      "start_sec": 115.0,
+      "end_sec": 126.0,
+      "content": "会社カレンダーは社内向け、個人カレンダーは顧客名など詳細、表計算は部長が行動予定を見るために始まりました。"
+    },
+    {
+      "id": "0d49a272-d51a-5bad-b7c6-594b15c6659b",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 17,
+      "speaker": "salesperson",
+      "start_sec": 126.0,
+      "end_sec": 135.0,
+      "content": "それぞれ別の目的があるので、1つを単純に廃止すると必要な情報が失われる可能性がありますね。"
+    },
+    {
+      "id": "d576a037-7e25-5c18-a65b-98fa284400d7",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 18,
+      "speaker": "customer",
+      "start_sec": 135.0,
+      "end_sec": 141.0,
+      "content": "営業は顧客名を全社に見せたくないと言います。"
+    },
+    {
+      "id": "91c5e685-6955-5be4-9c80-d94b8888b216",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 19,
+      "speaker": "salesperson",
+      "start_sec": 141.0,
+      "end_sec": 150.0,
+      "content": "予定ありだけ共有し、詳細の閲覧範囲を限定するなど公開範囲の要件を整理しましょう。"
+    },
+    {
+      "id": "aee2b598-6f7a-5935-853a-8a2dcf355083",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 150.0,
+      "end_sec": 155.0,
+      "content": "部長には訪問先まで、多部署には空き時間だけで良いです。"
+    },
+    {
+      "id": "c69b3435-36de-5e56-8dc2-eb298eab6e44",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 155.0,
+      "end_sec": 161.0,
+      "content": "設予約も設備や収容人数まで選択条件に必要ですか?"
+    },
+    {
+      "id": "e0172e66-38ed-515e-857e-0c8d15479dfc",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 161.0,
+      "end_sec": 168.0,
+      "content": "ウェブ会に設備がある部屋かどうかは必要です。今は名前だけで判断しています。"
+    },
+    {
+      "id": "90f56473-3886-5e8c-a460-49c46f749e01",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 168.0,
+      "end_sec": 174.0,
+      "content": "調整時間だけではなく、予定の成本が複数あることが根本ですね。"
+    },
+    {
+      "id": "e328dbed-2043-546c-8111-a5a87707e997",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 174.0,
+      "end_sec": 178.0,
+      "content": "営業事務の方は1週間に何件ほど調整しますか?"
+    },
+    {
+      "id": "129aa6a1-b26e-54c3-b7a5-2729b93f0f2e",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 178.0,
+      "end_sec": 184.0,
+      "content": "20件くらいで、複雑なものは30分以上です。"
+    },
+    {
+      "id": "54228707-36f1-5cb0-aaf9-348645ef7406",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 184.0,
+      "end_sec": 195.0,
+      "content": "EvaluV Second Edition Schedulerでは、人の予定、会議開催調整、施設予約、外出先からの確認登録を支援できます。"
+    },
+    {
+      "id": "7c3c9a8d-4e12-5565-b3f9-02970f2d993a",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 195.0,
+      "end_sec": 204.0,
+      "content": "ただし、個人カレンダーを残すのか、どの予定を共有必須にするのかを決めないと未従管理になります。"
+    },
+    {
+      "id": "6adb701b-1c3d-5afa-8a0e-a8a179bd7478",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 204.0,
+      "end_sec": 211.0,
+      "content": "外出先から予定を登録する場合、スマートフォンの利用ルールはありますか?"
+    },
+    {
+      "id": "7bdef37e-11b3-5606-820b-f43a097c830e",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 29,
+      "speaker": "customer",
+      "start_sec": 211.0,
+      "end_sec": 218.0,
+      "content": "会社支給端末のみです。分出時のため、顧客情報の表示には制限があります。"
+    },
+    {
+      "id": "3d31eaf1-2f71-5314-8bd8-f5c636e451e4",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 30,
+      "speaker": "salesperson",
+      "start_sec": 218.0,
+      "end_sec": 227.0,
+      "content": "モバイルで全てを見せる前提ではなく、空き時間確認と予定登録など、必要操作に絞るか確認します。"
+    },
+    {
+      "id": "6f5d40cc-5495-5b5e-8137-17631287042b",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 227.0,
+      "end_sec": 232.0,
+      "content": "移動中に空きだけ分かれば、事務へ電話せず日程を応えられます。"
+    },
+    {
+      "id": "a19ada83-792d-5260-8ea3-0c6ec23747fc",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 232.0,
+      "end_sec": 241.0,
+      "content": "営業本人が回答できることは、事務の交数削減だけでなく、顧客への即答にもつながりますね。"
+    },
+    {
+      "id": "e2e0df67-421a-5bde-ac5e-a02a51bb38e3",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 241.0,
+      "end_sec": 245.0,
+      "content": "そこは営業側のメリットとして伝えられそうです。"
+    },
+    {
+      "id": "e616df95-4d35-59ab-9e17-60f32b5c3d48",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 34,
+      "speaker": "customer",
+      "start_sec": 245.0,
+      "end_sec": 250.0,
+      "content": "社員は個人カレンダーを手放したくないと言いそうです。"
+    },
+    {
+      "id": "5d2420dc-eba7-577b-81c3-252df40af568",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 250.0,
+      "end_sec": 256.0,
+      "content": "そこを無理に決めず、まず営業6人の2週間で試しませんか?"
+    },
+    {
+      "id": "0e85bff4-f022-5118-8c4a-e4654ad3bf76",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 256.0,
+      "end_sec": 265.0,
+      "content": "顧客訪問と社内会議だけを共有対象にし、事務担当の調整時間と二重登録の回数を測ります。"
+    },
+    {
+      "id": "8ac96686-f2ae-59f7-b7ff-a49aea3a57cf",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 265.0,
+      "end_sec": 272.0,
+      "content": "2週間の試行では、誰かが二重入力を続けても責めず、理由を記録してください。"
+    },
+    {
+      "id": "5f4ca13d-6403-5e30-b349-f72b7fb39900",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 38,
+      "speaker": "customer",
+      "start_sec": 272.0,
+      "end_sec": 279.0,
+      "content": "個人カレンダーの通知が便利だから残すという人はいると思います。"
+    },
+    {
+      "id": "b7b4696c-77a0-53b0-9c5c-b42509aa8934",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 279.0,
+      "end_sec": 290.0,
+      "content": "その利点を新しい運用で代替できるか、できないなら連携や役割分担を検討します。"
+    },
+    {
+      "id": "602af487-afc2-5538-aadd-4505895fb479",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 290.0,
+      "end_sec": 293.0,
+      "content": "一律禁止より現実的です。"
+    },
+    {
+      "id": "359de8d2-7033-530b-a6f6-c1e8c8d0ada1",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 293.0,
+      "end_sec": 303.0,
+      "content": "評価は会議確定までの時間、メール・チャット回数、施設重複、営業が自分で回答できた件数で見ましょう。"
+    },
+    {
+      "id": "c2277dfa-8e9b-5b00-9efa-73ac2ba3b605",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 303.0,
+      "end_sec": 311.0,
+      "content": "営業事務の方にも使いやすさだけでなく、心理的な最速負担が減ったか聞きたいです。"
+    },
+    {
+      "id": "4feb396d-11a0-5d41-bef7-c27cb57489cc",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 311.0,
+      "end_sec": 317.0,
+      "content": "ぜひ入れましょう。時間に現れにくい負担も利用継続には重要です。"
+    },
+    {
+      "id": "1203cd6e-e155-5ec7-9a87-5fdf6ab1b447",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "sequence_no": 44,
+      "speaker": "customer",
+      "start_sec": 317.0,
+      "end_sec": 321.0,
+      "content": "小さく試すなら合意を取りやすいです。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "2163a38f-214d-58ce-9500-a5198f841472",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "knowledge_type": "pain_point",
+      "title": "分散した予定管理による調整遅延と施設重複リスク",
+      "situation": "社員の出社日が異なり、会議調整が頻繁に発生している環境。",
+      "problem": "会社カレンダー、個人カレンダー、表計算が混在し、顧客訪問が反映されないことがある。また、会議室の重複予約が発生している。",
+      "judgment": "予定情報の分散が根本原因であり、単一のツール導入だけでは解決しない。",
+      "action": "現状の各メディアの役割（社内向け、詳細管理、部長用）を確認し、情報の非対称性を把握する。",
+      "reasoning": "各メディアには異なる目的（機密性、管理粒度）があり、単純な廃止は情報損失を招くため、要件整理が必要。",
+      "outcome": null,
+      "lesson": "スケジュール管理の課題は「ツール不足」ではなく「情報共有のルールと粒度の不一致」であることが多い。",
+      "applicable_situations": "複数部門や役職で情報共有範囲が異なる組織の会議調整。",
+      "limitations": "顧客情報の機密性要件が強い場合、完全な一元化は困難。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "分散した予定管理による調整遅延と施設重複リスク\n社員の出社日が異なり、会議調整が頻繁に発生している環境。\n会社カレンダー、個人カレンダー、表計算が混在し、顧客訪問が反映されないことがある。また、会議室の重複予約が発生している。\n予定情報の分散が根本原因であり、単一のツール導入だけでは解決しない。\n現状の各メディアの役割（社内向け、詳細管理、部長用）を確認し、情報の非対称性を把握する。\n各メディアには異なる目的（機密性、管理粒度）があり、単純な廃止は情報損失を招くため、要件整理が必要。\nスケジュール管理の課題は「ツール不足」ではなく「情報共有のルールと粒度の不一致」であることが多い。\n複数部門や役職で情報共有範囲が異なる組織の会議調整。\n顧客情報の機密性要件が強い場合、完全な一元化は困難。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:30:35.963462Z"
+    },
+    {
+      "id": "03f20e19-842b-5e31-9311-3c67fd6b163a",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "knowledge_type": "sales_technique",
+      "title": "心理的負担を考慮した小規模な試行（PoC）提案",
+      "situation": "顧客は個人カレンダーを手放したくないという抵抗感を持っている。",
+      "problem": "新しい運用への移行において、社員の心理的抵抗や既存の利便性への執着が障壁となる。",
+      "judgment": "一律の禁止や大規模な変更ではなく、限定的な範囲での試行により合意形成を図る。",
+      "action": "営業6人限定で2週間、顧客訪問と社内会議のみを共有対象とする試行を提案し、二重登録の理由を記録する運用を指示する。",
+      "reasoning": "小さく試すことでリスクを低減し、社員の抵抗を和らげながら実際の効果（調整時間削減、即答性向上）を定量的に示す。",
+      "outcome": null,
+      "lesson": "変革への抵抗がある場合、スコープを狭くし、失敗を許容しつつ学習する「実験的アプローチ」が有効。",
+      "applicable_situations": "既存の業務フローやツールへの愛着が強い顧客への新規システム提案時。",
+      "limitations": "試行期間が短すぎると統計的有意性が得られない場合がある。",
+      "industry": null,
+      "product": "EvaluV Second Edition Scheduler",
+      "sales_stage": "proposal",
+      "search_text": "心理的負担を考慮した小規模な試行（PoC）提案\n顧客は個人カレンダーを手放したくないという抵抗感を持っている。\n新しい運用への移行において、社員の心理的抵抗や既存の利便性への執着が障壁となる。\n一律の禁止や大規模な変更ではなく、限定的な範囲での試行により合意形成を図る。\n営業6人限定で2週間、顧客訪問と社内会議のみを共有対象とする試行を提案し、二重登録の理由を記録する運用を指示する。\n小さく試すことでリスクを低減し、社員の抵抗を和らげながら実際の効果（調整時間削減、即答性向上）を定量的に示す。\n変革への抵抗がある場合、スコープを狭くし、失敗を許容しつつ学習する「実験的アプローチ」が有効。\n既存の業務フローやツールへの愛着が強い顧客への新規システム提案時。\n試行期間が短すぎると統計的有意性が得られない場合がある。\nEvaluV Second Edition Scheduler\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:30:35.963462Z"
+    },
+    {
+      "id": "fdd745bf-3458-5dc8-b605-50103a8d047e",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "knowledge_type": "customer_need",
+      "title": "モバイル環境での最小限の操作と顧客情報保護のバランス",
+      "situation": "外出先からの予定登録や空き時間確認が必要だが、顧客情報の表示には制限がある。",
+      "problem": "会社支給端末のみ利用可能であり、顧客情報の漏洩リスクを避ける必要がある。",
+      "judgment": "モバイルでは全機能を提供せず、空き時間確認と予定登録など、必要最小限の操作に絞る。",
+      "action": "モバイル利用時の機能制限（顧客名非表示など）を前提とした運用設計を行う。",
+      "reasoning": "セキュリティ要件と利便性のトレードオフを明確にし、事務への電話連絡を減らしつつ顧客情報を保護する。",
+      "outcome": null,
+      "lesson": "モバイル対応は「PCと同じ機能」ではなく「その場に必要な最小限の機能」に絞ることで、セキュリティとUXの両立が可能。",
+      "applicable_situations": "外出が多い営業職や、顧客情報機密性が高い業界のシステム導入。",
+      "limitations": "モバイルでの操作が制限されすぎると、現場の利便性が損なわれる可能性がある。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "モバイル環境での最小限の操作と顧客情報保護のバランス\n外出先からの予定登録や空き時間確認が必要だが、顧客情報の表示には制限がある。\n会社支給端末のみ利用可能であり、顧客情報の漏洩リスクを避ける必要がある。\nモバイルでは全機能を提供せず、空き時間確認と予定登録など、必要最小限の操作に絞る。\nモバイル利用時の機能制限（顧客名非表示など）を前提とした運用設計を行う。\nセキュリティ要件と利便性のトレードオフを明確にし、事務への電話連絡を減らしつつ顧客情報を保護する。\nモバイル対応は「PCと同じ機能」ではなく「その場に必要な最小限の機能」に絞ることで、セキュリティとUXの両立が可能。\n外出が多い営業職や、顧客情報機密性が高い業界のシステム導入。\nモバイルでの操作が制限されすぎると、現場の利便性が損なわれる可能性がある。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:30:35.963462Z"
+    },
+    {
+      "id": "51a906f5-acaa-556d-858f-dddd8384ec84",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "knowledge_type": "operational_insight",
+      "title": "定量的指標と主観的負担の両面での効果測定",
+      "situation": "会議調整の効率化を図るための試行期間が設定された。",
+      "problem": "時間削減などの定量的指標だけでは、社員の心理的負担や使いやすさの変化を捉えきれない。",
+      "judgment": "KPIとして定量的指標と、利用者の主観的フィードバックを併用する。",
+      "action": "会議確定までの時間、メール・チャット回数、施設重複、自己回答件数に加え、事務担当の心理的負担軽減の有無を調査する。",
+      "reasoning": "「時間に現れにくい負担」も利用継続には重要であり、定性的な評価を組み合わせることで真の改善度を把握できる。",
+      "outcome": null,
+      "lesson": "業務効率化の評価は、生産性指標だけでなく、ユーザー体験（UX）や心理的負荷の変化も含めるべき。",
+      "applicable_situations": "BPOや事務作業の効率化プロジェクト、社内ツール導入後の効果検証。",
+      "limitations": "主観的評価はバイアスがかかる可能性があるため、定量的データとの照合が必要。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "定量的指標と主観的負担の両面での効果測定\n会議調整の効率化を図るための試行期間が設定された。\n時間削減などの定量的指標だけでは、社員の心理的負担や使いやすさの変化を捉えきれない。\nKPIとして定量的指標と、利用者の主観的フィードバックを併用する。\n会議確定までの時間、メール・チャット回数、施設重複、自己回答件数に加え、事務担当の心理的負担軽減の有無を調査する。\n「時間に現れにくい負担」も利用継続には重要であり、定性的な評価を組み合わせることで真の改善度を把握できる。\n業務効率化の評価は、生産性指標だけでなく、ユーザー体験（UX）や心理的負荷の変化も含めるべき。\nBPOや事務作業の効率化プロジェクト、社内ツール導入後の効果検証。\n主観的評価はバイアスがかかる可能性があるため、定量的データとの照合が必要。\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:30:35.963462Z"
+    },
+    {
+      "id": "189ee40d-c425-5b70-84d7-449bf84ac715",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "knowledge_type": "proposal",
+      "title": "役割別・目的別の情報公開範囲の設計",
+      "situation": "営業は顧客名を全社に見せたくないが、部長は行動予定を確認したい。",
+      "problem": "情報共有の粒度が統一されておらず、機密性と管理の必要性が衝突している。",
+      "judgment": "閲覧者（部長、多部署、営業本人）ごとに公開範囲（詳細、空き時間のみ、予定ありのみ）を分ける。",
+      "action": "「予定あり」だけ共有し、詳細の閲覧範囲を限定するなどの要件整理を行う。",
+      "reasoning": "各ステークホルダーのニーズに応じた最小限の情報提供により、機密性を守りつつ調整の円滑化を図る。",
+      "outcome": null,
+      "lesson": "スケジュール共有は「全員に同じ情報」ではなく、「誰が何を見るか」を権限設計で明確にすることが重要。",
+      "applicable_situations": "多層構造の組織や、顧客情報を含む業務スケジュールの管理。",
+      "limitations": "権限設定が複雑になりすぎると、管理コストが増大する可能性がある。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "役割別・目的別の情報公開範囲の設計\n営業は顧客名を全社に見せたくないが、部長は行動予定を確認したい。\n情報共有の粒度が統一されておらず、機密性と管理の必要性が衝突している。\n閲覧者（部長、多部署、営業本人）ごとに公開範囲（詳細、空き時間のみ、予定ありのみ）を分ける。\n「予定あり」だけ共有し、詳細の閲覧範囲を限定するなどの要件整理を行う。\n各ステークホルダーのニーズに応じた最小限の情報提供により、機密性を守りつつ調整の円滑化を図る。\nスケジュール共有は「全員に同じ情報」ではなく、「誰が何を見るか」を権限設計で明確にすることが重要。\n多層構造の組織や、顧客情報を含む業務スケジュールの管理。\n権限設定が複雑になりすぎると、管理コストが増大する可能性がある。\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:30:35.963462Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "1035e353-5d91-566b-9336-46d6f7bdf17f",
+      "knowledge_id": "2163a38f-214d-58ce-9500-a5198f841472",
+      "start_utterance_id": "6acdf114-ef9c-59a3-811b-060bff500e16",
+      "end_utterance_id": "0d49a272-d51a-5bad-b7c6-594b15c6659b"
+    },
+    {
+      "id": "4202c463-fdb9-5309-aae3-42cad0a98041",
+      "knowledge_id": "03f20e19-842b-5e31-9311-3c67fd6b163a",
+      "start_utterance_id": "e616df95-4d35-59ab-9e17-60f32b5c3d48",
+      "end_utterance_id": "8ac96686-f2ae-59f7-b7ff-a49aea3a57cf"
+    },
+    {
+      "id": "86dfb681-dd93-50ae-bb61-0d3f0fefcf04",
+      "knowledge_id": "fdd745bf-3458-5dc8-b605-50103a8d047e",
+      "start_utterance_id": "6adb701b-1c3d-5afa-8a0e-a8a179bd7478",
+      "end_utterance_id": "6f5d40cc-5495-5b5e-8137-17631287042b"
+    },
+    {
+      "id": "2c8aea44-d337-572f-a066-9968690dfe32",
+      "knowledge_id": "51a906f5-acaa-556d-858f-dddd8384ec84",
+      "start_utterance_id": "359de8d2-7033-530b-a6f6-c1e8c8d0ada1",
+      "end_utterance_id": "4feb396d-11a0-5d41-bef7-c27cb57489cc"
+    },
+    {
+      "id": "ff4b0041-194c-5582-8bcc-c4eed97dbc7f",
+      "knowledge_id": "189ee40d-c425-5b70-84d7-449bf84ac715",
+      "start_utterance_id": "d576a037-7e25-5c18-a65b-98fa284400d7",
+      "end_utterance_id": "aee2b598-6f7a-5935-853a-8a2dcf355083"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "05376bde-9604-5172-a952-76865e1094e5",
+      "data_source_id": "1cf409d9-e421-5a50-88d0-8b787526f5d1",
+      "summary": "顧客の会議調整における予定管理の分散と施設重複の課題を掘り下げ、EvaluV Second Edition Schedulerの導入を提案。個人カレンダーへの抵抗感を考慮し、営業6人限定の2週間試行（PoC）を合意。モバイル利用時の情報保護と、定量的・主観的両面での効果測定指標を定義した。",
+      "customer_needs": [
+        "会議調整時間の短縮",
+        "会議室の重複予約防止",
+        "顧客情報の機密性維持",
+        "外出先からの簡易な空き時間確認・予定登録",
+        "事務担当の心理的負担軽減"
+      ],
+      "proposals": [
+        "EvaluV Second Edition Schedulerの導入",
+        "営業6人限定・2週間の小規模試行（PoC）",
+        "顧客訪問と社内会議のみを共有対象とするスコープ限定",
+        "モバイルでは空き時間確認と予定登録に機能を絞る",
+        "会議確定時間、メール回数、施設重複、自己回答件数、心理的負担をKPIとする"
+      ],
+      "decisions": [
+        "2週間の試行期間を設定",
+        "試行中は二重入力を責めず、理由を記録する運用を採用",
+        "個人カレンダーの廃止はせず、役割分担を検討する方針"
+      ],
+      "next_actions": [
+        "試行開始に向けた準備（アカウント作成、権限設定）",
+        "営業6人への説明と同意取得",
+        "2週間後の効果測定とレビュー実施"
+      ]
+    }
+  ]
+}

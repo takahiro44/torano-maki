@@ -1,0 +1,620 @@
+{
+  "data_sources": [
+    {
+      "id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "source_type": "audio",
+      "file_name": "long_018.wav",
+      "occurred_at": "2026-08-25T00:52:06Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "846657fe-83e7-5cd7-a30c-dd8f3f9276a7",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 1,
+      "speaker": "customer",
+      "start_sec": 0.0,
+      "end_sec": 8.0,
+      "content": "他社の見積より高いですね。ウイルス対策なら安い方でいいのではないでしょうか?"
+    },
+    {
+      "id": "10f3b407-2b54-5470-b24e-5bab43e86993",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 2,
+      "speaker": "salesperson",
+      "start_sec": 8.0,
+      "end_sec": 20.0,
+      "content": "価格差が気になりますよね。私から機能を並べる前に、今回の見積で守りたい業務と、他社案に含まれる運用範囲を一緒に確認してもいいですか?"
+    },
+    {
+      "id": "067668fd-2f46-5eeb-86e8-ba4106e73e34",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 3,
+      "speaker": "customer",
+      "start_sec": 20.0,
+      "end_sec": 30.0,
+      "content": "他社は1台あたりの月額が半分ほどです。職員25人なので、年間では差が大きく見えます。"
+    },
+    {
+      "id": "c0a55bba-7f46-5685-8e8b-182f25bfdcba",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 30.0,
+      "end_sec": 40.0,
+      "content": "年間総額で見ると重要な差ですね。こちらもその差に見合う要件がなければ、高い案を選ぶ必要はないと思います。"
+    },
+    {
+      "id": "6c94681f-e5a9-521d-a7c5-4d15aedd5b75",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 40.0,
+      "end_sec": 44.0,
+      "content": "安い方を否定されると思っていました。"
+    },
+    {
+      "id": "c927d347-a03f-5486-92a3-434109d67f52",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 44.0,
+      "end_sec": 52.0,
+      "content": "機能の多さではなく、ご社のリスクと運用に必要な範囲で比べたいです。"
+    },
+    {
+      "id": "7fe78836-e17f-58ce-b668-de47a15e9997",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 52.0,
+      "end_sec": 59.0,
+      "content": "顧客の申告データです。漏映したら事務所の信用に関わります。"
+    },
+    {
+      "id": "beb311a9-f1b9-5702-a6aa-77f1515cd3c8",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 59.0,
+      "end_sec": 63.0,
+      "content": "直近で不安を感じた出来事はありましたか?"
+    },
+    {
+      "id": "23a71cbd-ab15-5063-84e8-7619c4b0d96a",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 63.0,
+      "end_sec": 70.0,
+      "content": "退職者のPCに顧客データが残っているかわからず、初期化を業者へ頼みました。"
+    },
+    {
+      "id": "fbf9aee7-169a-5766-ac38-802c8090007a",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 70.0,
+      "end_sec": 78.0,
+      "content": "端末一覧と、誰がどのデータへアクセスできるかは管理できていますか?"
+    },
+    {
+      "id": "760b7fe5-e4f5-511b-a877-b3d79254731d",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 11,
+      "speaker": "salesperson",
+      "start_sec": 78.0,
+      "end_sec": 84.0,
+      "content": "退職者のPCは退職日から初期化まで何日ありましたか?"
+    },
+    {
+      "id": "fbd488a5-746e-5b80-b0d7-f27a8c5015d7",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 84.0,
+      "end_sec": 93.0,
+      "content": "1週間です。その間は鍵のかかる棚へ置きましたが、処理方法がわからず業者を探しました。"
+    },
+    {
+      "id": "d4732a61-ff43-5f70-8bb1-ec768a8028e8",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 93.0,
+      "end_sec": 97.0,
+      "content": "退職時に停止したアカウントはメールだけですか?"
+    },
+    {
+      "id": "4ba610e3-ddde-54f2-b127-d120c7eee35c",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 97.0,
+      "end_sec": 102.0,
+      "content": "メール等、会計システムです。"
+    },
+    {
+      "id": "b0bccd59-5926-55e0-9df2-9eaad2d2cd24",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 102.0,
+      "end_sec": 106.0,
+      "content": "クラウドストレージや共有フォルダは後から確認しました。"
+    },
+    {
+      "id": "2e17fa81-c83b-5cce-b39c-88e42c52604f",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 106.0,
+      "end_sec": 114.0,
+      "content": "端末初期化だけでなく、複数サービスのアカウント停止を漏れなく行う手順が必要ですね。"
+    },
+    {
+      "id": "52e4f80d-5b49-53fc-b86a-a40a41020910",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 114.0,
+      "end_sec": 119.0,
+      "content": "所長と総務で、どちらがやるか曖昧です。"
+    },
+    {
+      "id": "21b0bbbf-4328-5dee-baab-fc486b774121",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 119.0,
+      "end_sec": 128.0,
+      "content": "製品を入れる前に、退職連絡を起点に誰が何を止め、誰が完了確認するか決められます。"
+    },
+    {
+      "id": "16b06c0b-64bc-5b3d-a156-cb039505d819",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 128.0,
+      "end_sec": 132.0,
+      "content": "それだけでもすぐ改善できますね。"
+    },
+    {
+      "id": "48751e73-fed5-5ea2-86d8-04293908c49b",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 132.0,
+      "end_sec": 140.0,
+      "content": "一覧は表計算ですが、更新が遅れています。アクセス券は担当者任せです。"
+    },
+    {
+      "id": "014b0402-9a31-59d8-88c4-fa6f39204154",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 140.0,
+      "end_sec": 151.0,
+      "content": "今回のリスクは外部からのウイルスだけでなく、端末管理、退職時の処理、アクセス券、データ消去も含まれそうです。"
+    },
+    {
+      "id": "32b43ea0-9eab-545c-a25b-b43db230100d",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 151.0,
+      "end_sec": 155.0,
+      "content": "でも予算は限られています。"
+    },
+    {
+      "id": "fe05aa49-c788-57e0-ab29-8ab754226594",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 155.0,
+      "end_sec": 160.0,
+      "content": "顧客データは端末内サーバー、クラウドのどこにありますか?"
+    },
+    {
+      "id": "d0f63600-57bb-5644-8df7-f2c91aa19590",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 160.0,
+      "end_sec": 168.0,
+      "content": "原則はサーバーですが、作業中のファイルをデスクトップへ置く人がいます。"
+    },
+    {
+      "id": "b803f680-2629-53c0-b348-eba7211a5feb",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 168.0,
+      "end_sec": 171.0,
+      "content": "メール添付にも残ります。"
+    },
+    {
+      "id": "82398f92-c971-5bf7-ab8b-3b9c80196ce8",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 171.0,
+      "end_sec": 181.0,
+      "content": "守る対象と実際の保存場所が一致しているか確認が必要です。端末管理だけで全て解決すると断定できません。"
+    },
+    {
+      "id": "3a3859ef-0b70-5a3c-b3fe-fad95e8b59ab",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 27,
+      "speaker": "customer",
+      "start_sec": 181.0,
+      "end_sec": 189.0,
+      "content": "ルールでは端末へ保存禁止ですが、守られているか見ていません。"
+    },
+    {
+      "id": "c7c6e5f2-7089-51ab-8dd3-2e5fc9d4b5a1",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 189.0,
+      "end_sec": 195.0,
+      "content": "監視や制御を入れる場合も、なぜ端末へ置くのかを確認しましょう。"
+    },
+    {
+      "id": "92a7d368-0e39-5193-854b-fbbd7c17068d",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 195.0,
+      "end_sec": 199.0,
+      "content": "業務上必要なら安全な代替手段が先です。"
+    },
+    {
+      "id": "4db640ac-22ae-5135-b80c-630a57b5af71",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 199.0,
+      "end_sec": 204.0,
+      "content": "大きな申告データを外出先で扱うときに置くようです。"
+    },
+    {
+      "id": "649b9099-1b52-5221-af5c-b06e70478699",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 204.0,
+      "end_sec": 208.0,
+      "content": "ですのですべてを同時に入れる前提にはしません。"
+    },
+    {
+      "id": "ef3ac097-76b5-5b4a-8956-75335ac2d219",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 208.0,
+      "end_sec": 215.0,
+      "content": "大塚商会は複数メーカーを扱うため、目的と良さに合わせて組み合わせを検討できます。"
+    },
+    {
+      "id": "bee8e462-9797-5c05-b229-e1beffec55f4",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 33,
+      "speaker": "salesperson",
+      "start_sec": 215.0,
+      "end_sec": 221.0,
+      "content": "まず顧客データに触れる端末と退職時の処理を優先する案もあります。"
+    },
+    {
+      "id": "2546cd01-2bf8-51c3-9d99-4a59bde7ed93",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 221.0,
+      "end_sec": 228.0,
+      "content": "他社案はライセンスだけで、設定や退職時の対応は含まれていないと思います。"
+    },
+    {
+      "id": "60fd065f-f845-5114-8de2-43e190cf968c",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 228.0,
+      "end_sec": 241.0,
+      "content": "では製品名と月額だけではなく、初期設定・運用・問い合わせ・自己自対応・端末入れ替え時の作業を同じ表で比較しましょう。"
+    },
+    {
+      "id": "c8141c96-a69d-5f2f-95c8-bfaf59d69280",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 241.0,
+      "end_sec": 245.0,
+      "content": "その結果、他社案の方が要件に合えば、それも正直にお伝えします。"
+    },
+    {
+      "id": "194f51a8-dad2-5115-8edb-ce73c6f946cc",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 246.0,
+      "end_sec": 255.0,
+      "content": "比較表では必須・望ましい、今回は対象外の3段階に要件を分けませんか?"
+    },
+    {
+      "id": "2eb574f0-4343-56ba-8f6e-277f00de4138",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 38,
+      "speaker": "customer",
+      "start_sec": 255.0,
+      "end_sec": 265.0,
+      "content": "必須は、不正アクセス対策・端末一覧・退職時の処理です。高度な監視は予算次第です。"
+    },
+    {
+      "id": "63cb66ef-4162-565a-853e-0e875ed10453",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 265.0,
+      "end_sec": 272.0,
+      "content": "自己時の連絡窓口と、誰が初動を支援するかも必須に入れますか?"
+    },
+    {
+      "id": "ebee72e9-f45c-501c-af0d-62c9894b4d13",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 272.0,
+      "end_sec": 277.0,
+      "content": "はい、私だけでは判断できないので重要です。"
+    },
+    {
+      "id": "a5f1563c-27eb-5f14-a774-4a0dece6f87d",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 277.0,
+      "end_sec": 287.0,
+      "content": "それぞれの見積り先へ同じ質問を出し、含まれない作業は社内で誰が担当するかまで埋めましょう。"
+    },
+    {
+      "id": "5e01abc6-8fb0-51a4-abe4-9c42280876f4",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 287.0,
+      "end_sec": 292.0,
+      "content": "空欄が残れば安い理由も見えますね。"
+    },
+    {
+      "id": "f63bb76a-965b-5aa5-9c35-e975d3cb5653",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 292.0,
+      "end_sec": 299.0,
+      "content": "価格差を隠さず、残る社内負担とリスクを含めて代表の判断材料にします。"
+    },
+    {
+      "id": "1e5cd356-c2f5-50bd-87af-b760856eebeb",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 44,
+      "speaker": "customer",
+      "start_sec": 299.0,
+      "end_sec": 308.0,
+      "content": "安い案を選ぶ場合に、社内で担う仕事も費用ゼロではないということですね。"
+    },
+    {
+      "id": "bbe4f565-b509-5848-a7d9-e59c173996a8",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 308.0,
+      "end_sec": 315.0,
+      "content": "はい、社内交数も含めて比較し、それでも他社案が適切なら無理に変更を進めません。"
+    },
+    {
+      "id": "5b4fa8db-0d4c-5767-90ba-031ff5787340",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 46,
+      "speaker": "customer",
+      "start_sec": 315.0,
+      "end_sec": 322.0,
+      "content": "判断基準が明確なら、価格だけで決めたという後悔も減らせそうです。"
+    },
+    {
+      "id": "0489dec1-904e-574f-b451-25e89ef06e7e",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 47,
+      "speaker": "salesperson",
+      "start_sec": 322.0,
+      "end_sec": 328.0,
+      "content": "選定理由を記録し、更新時にも同じ基準で見直せるようにしましょう。"
+    },
+    {
+      "id": "09913c57-90c7-54df-a0e2-487bd1817008",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "sequence_no": 48,
+      "speaker": "customer",
+      "start_sec": 328.0,
+      "end_sec": 332.0,
+      "content": "同じ条件で比較できるなら納得しやすいです。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "8a15bb1b-3f80-5004-a5f9-7df162777854",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "knowledge_type": "sales_technique",
+      "title": "価格異議に対する誠実な姿勢と比較軸の提示",
+      "situation": "顧客が他社見積より高いことを理由に価格差を指摘し、安価な選択肢を好む傾向を示している。",
+      "problem": "顧客は単なるウイルス対策ではなく、年間総額でのコスト差に敏感であり、高額な提案への抵抗感がある。",
+      "judgment": "安価な選択肢を否定せず、顧客のリスクと運用に必要な範囲で比較する姿勢を示すことで信頼を構築する。",
+      "action": "「高い案を選ぶ必要はない」と顧客の懸念を肯定し、機能の多さではなくリスク管理の観点から比較する提案を行う。",
+      "reasoning": "顧客の心理的防衛を解き、対話的な比較検討へと導くため。",
+      "outcome": "顧客は「安い方を否定されると思っていました」と述べ、対話の土壌が整う。",
+      "lesson": "価格異議に対しては、まず顧客の懸念を肯定し、比較の基準（リスク・運用範囲）を顧客と合意形成することで、単なる価格競争から脱却できる。",
+      "applicable_situations": "競合他社との価格比較が議題になっている商談。",
+      "limitations": "顧客が既に価格のみで決定している場合は、この手法では動かない可能性がある。",
+      "industry": "ITセキュリティ",
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "価格異議に対する誠実な姿勢と比較軸の提示\n顧客が他社見積より高いことを理由に価格差を指摘し、安価な選択肢を好む傾向を示している。\n顧客は単なるウイルス対策ではなく、年間総額でのコスト差に敏感であり、高額な提案への抵抗感がある。\n安価な選択肢を否定せず、顧客のリスクと運用に必要な範囲で比較する姿勢を示すことで信頼を構築する。\n「高い案を選ぶ必要はない」と顧客の懸念を肯定し、機能の多さではなくリスク管理の観点から比較する提案を行う。\n顧客の心理的防衛を解き、対話的な比較検討へと導くため。\n顧客は「安い方を否定されると思っていました」と述べ、対話の土壌が整う。\n価格異議に対しては、まず顧客の懸念を肯定し、比較の基準（リスク・運用範囲）を顧客と合意形成することで、単なる価格競争から脱却できる。\n競合他社との価格比較が議題になっている商談。\n顧客が既に価格のみで決定している場合は、この手法では動かない可能性がある。\nITセキュリティ\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:32:54.769838Z"
+    },
+    {
+      "id": "330c98de-6dd6-5fbf-ab4a-61611b868ea6",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "knowledge_type": "pain_point",
+      "title": "退職時の情報漏洩リスクと運用プロセスの欠如",
+      "situation": "顧客は顧客申告データを管理しており、漏洩が事務所信用に関わる。",
+      "problem": "退職者のPCに顧客データが残存するリスクがあり、初期化までの期間（1週間）や、メール・会計システム・クラウドストレージ等のアカウント停止手順が曖昧で、所長と総務の責任分担が不明確。",
+      "judgment": "単なる端末管理ではなく、退職連絡を起点とした一連のアカウント停止・データ消去プロセスの欠如が重大なリスク要因。",
+      "action": "退職時の処理フロー（誰が何を止め、誰が確認するか）の明確化を提案する。",
+      "reasoning": "製品導入前の運用プロセスの改善により、即座にリスク低減効果が得られることを示すため。",
+      "outcome": "顧客は「それだけでもすぐ改善できますね」と反応し、課題の重要性を認識。",
+      "lesson": "セキュリティ商談では、製品機能だけでなく、顧客の業務プロセス（特に人事異動時）における運用ギャップを特定し、プロセス改善を提案することで付加価値を高めることができる。",
+      "applicable_situations": "従業員数が多く、退職・異動が頻繁な組織へのセキュリティ提案。",
+      "limitations": "顧客が既に厳格な退職プロセスを持っている場合は、このアプローチは通用しない。",
+      "industry": "士業・事務所",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "退職時の情報漏洩リスクと運用プロセスの欠如\n顧客は顧客申告データを管理しており、漏洩が事務所信用に関わる。\n退職者のPCに顧客データが残存するリスクがあり、初期化までの期間（1週間）や、メール・会計システム・クラウドストレージ等のアカウント停止手順が曖昧で、所長と総務の責任分担が不明確。\n単なる端末管理ではなく、退職連絡を起点とした一連のアカウント停止・データ消去プロセスの欠如が重大なリスク要因。\n退職時の処理フロー（誰が何を止め、誰が確認するか）の明確化を提案する。\n製品導入前の運用プロセスの改善により、即座にリスク低減効果が得られることを示すため。\n顧客は「それだけでもすぐ改善できますね」と反応し、課題の重要性を認識。\nセキュリティ商談では、製品機能だけでなく、顧客の業務プロセス（特に人事異動時）における運用ギャップを特定し、プロセス改善を提案することで付加価値を高めることができる。\n従業員数が多く、退職・異動が頻繁な組織へのセキュリティ提案。\n顧客が既に厳格な退職プロセスを持っている場合は、このアプローチは通用しない。\n士業・事務所\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:32:54.769838Z"
+    },
+    {
+      "id": "894c7353-f520-56fb-90e6-440c8d9d6f35",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "knowledge_type": "operational_insight",
+      "title": "データ保存場所の実態とルール乖離の発見",
+      "situation": "顧客は原則としてサーバーにデータを保存するルールがある。",
+      "problem": "実際には、作業中のファイルをデスクトップに置いたり、メール添付に残したりする職員がおり、ルールと実態が乖離している。",
+      "judgment": "監視・制御を入れる前に、なぜ端末に保存するのか（業務上の必要性）を確認し、安全な代替手段を提示する必要がある。",
+      "action": "外出先での申告データ処理という具体的な業務シーンから、端末保存の理由を掘り下げ、代替手段の検討を促す。",
+      "reasoning": "単なる禁止ではなく、業務効率とセキュリティのバランスを考慮した解決策を提示するため。",
+      "outcome": "顧客は外出先でのデータ処理が理由であることを認め、課題の具体化が進む。",
+      "lesson": "セキュリティポリシーの遵守状況を確認する際は、「なぜ違反しているか」の業務背景を聞き出すことで、適切な技術的解決策（例：モバイルワーク対応の安全な共有環境）を提案できる。",
+      "applicable_situations": "リモートワークや外出先での業務が多い環境。",
+      "limitations": "業務内容が複雑で、代替手段がすぐに見つからない場合は、提案が難しい。",
+      "industry": "士業・事務所",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "データ保存場所の実態とルール乖離の発見\n顧客は原則としてサーバーにデータを保存するルールがある。\n実際には、作業中のファイルをデスクトップに置いたり、メール添付に残したりする職員がおり、ルールと実態が乖離している。\n監視・制御を入れる前に、なぜ端末に保存するのか（業務上の必要性）を確認し、安全な代替手段を提示する必要がある。\n外出先での申告データ処理という具体的な業務シーンから、端末保存の理由を掘り下げ、代替手段の検討を促す。\n単なる禁止ではなく、業務効率とセキュリティのバランスを考慮した解決策を提示するため。\n顧客は外出先でのデータ処理が理由であることを認め、課題の具体化が進む。\nセキュリティポリシーの遵守状況を確認する際は、「なぜ違反しているか」の業務背景を聞き出すことで、適切な技術的解決策（例：モバイルワーク対応の安全な共有環境）を提案できる。\nリモートワークや外出先での業務が多い環境。\n業務内容が複雑で、代替手段がすぐに見つからない場合は、提案が難しい。\n士業・事務所\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:32:54.769838Z"
+    },
+    {
+      "id": "ef6fc3ff-279f-5b22-994c-f873c4b8cdc4",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "knowledge_type": "sales_technique",
+      "title": "包括的な比較表による透明性の確保",
+      "situation": "顧客は他社案（ライセンスのみ）と自社案（運用・設定含む）の比較に迷っている。",
+      "problem": "月額料金だけで比較すると、他社案が有利に見えるが、初期設定・運用・問い合わせ対応・端末入れ替え等の隠れたコスト（社内負担）が考慮されていない。",
+      "judgment": "製品名と月額だけでなく、運用・対応範囲を同じ表で比較し、含まれない作業は社内で誰が担当するかまで埋めることで、真の総コストを可視化する。",
+      "action": "「必須・望ましい・対象外」の3段階で要件を分け、各見積り先へ同じ質問を出して比較表を作成する提案を行う。",
+      "reasoning": "価格差の背景にある「社内負担」を可視化し、顧客が納得できる判断材料を提供するため。",
+      "outcome": "顧客は「空欄が残れば安い理由も見えますね」と理解し、比較の公平性を認める。",
+      "lesson": "競合比較では、単なる機能リストではなく、「誰が何をするか（RACI）」まで踏み込んだ比較表を提示することで、安価な競合案の隠れたリスク（社内工数）を浮き彫りにできる。",
+      "applicable_situations": "SaaSやセキュリティ製品など、運用コストが重要な商材。",
+      "limitations": "顧客が比較表の作成に協力しない場合は、営業側が主導して作成する必要がある。",
+      "industry": "ITセキュリティ",
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "包括的な比較表による透明性の確保\n顧客は他社案（ライセンスのみ）と自社案（運用・設定含む）の比較に迷っている。\n月額料金だけで比較すると、他社案が有利に見えるが、初期設定・運用・問い合わせ対応・端末入れ替え等の隠れたコスト（社内負担）が考慮されていない。\n製品名と月額だけでなく、運用・対応範囲を同じ表で比較し、含まれない作業は社内で誰が担当するかまで埋めることで、真の総コストを可視化する。\n「必須・望ましい・対象外」の3段階で要件を分け、各見積り先へ同じ質問を出して比較表を作成する提案を行う。\n価格差の背景にある「社内負担」を可視化し、顧客が納得できる判断材料を提供するため。\n顧客は「空欄が残れば安い理由も見えますね」と理解し、比較の公平性を認める。\n競合比較では、単なる機能リストではなく、「誰が何をするか（RACI）」まで踏み込んだ比較表を提示することで、安価な競合案の隠れたリスク（社内工数）を浮き彫りにできる。\nSaaSやセキュリティ製品など、運用コストが重要な商材。\n顧客が比較表の作成に協力しない場合は、営業側が主導して作成する必要がある。\nITセキュリティ\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:32:54.769838Z"
+    },
+    {
+      "id": "894da6da-f670-5ad0-b625-d9b5807e60e8",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "knowledge_type": "decision",
+      "title": "判断基準の明確化と記録による後悔の防止",
+      "situation": "顧客は予算が限られており、安価な案と高機能な案の間で迷っている。",
+      "problem": "価格だけで決定すると、後からリスクが顕在化した場合に「価格だけで決めた」という後悔が生じる可能性がある。",
+      "judgment": "選定理由を記録し、更新時にも同じ基準で見直せるようにすることで、意思決定の透明性と一貫性を保つ。",
+      "action": "「判断基準が明確なら、価格だけで決めたという後悔も減らせそうです」と提案し、選定理由の記録を促す。",
+      "reasoning": "長期的な顧客満足と、将来の更新・拡張時のスムーズな意思決定を支援するため。",
+      "outcome": "顧客は「同じ条件で比較できるなら納得しやすいです」と同意する。",
+      "lesson": "商談の終盤では、単なる契約締結だけでなく、「なぜその製品を選んだか」の根拠を文書化することを提案することで、顧客の納得感を高め、将来のアップセルや更新時の抵抗を減らすことができる。",
+      "applicable_situations": "高額なIT投資や、長期的な契約を伴う商談。",
+      "limitations": "顧客が意思決定プロセスを簡素化したい場合は、この提案は重荷に感じられる可能性がある。",
+      "industry": "ITセキュリティ",
+      "product": null,
+      "sales_stage": "closing",
+      "search_text": "判断基準の明確化と記録による後悔の防止\n顧客は予算が限られており、安価な案と高機能な案の間で迷っている。\n価格だけで決定すると、後からリスクが顕在化した場合に「価格だけで決めた」という後悔が生じる可能性がある。\n選定理由を記録し、更新時にも同じ基準で見直せるようにすることで、意思決定の透明性と一貫性を保つ。\n「判断基準が明確なら、価格だけで決めたという後悔も減らせそうです」と提案し、選定理由の記録を促す。\n長期的な顧客満足と、将来の更新・拡張時のスムーズな意思決定を支援するため。\n顧客は「同じ条件で比較できるなら納得しやすいです」と同意する。\n商談の終盤では、単なる契約締結だけでなく、「なぜその製品を選んだか」の根拠を文書化することを提案することで、顧客の納得感を高め、将来のアップセルや更新時の抵抗を減らすことができる。\n高額なIT投資や、長期的な契約を伴う商談。\n顧客が意思決定プロセスを簡素化したい場合は、この提案は重荷に感じられる可能性がある。\nITセキュリティ\nclosing",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:32:54.769838Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "c9f071ac-a449-50be-9a77-564f2b96b894",
+      "knowledge_id": "8a15bb1b-3f80-5004-a5f9-7df162777854",
+      "start_utterance_id": "846657fe-83e7-5cd7-a30c-dd8f3f9276a7",
+      "end_utterance_id": "c927d347-a03f-5486-92a3-434109d67f52"
+    },
+    {
+      "id": "ee9ce5a5-9839-5ff4-90fe-4215dc086a99",
+      "knowledge_id": "330c98de-6dd6-5fbf-ab4a-61611b868ea6",
+      "start_utterance_id": "7fe78836-e17f-58ce-b668-de47a15e9997",
+      "end_utterance_id": "16b06c0b-64bc-5b3d-a156-cb039505d819"
+    },
+    {
+      "id": "d5158d81-a93f-5b0d-ba29-27b813a69aa7",
+      "knowledge_id": "894c7353-f520-56fb-90e6-440c8d9d6f35",
+      "start_utterance_id": "fe05aa49-c788-57e0-ab29-8ab754226594",
+      "end_utterance_id": "4db640ac-22ae-5135-b80c-630a57b5af71"
+    },
+    {
+      "id": "a5306a2e-26d9-55a7-9b48-2392e7caf76a",
+      "knowledge_id": "ef6fc3ff-279f-5b22-994c-f873c4b8cdc4",
+      "start_utterance_id": "2546cd01-2bf8-51c3-9d99-4a59bde7ed93",
+      "end_utterance_id": "5e01abc6-8fb0-51a4-abe4-9c42280876f4"
+    },
+    {
+      "id": "2dfe96a2-f727-545e-912d-e7a3186a42c9",
+      "knowledge_id": "894da6da-f670-5ad0-b625-d9b5807e60e8",
+      "start_utterance_id": "f63bb76a-965b-5aa5-9c35-e975d3cb5653",
+      "end_utterance_id": "09913c57-90c7-54df-a0e2-487bd1817008"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "5ec7289f-9bc8-597a-9e2f-42a568d8a6bb",
+      "data_source_id": "4f1e3a0e-90ad-504b-ab91-5cea54a79d3d",
+      "summary": "顧客は他社見積より高い価格を懸念していたが、営業は価格差を否定せず、リスク管理と運用範囲の観点から比較する姿勢を示した。退職時の情報漏洩リスクや、データ保存場所の実態とルールの乖離が特定され、製品導入前のプロセス改善と、包括的な比較表による透明性の確保が提案された。最終的に、判断基準の明確化と記録による納得感の向上で合意形成が進んだ。",
+      "customer_needs": [
+        "年間総額でのコスト最適化",
+        "退職時の顧客データ漏洩リスクの低減",
+        "端末管理とアクセス権限の明確化",
+        "業務効率とセキュリティのバランス（外出先でのデータ処理）",
+        "他社案との公平な比較材料"
+      ],
+      "proposals": [
+        "リスクと運用範囲に基づく比較軸の提示",
+        "退職連絡を起点としたアカウント停止・データ消去プロセスの明確化",
+        "データ保存場所の実態確認と安全な代替手段の検討",
+        "初期設定・運用・対応範囲を含む包括的な比較表の作成",
+        "選定理由の記録と更新時に見直せる判断基準の確立"
+      ],
+      "decisions": [
+        "価格だけで判断せず、運用コスト（社内負担）を含めて比較する方針",
+        "必須要件（不正アクセス対策・端末一覧・退職時処理）と望ましい要件を3段階で分類する方針",
+        "他社案が要件に合えば正直に伝える誠実な姿勢の共有"
+      ],
+      "next_actions": [
+        "各見積り先へ同じ質問（初期設定・運用・問い合わせ対応等）を出し、比較表を埋める",
+        "退職時の処理フロー（所長・総務の責任分担）を社内で明確にする",
+        "外出先でのデータ処理に対する安全な代替手段を検討する",
+        "選定理由を記録し、判断基準を文書化する"
+      ]
+    }
+  ]
+}

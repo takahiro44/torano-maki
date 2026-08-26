@@ -3,8 +3,12 @@
 # 音声から再生成するのに手間がかかり、メンバー間で同じ入力を共有できないため。
 /input/*
 !/input/medium_glossary.json
+!/input/transcripts/
 /output/*
 !/output/knowledge_extraction.json
+!/output/meetings/
+# LLMの生応答。実行のたびに変わるので追跡しない（失敗の調査用）
+/output/raw/
 /__pycache__/
 /.pytest_cache/
 /.ruff_cache/

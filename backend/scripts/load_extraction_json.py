@@ -20,10 +20,15 @@ APIではなくDBへ直接書く。`utterance_segments` / `knowledge_evidence` /
 `call_summaries` に対応するエンドポイントが無く、
 1商談分を1トランザクションで入れたいため。
 
+既定で `experiments/knowledge-extraction/output/meetings/` の全商談を
+**1トランザクションで**投入する。`git pull` した人がこのコマンド1つで
+チームと同じデータを手元に用意できる状態を保つこと。
+
 使い方:
     cd backend
-    uv run python scripts/load_extraction_json.py
-    uv run python scripts/load_extraction_json.py --replace   # 入れ直す
+    uv run python scripts/load_extraction_json.py            # 全商談を投入
+    uv run python scripts/load_extraction_json.py --replace  # 入れ直す
+    uv run python scripts/load_extraction_json.py --file <path>   # 1件だけ
     uv run python scripts/load_extraction_json.py --status draft
 """
 
@@ -53,9 +58,15 @@ from app.services.embedding import embed_passages
 from app.services.search_text import generate_search_text_from_mapping
 
 _REPO_ROOT = Path(__file__).resolve().parents[2]
-DEFAULT_JSON = (
-    _REPO_ROOT / "experiments" / "knowledge-extraction" / "output" / "knowledge_extraction.json"
-)
+_EXTRACTION_DIR = _REPO_ROOT / "experiments" / "knowledge-extraction" / "output"
+# 商談1件につき1ファイル。既定でこのディレクトリを丸ごと入れる。
+# 1件ずつ指定させると、22件を投入するのに22回コマンドを叩くことになり、
+# そのたびに埋め込みモデル（2.2GB）の読み込みが走って10分近くかかる。
+DEFAULT_DIR = _EXTRACTION_DIR / "meetings"
+# 2026-08-24の検証結果。`meetings/01_order_entry.json` と**同じ商談**
+# （どちらも tts-demo/scripts/01_order_entry.json の台本から合成した音声）なので、
+# 両方入れると同じナレッジが検索結果に二重に出る。既定では読まない。
+LEGACY_JSON = _EXTRACTION_DIR / "knowledge_extraction.json"
 
 
 # 実験側の schema.py は別の uv プロジェクトにあり、backend から import できない。
@@ -134,6 +145,42 @@ class ExtractionResult(_Strict):
 
 def load_result(path: Path) -> ExtractionResult:
     return ExtractionResult.model_validate_json(path.read_text(encoding="utf-8"))
+
+
+def merge_results(paths: list[Path]) -> ExtractionResult:
+    """複数商談のJSONを1つにまとめる。
+
+    **1トランザクションで入れるため**にまとめている。ファイルごとに
+    投入すると、途中で失敗したときに「何件目まで入ったか」が分からない
+    中途半端なDBが残る。埋め込みも `insert_result` が一括で生成するので、
+    まとめた方がモデルの読み込みが1回で済む。
+
+    同じ商談が複数ファイルに現れたら止める。決定的UUIDなので、
+    そのまま入れると主キーの衝突で落ちるが、原因が分かりにくい。
+    """
+    merged = ExtractionResult(
+        data_sources=[],
+        utterance_segments=[],
+        knowledge_units=[],
+        knowledge_evidence=[],
+        call_summaries=[],
+    )
+    seen: dict[UUID, Path] = {}
+    for path in paths:
+        result = load_result(path)
+        for source in result.data_sources:
+            if source.id in seen:
+                raise ValueError(
+                    f"同じ商談が2つのファイルにあります: {seen[source.id].name} と {path.name}"
+                    f"（{source.file_name}）"
+                )
+            seen[source.id] = path
+        merged.data_sources.extend(result.data_sources)
+        merged.utterance_segments.extend(result.utterance_segments)
+        merged.knowledge_units.extend(result.knowledge_units)
+        merged.knowledge_evidence.extend(result.knowledge_evidence)
+        merged.call_summaries.extend(result.call_summaries)
+    return merged
 
 
 def source_ids(result: ExtractionResult) -> list[UUID]:
@@ -225,7 +272,15 @@ def insert_result(db: Session, result: ExtractionResult, *, status: str) -> dict
 def main() -> int:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
-        "--file", type=Path, default=DEFAULT_JSON, help=f"投入するJSON（既定: {DEFAULT_JSON}）"
+        "--dir",
+        type=Path,
+        default=DEFAULT_DIR,
+        help=f"この中の *.json をすべて投入する（既定: {DEFAULT_DIR}）",
+    )
+    parser.add_argument(
+        "--file",
+        type=Path,
+        help="1件だけ投入する。指定すると --dir は無視される",
     )
     parser.add_argument(
         "--replace",
@@ -240,12 +295,27 @@ def main() -> int:
     )
     args = parser.parse_args()
 
-    if not args.file.exists():
-        print(f"ファイルがありません: {args.file}", file=sys.stderr)
-        return 1
+    if args.file is not None:
+        if not args.file.exists():
+            print(f"ファイルがありません: {args.file}", file=sys.stderr)
+            return 1
+        paths = [args.file]
+    else:
+        if not args.dir.is_dir():
+            print(f"ディレクトリがありません: {args.dir}", file=sys.stderr)
+            return 1
+        paths = sorted(args.dir.glob("*.json"))
+        if not paths:
+            print(f"投入するJSONがありません: {args.dir}", file=sys.stderr)
+            return 1
 
-    result = load_result(args.file)
+    try:
+        result = merge_results(paths)
+    except ValueError as error:
+        print(error, file=sys.stderr)
+        return 1
     ids = source_ids(result)
+    print(f"入力: {len(paths)}ファイル / 商談{len(ids)}件")
 
     db = SessionLocal()
     try:

@@ -1,0 +1,615 @@
+{
+  "data_sources": [
+    {
+      "id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "source_type": "audio",
+      "file_name": "long_006.wav",
+      "occurred_at": "2026-08-25T00:05:12Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "bac1599b-9126-5d36-b42b-1bd70865ed7f",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 8.0,
+      "content": "会議室のポスター、御社で制作されたものですか? 色の使い方が印象的ですね"
+    },
+    {
+      "id": "f2ee0e2c-7565-5f16-92e4-abe6a889f084",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 8.0,
+      "end_sec": 15.0,
+      "content": "ありがとうございます。去年の採用キャンペーンです。 制作データも大量に残っています"
+    },
+    {
+      "id": "0f65be8f-ff63-54ea-aa02-78d58263c044",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 15.0,
+      "end_sec": 24.0,
+      "content": "その大量データの中で契約書の最新版確認に困ったことがあると伺いました。 直近ではいつでしたか?"
+    },
+    {
+      "id": "25e10e35-3d99-5d02-a5a0-22ed6a7acba3",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 24.0,
+      "end_sec": 30.0,
+      "content": "その取引先から問い合わせが来た時、回答期限はどれくらいでしたか?"
+    },
+    {
+      "id": "90074957-820c-510f-9ed9-83f87b2fbbd6",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 30.0,
+      "end_sec": 37.0,
+      "content": "当日中です。担当営業が外出中で、管理部とホームが代わりに探しました"
+    },
+    {
+      "id": "0672e55e-76df-5b4d-9204-193e0f39c8da",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 37.0,
+      "end_sec": 43.0,
+      "content": "2時間の間、何人が探す作業に関わりましたか?"
+    },
+    {
+      "id": "961be201-87a2-57c0-b4fb-35b7df6cc8db",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 43.0,
+      "end_sec": 50.0,
+      "content": "3人です。営業にも電話したので、商談を中断させてしまいました"
+    },
+    {
+      "id": "3fff2b53-a5e2-5500-bc97-4316f0273582",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 50.0,
+      "end_sec": 56.0,
+      "content": "ファイル探索だけでのべ6時間近い負担になった可能性がありますね"
+    },
+    {
+      "id": "ca2136d5-f589-59ae-af4c-5ebbed326dd1",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 56.0,
+      "end_sec": 63.0,
+      "content": "そう考えると大きいですね。月に何度か似たことがあります"
+    },
+    {
+      "id": "f85205f3-ad91-5458-9fed-0eb2381aa0aa",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 63.0,
+      "end_sec": 72.0,
+      "content": "先週です。取引先から契約条件を聞かれ、 共有フォルダに同じ名前のファイルが4つありました"
+    },
+    {
+      "id": "724cb88c-8f9a-5f32-bd3a-1826e1d13d00",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 11,
+      "speaker": "salesperson",
+      "start_sec": 72.0,
+      "end_sec": 76.0,
+      "content": "どれが正しいかどう判断しましたか?"
+    },
+    {
+      "id": "9540c757-1cc5-5ea5-9443-78e02bbf05d3",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 76.0,
+      "end_sec": 85.0,
+      "content": "担当営業とホームに連絡して、最終的には応援済みの紙を倉庫から出しました"
+    },
+    {
+      "id": "ae19587a-8420-56e9-b96d-a7b041eec276",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 85.0,
+      "end_sec": 88.0,
+      "content": "2時間くらいです"
+    },
+    {
+      "id": "7a4b9c78-980c-5b13-9f9a-5497f242dfa0",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 88.0,
+      "end_sec": 93.0,
+      "content": "見つける時間の他に、古い番を使うリスクもありますね"
+    },
+    {
+      "id": "ed369be5-e8fa-5215-b358-5aeaffe073ff",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 93.0,
+      "end_sec": 97.0,
+      "content": "実際に誤った番を送ったことはありますか?"
+    },
+    {
+      "id": "86000490-5c8a-56a2-a16c-9b1f1d0bf115",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 16,
+      "speaker": "customer",
+      "start_sec": 97.0,
+      "end_sec": 102.0,
+      "content": "一度あります。先方から指摘されて送り直しました"
+    },
+    {
+      "id": "41c4ab5a-0bf8-5b64-8636-cb06b54b5349",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 102.0,
+      "end_sec": 107.0,
+      "content": "大きな問題にはなりませんでしたが、信用面が怖いです"
+    },
+    {
+      "id": "9c68a905-99bb-5e4c-a6f6-5a9c7493f98d",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 107.0,
+      "end_sec": 113.0,
+      "content": "古い番を送った際、なぜそれを最新番だと思ったのでしょう?"
+    },
+    {
+      "id": "3fe898fa-df55-5042-b2e8-c5d286e4f3ce",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 113.0,
+      "end_sec": 123.0,
+      "content": "ファイル名に最終と書いてあり、更新日も新しかったからです。 でも内容は多い前でした"
+    },
+    {
+      "id": "e19ec655-f3cd-52a4-b7ac-3a09c5f1b098",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 123.0,
+      "end_sec": 129.0,
+      "content": "ファイル名や更新日だけでは契約状態を判断できないんですね"
+    },
+    {
+      "id": "d7be1074-4565-53f1-8f11-e1cf326089dc",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 21,
+      "speaker": "customer",
+      "start_sec": 129.0,
+      "end_sec": 135.0,
+      "content": "最終、最終に確定番という名前が並びます"
+    },
+    {
+      "id": "dcc0fe38-2199-5a11-8a50-d4c39f2404c6",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 135.0,
+      "end_sec": 145.0,
+      "content": "契約先、契約種別、有効期間、承認状態など検索等製法判断に必要な属性を決める必要があります"
+    },
+    {
+      "id": "caeaa427-3f7e-52f8-9424-bd27c8db91fd",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 145.0,
+      "end_sec": 151.0,
+      "content": "自動更新かどうかも欲しいです。更新忘れの確認にも使いたいので"
+    },
+    {
+      "id": "732d7770-c30c-5c7e-a0b3-20423861fbc9",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 151.0,
+      "end_sec": 157.0,
+      "content": "検索目的と期限管理目的では必要項目が少し違います"
+    },
+    {
+      "id": "08ad3bd7-8f2b-5ec2-9d96-e9c664705696",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 157.0,
+      "end_sec": 162.0,
+      "content": "最初から項目を増やしすぎないよう、利用場面ごとに優先しましょう"
+    },
+    {
+      "id": "29954f03-c536-5310-a2aa-a6cc8483e893",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 162.0,
+      "end_sec": 169.0,
+      "content": "入力が面倒になると営業が登録しなくなるので、そこは気になります"
+    },
+    {
+      "id": "7c957663-5346-54c0-bca8-bc5e93dfa533",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 169.0,
+      "end_sec": 174.0,
+      "content": "保存場所は営業部と管理部で共通ですか?"
+    },
+    {
+      "id": "ab2c2315-c283-542f-bf84-c33540dd1396",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 28,
+      "speaker": "customer",
+      "start_sec": 174.0,
+      "end_sec": 184.0,
+      "content": "営業の共有フォルダ、ホームのフォルダ、紙の3つです。命名ルールも守られていません"
+    },
+    {
+      "id": "465b553e-6d90-5107-9d7a-9fafc9d8a188",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 184.0,
+      "end_sec": 193.0,
+      "content": "検索機能だけ入れても、法制の定義と登録ルールが曖昧なら、最新版問題は残りそうです"
+    },
+    {
+      "id": "ac3480d7-a944-5c6a-a192-347b0e74f787",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 30,
+      "speaker": "salesperson",
+      "start_sec": 193.0,
+      "end_sec": 202.0,
+      "content": "登録担当を営業にする案と、管理部で一括登録する案では、どちらが現実的ですか?"
+    },
+    {
+      "id": "bdb4c4df-6b6d-58b8-9281-21f1285b6b21",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 202.0,
+      "end_sec": 209.0,
+      "content": "締結前は営業、応員済み成本は管理部が良いと思います"
+    },
+    {
+      "id": "25721f40-bb35-5a7b-bc22-9ed1bdb8bc74",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 209.0,
+      "end_sec": 217.0,
+      "content": "状態が変わると管理責任も変わるわけですね。受け渡しの完了条件を決める必要があります"
+    },
+    {
+      "id": "a75eedcb-51ea-5680-b860-d4a12719fa14",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 217.0,
+      "end_sec": 223.0,
+      "content": "営業がPDFを送ったつもりでも、管理部が気づかないことがあるんですよね"
+    },
+    {
+      "id": "c9956b56-a12a-57f5-bb9c-a93b5eda6aad",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 223.0,
+      "end_sec": 234.0,
+      "content": "ワークフローとの連携も候補ですが、まずは締結後に誰が何を確認し、いつ成本登録が完了するかを明文化しましょう"
+    },
+    {
+      "id": "bddf8f32-7bc4-518d-89aa-036764ab10c0",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 234.0,
+      "end_sec": 242.0,
+      "content": "契約業務そのものの見直しになりますね。耳が痛いですが、その通りです"
+    },
+    {
+      "id": "1f60b545-a844-5065-9592-64503b66b47f",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 242.0,
+      "end_sec": 253.0,
+      "content": "E-VALUE-V 2nd Edition Document管理では、属性検索や全文検索、印刷持ち出し制御、複合機との連携を検討できます"
+    },
+    {
+      "id": "eb15ae6f-69af-5865-a676-36b819c45932",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 253.0,
+      "end_sec": 263.0,
+      "content": "まず契約書について、誰が成本を登録し、どの属性を付け、誰が閲覧できるかを決めるのが先です"
+    },
+    {
+      "id": "aace04bb-bb2e-5a3a-b30a-3d8da677dfe6",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 38,
+      "speaker": "customer",
+      "start_sec": 263.0,
+      "end_sec": 269.0,
+      "content": "全社文書を一気にやるより、契約書から始めたいです"
+    },
+    {
+      "id": "be536bc8-2300-54b9-9a09-eaf5f44ab1de",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 269.0,
+      "end_sec": 275.0,
+      "content": "権限について、営業は全社の契約書を見られる必要がありますか?"
+    },
+    {
+      "id": "5d47ce36-1e2c-5d15-bc3c-cfebdedb8fd7",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 275.0,
+      "end_sec": 283.0,
+      "content": "自分の担当先だけで十分です。役員とホームは全社。外中スタッフには見せられません"
+    },
+    {
+      "id": "b6ff25d5-6993-5a36-8649-861218382131",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 284.0,
+      "end_sec": 293.0,
+      "content": "印刷や持ち出しも役割で制御する必要がありそうです。実際の組織と閲覧範囲を確認して設計します"
+    },
+    {
+      "id": "9495dd63-6319-5646-8069-e2235de51445",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 293.0,
+      "end_sec": 297.0,
+      "content": "ああ、退職者の権限が残らないことも重要です"
+    },
+    {
+      "id": "5cd8ccd9-f220-54be-8b87-8bbbbab2ec98",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 297.0,
+      "end_sec": 310.0,
+      "content": "では、評価項目に検索時間、ご飯の防止、権限変更の手順を入れます。契約6件で試した後、対象拡大を判断しましょう"
+    },
+    {
+      "id": "167a8bee-7da0-54ef-80c1-ce32bc8d8e19",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 44,
+      "speaker": "customer",
+      "start_sec": 310.0,
+      "end_sec": 316.0,
+      "content": "全社展開の前に運用まで確認できるなら安心です"
+    },
+    {
+      "id": "7ae6c395-f5fc-5255-b73b-4e1f630b34e2",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 316.0,
+      "end_sec": 327.0,
+      "content": "賛成です。次回は更新契約、個別契約、秘密保持契約を各2件ずつ使い、検索条件と権限の試案を作ります"
+    },
+    {
+      "id": "595cf383-889f-5cc6-9b52-7b7b1d856b59",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 46,
+      "speaker": "customer",
+      "start_sec": 327.0,
+      "end_sec": 330.0,
+      "content": "紙の電子化範囲もそこで決めましょう"
+    },
+    {
+      "id": "270ffa90-cfd3-5204-b117-4418372ccfb3",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "sequence_no": 47,
+      "speaker": "customer",
+      "start_sec": 330.0,
+      "end_sec": 332.0,
+      "content": "お願いします"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "65ff6140-31de-57a4-be18-038469a31544",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "knowledge_type": "pain_point",
+      "title": "契約書最新版の特定困難による業務停滞と人的コスト",
+      "situation": "取引先からの契約条件問い合わせに対し、共有フォルダに同名ファイルが複数存在し、最新版が特定できない状況。",
+      "problem": "営業・管理部・ホームの3人が2時間以上かけて探査し、商談中断や倉庫から紙の書類を出す手間が発生。",
+      "judgment": "ファイル名や更新日だけでは契約状態を判断できず、属人的な確認に依存している。",
+      "action": "担当者に連絡し、最終的に紙の書類を倉庫から取り出して対応。",
+      "reasoning": "命名ルールが守られておらず、営業・ホーム・紙の3箇所に分散保存されているため、単一のソースとして機能していない。",
+      "outcome": "のべ6時間近い探索負担が発生し、月数回同様の問題が起きている。",
+      "lesson": "文書管理の属人性が高い場合、検索機能だけでは解決せず、保存場所の一元化と命名ルールの徹底が前提となる。",
+      "applicable_situations": "契約書や重要文書のバージョン管理が不十分な組織。",
+      "limitations": "既存の業務フローが大きく変更されるため、現場の抵抗を考慮する必要がある。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "契約書最新版の特定困難による業務停滞と人的コスト\n取引先からの契約条件問い合わせに対し、共有フォルダに同名ファイルが複数存在し、最新版が特定できない状況。\n営業・管理部・ホームの3人が2時間以上かけて探査し、商談中断や倉庫から紙の書類を出す手間が発生。\nファイル名や更新日だけでは契約状態を判断できず、属人的な確認に依存している。\n担当者に連絡し、最終的に紙の書類を倉庫から取り出して対応。\n命名ルールが守られておらず、営業・ホーム・紙の3箇所に分散保存されているため、単一のソースとして機能していない。\nのべ6時間近い探索負担が発生し、月数回同様の問題が起きている。\n文書管理の属人性が高い場合、検索機能だけでは解決せず、保存場所の一元化と命名ルールの徹底が前提となる。\n契約書や重要文書のバージョン管理が不十分な組織。\n既存の業務フローが大きく変更されるため、現場の抵抗を考慮する必要がある。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:21:31.298528Z"
+    },
+    {
+      "id": "e527d7d0-25d8-58b3-87e2-9aa9bb094d8e",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "knowledge_type": "pain_point",
+      "title": "誤った版の送付による信用リスク",
+      "situation": "ファイル名に「最終」とあり更新日も新しかったため、最新だと思い込んで送信した。",
+      "problem": "実際の内容は古い版であり、取引先から指摘を受けて再送する手間と信用失墜のリスクが発生。",
+      "judgment": "ファイルメタデータ（名前・日付）のみでは、業務上の「最新」状態を正しく反映できない。",
+      "action": "取引先からの指摘後、正しい版を再送。",
+      "reasoning": "承認状態や有効期間などの業務属性がファイル情報に紐付いていないため、判断材料が不足していた。",
+      "outcome": "大きな問題にはならなかったが、信用面への懸念が残る。",
+      "lesson": "文書の「最新」はファイル属性ではなく、業務プロセス上の状態（承認済み、有効期間内等）で定義すべき。",
+      "applicable_situations": "外部への文書送付が多い業務。",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "誤った版の送付による信用リスク\nファイル名に「最終」とあり更新日も新しかったため、最新だと思い込んで送信した。\n実際の内容は古い版であり、取引先から指摘を受けて再送する手間と信用失墜のリスクが発生。\nファイルメタデータ（名前・日付）のみでは、業務上の「最新」状態を正しく反映できない。\n取引先からの指摘後、正しい版を再送。\n承認状態や有効期間などの業務属性がファイル情報に紐付いていないため、判断材料が不足していた。\n大きな問題にはならなかったが、信用面への懸念が残る。\n文書の「最新」はファイル属性ではなく、業務プロセス上の状態（承認済み、有効期間内等）で定義すべき。\n外部への文書送付が多い業務。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:21:31.298528Z"
+    },
+    {
+      "id": "4fe445f5-0e84-55bb-a709-d9ccc36c172f",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "knowledge_type": "customer_need",
+      "title": "検索と期限管理のための属性定義",
+      "situation": "契約書の最新版確認と、更新忘れの防止を同時に実現したい。",
+      "problem": "検索目的と期限管理目的では、必要な情報項目が異なる。",
+      "judgment": "契約先、契約種別、有効期間、承認状態、自動更新フラグなどの属性を定義する必要がある。",
+      "action": "利用場面ごとに優先順位をつけ、項目を増やしすぎないよう設計する。",
+      "reasoning": "入力が面倒になると営業が登録しなくなるため、業務効率化と入力負荷のバランスが重要。",
+      "outcome": null,
+      "lesson": "文書管理システムの設計時、ユーザーの「検索」ニーズと「管理」ニーズを区別し、最小限の必須属性を定義する。",
+      "applicable_situations": "文書管理システム導入時の要件定義。",
+      "limitations": "属性の過剰な追加は運用維持コストを高める。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "検索と期限管理のための属性定義\n契約書の最新版確認と、更新忘れの防止を同時に実現したい。\n検索目的と期限管理目的では、必要な情報項目が異なる。\n契約先、契約種別、有効期間、承認状態、自動更新フラグなどの属性を定義する必要がある。\n利用場面ごとに優先順位をつけ、項目を増やしすぎないよう設計する。\n入力が面倒になると営業が登録しなくなるため、業務効率化と入力負荷のバランスが重要。\n文書管理システムの設計時、ユーザーの「検索」ニーズと「管理」ニーズを区別し、最小限の必須属性を定義する。\n文書管理システム導入時の要件定義。\n属性の過剰な追加は運用維持コストを高める。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:21:31.298528Z"
+    },
+    {
+      "id": "6f144efa-a8fc-503b-8c0c-dacfcefe8134",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "knowledge_type": "proposal",
+      "title": "状態に応じた管理責任の分離と引き継ぎ条件の明文化",
+      "situation": "契約締結前と締結後で、文書の管理責任者が異なる。",
+      "problem": "営業がPDFを送ったつもりでも管理部が気づかないなど、引き継ぎの抜け漏れが発生。",
+      "judgment": "締結前は営業、締結済み（承認済み）は管理部が管理する方が現実的。",
+      "action": "状態変化に伴う管理責任の移管と、引き継ぎ完了条件を明文化する。",
+      "reasoning": "ワークフロー連携も候補だが、まずは誰が何を確認し、いつ登録が完了するかという基本ルールを確立する。",
+      "outcome": null,
+      "lesson": "文書ライフサイクルの各段階で、責任主体を明確にし、引き継ぎのトリガー条件を定義することで、管理の空白地帯を防げる。",
+      "applicable_situations": "複数部門が関わる文書管理プロセス。",
+      "limitations": "部門間の連携コストがかかる。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "状態に応じた管理責任の分離と引き継ぎ条件の明文化\n契約締結前と締結後で、文書の管理責任者が異なる。\n営業がPDFを送ったつもりでも管理部が気づかないなど、引き継ぎの抜け漏れが発生。\n締結前は営業、締結済み（承認済み）は管理部が管理する方が現実的。\n状態変化に伴う管理責任の移管と、引き継ぎ完了条件を明文化する。\nワークフロー連携も候補だが、まずは誰が何を確認し、いつ登録が完了するかという基本ルールを確立する。\n文書ライフサイクルの各段階で、責任主体を明確にし、引き継ぎのトリガー条件を定義することで、管理の空白地帯を防げる。\n複数部門が関わる文書管理プロセス。\n部門間の連携コストがかかる。\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:21:31.298528Z"
+    },
+    {
+      "id": "d52e4215-adf3-56da-9fa5-1e5a64a7a184",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "knowledge_type": "decision",
+      "title": "契約書からの段階的導入と権限設計",
+      "situation": "全社文書を一気に管理対象にするのはリスクが高い。",
+      "problem": "権限設定が複雑で、退職者や外部スタッフへのアクセス制御が必要。",
+      "judgment": "まず契約書から始め、6件で試した後に拡大する。",
+      "action": "営業は担当先のみ、役員・管理部は全社、外部スタッフは非公開とする権限設計を行う。",
+      "reasoning": "印刷・持ち出し制御や退職者権限削除を含む運用確認が、全社展開前の安心材料となる。",
+      "outcome": "次回は更新契約、個別契約、秘密保持契約を各2件ずつ使い、検索条件と権限の試案を作る。",
+      "lesson": "文書管理システム導入は、高頻度で問題が起きる特定文書種別からPoC（概念実証）を行い、運用ルールを固めてから拡大するのが有効。",
+      "applicable_situations": "大規模な文書管理システム導入プロジェクト。",
+      "limitations": "初期段階では対象外の文書は従来通り管理する必要がある。",
+      "industry": null,
+      "product": "E-VALUE-V 2nd Edition Document管理",
+      "sales_stage": "negotiation",
+      "search_text": "契約書からの段階的導入と権限設計\n全社文書を一気に管理対象にするのはリスクが高い。\n権限設定が複雑で、退職者や外部スタッフへのアクセス制御が必要。\nまず契約書から始め、6件で試した後に拡大する。\n営業は担当先のみ、役員・管理部は全社、外部スタッフは非公開とする権限設計を行う。\n印刷・持ち出し制御や退職者権限削除を含む運用確認が、全社展開前の安心材料となる。\n次回は更新契約、個別契約、秘密保持契約を各2件ずつ使い、検索条件と権限の試案を作る。\n文書管理システム導入は、高頻度で問題が起きる特定文書種別からPoC（概念実証）を行い、運用ルールを固めてから拡大するのが有効。\n大規模な文書管理システム導入プロジェクト。\n初期段階では対象外の文書は従来通り管理する必要がある。\nE-VALUE-V 2nd Edition Document管理\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:21:31.298528Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "eb2c7bf9-cfe3-5cfc-928d-90cd30357f91",
+      "knowledge_id": "65ff6140-31de-57a4-be18-038469a31544",
+      "start_utterance_id": "0f65be8f-ff63-54ea-aa02-78d58263c044",
+      "end_utterance_id": "ae19587a-8420-56e9-b96d-a7b041eec276"
+    },
+    {
+      "id": "f4594b37-4ed0-57c9-9f52-40cee6ac4ece",
+      "knowledge_id": "65ff6140-31de-57a4-be18-038469a31544",
+      "start_utterance_id": "ab2c2315-c283-542f-bf84-c33540dd1396",
+      "end_utterance_id": "ab2c2315-c283-542f-bf84-c33540dd1396"
+    },
+    {
+      "id": "6a50a3e8-c3eb-54ca-bbed-c981fa08b6e7",
+      "knowledge_id": "e527d7d0-25d8-58b3-87e2-9aa9bb094d8e",
+      "start_utterance_id": "7a4b9c78-980c-5b13-9f9a-5497f242dfa0",
+      "end_utterance_id": "d7be1074-4565-53f1-8f11-e1cf326089dc"
+    },
+    {
+      "id": "735ef051-d3a0-5918-8704-a7a7f8b635ae",
+      "knowledge_id": "4fe445f5-0e84-55bb-a709-d9ccc36c172f",
+      "start_utterance_id": "dcc0fe38-2199-5a11-8a50-d4c39f2404c6",
+      "end_utterance_id": "29954f03-c536-5310-a2aa-a6cc8483e893"
+    },
+    {
+      "id": "7f6de7d0-fcaf-5d80-b880-d8db0b8a4fd1",
+      "knowledge_id": "6f144efa-a8fc-503b-8c0c-dacfcefe8134",
+      "start_utterance_id": "ac3480d7-a944-5c6a-a192-347b0e74f787",
+      "end_utterance_id": "bddf8f32-7bc4-518d-89aa-036764ab10c0"
+    },
+    {
+      "id": "9a69b720-cfeb-592d-babc-fc2f06cde212",
+      "knowledge_id": "d52e4215-adf3-56da-9fa5-1e5a64a7a184",
+      "start_utterance_id": "1f60b545-a844-5065-9592-64503b66b47f",
+      "end_utterance_id": "270ffa90-cfd3-5204-b117-4418372ccfb3"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "c3c7dc0f-cde6-5772-8d21-f966e78c3410",
+      "data_source_id": "7719a870-1160-533e-a710-2a19cd38290f",
+      "summary": "契約書最新版の特定困難と誤送リスクに関する課題を掘り下げ、属性定義、管理責任の分離、権限設計を含む段階的導入プランを合意した商談。",
+      "customer_needs": [
+        "契約書最新版の迅速な特定",
+        "誤った版の送付防止",
+        "更新忘れの確認機能",
+        "役割に応じた閲覧・印刷権限管理",
+        "入力負荷の少ない属性設計"
+      ],
+      "proposals": [
+        "契約先・種別・有効期間・承認状態などの属性定義",
+        "締結前は営業、締結後は管理部が管理する責任分離",
+        "E-VALUE-V 2nd Edition Document管理による属性検索・全文検索・複合機連携",
+        "契約書6件でのPoC実施"
+      ],
+      "decisions": [
+        "全社展開前に契約書から段階的に導入する",
+        "営業は担当先のみ、役員・管理部は全社、外部スタッフは非公開とする権限設計",
+        "次回は更新・個別・秘密保持契約を各2件ずつ使用して試案を作る"
+      ],
+      "next_actions": [
+        "検索条件と権限の試案作成",
+        "紙の電子化範囲の決定",
+        "評価項目（検索時間、誤送防止、権限変更手順）の確認"
+      ]
+    }
+  ]
+}

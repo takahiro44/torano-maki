@@ -1,0 +1,623 @@
+{
+  "data_sources": [
+    {
+      "id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "source_type": "audio",
+      "file_name": "long_008.wav",
+      "occurred_at": "2026-08-25T00:14:20Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "635bd3cb-835c-5c7b-97ac-d6ce7f6de359",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 1,
+      "speaker": "customer",
+      "start_sec": 0.0,
+      "end_sec": 8.76,
+      "content": "入り口に建物模型が並んでいて、つい見入ってしまいました。あの木造ホールも御社の設計ですか?"
+    },
+    {
+      "id": "6a22a354-1b3a-53e7-a51a-172180b9b5f3",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 2,
+      "speaker": "salesperson",
+      "start_sec": 8.76,
+      "end_sec": 16.98,
+      "content": "そうです。模型と図面を行き来しながら進めた案件です。図面データがかなり大きくなりました。"
+    },
+    {
+      "id": "d0dfcdbb-c918-5238-b83b-00ae598f11b6",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 16.98,
+      "end_sec": 25.58,
+      "content": "まさに今日はそのデータ受け渡しについて伺いたいです。最後に送信で困ったのはいつでしたか?"
+    },
+    {
+      "id": "95167b3d-1755-5c52-a446-8c43b2b0968d",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 25.58,
+      "end_sec": 31.58,
+      "content": "昨日送ろうとしたファイルはどの種類でどのくらいの容量でしたか?"
+    },
+    {
+      "id": "7d5b387c-c17c-5737-8aab-a4fa8b4533a9",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 31.58,
+      "end_sec": 38.82,
+      "content": "3次元の設計データとPDF図面で合計2GB近くありました。"
+    },
+    {
+      "id": "5d1a9396-6743-583e-83d8-af55a04c0aa9",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 38.82,
+      "end_sec": 42.72,
+      "content": "送信期限は決まっていましたか?"
+    },
+    {
+      "id": "5b536e85-f1c3-58f8-8cbe-4281802c8a2e",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 42.72,
+      "end_sec": 52.46,
+      "content": "先方の会議が午後にあり、午前中に必要でした。急ぎだったので上司へ相談する時間も惜しかったようです。"
+    },
+    {
+      "id": "50bc44a3-9ccc-5986-86ec-7f4cc74c087c",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 52.46,
+      "end_sec": 60.46,
+      "content": "ルール違反というより、正規手段が急ぎの業務に対応できていなかった側面がありますね。"
+    },
+    {
+      "id": "15ff4852-8499-5c60-a47b-924627dfa412",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 60.46,
+      "end_sec": 65.5,
+      "content": "そう思います。社員を叱るだけではまた怒ります。"
+    },
+    {
+      "id": "4694a7a7-9381-5322-b569-93c083d9af2b",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 65.5,
+      "end_sec": 73.74,
+      "content": "昨日です。取引先のメール上限に引っかかり、個人向けのファイル転送サービスを使った社員がいました。"
+    },
+    {
+      "id": "ed3a63b6-12ca-5670-a7e7-89d751ab9e09",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 11,
+      "speaker": "salesperson",
+      "start_sec": 73.74,
+      "end_sec": 80.22,
+      "content": "会社として認めている方法ではなかったんですね。なぜその方法を選んだのでしょう?"
+    },
+    {
+      "id": "9437a6ad-79c8-5cd0-87cd-a84e461ffa07",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 80.46,
+      "end_sec": 88.86,
+      "content": "急ぎで他の方法がわからなかったそうです。パスワード付きジップを別メールで送るやり方も残っています。"
+    },
+    {
+      "id": "4352fe1b-2baf-56f0-969c-bdab250a4477",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 88.86,
+      "end_sec": 99.74,
+      "content": "送信相手は社外が中心ですか?相手が自社のIDを持っていないケースも多いでしょうか?"
+    },
+    {
+      "id": "19956445-9cf2-56e5-b949-9385944bd49f",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 99.74,
+      "end_sec": 105.42,
+      "content": "ほとんど社外で案件ごとに協力会社が変わります。"
+    },
+    {
+      "id": "f199d390-b50f-54e4-a882-130ce5e4d194",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 105.42,
+      "end_sec": 111.18,
+      "content": "ご送信や、誰がダウンロードしたかわからず困った経験はありますか?"
+    },
+    {
+      "id": "bdddd639-bf03-5f0f-b367-05921eceadf4",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 111.18,
+      "end_sec": 117.74,
+      "content": "当て先を間違えたとき、ファイルにはどの程度の機密情報が含まれていましたか?"
+    },
+    {
+      "id": "aa5fe0ed-0029-5e84-a319-48d91cfbd827",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 117.74,
+      "end_sec": 125.9,
+      "content": "公開前の店舗図面です。幸い相手が以前からの協力会社で削除したと連絡をもらいました。"
+    },
+    {
+      "id": "b1bac2ed-9929-5d38-b39c-92d03717e7ff",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 125.9,
+      "end_sec": 131.02,
+      "content": "削除されたことを技術的に確認する方法はありましたか?"
+    },
+    {
+      "id": "32e6bb1e-d9fb-59d1-ba35-85781d469a1a",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 131.02,
+      "end_sec": 136.22,
+      "content": "ありません。相手の回答を信じるしかありませんでした。"
+    },
+    {
+      "id": "580e64c4-9d79-5ff4-9849-3592002c3720",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 136.22,
+      "end_sec": 147.58,
+      "content": "送信後に公開を止める、期限を設ける、アクセス状況を確認するといった要件が必要か検討しましょう。"
+    },
+    {
+      "id": "c612984f-9270-53c4-a5be-3d22ecc639b6",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 21,
+      "speaker": "customer",
+      "start_sec": 147.58,
+      "end_sec": 152.78,
+      "content": "案件終了後もリンクが残り続けるのは避けたいです。"
+    },
+    {
+      "id": "f10dcc1b-ca05-5516-a0dd-e868d023ce3e",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 152.78,
+      "end_sec": 157.58,
+      "content": "保存期間と削除責任者も決める必要があります。"
+    },
+    {
+      "id": "7eada9f8-95d1-5620-8606-99d58050413d",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 157.58,
+      "end_sec": 162.38,
+      "content": "長期保管用と一時受け渡し用を混同しないようにします。"
+    },
+    {
+      "id": "860a0863-2460-5448-bbe9-42d7e25affd5",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 162.38,
+      "end_sec": 170.3,
+      "content": "あー、完成図面は保管したいですが、途中データは期限があって良いです。"
+    },
+    {
+      "id": "52679515-2cc1-5533-b3f7-b395965e42c7",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 170.3,
+      "end_sec": 178.14,
+      "content": "当て先間違いが一度ありました。すぐ気づきましたが取り消せず焦りました。"
+    },
+    {
+      "id": "b14642e9-4065-50b0-b16a-4abb2eccfd7e",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 178.14,
+      "end_sec": 186.7,
+      "content": "どこでもキャビネットは、IDを持たない第三者とのファイル操縦心やリンク共有を検討できるオンラインストレージです。"
+    },
+    {
+      "id": "16369ad7-ccdf-52a2-ac55-e5d164295942",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 186.7,
+      "end_sec": 191.34,
+      "content": "ただ、導入するだけでは個人サービスの利用は止まりません。"
+    },
+    {
+      "id": "c48974b9-2277-5120-9857-d6ba4dc7e1a2",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 191.34,
+      "end_sec": 195.66,
+      "content": "急ぎでも迷わない送信手順と権限が必要です。"
+    },
+    {
+      "id": "d5a514ce-b55f-57a3-b1ad-f8ea100d891e",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 195.66,
+      "end_sec": 201.98,
+      "content": "協力会社から受け取る場合、相手側の捜査で懸念はありますか?"
+    },
+    {
+      "id": "18daa71b-b42f-573c-8d0d-c4a7f758330b",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 201.98,
+      "end_sec": 209.26,
+      "content": "年配の職人さんもいて、アカウント作成や複雑な認証は難しいと言われます。"
+    },
+    {
+      "id": "bbb360c2-9f8e-5ceb-b0e8-8147d41ad63d",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 209.26,
+      "end_sec": 217.66,
+      "content": "送信側の安全性だけでなく、IDを持たない相手が迷わず受け渡しできることが条件ですね。"
+    },
+    {
+      "id": "bf9db4c3-cb05-5d84-95b5-465234d498ae",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 32,
+      "speaker": "customer",
+      "start_sec": 217.66,
+      "end_sec": 221.66,
+      "content": "スマートフォンから送る人もいます。"
+    },
+    {
+      "id": "3363baab-05e5-5e87-89d1-7ab83ae9a782",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 33,
+      "speaker": "salesperson",
+      "start_sec": 221.66,
+      "end_sec": 229.5,
+      "content": "実際の端末と相手役を使った確認が必要です。社内だけで操作できても不十分です。"
+    },
+    {
+      "id": "a61ce393-59a8-5f95-9867-784e90ac4dc8",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 34,
+      "speaker": "customer",
+      "start_sec": 229.5,
+      "end_sec": 235.42,
+      "content": "協力会社一社に試行をお願いできると思います。"
+    },
+    {
+      "id": "97a18edf-3b7a-5489-b98c-0cd0de39dcad",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 235.5,
+      "end_sec": 240.54,
+      "content": "操作が複雑だと、また勝手な方法を使いそうです。"
+    },
+    {
+      "id": "24861837-391f-5ecc-8804-ff2e9ec73413",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 240.54,
+      "end_sec": 249.82,
+      "content": "次回、実際の送信場面を3つ、通常図面、特に機密性の高い図面、協力会社からの受信に分けて、"
+    },
+    {
+      "id": "0a0c32e3-1081-58a9-80f6-0550a221b9bb",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 249.82,
+      "end_sec": 254.3,
+      "content": "必要な操作と管理者の確認項目をデモで見ていただきましょう。"
+    },
+    {
+      "id": "9aea91a5-6f55-58e6-a22e-9fbd2aad5658",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 38,
+      "speaker": "customer",
+      "start_sec": 254.3,
+      "end_sec": 257.5,
+      "content": "現場の若手にも触ってもらいたいです。"
+    },
+    {
+      "id": "2f13709a-6918-5c79-be57-07759355f6d8",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 257.5,
+      "end_sec": 262.22,
+      "content": "社内では誰がユーザー追加や権限変更を担当しますか?"
+    },
+    {
+      "id": "1806c093-3c9a-5ad1-9b2f-eda16f1dd194",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 262.3,
+      "end_sec": 270.7,
+      "content": "総務が候補ですが、案件メンバーの変更は設計部の方が早く把握します。"
+    },
+    {
+      "id": "df9498f6-4099-53c3-8b41-467879dd2f3a",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 270.7,
+      "end_sec": 278.14,
+      "content": "申請は設計部、承認と設定は総務など役割分担を決めましょう。"
+    },
+    {
+      "id": "43175e11-3b4f-5164-b5e6-f93ab7be68a6",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 278.14,
+      "end_sec": 282.94,
+      "content": "退職者や案件終了時の削除も同じ流れにします。"
+    },
+    {
+      "id": "2f21f1de-bc88-5e4b-b92f-e22a59b4ad97",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 43,
+      "speaker": "customer",
+      "start_sec": 282.94,
+      "end_sec": 289.1,
+      "content": "増やす時だけでなく、消す時の運用も必要ですね。"
+    },
+    {
+      "id": "bf77dc5e-c2dd-5199-84fb-0442516d5fba",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 289.18,
+      "end_sec": 294.38,
+      "content": "施行では、送受信時間、相手の捜査問い合わせ、"
+    },
+    {
+      "id": "2a4d491b-14ae-571d-9fde-e3e9fbf31ccd",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 294.38,
+      "end_sec": 299.26,
+      "content": "ご送信時の対応、期限切れ削除まで確認します。"
+    },
+    {
+      "id": "9714533d-0d47-53a7-8d46-6520bc137a60",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 46,
+      "speaker": "customer",
+      "start_sec": 299.26,
+      "end_sec": 304.86,
+      "content": "そこまで試せれば現場にもルールを説明できます。"
+    },
+    {
+      "id": "1c8ade56-d8b9-5f8d-9855-42b782f15a64",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "sequence_no": 47,
+      "speaker": "customer",
+      "start_sec": 304.86,
+      "end_sec": 311.34,
+      "content": "ぜひお願いします。使う本人が迷わないかまで確認してから運用を決めましょう。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "71344a84-f559-5e06-a29e-69c67ef3c049",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "knowledge_type": "pain_point",
+      "title": "急ぎの業務におけるファイル送信手段の欠如",
+      "situation": "設計データや図面など大容量ファイルの社外送信が必要な場面",
+      "problem": "正規手段が急ぎの業務に対応できず、社員が個人向けファイル転送サービスを利用してしまう",
+      "judgment": "単なるルール違反ではなく、業務フローとツール適合性の問題",
+      "action": "急ぎでも迷わない送信手順と権限管理の整備",
+      "reasoning": "社員を叱責するだけでは再発防止にならないため、環境整備が必要",
+      "outcome": null,
+      "lesson": "セキュリティインシデントの背景には、業務の緊急性とツールの使い勝手のミスマッチがある",
+      "applicable_situations": "大容量データの社外共有が頻繁な業界",
+      "limitations": null,
+      "industry": "建築・設計",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "急ぎの業務におけるファイル送信手段の欠如\n設計データや図面など大容量ファイルの社外送信が必要な場面\n正規手段が急ぎの業務に対応できず、社員が個人向けファイル転送サービスを利用してしまう\n単なるルール違反ではなく、業務フローとツール適合性の問題\n急ぎでも迷わない送信手順と権限管理の整備\n社員を叱責するだけでは再発防止にならないため、環境整備が必要\nセキュリティインシデントの背景には、業務の緊急性とツールの使い勝手のミスマッチがある\n大容量データの社外共有が頻繁な業界\n建築・設計\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:00.824413Z"
+    },
+    {
+      "id": "9009b517-c82b-5f5c-b3aa-bca45afee6ca",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "knowledge_type": "customer_need",
+      "title": "IDを持たない第三者との安全なファイル共有",
+      "situation": "案件ごとに協力会社が変わり、相手が自社IDを持っていないケースが多い",
+      "problem": "メール上限に引っかかる、または機密情報を誤送信するリスク",
+      "judgment": "送信側の安全性だけでなく、受信側（ID非保持者）の利便性も重要",
+      "action": "リンク共有やID不要の受け渡し機能の検討",
+      "reasoning": "年配の職人などアカウント作成が難しい相手も存在するため",
+      "outcome": null,
+      "lesson": "B2Bのファイル共有では、相手のITリテラシーや環境を考慮した設計が必須",
+      "applicable_situations": "多様な外部パートナーと協業する企業",
+      "limitations": null,
+      "industry": "建築・設計",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "IDを持たない第三者との安全なファイル共有\n案件ごとに協力会社が変わり、相手が自社IDを持っていないケースが多い\nメール上限に引っかかる、または機密情報を誤送信するリスク\n送信側の安全性だけでなく、受信側（ID非保持者）の利便性も重要\nリンク共有やID不要の受け渡し機能の検討\n年配の職人などアカウント作成が難しい相手も存在するため\nB2Bのファイル共有では、相手のITリテラシーや環境を考慮した設計が必須\n多様な外部パートナーと協業する企業\n建築・設計\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:00.824413Z"
+    },
+    {
+      "id": "022e146a-7501-5656-ad45-f9477af8d742",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "knowledge_type": "operational_insight",
+      "title": "データ保存期間と削除責任の明確化",
+      "situation": "案件終了後もリンクが残存するリスク",
+      "problem": "長期保管用と一時受け渡し用が混同されている",
+      "judgment": "完成図面は保管、途中データは期限設定が必要",
+      "action": "保存期間と削除責任者の決定、退職者や案件終了時の削除フロー整備",
+      "reasoning": "増やす時だけでなく、消す時の運用も重要",
+      "outcome": null,
+      "lesson": "データライフサイクル管理は、作成・共有だけでなく削除・廃棄まで含めて設計する",
+      "applicable_situations": "機密データを扱うすべての組織",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "データ保存期間と削除責任の明確化\n案件終了後もリンクが残存するリスク\n長期保管用と一時受け渡し用が混同されている\n完成図面は保管、途中データは期限設定が必要\n保存期間と削除責任者の決定、退職者や案件終了時の削除フロー整備\n増やす時だけでなく、消す時の運用も重要\nデータライフサイクル管理は、作成・共有だけでなく削除・廃棄まで含めて設計する\n機密データを扱うすべての組織\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:00.824413Z"
+    },
+    {
+      "id": "82b7ae79-0d96-541b-99f1-eb0dc19ebc6d",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "knowledge_type": "sales_technique",
+      "title": "具体的なシナリオを用いたデモ提案",
+      "situation": "顧客が現場の若手や協力会社の操作性を懸念している",
+      "problem": "社内だけで操作できても、実際の現場では不十分",
+      "judgment": "実際の端末と相手役を使った確認が必要",
+      "action": "通常図面、機密図面、協力会社からの受信の3つの場面をデモで提示",
+      "reasoning": "使う本人が迷わないか確認してから運用を決めるため",
+      "outcome": null,
+      "lesson": "IT導入商談では、抽象的な機能説明ではなく、顧客の具体的な業務シーンに落とし込んだデモが有効",
+      "applicable_situations": "現場作業員や外部パートナーを含むユーザー基盤を持つ案件",
+      "limitations": null,
+      "industry": null,
+      "product": "どこでもキャビネット",
+      "sales_stage": "proposal",
+      "search_text": "具体的なシナリオを用いたデモ提案\n顧客が現場の若手や協力会社の操作性を懸念している\n社内だけで操作できても、実際の現場では不十分\n実際の端末と相手役を使った確認が必要\n通常図面、機密図面、協力会社からの受信の3つの場面をデモで提示\n使う本人が迷わないか確認してから運用を決めるため\nIT導入商談では、抽象的な機能説明ではなく、顧客の具体的な業務シーンに落とし込んだデモが有効\n現場作業員や外部パートナーを含むユーザー基盤を持つ案件\nどこでもキャビネット\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:00.824413Z"
+    },
+    {
+      "id": "75f8fd25-215d-5f1d-9683-b8edcfe089fc",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "knowledge_type": "decision",
+      "title": "ユーザー管理の役割分担",
+      "situation": "社内でのユーザー追加や権限変更の担当が未定",
+      "problem": "案件メンバーの変更は設計部が早く把握するが、管理は総務が候補",
+      "judgment": "申請は設計部、承認と設定は総務",
+      "action": "役割分担の決定",
+      "reasoning": "業務のスピードと管理の統制のバランス",
+      "outcome": null,
+      "lesson": "ITツールの運用は、業務部門と管理部門の連携設計が成功の鍵",
+      "applicable_situations": "部門横断的なデータ共有を行う組織",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "ユーザー管理の役割分担\n社内でのユーザー追加や権限変更の担当が未定\n案件メンバーの変更は設計部が早く把握するが、管理は総務が候補\n申請は設計部、承認と設定は総務\n役割分担の決定\n業務のスピードと管理の統制のバランス\nITツールの運用は、業務部門と管理部門の連携設計が成功の鍵\n部門横断的なデータ共有を行う組織\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:00.824413Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "ddee727a-db91-59bd-af95-ffad1dc7e888",
+      "knowledge_id": "71344a84-f559-5e06-a29e-69c67ef3c049",
+      "start_utterance_id": "5b536e85-f1c3-58f8-8cbe-4281802c8a2e",
+      "end_utterance_id": "9437a6ad-79c8-5cd0-87cd-a84e461ffa07"
+    },
+    {
+      "id": "85a82a60-66c6-53f6-a948-f7ef661047ac",
+      "knowledge_id": "9009b517-c82b-5f5c-b3aa-bca45afee6ca",
+      "start_utterance_id": "4352fe1b-2baf-56f0-969c-bdab250a4477",
+      "end_utterance_id": "19956445-9cf2-56e5-b949-9385944bd49f"
+    },
+    {
+      "id": "2b35e54e-e469-5848-8522-1e4e9c5f0847",
+      "knowledge_id": "9009b517-c82b-5f5c-b3aa-bca45afee6ca",
+      "start_utterance_id": "d5a514ce-b55f-57a3-b1ad-f8ea100d891e",
+      "end_utterance_id": "bbb360c2-9f8e-5ceb-b0e8-8147d41ad63d"
+    },
+    {
+      "id": "3db50fb3-6257-53e3-8280-f6925700f44d",
+      "knowledge_id": "022e146a-7501-5656-ad45-f9477af8d742",
+      "start_utterance_id": "c612984f-9270-53c4-a5be-3d22ecc639b6",
+      "end_utterance_id": "860a0863-2460-5448-bbe9-42d7e25affd5"
+    },
+    {
+      "id": "89bd5fca-77e8-57fe-b399-1c130297d4cc",
+      "knowledge_id": "022e146a-7501-5656-ad45-f9477af8d742",
+      "start_utterance_id": "43175e11-3b4f-5164-b5e6-f93ab7be68a6",
+      "end_utterance_id": "2f21f1de-bc88-5e4b-b92f-e22a59b4ad97"
+    },
+    {
+      "id": "5e407d54-261b-5843-9efb-c0599e3f0220",
+      "knowledge_id": "82b7ae79-0d96-541b-99f1-eb0dc19ebc6d",
+      "start_utterance_id": "bf9db4c3-cb05-5d84-95b5-465234d498ae",
+      "end_utterance_id": "0a0c32e3-1081-58a9-80f6-0550a221b9bb"
+    },
+    {
+      "id": "29441852-84a6-526e-af40-bfc3fc88eab1",
+      "knowledge_id": "82b7ae79-0d96-541b-99f1-eb0dc19ebc6d",
+      "start_utterance_id": "9714533d-0d47-53a7-8d46-6520bc137a60",
+      "end_utterance_id": "1c8ade56-d8b9-5f8d-9855-42b782f15a64"
+    },
+    {
+      "id": "139810e5-5a47-5b04-b28d-31e2d55f6157",
+      "knowledge_id": "75f8fd25-215d-5f1d-9683-b8edcfe089fc",
+      "start_utterance_id": "2f13709a-6918-5c79-be57-07759355f6d8",
+      "end_utterance_id": "df9498f6-4099-53c3-8b41-467879dd2f3a"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "d75b5dc8-73b4-5ced-8c76-c9d36139fa4c",
+      "data_source_id": "4abe4c03-e7a5-57c7-aacf-60d6dec0f534",
+      "summary": "建築設計会社における大容量図面データの社外送信時のセキュリティ課題と、IDを持たない協力会社との利便性を両立したオンラインストレージ「どこでもキャビネット」の導入検討商談。",
+      "customer_needs": [
+        "急ぎの業務でも迷わないファイル送信手段",
+        "IDを持たない第三者（協力会社）との安全なファイル共有",
+        "データ保存期間と削除責任の明確化",
+        "現場の若手や年配の職人でも操作しやすいUI"
+      ],
+      "proposals": [
+        "通常図面、機密図面、協力会社受信の3シナリオでのデモ実施",
+        "申請（設計部）と承認・設定（総務）の役割分担",
+        "退職者や案件終了時の削除フロー整備"
+      ],
+      "decisions": [
+        "次回デモで実際の端末と相手役を使った確認を行う",
+        "ユーザー管理の役割分担を設計部と総務で決める"
+      ],
+      "next_actions": [
+        "3つの送信場面を含むデモ準備",
+        "社内での運用ルール（保存期間、削除責任者）の策定"
+      ]
+    }
+  ]
+}

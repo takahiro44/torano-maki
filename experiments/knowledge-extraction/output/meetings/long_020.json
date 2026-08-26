@@ -1,0 +1,660 @@
+{
+  "data_sources": [
+    {
+      "id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "source_type": "audio",
+      "file_name": "long_020.wav",
+      "occurred_at": "2026-08-25T01:00:10Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "d7207e22-7d02-5c53-b3ab-2eb0469e1849",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 6.0,
+      "content": "窓際の植物が元気ですね。社員の方が手入れされているんですか?"
+    },
+    {
+      "id": "4b422ca5-d7ef-5f83-8004-7edc2a2263eb",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 6.0,
+      "end_sec": 13.0,
+      "content": "当番制です。私は忘れがちなのでチャットで知らせてもらっています。"
+    },
+    {
+      "id": "a788ff47-dea7-5fa4-a741-5a426c4adbba",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 13.0,
+      "end_sec": 23.0,
+      "content": "当番が見える仕組みがあるんですね。今日はネットワーク管理を任せたいというご相談ですが、最後に困った出来事を教えてください。"
+    },
+    {
+      "id": "29409d88-36b7-51b7-b284-a2d67a2c8fa0",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 23.0,
+      "end_sec": 30.0,
+      "content": "ネットワーク管理を任せたいと思ったきっかけは、先週の出来事だけですか?"
+    },
+    {
+      "id": "833347f9-9a50-5a28-90dc-fbd3f890c80d",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 30.0,
+      "end_sec": 39.0,
+      "content": "知人の会社で長時間インターネットが止まったと聞き、不安になりました。うちは専門担当がいません。"
+    },
+    {
+      "id": "b805554c-8111-5a2e-82d7-e3b4b7d66faf",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 39.0,
+      "end_sec": 45.0,
+      "content": "他社の事故を見て、自社でも起きたら対応できないという不安が強くなったんですね。"
+    },
+    {
+      "id": "62757be9-e449-51fb-8ee6-27e8865fac22",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 46.0,
+      "end_sec": 51.0,
+      "content": "はい、何か入れておけば安心できるのではと思いました。"
+    },
+    {
+      "id": "10c6c0d5-65d6-5c46-b08c-136c2c0418af",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 51.0,
+      "end_sec": 63.0,
+      "content": "安心は重要ですが、何を防ぎ、どの状態になれば安心と言えるかを具体化しないと、契約後も不安が残る可能性があります。"
+    },
+    {
+      "id": "a1abc8c0-2f08-5984-a402-9e26b3f77638",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 63.0,
+      "end_sec": 69.0,
+      "content": "問い合わせ先と、危機が正常か分かることが欲しいです。"
+    },
+    {
+      "id": "98f95f76-bc70-51d4-97bc-33a66861f5c6",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 69.0,
+      "end_sec": 74.0,
+      "content": "先週、インターネットが遅いと社員から言われました。"
+    },
+    {
+      "id": "7bb9c818-f7b1-55ba-b71c-b96a114ff23d",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 74.0,
+      "end_sec": 78.0,
+      "content": "私がルーターを再起動したら治りました。"
+    },
+    {
+      "id": "c42dfab7-7c97-562c-b487-75949ed2371b",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 78.0,
+      "end_sec": 84.0,
+      "content": "その時全員が遅かったのでしょうか?それとも特定の方だけでしたか?"
+    },
+    {
+      "id": "a1c8b161-4935-536e-b970-b9a37f7c77ea",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 84.0,
+      "end_sec": 90.0,
+      "content": "確認していません。2人に言われてすぐ再起動しました。"
+    },
+    {
+      "id": "033a6828-3955-56d2-ba38-2a9c2d52a576",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 90.0,
+      "end_sec": 98.0,
+      "content": "発生頻度はどれくらいですか?半年で2回のうち、もう1回はどんな状況でしたか?"
+    },
+    {
+      "id": "f933b9bd-80e2-5084-a9d6-3ddb250e5ed3",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 98.0,
+      "end_sec": 106.0,
+      "content": "ああ、大きなデータをクラウドへ送っていた社員のPCだけ、遅く全社障害ではなかったですね。"
+    },
+    {
+      "id": "ef64890c-929c-5405-935f-ca016ba324eb",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 106.0,
+      "end_sec": 115.0,
+      "content": "2回目が同じ原因とは限らないですね。1回目は全体、2回目は1端末だった可能性があります。"
+    },
+    {
+      "id": "8fa29242-bdec-5b6e-9c28-9ccd1c02542a",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 115.0,
+      "end_sec": 123.0,
+      "content": "当時はどちらもネットが遅いという一つの問題だと思いました。"
+    },
+    {
+      "id": "c49fc945-96e2-56be-954a-f41b9706a3d4",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 123.0,
+      "end_sec": 133.0,
+      "content": "問い合わせ受付で影響範囲を確認するだけでも、回線、Wi-Fi、端末、アプリの切り分けが進みます。"
+    },
+    {
+      "id": "01bfffb7-fa72-5a45-b67d-1d9deaccf50e",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 133.0,
+      "end_sec": 140.0,
+      "content": "社員にも遅いだけでなく、場所や端末を伝えてもらうようにします。"
+    },
+    {
+      "id": "39e914e6-aab0-5655-a30e-3af2d306ef3d",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 140.0,
+      "end_sec": 148.0,
+      "content": "半年で2回です。再起動は5分くらいですが、私は機械が苦手なので不安です。"
+    },
+    {
+      "id": "5de11aab-64d1-5408-8117-129cf62659f3",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 149.0,
+      "end_sec": 158.0,
+      "content": "不安を減らすことが一番でしょうか?それとも、実際の停止時間や社員の作業影響が大きいでしょうか?"
+    },
+    {
+      "id": "78402988-9714-52df-af36-300e1d0c6c2b",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 158.0,
+      "end_sec": 165.0,
+      "content": "今のところ影響は小さいです。問い合わせ先がわからないことが不安ですね。"
+    },
+    {
+      "id": "851debef-cb56-5ab1-8b7a-aaa459e1796a",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 165.0,
+      "end_sec": 177.0,
+      "content": "現在の回線や機器に保守窓口はありますか?既存の契約書は、回線、ルータ、Wi-Fiで別々になっていますか?"
+    },
+    {
+      "id": "74c1ed3a-eff4-5f05-8f9c-b1850803465b",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 177.0,
+      "end_sec": 186.0,
+      "content": "回線は通信会社、ルータは購入した業者、Wi-Fiは知人に設定してもらいました。"
+    },
+    {
+      "id": "048d5e8b-dc5f-50c8-b292-492b1ef06007",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 186.0,
+      "end_sec": 193.0,
+      "content": "窓口が複数で、障害時にどこへ連絡するかわからないことが不安の中心かもしれません。"
+    },
+    {
+      "id": "90c780b1-33de-5ee6-a4cd-77ad817713f4",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 193.0,
+      "end_sec": 200.0,
+      "content": "そうですね。各社から自分の範囲ではないと言われるのが怖いです。"
+    },
+    {
+      "id": "c9bc86e4-a3e5-53fc-b7a4-446cc75d800d",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 200.0,
+      "end_sec": 209.0,
+      "content": "契約内容と連絡先を1枚に整理し、最初にどこへ連絡するか決めるだけで改善するか試しましょう。"
+    },
+    {
+      "id": "e26e0a09-529d-5d5e-991e-6204840b35d3",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 28,
+      "speaker": "customer",
+      "start_sec": 209.0,
+      "end_sec": 213.0,
+      "content": "それなら費用をかけずに、できます。"
+    },
+    {
+      "id": "2203d202-6e06-5463-8211-73adea09fbe4",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 213.0,
+      "end_sec": 223.0,
+      "content": "もし実際に窓口間のたらいまわしが起きる、監視が必要な業務影響があるとわかれば、運用代行の価値が明確になります。"
+    },
+    {
+      "id": "d2cd35c6-34ef-548b-b735-de39715c317d",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 223.0,
+      "end_sec": 227.0,
+      "content": "必要性を確認してから比較したいです。"
+    },
+    {
+      "id": "ae1d9d56-e3e7-5011-8b3c-a24325f2b94f",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 227.0,
+      "end_sec": 232.0,
+      "content": "契約書を確認すればあるかもしれません。使ったことはありません。"
+    },
+    {
+      "id": "094adf61-c49d-58f6-98c1-69a6c77e4c65",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 232.0,
+      "end_sec": 241.0,
+      "content": "多用レールラクラクネットワークシリーズには、ネットワーク機器の運用管理やトラブル対応を支援するメニューがあります。"
+    },
+    {
+      "id": "1650f0b5-0763-52bb-acd5-6f5e0f2badf4",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 33,
+      "speaker": "salesperson",
+      "start_sec": 241.0,
+      "end_sec": 252.0,
+      "content": "ただ、半年に2回5分で復旧し、既存窓口も未確認なら、すぐ新しい契約を進める段階ではないと思います。"
+    },
+    {
+      "id": "f083965f-3272-5d7e-b647-6cdecb66f110",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 34,
+      "speaker": "customer",
+      "start_sec": 252.0,
+      "end_sec": 254.0,
+      "content": "売らなくていいんですか。"
+    },
+    {
+      "id": "6c46edd9-459c-53c7-8df0-901d46cfa4c8",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 254.0,
+      "end_sec": 258.0,
+      "content": "必要性が明確になってからのほうがよいです。"
+    },
+    {
+      "id": "2b3628d6-1689-5c6d-8d2e-df8f9fa91f52",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 258.0,
+      "end_sec": 272.0,
+      "content": "まず、契約書で既存窓口を確認し、次回問題が起きたら、時刻、影響した人、端末、利用中のアプリ、復旧までの時間を記録してください。"
+    },
+    {
+      "id": "8a0ed0fc-53f2-57c2-bb99-9b046c08ea16",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 272.0,
+      "end_sec": 281.0,
+      "content": "1カ月の観察中に重大な障害が起きた場合は、記録を優先せず既存窓口や緊急連絡先へ連絡してください。"
+    },
+    {
+      "id": "b4f662a4-7150-59fb-8a0a-dfe3ef5bc522",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 38,
+      "speaker": "customer",
+      "start_sec": 281.0,
+      "end_sec": 285.0,
+      "content": "観察のために対応が遅れてはいけませんね。"
+    },
+    {
+      "id": "94f65117-5aaf-5aae-8f3e-616e26836d58",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 285.0,
+      "end_sec": 296.0,
+      "content": "はい。平常時に契約一覧、危機一覧、社内への連絡文、問い合わせ時に伝える情報だけ準備しましょう。"
+    },
+    {
+      "id": "b6cca770-a904-5c60-90bd-9a3cb8baeaf9",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 296.0,
+      "end_sec": 303.0,
+      "content": "社員には、勝手に再起動する前に私へ状況を伝えてもらいます。"
+    },
+    {
+      "id": "fe7fc342-2157-5ea1-9a87-f417b3d83595",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 304.0,
+      "end_sec": 313.0,
+      "content": "復旧を急ぐ場合は再起動して構いませんが、可能な範囲で時刻と影響範囲を残す運用にしましょう。"
+    },
+    {
+      "id": "8dc2579f-c8cd-5351-99ac-fb50804d351f",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 313.0,
+      "end_sec": 316.0,
+      "content": "無理のないルールなら続けられそうです。"
+    },
+    {
+      "id": "573e069d-f4f4-5710-8945-98eedcc6d7bf",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 316.0,
+      "end_sec": 323.0,
+      "content": "次回は観察結果に加え、長谷川さんの不安がどれだけ減ったかも確認します。"
+    },
+    {
+      "id": "ef26a420-a32d-5e75-a342-3f65888d474c",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 323.0,
+      "end_sec": 329.0,
+      "content": "製品導入がなくても対応手順が見えれば目的の一部は達成できます。"
+    },
+    {
+      "id": "73b17e52-5092-59e3-9133-c8115c857348",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 329.0,
+      "end_sec": 333.0,
+      "content": "まずは今の環境を理解するところから始めます。"
+    },
+    {
+      "id": "119110eb-e745-500e-b7ed-2bbdb184e799",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 46,
+      "speaker": "customer",
+      "start_sec": 333.0,
+      "end_sec": 335.0,
+      "content": "それならすぐできます。"
+    },
+    {
+      "id": "5da1d2cb-6e3c-5902-9d1c-31028c6b6f9d",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 47,
+      "speaker": "salesperson",
+      "start_sec": 335.0,
+      "end_sec": 346.0,
+      "content": "1ヶ月後に記録を見て、頻度や業務影響が大きい、原因切り分けに負担がかかるという事実があれば、現地確認とサービス比較へ進みましょう。"
+    },
+    {
+      "id": "d8b6f84e-ef55-57d3-a142-9c0838784db5",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 346.0,
+      "end_sec": 350.0,
+      "content": "既存窓口で十分ならそのまま使うのが合理的です。"
+    },
+    {
+      "id": "1e239e47-eb52-570d-a63d-6731fce15598",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "sequence_no": 49,
+      "speaker": "customer",
+      "start_sec": 350.0,
+      "end_sec": 355.0,
+      "content": "安心しました。まず、今あるものを確認します。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "248f9803-7a10-5e44-b162-b50efc252cbf",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "knowledge_type": "sales_technique",
+      "title": "不安の具体化と現状把握による信頼構築",
+      "situation": "顧客が他社の事故をきっかけにネットワーク管理の不安を訴えているが、具体的な障害内容が曖昧な状態。",
+      "problem": "顧客の「安心したい」という漠然とした要望に対し、過剰なサービス提案や契約を急ぐと不信感や不要なコストが発生するリスクがある。",
+      "judgment": "まず顧客の不安の正体（窓口の不明確さ、対応手順の欠如）を特定し、既存リソースで解決できる可能性を探る。",
+      "action": "障害時の影響範囲（全社か特定端末か）や発生頻度、既存の契約窓口を確認する質問を行い、顧客自身に現状を整理させる。",
+      "reasoning": "事実ベースの現状把握により、顧客の不安が「未知の恐怖」から「管理可能なリスク」に変わるため、信頼関係が深まる。",
+      "outcome": "顧客は「窓口が複数でたらい回しになるのが怖い」という根本的な不安を言語化し、既存契約の確認に前向きになった。",
+      "lesson": "顧客の漠然とした不安に対して、すぐに製品を売るのではなく、現状の課題を一緒に整理するプロセスを経ることで、後の提案の精度と受容性を高めることができる。",
+      "applicable_situations": "顧客が「不安」「心配」という感情ベースの要望のみで具体的な課題が不明な場合。",
+      "limitations": "顧客が現状の把握を拒否したり、時間的余裕がない場合は、このプロセスが長引く可能性がある。",
+      "industry": "ITサービス",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "不安の具体化と現状把握による信頼構築\n顧客が他社の事故をきっかけにネットワーク管理の不安を訴えているが、具体的な障害内容が曖昧な状態。\n顧客の「安心したい」という漠然とした要望に対し、過剰なサービス提案や契約を急ぐと不信感や不要なコストが発生するリスクがある。\nまず顧客の不安の正体（窓口の不明確さ、対応手順の欠如）を特定し、既存リソースで解決できる可能性を探る。\n障害時の影響範囲（全社か特定端末か）や発生頻度、既存の契約窓口を確認する質問を行い、顧客自身に現状を整理させる。\n事実ベースの現状把握により、顧客の不安が「未知の恐怖」から「管理可能なリスク」に変わるため、信頼関係が深まる。\n顧客は「窓口が複数でたらい回しになるのが怖い」という根本的な不安を言語化し、既存契約の確認に前向きになった。\n顧客の漠然とした不安に対して、すぐに製品を売るのではなく、現状の課題を一緒に整理するプロセスを経ることで、後の提案の精度と受容性を高めることができる。\n顧客が「不安」「心配」という感情ベースの要望のみで具体的な課題が不明な場合。\n顧客が現状の把握を拒否したり、時間的余裕がない場合は、このプロセスが長引く可能性がある。\nITサービス\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:34:05.705975Z"
+    },
+    {
+      "id": "ce89a63b-6716-5030-9415-15fcfa7e670b",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "knowledge_type": "sales_technique",
+      "title": "低コストな初期アクションの提案による心理的ハードルの低下",
+      "situation": "顧客はネットワーク障害への対応に不安を抱えているが、高額な運用代行契約には慎重である。",
+      "problem": "いきなり有償サービス（運用代行）を提案すると、顧客は「まだ必要かわからないのに費用がかかる」と抵抗を示す可能性がある。",
+      "judgment": "費用をかけずに実行できる「契約書の整理」や「障害時の記録ルール」をまず提案し、顧客の行動を促す。",
+      "action": "「契約内容と連絡先を1枚に整理する」「障害時に時刻や影響範囲を記録する」という具体的な低コストアクションを提案する。",
+      "reasoning": "顧客が自ら小さな成功体験（不安の軽減、手順の明確化）を得ることで、次のステップ（有償サービスの検討）への心理的ハードルが下がる。",
+      "outcome": "顧客は「費用をかけずにできる」と反応し、観察期間の設定に同意した。",
+      "lesson": "高額な提案の前に、顧客が即座に実行可能で費用のかからない「次の一歩」を提示することで、商談の停滞を防ぎ、顧客の主体性を引き出すことができる。",
+      "applicable_situations": "顧客が費用対効果に敏感で、直ちに契約する意思がない場合。",
+      "limitations": "顧客が「記録する手間」を嫌がる場合は、ツール導入など別のアプローチが必要になる。",
+      "industry": "ITサービス",
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "低コストな初期アクションの提案による心理的ハードルの低下\n顧客はネットワーク障害への対応に不安を抱えているが、高額な運用代行契約には慎重である。\nいきなり有償サービス（運用代行）を提案すると、顧客は「まだ必要かわからないのに費用がかかる」と抵抗を示す可能性がある。\n費用をかけずに実行できる「契約書の整理」や「障害時の記録ルール」をまず提案し、顧客の行動を促す。\n「契約内容と連絡先を1枚に整理する」「障害時に時刻や影響範囲を記録する」という具体的な低コストアクションを提案する。\n顧客が自ら小さな成功体験（不安の軽減、手順の明確化）を得ることで、次のステップ（有償サービスの検討）への心理的ハードルが下がる。\n顧客は「費用をかけずにできる」と反応し、観察期間の設定に同意した。\n高額な提案の前に、顧客が即座に実行可能で費用のかからない「次の一歩」を提示することで、商談の停滞を防ぎ、顧客の主体性を引き出すことができる。\n顧客が費用対効果に敏感で、直ちに契約する意思がない場合。\n顧客が「記録する手間」を嫌がる場合は、ツール導入など別のアプローチが必要になる。\nITサービス\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:34:05.705975Z"
+    },
+    {
+      "id": "373927ae-d84c-5482-8735-db0bf3e2154b",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "knowledge_type": "sales_technique",
+      "title": "「売らない」姿勢による信頼獲得と長期視点の共有",
+      "situation": "顧客が「売らなくていいんですか」と確認する場面。",
+      "problem": "営業担当者が即座に契約を迫ると、顧客は防御的になり、真のニーズを隠す可能性がある。",
+      "judgment": "顧客の必要性が明確になるまで契約を急がないことを明示し、顧客の利益最優先の姿勢を示す。",
+      "action": "「必要性が明確になってからのほうがよい」と回答し、1ヶ月間の観察期間を設定する。",
+      "reasoning": "顧客にとって最適な解決策（既存窓口の活用 or 新規契約）を一緒に見つけるパートナーとして振る舞うことで、長期的な信頼関係を築く。",
+      "outcome": "顧客は「安心しました」と返し、既存環境の確認に協力する姿勢を見せた。",
+      "lesson": "短期的なクロージングを諦め、顧客の課題解決プロセスに寄り添う姿勢を示すことで、顧客の心理的防衛を解き、真の意思決定プロセスに参加できる。",
+      "applicable_situations": "顧客が「本当に必要か」を疑っている、または競合他社と比較検討している段階。",
+      "limitations": "組織のKPIや短期的な売上目標が厳しすぎる環境では、この戦略を実行しにくい可能性がある。",
+      "industry": "ITサービス",
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "「売らない」姿勢による信頼獲得と長期視点の共有\n顧客が「売らなくていいんですか」と確認する場面。\n営業担当者が即座に契約を迫ると、顧客は防御的になり、真のニーズを隠す可能性がある。\n顧客の必要性が明確になるまで契約を急がないことを明示し、顧客の利益最優先の姿勢を示す。\n「必要性が明確になってからのほうがよい」と回答し、1ヶ月間の観察期間を設定する。\n顧客にとって最適な解決策（既存窓口の活用 or 新規契約）を一緒に見つけるパートナーとして振る舞うことで、長期的な信頼関係を築く。\n顧客は「安心しました」と返し、既存環境の確認に協力する姿勢を見せた。\n短期的なクロージングを諦め、顧客の課題解決プロセスに寄り添う姿勢を示すことで、顧客の心理的防衛を解き、真の意思決定プロセスに参加できる。\n顧客が「本当に必要か」を疑っている、または競合他社と比較検討している段階。\n組織のKPIや短期的な売上目標が厳しすぎる環境では、この戦略を実行しにくい可能性がある。\nITサービス\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:34:05.705975Z"
+    },
+    {
+      "id": "524863ed-a8e9-5536-8143-cc4eec857963",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "knowledge_type": "operational_insight",
+      "title": "障害対応時の「影響範囲確認」が切り分けの第一歩",
+      "situation": "顧客の社内では、ネットワークが遅いという報告に対し、原因を特定せずにルーター再起動を行うことが習慣化していた。",
+      "problem": "原因不明のまま再起動を行うと、障害の根本原因（回線、Wi-Fi、端末、アプリ）が特定できず、再発防止や適切な対応が困難になる。",
+      "judgment": "障害発生時に「誰が、どの端末で、どのアプリで、どの程度遅かったか」を確認するだけで、切り分けの方向性が定まる。",
+      "action": "社員に「遅い」と報告する際に、場所や端末、利用中のアプリを伝えるようルール化することを提案。",
+      "reasoning": "IT障害の多くは、全社的な回線障害ではなく、特定の端末やアプリケーション起因である場合が多い。初期情報の質が、解決速度とコストを左右する。",
+      "outcome": "顧客は「社員に状況を伝えるようにする」と同意し、より正確な障害記録が可能になる見込み。",
+      "lesson": "IT運用において、障害報告のテンプレート化（時刻、影響範囲、端末、アプリ）は、専門知識のない担当者でも有効な切り分けを行うための最低限の要件である。",
+      "applicable_situations": "IT専門担当者がいない中小企業でのネットワーク障害対応。",
+      "limitations": "社員が報告を面倒と感じる場合は、簡易的なフォームやチャットボット等のツール活用が補完として必要。",
+      "industry": "ITサービス",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "障害対応時の「影響範囲確認」が切り分けの第一歩\n顧客の社内では、ネットワークが遅いという報告に対し、原因を特定せずにルーター再起動を行うことが習慣化していた。\n原因不明のまま再起動を行うと、障害の根本原因（回線、Wi-Fi、端末、アプリ）が特定できず、再発防止や適切な対応が困難になる。\n障害発生時に「誰が、どの端末で、どのアプリで、どの程度遅かったか」を確認するだけで、切り分けの方向性が定まる。\n社員に「遅い」と報告する際に、場所や端末、利用中のアプリを伝えるようルール化することを提案。\nIT障害の多くは、全社的な回線障害ではなく、特定の端末やアプリケーション起因である場合が多い。初期情報の質が、解決速度とコストを左右する。\n顧客は「社員に状況を伝えるようにする」と同意し、より正確な障害記録が可能になる見込み。\nIT運用において、障害報告のテンプレート化（時刻、影響範囲、端末、アプリ）は、専門知識のない担当者でも有効な切り分けを行うための最低限の要件である。\nIT専門担当者がいない中小企業でのネットワーク障害対応。\n社員が報告を面倒と感じる場合は、簡易的なフォームやチャットボット等のツール活用が補完として必要。\nITサービス\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:34:05.705975Z"
+    },
+    {
+      "id": "f34f2839-ff89-5960-bbb7-97d3dc4624d0",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "knowledge_type": "decision",
+      "title": "既存窓口の活用と新規契約の判断基準の設定",
+      "situation": "顧客は回線、ルーター、Wi-Fiと契約窓口が分散しており、障害時にどこに連絡すべきか迷っている。",
+      "problem": "新規の運用代行サービスを契約すべきか、既存の契約窓口を整理して活用すべきか判断がつかない。",
+      "judgment": "1ヶ月間の観察期間中に、既存窓口で対応できない事案（たらい回し、重大な業務影響、頻繁な障害）が発生した場合のみ、新規契約や現地確認に進む。",
+      "action": "契約書を確認し、窓口を1枚にまとめる。障害時に記録を残し、1ヶ月後に結果を評価する。",
+      "reasoning": "現状の障害頻度（半年2回、5分で復旧）は、高額な運用代行契約の必要性を十分に裏付けるほどではないため、低コストな既存リソースの活用を優先する。",
+      "outcome": "顧客は「既存窓口で十分ならそのまま使うのが合理的」と理解し、まず現状確認を行うことに合意。",
+      "lesson": "ITサービスの提案において、顧客の現状の障害頻度と業務影響度を定量的に評価し、それに見合ったコストのソリューションを提案することが、顧客の納得感と合理性を高める鍵となる。",
+      "applicable_situations": "顧客がITインフラの外部委託を検討しているが、現状の課題が軽微な場合。",
+      "limitations": "顧客の事業がIT依存度が高く、5分の停止でも致命的な損失を伴う場合は、この判断基準は適用できない。",
+      "industry": "ITサービス",
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "既存窓口の活用と新規契約の判断基準の設定\n顧客は回線、ルーター、Wi-Fiと契約窓口が分散しており、障害時にどこに連絡すべきか迷っている。\n新規の運用代行サービスを契約すべきか、既存の契約窓口を整理して活用すべきか判断がつかない。\n1ヶ月間の観察期間中に、既存窓口で対応できない事案（たらい回し、重大な業務影響、頻繁な障害）が発生した場合のみ、新規契約や現地確認に進む。\n契約書を確認し、窓口を1枚にまとめる。障害時に記録を残し、1ヶ月後に結果を評価する。\n現状の障害頻度（半年2回、5分で復旧）は、高額な運用代行契約の必要性を十分に裏付けるほどではないため、低コストな既存リソースの活用を優先する。\n顧客は「既存窓口で十分ならそのまま使うのが合理的」と理解し、まず現状確認を行うことに合意。\nITサービスの提案において、顧客の現状の障害頻度と業務影響度を定量的に評価し、それに見合ったコストのソリューションを提案することが、顧客の納得感と合理性を高める鍵となる。\n顧客がITインフラの外部委託を検討しているが、現状の課題が軽微な場合。\n顧客の事業がIT依存度が高く、5分の停止でも致命的な損失を伴う場合は、この判断基準は適用できない。\nITサービス\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:34:05.705975Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "acd30bc2-e8ff-5f84-a51f-f8d70b182a62",
+      "knowledge_id": "248f9803-7a10-5e44-b162-b50efc252cbf",
+      "start_utterance_id": "833347f9-9a50-5a28-90dc-fbd3f890c80d",
+      "end_utterance_id": "a1abc8c0-2f08-5984-a402-9e26b3f77638"
+    },
+    {
+      "id": "ba8f0253-113b-59bd-9026-081e05167ddf",
+      "knowledge_id": "248f9803-7a10-5e44-b162-b50efc252cbf",
+      "start_utterance_id": "98f95f76-bc70-51d4-97bc-33a66861f5c6",
+      "end_utterance_id": "8fa29242-bdec-5b6e-9c28-9ccd1c02542a"
+    },
+    {
+      "id": "c145babb-6541-5a79-8da6-73453dd58c58",
+      "knowledge_id": "248f9803-7a10-5e44-b162-b50efc252cbf",
+      "start_utterance_id": "851debef-cb56-5ab1-8b7a-aaa459e1796a",
+      "end_utterance_id": "90c780b1-33de-5ee6-a4cd-77ad817713f4"
+    },
+    {
+      "id": "1ff1559d-861b-5bf0-9802-b9134e5b01d2",
+      "knowledge_id": "ce89a63b-6716-5030-9415-15fcfa7e670b",
+      "start_utterance_id": "c9bc86e4-a3e5-53fc-b7a4-446cc75d800d",
+      "end_utterance_id": "e26e0a09-529d-5d5e-991e-6204840b35d3"
+    },
+    {
+      "id": "5bb04932-12a7-5a0f-85b5-596dd0ad6fc4",
+      "knowledge_id": "ce89a63b-6716-5030-9415-15fcfa7e670b",
+      "start_utterance_id": "2b3628d6-1689-5c6d-8d2e-df8f9fa91f52",
+      "end_utterance_id": "94f65117-5aaf-5aae-8f3e-616e26836d58"
+    },
+    {
+      "id": "31d6ed51-4057-5bd5-84d4-f66381672036",
+      "knowledge_id": "373927ae-d84c-5482-8735-db0bf3e2154b",
+      "start_utterance_id": "1650f0b5-0763-52bb-acd5-6f5e0f2badf4",
+      "end_utterance_id": "6c46edd9-459c-53c7-8df0-901d46cfa4c8"
+    },
+    {
+      "id": "3b515a0c-7aae-5b6f-9e64-dc87873401f8",
+      "knowledge_id": "373927ae-d84c-5482-8735-db0bf3e2154b",
+      "start_utterance_id": "5da1d2cb-6e3c-5902-9d1c-31028c6b6f9d",
+      "end_utterance_id": "1e239e47-eb52-570d-a63d-6731fce15598"
+    },
+    {
+      "id": "620758b2-fc5d-50c8-8a6e-3ca7eab68255",
+      "knowledge_id": "524863ed-a8e9-5536-8143-cc4eec857963",
+      "start_utterance_id": "c42dfab7-7c97-562c-b487-75949ed2371b",
+      "end_utterance_id": "01bfffb7-fa72-5a45-b67d-1d9deaccf50e"
+    },
+    {
+      "id": "65edd1b8-c6c6-521f-8fce-75f8b17f42c4",
+      "knowledge_id": "524863ed-a8e9-5536-8143-cc4eec857963",
+      "start_utterance_id": "b6cca770-a904-5c60-90bd-9a3cb8baeaf9",
+      "end_utterance_id": "fe7fc342-2157-5ea1-9a87-f417b3d83595"
+    },
+    {
+      "id": "c08f5b14-ab36-59c9-998c-4a5dd7832322",
+      "knowledge_id": "f34f2839-ff89-5960-bbb7-97d3dc4624d0",
+      "start_utterance_id": "2203d202-6e06-5463-8211-73adea09fbe4",
+      "end_utterance_id": "ae1d9d56-e3e7-5011-8b3c-a24325f2b94f"
+    },
+    {
+      "id": "c0ed0bf8-ae39-5213-96d7-0ce97357e3cf",
+      "knowledge_id": "f34f2839-ff89-5960-bbb7-97d3dc4624d0",
+      "start_utterance_id": "5da1d2cb-6e3c-5902-9d1c-31028c6b6f9d",
+      "end_utterance_id": "d8b6f84e-ef55-57d3-a142-9c0838784db5"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "0c8f9121-cbb4-55a8-b95f-8820e5e70563",
+      "data_source_id": "1fde0125-6df7-5385-b9ba-e0db148235b4",
+      "summary": "顧客は他社のネットワーク障害をきっかけに、自社でも同様の問題が起きた場合の対応に不安を抱えている。営業担当は、顧客の不安の正体（窓口の分散、対応手順の欠如）を特定し、高額な新規契約を急ぐのではなく、まず既存契約の整理と障害時の記録ルールという低コストなアクションを提案した。顧客はこれに同意し、1ヶ月間の観察期間を経て、必要性が明確になった場合に改めて検討することになった。",
+      "customer_needs": [
+        "ネットワーク障害発生時の明確な問い合わせ窓口",
+        "障害が正常か異常かを判断できる基準や手順",
+        "IT専門担当者がいない環境での不安の軽減"
+      ],
+      "proposals": [
+        "契約内容と連絡先を1枚に整理する",
+        "障害時に時刻、影響範囲、端末、アプリを記録する運用ルール",
+        "1ヶ月間の観察期間を設定し、結果に基づいて次のステップを判断する"
+      ],
+      "decisions": [
+        "直ちに新規の運用代行サービスを契約しない",
+        "まず既存の契約窓口を確認し、整理する",
+        "1ヶ月後に観察結果と顧客の不安の軽減度を確認する"
+      ],
+      "next_actions": [
+        "顧客: 契約書を確認し、窓口一覧を作成する",
+        "顧客: 社員に障害報告時の情報提供ルールを周知する",
+        "営業: 1ヶ月後にフォローアップし、記録内容と顧客の状況を確認する"
+      ]
+    }
+  ]
+}

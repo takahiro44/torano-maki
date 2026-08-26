@@ -1,0 +1,627 @@
+{
+  "data_sources": [
+    {
+      "id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "source_type": "audio",
+      "file_name": "long_001.wav",
+      "occurred_at": "2026-08-24T23:45:52Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "3db38fd5-07f0-5675-a291-a857cb8a13a9",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 10.0,
+      "content": "中村さん、こんにちは。今日は少し暑さが柔らぎましたね。駅から歩いてきたんですが、風があるだけでずいぶん違いました。"
+    },
+    {
+      "id": "dac1d281-0873-5a3d-ad42-df4ed35eeee1",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 10.0,
+      "end_sec": 17.0,
+      "content": "本当ですね。うちの倉庫はまだ暑いですけど、先週よりはだいぶ楽です。"
+    },
+    {
+      "id": "502f3088-889c-5f8c-aa80-1d2a00e34d52",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 17.0,
+      "end_sec": 28.0,
+      "content": "倉庫の皆さんは大変ですよね。前回、倉庫と営業の間で在庫確認が頻繁に発生していると伺いました。"
+    },
+    {
+      "id": "20e2db76-beca-54ed-aa9b-4f4697352e4c",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 28.0,
+      "end_sec": 32.0,
+      "content": "今日は直近のケースから詳しく教えていただけますか?"
+    },
+    {
+      "id": "7c822d8d-5d06-58ec-b8b8-487e667a3b32",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 32.0,
+      "end_sec": 42.0,
+      "content": "倉庫側からすると、営業に数字が見えているのに、なぜ毎回こちらへ聞くのかという不満もあります。"
+    },
+    {
+      "id": "ba10c9f1-e0a2-5df7-a41c-0220f886934f",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 42.0,
+      "end_sec": 52.0,
+      "content": "営業と倉庫の双方に負担感があるんですね。確認が来たとき、中村さんは普段どのように優先順位をつけていますか?"
+    },
+    {
+      "id": "7e71fbdb-bb70-5d47-8888-aa228db81736",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 52.0,
+      "end_sec": 63.0,
+      "content": "急ぎと言われたものから対応します。ただ、営業はどの案件も急ぎと言うので、結局こちらで顧客名や希望日を聞き直します。"
+    },
+    {
+      "id": "bacf7151-dae7-5305-ad42-824f8b72439c",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 63.0,
+      "end_sec": 70.0,
+      "content": "確認以来の時点で必要情報が揃っていないことも回答を遅くする要因になっていそうですね。"
+    },
+    {
+      "id": "f47604cf-80bc-53f1-9251-e360d0060a9f",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 70.0,
+      "end_sec": 80.0,
+      "content": "先週、営業がお客様から今週中に部品を30個欲しいと言われました。システムには50個と出ていたんです。"
+    },
+    {
+      "id": "fd786720-9484-503c-9112-18881dbbc00b",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 80.0,
+      "end_sec": 88.0,
+      "content": "50個と表示されていたのに、その場では回答できなかったんですね。最初に何を確認しましたか?"
+    },
+    {
+      "id": "b2388d4e-01b1-550a-b940-0bd34cc1c597",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 88.0,
+      "end_sec": 100.0,
+      "content": "20個は別のお客様向けの取り置きかもしれないと思って、倉庫担当に電話しました。さらに、来週の入荷予定を仕入れ担当へ確認しました。"
+    },
+    {
+      "id": "2ba10fc9-085f-585f-b979-29661e4c4148",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 100.0,
+      "end_sec": 110.0,
+      "content": "システム、倉庫、仕入れ担当の3箇所を確認したわけですね。最終回答までどれくらいかかりましたか?"
+    },
+    {
+      "id": "2ca9dc4a-890d-50a6-ba67-c414c348655c",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 110.0,
+      "end_sec": 118.0,
+      "content": "30分くらいです。営業から途中で2回、「まだですか?」と連絡が来ました。"
+    },
+    {
+      "id": "d1c33565-4148-5378-8d79-679125873da6",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 118.0,
+      "end_sec": 128.0,
+      "content": "このような確認は1日に何件ほどありますか?1日の中では確認が集中する時間帯がありますか?"
+    },
+    {
+      "id": "fd6af043-2255-5ea9-9f04-576e74af1a60",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 128.0,
+      "end_sec": 139.0,
+      "content": "午前11時前と夕方です。お客様へ午前中に返したい案件と、営業が外出先から戻る前の案件が重なります。"
+    },
+    {
+      "id": "710fc971-80e0-59e2-a084-1d3c114d5459",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 139.0,
+      "end_sec": 146.0,
+      "content": "その時間に倉庫や仕入れ担当が別作業中だと待ち時間がさらに伸びますか?"
+    },
+    {
+      "id": "2fbd46d9-7d9c-5cbd-8fc1-38855418b347",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 146.0,
+      "end_sec": 153.0,
+      "content": "はい。入出庫のピークと重なるので、倉庫側もすぐ電話に出られません。"
+    },
+    {
+      "id": "06b87363-60f5-58c7-b154-817a794d2c2d",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 153.0,
+      "end_sec": 159.0,
+      "content": "確認対応によって倉庫本来の作業が中断されることはありますか?"
+    },
+    {
+      "id": "2bb47c84-6935-5773-acd7-6edd74f5b57b",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 159.0,
+      "end_sec": 170.0,
+      "content": "あります。電話のたびに端末まで戻るので、ピッキングが止まります。数字にはしていませんが、現場から改善してほしいと言われています。"
+    },
+    {
+      "id": "3573f926-2fc8-568e-8c36-cf7d50626e8a",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 170.0,
+      "end_sec": 178.0,
+      "content": "営業の回答時間だけでなく、倉庫作業の中断まで含めて効果を考える必要がありますね。"
+    },
+    {
+      "id": "27d7030f-e6fd-5d07-9cd5-6c1eca0fbd39",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 21,
+      "speaker": "customer",
+      "start_sec": 178.0,
+      "end_sec": 187.0,
+      "content": "そうですね。単に業務部の電話を減らす話ではないと思います。10件から20件です。"
+    },
+    {
+      "id": "fc9f0a9c-6058-500b-bca9-32ec51415dcf",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 187.0,
+      "end_sec": 192.0,
+      "content": "簡単なら5分ですが、難しい商品はもっとかかります。"
+    },
+    {
+      "id": "cabd79f9-e9c3-58ec-b38a-83ad35d88fa7",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 192.0,
+      "end_sec": 198.0,
+      "content": "ベテランの方と新人の方で回答速度に差はありますか?"
+    },
+    {
+      "id": "b8200acd-3ef3-506a-ac36-4f216972a7d6",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 198.0,
+      "end_sec": 207.0,
+      "content": "あります。ベテランは取り置き先やニューカビを覚えています。新人は全部聞かないと分かりません。"
+    },
+    {
+      "id": "6fe057c6-8c36-5aa7-aa7d-9f45a66ac7b0",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 207.0,
+      "end_sec": 218.0,
+      "content": "つまり、在庫データが全くないのではなく、販売可能数を判断する情報が複数の場所と人の記憶に分かれている。"
+    },
+    {
+      "id": "eb12207a-d0c1-5c27-8237-3469df0ee851",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 218.0,
+      "end_sec": 225.0,
+      "content": "結果として、納期回答が遅れ、時には訂正も起こるという理解であっていますか?"
+    },
+    {
+      "id": "95cbac0a-292a-5845-842b-5f4519b11b5e",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 27,
+      "speaker": "customer",
+      "start_sec": 225.0,
+      "end_sec": 233.0,
+      "content": "はい。月に1、2回はありますと答えた後で納期を伸ばしてもらうことがあります。"
+    },
+    {
+      "id": "d6f55702-7b3a-570b-b8ef-023b80687049",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 233.0,
+      "end_sec": 245.0,
+      "content": "改善後の理想を1つ選ぶなら、業務部の確認時間を減らすことと、営業が自分で正しい納期を判断できることのどちらが近いですか?"
+    },
+    {
+      "id": "e97ab996-9b0b-53f0-9c62-f1cb225cd663",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 245.0,
+      "end_sec": 250.0,
+      "content": "逆に、システムだけで判断させることに不安はありますか?"
+    },
+    {
+      "id": "3ab6b44a-22e6-5eb4-9135-e582bc7b99d3",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 250.0,
+      "end_sec": 258.0,
+      "content": "あります。重要顧客向けの取り置きは、事情を知らない営業が勝手に使える状態にしたくありません。"
+    },
+    {
+      "id": "b4fb7c49-47bf-504e-9367-d1ec27273337",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 258.0,
+      "end_sec": 266.0,
+      "content": "販売可能数を見せることと取り置きを変更する権限は分ける必要がありますね。"
+    },
+    {
+      "id": "e1221554-3a4a-52c4-b436-cea863a97f87",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 266.0,
+      "end_sec": 270.0,
+      "content": "例外判断は誰が行うべきでしょう?"
+    },
+    {
+      "id": "059776ec-1824-5860-82c1-f373454fd07e",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 270.0,
+      "end_sec": 273.0,
+      "content": "業務部長か担当役員です。"
+    },
+    {
+      "id": "07e157e4-75c7-5008-b87e-3daae79c3d2b",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 34,
+      "speaker": "customer",
+      "start_sec": 273.0,
+      "end_sec": 278.0,
+      "content": "営業には理由と次回入荷日まで見れば十分です。"
+    },
+    {
+      "id": "042d3b84-cd38-5c5f-a8a4-dbdfb5d5f2ee",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 278.0,
+      "end_sec": 286.0,
+      "content": "その線引きは重要です。情報を広く見せても変更権限まで広げる必要はありません。"
+    },
+    {
+      "id": "e8e5fbe6-443b-57aa-8e79-67ff8520a23b",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 286.0,
+      "end_sec": 290.0,
+      "content": "それなら、現場も受け入れやすいと思います。"
+    },
+    {
+      "id": "96a010a4-bb3a-5c9e-a99e-45436ac28fa2",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 37,
+      "speaker": "customer",
+      "start_sec": 290.0,
+      "end_sec": 298.0,
+      "content": "営業が自分で判断できることです。こちらも楽になりますし、お客様を待たせません。"
+    },
+    {
+      "id": "e69a1146-eba2-5bf4-a080-4c41d99987ac",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 298.0,
+      "end_sec": 307.0,
+      "content": "その方向なら、売り上げ、仕入れ、在庫を扱うエスマイルVセカンドエディション、販売を候補にできます。"
+    },
+    {
+      "id": "d5e49ecb-b9d2-5c2f-b010-1435b1fafc94",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 307.0,
+      "end_sec": 316.0,
+      "content": "ただ、取り置き等入荷予定を今どこへ記録しているか確認しないまま、導入すれば解決するとは言えません。"
+    },
+    {
+      "id": "9ae15afa-1ba3-5c07-8a0b-5c7861976045",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 316.0,
+      "end_sec": 325.0,
+      "content": "取り置きは共有表と担当者のメモが混在しています。そこから整理が必要そうですね。"
+    },
+    {
+      "id": "6c6917a4-0f25-5194-8a9b-2a43b12b1cb4",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 325.0,
+      "end_sec": 337.0,
+      "content": "効果を測るとしたら、回答までの平均時間、確認電話の件数、納期訂正の件数の3つで良さそうですか?"
+    },
+    {
+      "id": "1b45be2d-c24e-5bf1-adb8-f96618201ff1",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 337.0,
+      "end_sec": 347.0,
+      "content": "倉庫の中段回数も入れたいです。営業側はお客様を待たせた件数が分かると良いですね。"
+    },
+    {
+      "id": "a1f4add5-dc7a-5ce8-82b2-b7b079de4938",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 347.0,
+      "end_sec": 358.0,
+      "content": "では、導入前の基準として、1週間だけ記録を取りましょう。間隔ではなく、改善前後で比較できるようにします。"
+    },
+    {
+      "id": "37798e64-3c78-51a4-baf6-366421324451",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 44,
+      "speaker": "customer",
+      "start_sec": 358.0,
+      "end_sec": 363.0,
+      "content": "わかりました。記録項目をいただければ、各部門へ依頼します。"
+    },
+    {
+      "id": "fb20f4c1-9567-515d-a34d-a69b92c8714a",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 363.0,
+      "end_sec": 373.0,
+      "content": "次回、営業等、倉庫と仕入れの担当者に1人ずつ参加いただき、最近の一案件を時系列で確認させてください。"
+    },
+    {
+      "id": "6e944259-9349-595f-96a3-f359190c6f70",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 373.0,
+      "end_sec": 379.0,
+      "content": "その上で、システムに持たせる情報と人が判断する部分を分けてご提案します。"
+    },
+    {
+      "id": "c4bc7019-f74f-5317-9f8d-9dfa639b49e0",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "sequence_no": 47,
+      "speaker": "customer",
+      "start_sec": 379.0,
+      "end_sec": 383.0,
+      "content": "わかりました。3人の予定を確認しておきます。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "2e8c338d-4029-5e77-aaea-d8480325ca41",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "knowledge_type": "pain_point",
+      "title": "在庫確認の非効率性と部門間摩擦",
+      "situation": "営業と倉庫の間で在庫確認が頻繁に発生している状態",
+      "problem": "営業がシステム上の数値を把握しているにもかかわらず、毎回倉庫に確認し、倉庫側は負担と不満を感じている",
+      "judgment": "確認の頻度と情報の非対称性が業務効率を低下させている",
+      "action": "具体的なケース（部品30個の依頼）を掘り下げて、確認プロセスのボトルネックを特定する",
+      "reasoning": "システム表示と実際の在庫（取り置き等）の乖離、および確認に必要な情報の欠如が原因",
+      "outcome": "確認に30分程度かかり、営業からの催促が発生し、倉庫作業が中断される実態が判明",
+      "lesson": "単なる電話件数の削減ではなく、確認プロセス自体の構造（情報源の分散、権限の曖昧さ）に目を向ける必要がある",
+      "applicable_situations": "在庫管理や受発注業務において、部門間の確認作業がボトルネックになっている場合",
+      "limitations": "特定の製造業や卸売業の在庫管理プロセスに依存する",
+      "industry": "製造業/卸売業",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "在庫確認の非効率性と部門間摩擦\n営業と倉庫の間で在庫確認が頻繁に発生している状態\n営業がシステム上の数値を把握しているにもかかわらず、毎回倉庫に確認し、倉庫側は負担と不満を感じている\n確認の頻度と情報の非対称性が業務効率を低下させている\n具体的なケース（部品30個の依頼）を掘り下げて、確認プロセスのボトルネックを特定する\nシステム表示と実際の在庫（取り置き等）の乖離、および確認に必要な情報の欠如が原因\n確認に30分程度かかり、営業からの催促が発生し、倉庫作業が中断される実態が判明\n単なる電話件数の削減ではなく、確認プロセス自体の構造（情報源の分散、権限の曖昧さ）に目を向ける必要がある\n在庫管理や受発注業務において、部門間の確認作業がボトルネックになっている場合\n特定の製造業や卸売業の在庫管理プロセスに依存する\n製造業/卸売業\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:10.748261Z"
+    },
+    {
+      "id": "b8e6e627-9b26-57b8-9d0f-9484a4aa706e",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "knowledge_type": "operational_insight",
+      "title": "在庫判断情報の分散と属人化",
+      "situation": "販売可能数の判断に必要な情報がシステム、倉庫、仕入れ担当、個人の記憶に分散している",
+      "problem": "ベテランと新人で回答速度に差があり、新人は全情報を確認しないと判断できない",
+      "judgment": "在庫データが完全に欠如しているのではなく、判断に必要なコンテキスト（取り置き先、入荷予定等）が非構造化されている",
+      "action": "情報の所在（共有表、メモ、システム）と判断主体を整理する",
+      "reasoning": "取り置きや入荷予定が個人の記憶や非共有のメモに依存しているため、標準的な判断フローが構築されていない",
+      "outcome": "納期回答が遅れ、訂正が発生するリスクが高まっている",
+      "lesson": "業務効率化のためには、属人化している判断基準を可視化し、システムや共有ドキュメントに集約する必要がある",
+      "applicable_situations": "経験者の勘や記憶に依存した業務判断が行われている現場",
+      "limitations": "情報の完全なデジタル化が前提となる",
+      "industry": "製造業/卸売業",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "在庫判断情報の分散と属人化\n販売可能数の判断に必要な情報がシステム、倉庫、仕入れ担当、個人の記憶に分散している\nベテランと新人で回答速度に差があり、新人は全情報を確認しないと判断できない\n在庫データが完全に欠如しているのではなく、判断に必要なコンテキスト（取り置き先、入荷予定等）が非構造化されている\n情報の所在（共有表、メモ、システム）と判断主体を整理する\n取り置きや入荷予定が個人の記憶や非共有のメモに依存しているため、標準的な判断フローが構築されていない\n納期回答が遅れ、訂正が発生するリスクが高まっている\n業務効率化のためには、属人化している判断基準を可視化し、システムや共有ドキュメントに集約する必要がある\n経験者の勘や記憶に依存した業務判断が行われている現場\n情報の完全なデジタル化が前提となる\n製造業/卸売業\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:10.748261Z"
+    },
+    {
+      "id": "dc8362fc-3b6f-5ea3-b7d8-09da148118ed",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "knowledge_type": "sales_technique",
+      "title": "権限と情報の分離による提案設計",
+      "situation": "顧客はシステムによる自動判断への不安（重要顧客向け取り置きの誤用）を抱えている",
+      "problem": "営業が正しい納期を判断できる一方で、取り置きを変更する権限まで与えるとリスクがある",
+      "judgment": "「情報の可視化」と「変更権限の付与」は分けて設計すべき",
+      "action": "営業には理由と次回入荷日を表示し、例外判断（取り置き変更）は業務部長や役員に限定する提案を行う",
+      "reasoning": "現場の抵抗を減らし、リスクを管理しながら業務効率化を実現するため",
+      "outcome": "顧客は「現場も受け入れやすい」と反応し、方向性に合意",
+      "lesson": "システム導入時の抵抗を減らすには、権限の線引きを明確にし、現場の懸念（リスク管理）に応える設計が重要",
+      "applicable_situations": "権限管理が重要な業務プロセスのシステム化提案時",
+      "limitations": "組織の階層構造や権限設計が明確な場合に有効",
+      "industry": "製造業/卸売業",
+      "product": "エスマイルVセカンドエディション",
+      "sales_stage": "proposal",
+      "search_text": "権限と情報の分離による提案設計\n顧客はシステムによる自動判断への不安（重要顧客向け取り置きの誤用）を抱えている\n営業が正しい納期を判断できる一方で、取り置きを変更する権限まで与えるとリスクがある\n「情報の可視化」と「変更権限の付与」は分けて設計すべき\n営業には理由と次回入荷日を表示し、例外判断（取り置き変更）は業務部長や役員に限定する提案を行う\n現場の抵抗を減らし、リスクを管理しながら業務効率化を実現するため\n顧客は「現場も受け入れやすい」と反応し、方向性に合意\nシステム導入時の抵抗を減らすには、権限の線引きを明確にし、現場の懸念（リスク管理）に応える設計が重要\n権限管理が重要な業務プロセスのシステム化提案時\n組織の階層構造や権限設計が明確な場合に有効\n製造業/卸売業\nエスマイルVセカンドエディション\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:10.748261Z"
+    },
+    {
+      "id": "9386c4f6-5378-5760-91ad-fea5c9cf0f09",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "knowledge_type": "next_action",
+      "title": "導入前の基準値取得と詳細ヒアリング",
+      "situation": "改善効果を測定するため、現状の業務フローと数値の把握が必要",
+      "problem": "改善前後の比較ができないため、効果の定量化が困難",
+      "judgment": "1週間だけ記録を取り、基準値を確定させる",
+      "action": "記録項目を提供し、営業・倉庫・仕入れの担当者1人ずつに参加してもらい、最近の一案件を時系列で確認する",
+      "reasoning": "具体的なケーススタディを通じて、システムに持たせる情報と人が判断する部分を正確に分離するため",
+      "outcome": "顧客は3人の予定を確認し、協力に同意",
+      "lesson": "提案前に「現状の可視化」を共同作業として行うことで、顧客の当事者意識を高め、精度の高い提案が可能になる",
+      "applicable_situations": "業務プロセス改善やシステム導入前の要件定義段階",
+      "limitations": "顧客側の協力が不可欠",
+      "industry": "製造業/卸売業",
+      "product": "エスマイルVセカンドエディション",
+      "sales_stage": "follow_up",
+      "search_text": "導入前の基準値取得と詳細ヒアリング\n改善効果を測定するため、現状の業務フローと数値の把握が必要\n改善前後の比較ができないため、効果の定量化が困難\n1週間だけ記録を取り、基準値を確定させる\n記録項目を提供し、営業・倉庫・仕入れの担当者1人ずつに参加してもらい、最近の一案件を時系列で確認する\n具体的なケーススタディを通じて、システムに持たせる情報と人が判断する部分を正確に分離するため\n顧客は3人の予定を確認し、協力に同意\n提案前に「現状の可視化」を共同作業として行うことで、顧客の当事者意識を高め、精度の高い提案が可能になる\n業務プロセス改善やシステム導入前の要件定義段階\n顧客側の協力が不可欠\n製造業/卸売業\nエスマイルVセカンドエディション\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:10.748261Z"
+    },
+    {
+      "id": "94676939-c5de-5bcd-b099-9697021003f7",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "knowledge_type": "customer_need",
+      "title": "KPIとしての効果測定指標の明確化",
+      "situation": "改善の効果をどう測るかが不明確",
+      "problem": "単なる電話件数の削減では、倉庫作業の中断や顧客待ち時間への影響を捉えきれない",
+      "judgment": "回答までの平均時間、確認電話の件数、納期訂正の件数、倉庫の中断回数、営業側の顧客待ち件数を指標とする",
+      "action": "顧客が追加した指標（倉庫の中断回数、営業側の顧客待ち件数）を含めたKPIリストを合意する",
+      "reasoning": "部門横断的な影響を可視化し、経営層への報告にも耐えうる指標にするため",
+      "outcome": "顧客は「各部門へ依頼する」と述べ、指標の採用に同意",
+      "lesson": "KPI設計時には、直接の業務指標だけでなく、間接的な影響（他部門の作業中断、顧客体験）を含む指標を提案すると顧客の納得感が高まる",
+      "applicable_situations": "業務改善プロジェクトの目標設定時",
+      "limitations": "データ収集の負荷が増える可能性がある",
+      "industry": "製造業/卸売業",
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "KPIとしての効果測定指標の明確化\n改善の効果をどう測るかが不明確\n単なる電話件数の削減では、倉庫作業の中断や顧客待ち時間への影響を捉えきれない\n回答までの平均時間、確認電話の件数、納期訂正の件数、倉庫の中断回数、営業側の顧客待ち件数を指標とする\n顧客が追加した指標（倉庫の中断回数、営業側の顧客待ち件数）を含めたKPIリストを合意する\n部門横断的な影響を可視化し、経営層への報告にも耐えうる指標にするため\n顧客は「各部門へ依頼する」と述べ、指標の採用に同意\nKPI設計時には、直接の業務指標だけでなく、間接的な影響（他部門の作業中断、顧客体験）を含む指標を提案すると顧客の納得感が高まる\n業務改善プロジェクトの目標設定時\nデータ収集の負荷が増える可能性がある\n製造業/卸売業\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:10.748261Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "7e932884-886c-5072-ab41-7f7c93c56981",
+      "knowledge_id": "2e8c338d-4029-5e77-aaea-d8480325ca41",
+      "start_utterance_id": "502f3088-889c-5f8c-aa80-1d2a00e34d52",
+      "end_utterance_id": "7c822d8d-5d06-58ec-b8b8-487e667a3b32"
+    },
+    {
+      "id": "a9280503-86d2-5b35-ab21-94cd3e37ae8f",
+      "knowledge_id": "2e8c338d-4029-5e77-aaea-d8480325ca41",
+      "start_utterance_id": "f47604cf-80bc-53f1-9251-e360d0060a9f",
+      "end_utterance_id": "2ca9dc4a-890d-50a6-ba67-c414c348655c"
+    },
+    {
+      "id": "2619bf2f-4ea1-546a-8cb7-41647f269284",
+      "knowledge_id": "b8e6e627-9b26-57b8-9d0f-9484a4aa706e",
+      "start_utterance_id": "cabd79f9-e9c3-58ec-b38a-83ad35d88fa7",
+      "end_utterance_id": "6fe057c6-8c36-5aa7-aa7d-9f45a66ac7b0"
+    },
+    {
+      "id": "b3483b48-efc3-5470-8db6-33890abcfab7",
+      "knowledge_id": "b8e6e627-9b26-57b8-9d0f-9484a4aa706e",
+      "start_utterance_id": "d5e49ecb-b9d2-5c2f-b010-1435b1fafc94",
+      "end_utterance_id": "9ae15afa-1ba3-5c07-8a0b-5c7861976045"
+    },
+    {
+      "id": "62aab638-b3e8-5c93-b36b-f39b49c93595",
+      "knowledge_id": "dc8362fc-3b6f-5ea3-b7d8-09da148118ed",
+      "start_utterance_id": "e97ab996-9b0b-53f0-9c62-f1cb225cd663",
+      "end_utterance_id": "b4fb7c49-47bf-504e-9367-d1ec27273337"
+    },
+    {
+      "id": "de6b29f0-43aa-5231-ba72-b7fc042026e5",
+      "knowledge_id": "dc8362fc-3b6f-5ea3-b7d8-09da148118ed",
+      "start_utterance_id": "e1221554-3a4a-52c4-b436-cea863a97f87",
+      "end_utterance_id": "e8e5fbe6-443b-57aa-8e79-67ff8520a23b"
+    },
+    {
+      "id": "98e116f7-7616-5fc3-9065-3f8848e921f5",
+      "knowledge_id": "9386c4f6-5378-5760-91ad-fea5c9cf0f09",
+      "start_utterance_id": "6c6917a4-0f25-5194-8a9b-2a43b12b1cb4",
+      "end_utterance_id": "c4bc7019-f74f-5317-9f8d-9dfa639b49e0"
+    },
+    {
+      "id": "19d4e8cb-24da-5467-8cd3-9920e01f5d96",
+      "knowledge_id": "94676939-c5de-5bcd-b099-9697021003f7",
+      "start_utterance_id": "6c6917a4-0f25-5194-8a9b-2a43b12b1cb4",
+      "end_utterance_id": "1b45be2d-c24e-5bf1-adb8-f96618201ff1"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "7a8eaa49-c119-5fb2-bbc5-2548e959f55c",
+      "data_source_id": "17a9153e-dda6-5d05-aa4c-dda8a9ffa031",
+      "summary": "営業と倉庫間の在庫確認の非効率性（時間、中断、属人化）を掘り下げ、エスマイルVセカンドエディションによる改善提案を行った。権限と情報の分離、KPIの明確化、導入前の基準値取得で合意。",
+      "customer_needs": [
+        "在庫確認時間の短縮",
+        "倉庫作業の中断防止",
+        "納期回答の正確性向上",
+        "属人化の解消",
+        "権限管理の明確化"
+      ],
+      "proposals": [
+        "エスマイルVセカンドエディションの導入",
+        "営業への情報可視化（理由、次回入荷日）と変更権限の分離",
+        "1週間間の基準値記録",
+        "担当者同席による詳細フロー確認"
+      ],
+      "decisions": [
+        "KPIとして回答時間、電話件数、訂正件数、倉庫中断回数、顧客待ち件数を採用",
+        "例外判断は業務部長または役員が担当",
+        "次回、営業・倉庫・仕入れの担当者1人ずつ参加"
+      ],
+      "next_actions": [
+        "記録項目の提供",
+        "3人の担当者の日程調整",
+        "最近の一案件の時系列確認"
+      ]
+    }
+  ]
+}

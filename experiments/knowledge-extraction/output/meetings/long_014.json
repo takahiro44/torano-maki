@@ -1,0 +1,695 @@
+{
+  "data_sources": [
+    {
+      "id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "source_type": "audio",
+      "file_name": "long_014.wav",
+      "occurred_at": "2026-08-25T00:37:04Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "c2799ed8-2990-511b-828b-3abd0b0a7b1d",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 6.0,
+      "content": "ロビーにイベント用の箱がたくさんありますね。今週末の準備ですか?"
+    },
+    {
+      "id": "70f732ce-b201-5db6-a199-db048b3f95d6",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 6.0,
+      "end_sec": 12.0,
+      "content": "そうです。案件ごとに必要な備品が違うので、この時期は荷物が増えます。"
+    },
+    {
+      "id": "d07c1584-49a0-5ea9-ab5f-fc4b1a5eb7b1",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 12.0,
+      "end_sec": 21.0,
+      "content": "備品購入をまとめたいとのことでした。直近ではどんな購入が問題になりましたか?"
+    },
+    {
+      "id": "bff7d80c-4123-5fc7-94f5-5ca56eb6cf16",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 21.0,
+      "end_sec": 27.0,
+      "content": "養生テープは結果としてどれくらい余りましたか?"
+    },
+    {
+      "id": "fde09dff-1988-5b7a-be74-56181dbb25e2",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 27.0,
+      "end_sec": 35.0,
+      "content": "20巻ほどです。次回使えますが、どの倉庫にあるか共有されていません。"
+    },
+    {
+      "id": "2eb52845-f220-5578-a91d-4887bda060f6",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 35.0,
+      "end_sec": 42.0,
+      "content": "購入の重複だけでなく、余ったものの所在情報も分散しているんですね。"
+    },
+    {
+      "id": "6b500764-1ee6-5dd1-a801-e53615169d34",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 42.0,
+      "end_sec": 48.0,
+      "content": "イベント終了後はみんな疲れていて、返却や棚卸しが後回しになります。"
+    },
+    {
+      "id": "80210abb-2cc3-5821-b771-a39a350244db",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 48.0,
+      "end_sec": 55.0,
+      "content": "注文方法を整えても、返却と在庫更新がなければ重複購入は残ります。"
+    },
+    {
+      "id": "91ededfd-d113-580c-a1fc-f0713173abb3",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 55.0,
+      "end_sec": 61.0,
+      "content": "備品の管理まで含めると、総務だけでは決められませんね。"
+    },
+    {
+      "id": "0ef68c7b-c73a-5369-b7ac-a40ea1f87c1e",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 61.0,
+      "end_sec": 67.0,
+      "content": "現場スタッフが急ぎで養生テープを立て替えました。"
+    },
+    {
+      "id": "6ad75bda-ebe6-537a-ab41-b53b50169119",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 67.0,
+      "end_sec": 72.0,
+      "content": "同じ日に別の人も購入して余りました。"
+    },
+    {
+      "id": "f119bc4e-5479-5c99-9920-cc5db84c32c6",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 72.0,
+      "end_sec": 79.0,
+      "content": "購入前に、社内在庫や他の注文を確認する方法はありますか?"
+    },
+    {
+      "id": "db187702-e0ca-5ea5-a8bf-23f842a14ce6",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 79.0,
+      "end_sec": 84.0,
+      "content": "総務へチャットで聞きますが、夜間や休日の現場だと各自で買います。"
+    },
+    {
+      "id": "92f277f4-dbf6-529b-89b6-f7941c1c9cc5",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 84.0,
+      "end_sec": 90.0,
+      "content": "立替え生産と余った在庫の管理では、どちらの負担が大きいですか?"
+    },
+    {
+      "id": "6aba6b0e-b581-550e-baf4-202e5414915e",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 90.0,
+      "end_sec": 95.0,
+      "content": "経理は立替え、総務は余剰在庫です。"
+    },
+    {
+      "id": "7191a3dc-1625-5fa2-9652-3f68f131609a",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 16,
+      "speaker": "customer",
+      "start_sec": 95.0,
+      "end_sec": 100.0,
+      "content": "さらに、案件別の費用集計が後から必要になります。"
+    },
+    {
+      "id": "f23d41c6-04a4-5d8a-b718-6635a8fcd253",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 17,
+      "speaker": "salesperson",
+      "start_sec": 100.0,
+      "end_sec": 108.0,
+      "content": "立替え生産40件のうち、本当に緊急だったものはどれくらいでしょう?"
+    },
+    {
+      "id": "9dfbb81a-dd7c-584c-a39a-a448722432a8",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 18,
+      "speaker": "customer",
+      "start_sec": 108.0,
+      "end_sec": 111.0,
+      "content": "確認したことはありません。"
+    },
+    {
+      "id": "ba51f9b0-0c11-5b73-a77d-ccf316038d98",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 111.0,
+      "end_sec": 117.0,
+      "content": "安いから各自で買った方が早いというものも多いです。"
+    },
+    {
+      "id": "504be3dc-4b69-55fa-acf8-d1c0eb49cc3e",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 117.0,
+      "end_sec": 127.0,
+      "content": "購入単価だけでなく、立替え申請、領収書確認、振り込み、案件集計の事務コストもありますね。"
+    },
+    {
+      "id": "740bfc11-af88-5b89-be04-3104bc307f9f",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 21,
+      "speaker": "customer",
+      "start_sec": 127.0,
+      "end_sec": 133.0,
+      "content": "1件1000円の買い物に、経理が10分以上使うこともあります。"
+    },
+    {
+      "id": "7abafc56-8512-5517-81cb-430c0e6c245a",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 22,
+      "speaker": "salesperson",
+      "start_sec": 133.0,
+      "end_sec": 141.0,
+      "content": "小学だから管理しないのではなく、件数が多い小学品こそ標準注文に押せる効果がありそうですね。"
+    },
+    {
+      "id": "b005870b-4cb1-54f0-b867-796b4912c77c",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 141.0,
+      "end_sec": 148.0,
+      "content": "現場には、立替えを禁止するとだけ伝えず、すぐ届く代替手段を用意したいです。"
+    },
+    {
+      "id": "362fcfde-beb4-5618-aef4-e0f40d9002a7",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 148.0,
+      "end_sec": 153.0,
+      "content": "今月、立替え購入は何件くらいありましたか?"
+    },
+    {
+      "id": "49da01bf-c0ff-5793-ae53-3bffe61d218b",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 153.0,
+      "end_sec": 160.0,
+      "content": "40件ほどです。領収書の不足で確認することもあります。"
+    },
+    {
+      "id": "fb451cb2-9a4b-504b-9e61-000c771f653d",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 160.0,
+      "end_sec": 166.0,
+      "content": "他のメールは、幅広いオフィス用品やPC周辺機器などを扱う法人向け通販です。"
+    },
+    {
+      "id": "67a283a2-feae-5a63-af8e-cf90b00fca62",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 166.0,
+      "end_sec": 172.0,
+      "content": "部署別の発注管理や承認が必要なら、MA他のメールもお選択肢になります。"
+    },
+    {
+      "id": "03dbfee1-2861-55d0-90a8-84ff72c24622",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 172.0,
+      "end_sec": 177.0,
+      "content": "ただ、夜間の緊急購入まで一律に止めると現場が回りません。"
+    },
+    {
+      "id": "6ba45cfc-4bee-56f3-a920-0a26f84de2b1",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 177.0,
+      "end_sec": 184.0,
+      "content": "部署別発注管理や承認を使う場合、誰が承認者になる想定ですか?"
+    },
+    {
+      "id": "bde89a39-5ae5-5a05-96ef-790f68ab8b2e",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 184.0,
+      "end_sec": 191.0,
+      "content": "案件責任者です。ただ、現場に出ていて承認が遅れることがあります。"
+    },
+    {
+      "id": "798cc6ed-04ac-59ec-9bff-b20e82f3fb86",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 191.0,
+      "end_sec": 196.0,
+      "content": "承認を増やして調達が遅くなると本末転倒です。"
+    },
+    {
+      "id": "44d2d103-7a17-50b1-a3f5-e5fb30eb5c22",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 196.0,
+      "end_sec": 203.0,
+      "content": "定番品は、予算内なら承認不要、一定額以上だけ承認などのルールも検討できます。"
+    },
+    {
+      "id": "ea22b88d-33af-525e-8f5c-fed444b8d00f",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 203.0,
+      "end_sec": 208.0,
+      "content": "案件予算と品目の両方で分けたいです。"
+    },
+    {
+      "id": "91a8424c-0466-52ea-8761-a006d44555a7",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 208.0,
+      "end_sec": 215.0,
+      "content": "はい。MA他のメールの具体的な設定課費は要件と照らして確認します。"
+    },
+    {
+      "id": "cff7bd48-2f74-5088-b3ca-96f42e7f466d",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 215.0,
+      "end_sec": 218.0,
+      "content": "先に、恩者の承認原則を決めましょう。"
+    },
+    {
+      "id": "b84d6567-8a70-559b-b6e8-20f74908c834",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 218.0,
+      "end_sec": 223.0,
+      "content": "システムに合わせて複雑にするのではなく、ルールからですね。"
+    },
+    {
+      "id": "82930a19-ae89-5c93-9593-15eb952f3f9d",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 37,
+      "speaker": "customer",
+      "start_sec": 223.0,
+      "end_sec": 229.0,
+      "content": "通常品はまとめたいですが、本当の緊急時は残したいです。"
+    },
+    {
+      "id": "47ed466d-4b2b-51bc-8224-9a5ca2d20d22",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 229.0,
+      "end_sec": 238.0,
+      "content": "では、過去1ヶ月の購入を定期品、案件ごとの予定品、緊急品に分けましょう。"
+    },
+    {
+      "id": "a2a6b363-44c3-5852-983f-337944f1a1cc",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 238.0,
+      "end_sec": 251.0,
+      "content": "通常品の注文と承認を整え、緊急品は上限と事後報告を人のルールとして残す案を比較します。"
+    },
+    {
+      "id": "444491bb-7cb4-5c20-adfe-324c65f89d02",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 251.0,
+      "end_sec": 259.0,
+      "content": "試行対象は、毎月使う定番品を10品目ほど選ぶのはいかがですか?"
+    },
+    {
+      "id": "b1f8f48b-e766-5281-b402-bdc7a8d58fcc",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 259.0,
+      "end_sec": 267.0,
+      "content": "テープ、電池、コピー用紙、名札用品なら件数が多いです。"
+    },
+    {
+      "id": "d6b6bb3e-31ae-5455-9113-12604a8046d6",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 267.0,
+      "end_sec": 276.0,
+      "content": "1つの部署で1ヶ月試し、建替件数、重複購入、承認時間、経理の確認時間、結品を記録します。"
+    },
+    {
+      "id": "65122aeb-d7b5-5278-906e-28b1817a3c42",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 43,
+      "speaker": "customer",
+      "start_sec": 277.0,
+      "end_sec": 283.0,
+      "content": "結品が増えたら現場から反対されるので、そこも必要です。"
+    },
+    {
+      "id": "2f636eae-f628-5a25-8322-2347f5f0d8ab",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 283.0,
+      "end_sec": 289.0,
+      "content": "現場の利便性を落とさず管理負担を減らせるか、で判断しましょう。"
+    },
+    {
+      "id": "7fd1b6f6-53ab-54c0-a7ff-1245c94d9178",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 45,
+      "speaker": "customer",
+      "start_sec": 289.0,
+      "end_sec": 292.0,
+      "content": "その条件なら試してみたいです。"
+    },
+    {
+      "id": "057d0da2-dcab-5589-b8eb-06546688c6d8",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 292.0,
+      "end_sec": 302.0,
+      "content": "試行中に現場が別の購入方法へ戻った場合も、ルール違反として終わらせず、納期や品揃えなど理由を確認します。"
+    },
+    {
+      "id": "0d1e12c5-7ee4-5cd1-b2af-def5bb6b4bde",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 47,
+      "speaker": "customer",
+      "start_sec": 302.0,
+      "end_sec": 307.0,
+      "content": "使われない仕組みを全社へ広げないためにも必要ですね。"
+    },
+    {
+      "id": "87ee7733-93f1-50a1-8a65-ae249b6f5b5a",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 307.0,
+      "end_sec": 314.0,
+      "content": "結果を総務だけで評価せず、現場と経理を含めた3社で継続条件を決めましょう。"
+    },
+    {
+      "id": "9567428c-d2bf-576e-bb37-8230797531a1",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 49,
+      "speaker": "customer",
+      "start_sec": 314.0,
+      "end_sec": 319.0,
+      "content": "全員にとって改善になっているかを見ます。"
+    },
+    {
+      "id": "ff43bc2b-3c84-52c5-98d9-d17ea3cabd6e",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 50,
+      "speaker": "salesperson",
+      "start_sec": 319.0,
+      "end_sec": 327.0,
+      "content": "結品や納期遅延が一手でも起きた場合は、その原因が発注ルールか供給条件かを切り分けます。"
+    },
+    {
+      "id": "5efb2ae3-7300-5989-b4f5-c4e29a2f8f34",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 51,
+      "speaker": "salesperson",
+      "start_sec": 327.0,
+      "end_sec": 332.0,
+      "content": "単に元へ戻すのではなく、改善できるか確認します。"
+    },
+    {
+      "id": "173fd48a-bffd-5569-8f2a-9ed365fa973b",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "sequence_no": 52,
+      "speaker": "customer",
+      "start_sec": 332.0,
+      "end_sec": 337.0,
+      "content": "現場を縛りすぎない形なら検討できます。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "22482cec-a084-5b22-8f0b-cde3dc749dfd",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "knowledge_type": "pain_point",
+      "title": "立替え購入による事務コストと在庫分散の問題",
+      "situation": "イベント業務において、現場スタッフが急ぎで備品（養生テープ等）を立替え購入している。",
+      "problem": "購入単価だけでなく、立替え申請、領収書確認、振り込み、案件集計などの事務コストが発生し、余った在庫の所在が共有されないまま重複購入が起きている。",
+      "judgment": "安価な物品の個別購入は、管理コストを含めると非効率であり、件数が多い小口品こそ標準化すべき対象である。",
+      "action": "立替え購入の件数（月40件）と、そのうち本当に緊急だったものの割合を確認し、事務処理の負荷を可視化する。",
+      "reasoning": "現場の利便性（速さ）と管理の正確性（在庫共有、費用集計）のバランスが崩れているため、プロセスの見直しが必要。",
+      "outcome": null,
+      "lesson": "小口な消耗品の立替え購入は、単価ではなく「管理コスト（事務時間）」と「在庫の非可視化」が主要なペインポイントである。",
+      "applicable_situations": "現場で頻繁に消耗品を購入する必要がある製造業やイベント運営業。",
+      "limitations": "立替えが完全に禁止できない緊急時の対応策が別途必要。",
+      "industry": "イベント運営/製造",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "立替え購入による事務コストと在庫分散の問題\nイベント業務において、現場スタッフが急ぎで備品（養生テープ等）を立替え購入している。\n購入単価だけでなく、立替え申請、領収書確認、振り込み、案件集計などの事務コストが発生し、余った在庫の所在が共有されないまま重複購入が起きている。\n安価な物品の個別購入は、管理コストを含めると非効率であり、件数が多い小口品こそ標準化すべき対象である。\n立替え購入の件数（月40件）と、そのうち本当に緊急だったものの割合を確認し、事務処理の負荷を可視化する。\n現場の利便性（速さ）と管理の正確性（在庫共有、費用集計）のバランスが崩れているため、プロセスの見直しが必要。\n小口な消耗品の立替え購入は、単価ではなく「管理コスト（事務時間）」と「在庫の非可視化」が主要なペインポイントである。\n現場で頻繁に消耗品を購入する必要がある製造業やイベント運営業。\n立替えが完全に禁止できない緊急時の対応策が別途必要。\nイベント運営/製造\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:28:21.167455Z"
+    },
+    {
+      "id": "9eb49200-9566-5558-8d90-b61e76bf1831",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "knowledge_type": "sales_technique",
+      "title": "現場の抵抗を考慮した代替手段の提示",
+      "situation": "立替え購入の禁止や厳格な承認フローの導入を検討しているが、現場の利便性を損なう懸念がある。",
+      "problem": "「禁止」のみを伝えると現場が回りませんし、承認を増やすと調達が遅れて本末転倒になる。",
+      "judgment": "現場の利便性を落とさず管理負担を減らすための「代替手段」を用意することが重要。",
+      "action": "立替えを禁止するだけでなく、すぐ届く代替手段（法人向け通販など）を提案し、夜間や休日の緊急購入まで一律に止めない柔軟性を確保する。",
+      "reasoning": "現場の業務を止めないことが、新しいルールが定着するための前提条件である。",
+      "outcome": null,
+      "lesson": "プロセス改善の提案時、既存の非効率な慣行（立替え）を単純に禁止するのではなく、同等以上の利便性を提供する代替案をセットで提示する。",
+      "applicable_situations": "現場のスピード感が求められる業務における購買プロセスの改革。",
+      "limitations": "代替手段の納期や品揃えが現場の期待値を満たす必要がある。",
+      "industry": null,
+      "product": "法人向け通販サービス",
+      "sales_stage": "proposal",
+      "search_text": "現場の抵抗を考慮した代替手段の提示\n立替え購入の禁止や厳格な承認フローの導入を検討しているが、現場の利便性を損なう懸念がある。\n「禁止」のみを伝えると現場が回りませんし、承認を増やすと調達が遅れて本末転倒になる。\n現場の利便性を落とさず管理負担を減らすための「代替手段」を用意することが重要。\n立替えを禁止するだけでなく、すぐ届く代替手段（法人向け通販など）を提案し、夜間や休日の緊急購入まで一律に止めない柔軟性を確保する。\n現場の業務を止めないことが、新しいルールが定着するための前提条件である。\nプロセス改善の提案時、既存の非効率な慣行（立替え）を単純に禁止するのではなく、同等以上の利便性を提供する代替案をセットで提示する。\n現場のスピード感が求められる業務における購買プロセスの改革。\n代替手段の納期や品揃えが現場の期待値を満たす必要がある。\n法人向け通販サービス\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:28:21.167455Z"
+    },
+    {
+      "id": "e96a3100-9a9c-531e-84e3-cc189417dbd6",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "knowledge_type": "proposal",
+      "title": "品目と予算に基づく承認ルールの設計",
+      "situation": "部署別の発注管理や承認が必要だが、案件責任者が現場に出ていて承認が遅れる問題がある。",
+      "problem": "すべての購入に承認を求めると、現場の業務が停滞する。",
+      "judgment": "案件予算と品目の両方で承認の要否を分けるルールが有効。",
+      "action": "定番品は予算内なら承認不要、一定額以上だけ承認とするなど、品目別・金額別の承認フローを設計する。",
+      "reasoning": "リスクの低い通常品は迅速に、リスクの高い高額品や特殊品は慎重に、というバランスを取ることで現場の負荷を軽減する。",
+      "outcome": null,
+      "lesson": "承認フローは「一律」ではなく、品目の性質（定番/緊急）と金額の大小で分岐させることで、効率と統制の両立が可能になる。",
+      "applicable_situations": "購買プロセスの標準化を検討している中堅・大企業。",
+      "limitations": "品目の分類基準を明確に定義する必要がある。",
+      "industry": null,
+      "product": "購買管理システム/通販サービス",
+      "sales_stage": "proposal",
+      "search_text": "品目と予算に基づく承認ルールの設計\n部署別の発注管理や承認が必要だが、案件責任者が現場に出ていて承認が遅れる問題がある。\nすべての購入に承認を求めると、現場の業務が停滞する。\n案件予算と品目の両方で承認の要否を分けるルールが有効。\n定番品は予算内なら承認不要、一定額以上だけ承認とするなど、品目別・金額別の承認フローを設計する。\nリスクの低い通常品は迅速に、リスクの高い高額品や特殊品は慎重に、というバランスを取ることで現場の負荷を軽減する。\n承認フローは「一律」ではなく、品目の性質（定番/緊急）と金額の大小で分岐させることで、効率と統制の両立が可能になる。\n購買プロセスの標準化を検討している中堅・大企業。\n品目の分類基準を明確に定義する必要がある。\n購買管理システム/通販サービス\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:28:21.167455Z"
+    },
+    {
+      "id": "162bc5cf-c5ca-523f-bd52-612b65ad1a8c",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "knowledge_type": "next_action",
+      "title": "小規模な試行（パイロット）による効果検証",
+      "situation": "新しい購買ルールやシステム導入の効果を全社展開前に確認したい。",
+      "problem": "全社一斉導入はリスクが高く、現場の反発を招く可能性がある。",
+      "judgment": "1つの部署で1ヶ月間、定番品10品目程度を対象に試行し、データを記録する。",
+      "action": "建替件数、重複購入、承認時間、経理の確認時間、結品（不足）などをKPIとして記録し、現場と経理、総務の3者で継続条件を評価する。",
+      "reasoning": "現場の利便性を落とさず管理負担を減らせるかを定量的に検証するため。",
+      "outcome": null,
+      "lesson": "プロセス改善は、小規模なパイロットテストで「現場の利便性」と「管理コスト」のトレードオフを定量的に検証してから拡大するのが安全。",
+      "applicable_situations": "業務プロセスの標準化やシステム導入の初期段階。",
+      "limitations": "試行期間中のデータが偏っている可能性に注意が必要。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "小規模な試行（パイロット）による効果検証\n新しい購買ルールやシステム導入の効果を全社展開前に確認したい。\n全社一斉導入はリスクが高く、現場の反発を招く可能性がある。\n1つの部署で1ヶ月間、定番品10品目程度を対象に試行し、データを記録する。\n建替件数、重複購入、承認時間、経理の確認時間、結品（不足）などをKPIとして記録し、現場と経理、総務の3者で継続条件を評価する。\n現場の利便性を落とさず管理負担を減らせるかを定量的に検証するため。\nプロセス改善は、小規模なパイロットテストで「現場の利便性」と「管理コスト」のトレードオフを定量的に検証してから拡大するのが安全。\n業務プロセスの標準化やシステム導入の初期段階。\n試行期間中のデータが偏っている可能性に注意が必要。\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:28:21.167455Z"
+    },
+    {
+      "id": "c998f23d-6c76-5fec-b9dd-b27a612616c2",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "knowledge_type": "operational_insight",
+      "title": "試行中の逸脱行動の分析と改善",
+      "situation": "新しいルールを試行中だが、現場が従来の購入方法（立替え等）に戻ることがある。",
+      "problem": "ルール違反として処理すると、現場のモチベーションが下がり、仕組みが機能しなくなる。",
+      "judgment": "逸脱行動は「違反」ではなく「フィードバック」と捉える。",
+      "action": "現場が別の方法に戻った場合、納期や品揃えなどの理由を確認し、ルールか供給条件のどちらに問題があるかを切り分けて改善する。",
+      "reasoning": "使われない仕組みを全社へ広げないため、現場の声を反映して仕組みを洗練させる必要がある。",
+      "outcome": null,
+      "lesson": "新プロセス導入時の現場の逸脱行動は、仕組みの欠陥を示すシグナルであり、原因分析と改善サイクルに組み込むべき。",
+      "applicable_situations": "業務改善プロジェクトの運用フェーズ。",
+      "limitations": "逸脱行動の理由を正確に把握するためのヒアリングコストがかかる。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "follow_up",
+      "search_text": "試行中の逸脱行動の分析と改善\n新しいルールを試行中だが、現場が従来の購入方法（立替え等）に戻ることがある。\nルール違反として処理すると、現場のモチベーションが下がり、仕組みが機能しなくなる。\n逸脱行動は「違反」ではなく「フィードバック」と捉える。\n現場が別の方法に戻った場合、納期や品揃えなどの理由を確認し、ルールか供給条件のどちらに問題があるかを切り分けて改善する。\n使われない仕組みを全社へ広げないため、現場の声を反映して仕組みを洗練させる必要がある。\n新プロセス導入時の現場の逸脱行動は、仕組みの欠陥を示すシグナルであり、原因分析と改善サイクルに組み込むべき。\n業務改善プロジェクトの運用フェーズ。\n逸脱行動の理由を正確に把握するためのヒアリングコストがかかる。\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:28:21.167455Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "bae8693b-fdd6-5260-86fe-dc07607cc66d",
+      "knowledge_id": "22482cec-a084-5b22-8f0b-cde3dc749dfd",
+      "start_utterance_id": "0ef68c7b-c73a-5369-b7ac-a40ea1f87c1e",
+      "end_utterance_id": "6ad75bda-ebe6-537a-ab41-b53b50169119"
+    },
+    {
+      "id": "23e1a68a-166a-5a33-9664-969a5a97c25c",
+      "knowledge_id": "22482cec-a084-5b22-8f0b-cde3dc749dfd",
+      "start_utterance_id": "f23d41c6-04a4-5d8a-b718-6635a8fcd253",
+      "end_utterance_id": "740bfc11-af88-5b89-be04-3104bc307f9f"
+    },
+    {
+      "id": "37e85a98-689e-5a64-ae5c-3b1cae615572",
+      "knowledge_id": "22482cec-a084-5b22-8f0b-cde3dc749dfd",
+      "start_utterance_id": "362fcfde-beb4-5618-aef4-e0f40d9002a7",
+      "end_utterance_id": "49da01bf-c0ff-5793-ae53-3bffe61d218b"
+    },
+    {
+      "id": "945263ce-6e4c-5846-9a73-56966a2a6e9c",
+      "knowledge_id": "9eb49200-9566-5558-8d90-b61e76bf1831",
+      "start_utterance_id": "b005870b-4cb1-54f0-b867-796b4912c77c",
+      "end_utterance_id": "b005870b-4cb1-54f0-b867-796b4912c77c"
+    },
+    {
+      "id": "5d32fdb6-03de-5e80-a5a7-1ff233bbbb49",
+      "knowledge_id": "9eb49200-9566-5558-8d90-b61e76bf1831",
+      "start_utterance_id": "03dbfee1-2861-55d0-90a8-84ff72c24622",
+      "end_utterance_id": "03dbfee1-2861-55d0-90a8-84ff72c24622"
+    },
+    {
+      "id": "61a3ff10-ab47-5eb1-a252-70fd9a4fee5f",
+      "knowledge_id": "9eb49200-9566-5558-8d90-b61e76bf1831",
+      "start_utterance_id": "798cc6ed-04ac-59ec-9bff-b20e82f3fb86",
+      "end_utterance_id": "798cc6ed-04ac-59ec-9bff-b20e82f3fb86"
+    },
+    {
+      "id": "a25fe10c-8de0-5dae-b419-e10d24b083c4",
+      "knowledge_id": "e96a3100-9a9c-531e-84e3-cc189417dbd6",
+      "start_utterance_id": "6ba45cfc-4bee-56f3-a920-0a26f84de2b1",
+      "end_utterance_id": "bde89a39-5ae5-5a05-96ef-790f68ab8b2e"
+    },
+    {
+      "id": "b0cb23da-220e-5559-ae72-ee7bbacfa26a",
+      "knowledge_id": "e96a3100-9a9c-531e-84e3-cc189417dbd6",
+      "start_utterance_id": "44d2d103-7a17-50b1-a3f5-e5fb30eb5c22",
+      "end_utterance_id": "ea22b88d-33af-525e-8f5c-fed444b8d00f"
+    },
+    {
+      "id": "c1d320fa-2fbf-5951-a21b-16dab93761eb",
+      "knowledge_id": "162bc5cf-c5ca-523f-bd52-612b65ad1a8c",
+      "start_utterance_id": "444491bb-7cb4-5c20-adfe-324c65f89d02",
+      "end_utterance_id": "d6b6bb3e-31ae-5455-9113-12604a8046d6"
+    },
+    {
+      "id": "78c3fa25-9825-5208-bcaa-a6b1674e35b2",
+      "knowledge_id": "162bc5cf-c5ca-523f-bd52-612b65ad1a8c",
+      "start_utterance_id": "87ee7733-93f1-50a1-8a65-ae249b6f5b5a",
+      "end_utterance_id": "9567428c-d2bf-576e-bb37-8230797531a1"
+    },
+    {
+      "id": "cd24c489-59c8-590d-ba54-9e4c9f1e0ab5",
+      "knowledge_id": "c998f23d-6c76-5fec-b9dd-b27a612616c2",
+      "start_utterance_id": "057d0da2-dcab-5589-b8eb-06546688c6d8",
+      "end_utterance_id": "0d1e12c5-7ee4-5cd1-b2af-def5bb6b4bde"
+    },
+    {
+      "id": "b1559802-c414-54e4-b51f-22c66fd3dfa4",
+      "knowledge_id": "c998f23d-6c76-5fec-b9dd-b27a612616c2",
+      "start_utterance_id": "ff43bc2b-3c84-52c5-98d9-d17ea3cabd6e",
+      "end_utterance_id": "5efb2ae3-7300-5989-b4f5-c4e29a2f8f34"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "b4843584-b40c-5040-8aa9-b22c808e574b",
+      "data_source_id": "1c11bb33-3004-57f1-b12c-b5cf7cb5473c",
+      "summary": "イベント業務における備品の立替え購入と在庫管理の問題を解決するため、法人向け通販サービスの導入と購買ルールの見直しを提案した。現場の利便性を損なわないよう、品目別・金額別の承認フロー設計と、小規模な試行（パイロット）による効果検証を合意した。",
+      "customer_needs": [
+        "立替え購入による事務コスト（経理負担）の軽減",
+        "余剰在庫の所在共有と重複購入の防止",
+        "現場の利便性を損なわない迅速な調達手段",
+        "案件別の費用集計の効率化"
+      ],
+      "proposals": [
+        "法人向け通販サービスの活用",
+        "定番品は予算内なら承認不要、高額品のみ承認とするルール設計",
+        "1部署・1ヶ月・10品目限定の試行（パイロット）実施",
+        "建替件数、承認時間、経理確認時間などのKPIによる効果測定"
+      ],
+      "decisions": [
+        "試行対象品目としてテープ、電池、コピー用紙、名札用品を選定",
+        "試行結果の評価は総務、現場、経理の3者で行う",
+        "現場の逸脱行動はルール違反ではなく、改善のフィードバックとして扱う"
+      ],
+      "next_actions": [
+        "MA他のメール（通販サービス）の具体的な設定費用を要件と照らして確認",
+        "過去1ヶ月の購入データを定期品、案件予定品、緊急品に分類",
+        "試行期間中のKPI記録を開始"
+      ]
+    }
+  ]
+}
