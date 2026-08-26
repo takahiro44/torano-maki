@@ -9,6 +9,10 @@ import type {
   AudioTranscribeResponse,
   ChatMessage,
   ChatResponse,
+  ChatReviewDetail,
+  ChatReviewListItem,
+  ChatReviewStatus,
+  ChatReviewSummary,
   ChatStreamEvent,
   ConfigHealthResponse,
   DbHealthResponse,
@@ -196,6 +200,44 @@ export function sendChat(messages: ChatMessage[], topK = 5) {
     method: "POST",
     body: JSON.stringify({ messages, top_k: topK }),
     signal: AbortSignal.timeout(300_000),
+  });
+}
+
+// --- 上司レビュー ---
+
+/** 「まとめる」。DBには書き込まない */
+export function summarizeChatReview(messages: ChatMessage[]) {
+  return request<ChatReviewSummary>("/chat-reviews/summarize", {
+    method: "POST",
+    body: JSON.stringify({ messages }),
+    signal: AbortSignal.timeout(90_000),
+  });
+}
+
+/** 「上司に送信」。要約をサーバ側で再生成し、pendingで保存する */
+export function sendChatReview(messages: ChatMessage[]) {
+  return request<ChatReviewDetail>("/chat-reviews", {
+    method: "POST",
+    body: JSON.stringify({ messages }),
+    signal: AbortSignal.timeout(90_000),
+  });
+}
+
+export function listChatReviews(status?: ChatReviewStatus) {
+  const q = status ? `?status=${status}` : "";
+  return request<ChatReviewListItem[]>(`/chat-reviews${q}`);
+}
+
+export function getChatReview(id: string) {
+  return request<ChatReviewDetail>(`/chat-reviews/${id}`);
+}
+
+/** 上司の回答。そのままconfirmedのナレッジとして登録される */
+export function respondChatReview(id: string, responseText: string) {
+  return request<ChatReviewDetail>(`/chat-reviews/${id}/respond`, {
+    method: "POST",
+    body: JSON.stringify({ response_text: responseText }),
+    signal: AbortSignal.timeout(120_000),
   });
 }
 

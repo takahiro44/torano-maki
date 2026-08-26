@@ -10,6 +10,7 @@
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
+import { ChatReviewPanel } from "./ChatReviewPanel";
 import { Composer } from "./Composer";
 import { AgentTimeline, Spinner } from "./AgentTimeline";
 import { Citations } from "./Citations";
@@ -82,6 +83,8 @@ export function AiChat({ knowledgeCount }: { knowledgeCount: number | null }) {
           </button>
         </div>
       )}
+
+      <ChatReviewPanel turns={turns} />
 
       <Composer busy={busy} onSend={(t) => void send(t)} onStop={stop} />
     </div>

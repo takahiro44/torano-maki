@@ -20,15 +20,17 @@ import { AudioIngest } from "./components/AudioIngest";
 import { KnowledgeInput } from "./components/KnowledgeInput";
 import { KnowledgeList } from "./components/KnowledgeList";
 import { KnowledgeSearch } from "./components/KnowledgeSearch";
+import { SupervisorInbox } from "./components/SupervisorInbox";
 import type { KnowledgeCounts } from "./types/api";
 
-type Tab = "chat" | "search" | "input" | "audio" | "list";
+type Tab = "chat" | "search" | "input" | "audio" | "supervisor" | "list";
 
 const TABS: { key: Tab; label: string }[] = [
   { key: "chat", label: "AIに聞く" },
   { key: "search", label: "探す" },
   { key: "input", label: "登録" },
   { key: "audio", label: "音声" },
+  { key: "supervisor", label: "上司レビュー" },
   { key: "list", label: "一覧" },
 ];
 
@@ -108,6 +110,7 @@ export default function App() {
               {tab === "search" && <KnowledgeSearch />}
               {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
               {tab === "audio" && <AudioIngest onChanged={() => setReloadKey((n) => n + 1)} />}
+              {tab === "supervisor" && <SupervisorInbox />}
               {tab === "list" && (
                 <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
               )}
