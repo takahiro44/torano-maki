@@ -1,0 +1,832 @@
+{
+  "data_sources": [
+    {
+      "id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "source_type": "audio",
+      "file_name": "02_stock_leadtime.wav",
+      "occurred_at": "2026-08-24T10:00:36Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "bcc46cb0-5160-5af7-ab10-593b81ff3aa8",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 15.0,
+      "content": "中村さん、前回はありがとうございました。前回のお話では、販売管理システムの更新を検討されていて、特に在庫確認のところで営業の方から不満が出ているということでしたよね。"
+    },
+    {
+      "id": "0339f27d-cae9-5c70-914e-c5c7d3e97cc3",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 15.0,
+      "end_sec": 22.0,
+      "content": "そうですね。営業から在庫が分かりづらいとよく言われます。"
+    },
+    {
+      "id": "69a2813a-390b-582f-8b13-b575a94e26d1",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 22.0,
+      "end_sec": 33.0,
+      "content": "ありがとうございます。今日は、その分かりづらいというところをもう少し詳しく伺ってもいいですか?最近、在庫確認で実際に困ったケースってありました?"
+    },
+    {
+      "id": "af0de853-e8b1-5e60-83c7-d8afa937477a",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 4,
+      "speaker": "customer",
+      "start_sec": 33.0,
+      "end_sec": 46.0,
+      "content": "ありますね。先週も営業から急ぎで確認が来ました。お客様から今週中に30個欲しいと言われたらしくて。"
+    },
+    {
+      "id": "8b34def4-c6d8-5656-b20b-f16e1457b434",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 5,
+      "speaker": "salesperson",
+      "start_sec": 47.0,
+      "end_sec": 52.0,
+      "content": "その時中村さんのところでは、どうやって在庫を確認されたんですか?"
+    },
+    {
+      "id": "d94fa1ef-93f3-5088-b374-70800b57de03",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 52.0,
+      "end_sec": 61.0,
+      "content": "まず、販売管理システムを見ます。そこで数字を確認するんですが、それだけでは分からないことがあるんですよ。"
+    },
+    {
+      "id": "d4a8dae9-28d4-5c44-83ec-d24b7afbb133",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 61.0,
+      "end_sec": 63.0,
+      "content": "というと?"
+    },
+    {
+      "id": "641d7052-1836-5b4d-89c9-ec27e6518223",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 63.0,
+      "end_sec": 75.0,
+      "content": "例えば、在庫が50個と表示されていても、そのうち20個は別のお客様向きに取り置きしているとか、あとは入荷予定のものもあります。"
+    },
+    {
+      "id": "0b63bd9d-485b-50de-9f97-97c2ab814e6e",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 9,
+      "speaker": "salesperson",
+      "start_sec": 75.0,
+      "end_sec": 86.0,
+      "content": "なるほど。システム上に50個あると表示されても、実際に新しい注文へ使えるのが50個とは限らないんですね?"
+    },
+    {
+      "id": "08d3509d-0295-5b5b-a878-cf5e2f4e5784",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 86.0,
+      "end_sec": 95.0,
+      "content": "そうなんです。なので、結局担当者に確認します。"
+    },
+    {
+      "id": "7661c33f-ca95-5dde-973f-4f972b7c0346",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 11,
+      "speaker": "salesperson",
+      "start_sec": 95.0,
+      "end_sec": 100.0,
+      "content": "その担当者というのは、倉庫の方ですか?"
+    },
+    {
+      "id": "5fbcf3ad-e8ba-5961-88b7-c2adf6b46cb8",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 100.0,
+      "end_sec": 109.0,
+      "content": "倉庫もそうですし、商品によっては仕入れ担当ですね。あの商品来週何個入るんだっけ?みたいな。"
+    },
+    {
+      "id": "59c87b25-f9aa-553b-82a6-f024c19a1424",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 109.0,
+      "end_sec": 113.0,
+      "content": "確認するときは、電話ですか?"
+    },
+    {
+      "id": "f371464c-be43-506e-a007-1d2ef6441b59",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 113.0,
+      "end_sec": 119.0,
+      "content": "電話か、チャットですね。急ぎなら電話です。"
+    },
+    {
+      "id": "38998e56-8d66-56d9-b90d-ec88c3e67fad",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 119.0,
+      "end_sec": 126.0,
+      "content": "先週の30個のケースでは、最終的に回答が出るまでどれくらいかかりました?"
+    },
+    {
+      "id": "f23bb34d-135e-5a6d-8bed-cef711752f51",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 16,
+      "speaker": "customer",
+      "start_sec": 126.0,
+      "end_sec": 134.0,
+      "content": "30分くらいですかね。営業が急いでいたので、倉庫と仕入れ担当に両方確認しました。"
+    },
+    {
+      "id": "47a38a6e-ab75-5c2b-9c6b-89e220f4f8f4",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 17,
+      "speaker": "salesperson",
+      "start_sec": 134.0,
+      "end_sec": 142.0,
+      "content": "30分。その間、営業の方はお客様に回答できずに待っている状態ですか?"
+    },
+    {
+      "id": "547cb50e-21f6-5e67-ae8f-3e85885540b7",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 18,
+      "speaker": "customer",
+      "start_sec": 142.0,
+      "end_sec": 148.0,
+      "content": "そうですね。営業から何回かまだですかと連絡が来ました。"
+    },
+    {
+      "id": "fe1606fe-99c6-5704-921d-eb8a1ffd4889",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 19,
+      "speaker": "salesperson",
+      "start_sec": 148.0,
+      "end_sec": 161.0,
+      "content": "なるほど。在庫確認そのものに30分かかるというより、必要な情報が複数の人に分かれていて、それを集めるのに時間がかかっている感じですね。"
+    },
+    {
+      "id": "3cfbadd4-f4cd-5b62-a276-8f06dfd1bae5",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 161.0,
+      "end_sec": 165.0,
+      "content": "そう言われると、確かにそうですね。"
+    },
+    {
+      "id": "ec6398db-b388-5a9b-b261-77f6f9f87e5f",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 165.0,
+      "end_sec": 170.0,
+      "content": "ちなみに、ベテランの方だともっと早く判断できたりします?"
+    },
+    {
+      "id": "9563994d-ab8d-56ce-8dc2-aebead85944d",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 171.0,
+      "end_sec": 184.0,
+      "content": "しますね。長くいる社員なら、これは営者向けに確保しているとか、この商品なら来週水曜日に入るとか、結構覚えていますから。"
+    },
+    {
+      "id": "01603f20-315c-59a1-a7e0-57b9768564cd",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 184.0,
+      "end_sec": 187.0,
+      "content": "逆に新しく入った方だと?"
+    },
+    {
+      "id": "3af47a72-45ed-5361-bf4a-696e551bf8fd",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 187.0,
+      "end_sec": 191.0,
+      "content": "全部確認しないと分からないと思います。"
+    },
+    {
+      "id": "7edd2b80-9904-5399-8055-e83f45c6f7db",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 191.0,
+      "end_sec": 203.0,
+      "content": "そうすると、在庫情報そのものだけではなくて、誰がどの商品について詳しいのか、という人の知識にもかなり依存していそうですね。"
+    },
+    {
+      "id": "ac962592-38b5-513d-a4f8-7f0d80f8c23a",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 203.0,
+      "end_sec": 207.0,
+      "content": "そうですね。そこは昔からそうです。"
+    },
+    {
+      "id": "f996b14d-335d-5d51-a29c-744151e52c65",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 207.0,
+      "end_sec": 214.0,
+      "content": "実際、それが原因でお客様への回答を間違えてしまったことはありますか?"
+    },
+    {
+      "id": "7bd7fde5-2ecb-5612-8265-1b82144dfb8d",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 28,
+      "speaker": "customer",
+      "start_sec": 214.0,
+      "end_sec": 223.0,
+      "content": "あります。営業がシステムだけ見てありますと答えてしまって、後から取り置き分だったことが分かったり。"
+    },
+    {
+      "id": "a5570a86-cd47-5219-9653-58327f915b5b",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 223.0,
+      "end_sec": 227.0,
+      "content": "その場合、どう対応されます?"
+    },
+    {
+      "id": "a31503a1-ea83-5e66-b184-e22872fb1b27",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 227.0,
+      "end_sec": 239.0,
+      "content": "お客様に連絡して、納期を伸ばしていただくか、別の商品を提案します。場合によっては仕入れ先に急いでもらいます。"
+    },
+    {
+      "id": "ff437080-8907-5b8d-808b-96a17f47047c",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 239.0,
+      "end_sec": 246.0,
+      "content": "結構大きな対応になりますね。頻度としてはどれくらいでしょう?"
+    },
+    {
+      "id": "7579eeaf-4770-5582-b580-57dea1c97ebf",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 32,
+      "speaker": "customer",
+      "start_sec": 246.0,
+      "end_sec": 256.0,
+      "content": "大きなトラブルになるのは月に一、二回ですかね。確認の電話自体は毎日ありますけど。"
+    },
+    {
+      "id": "1cd63853-d7d2-581e-a5a4-741cfc1adb97",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 33,
+      "speaker": "salesperson",
+      "start_sec": 256.0,
+      "end_sec": 268.0,
+      "content": "毎日あるんですね。ちなみに営業や業務の方から、在庫や納期について確認されるのは一日何件くらいありますか?"
+    },
+    {
+      "id": "27d8bede-4ef3-57c4-96b5-15ad898c3cfa",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 34,
+      "speaker": "customer",
+      "start_sec": 268.0,
+      "end_sec": 272.0,
+      "content": "10件から20件くらいだと思います。"
+    },
+    {
+      "id": "81d62ade-f4d4-537e-bfca-f72470699a58",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 272.0,
+      "end_sec": 283.0,
+      "content": "仮に1件5分で済んだとしても、10件なら50分ですね。難しい商品だと先ほどのように30分かかる。"
+    },
+    {
+      "id": "2a3b840d-e65c-5148-a30b-dd58eef97ee0",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 283.0,
+      "end_sec": 291.0,
+      "content": "そうですね。考えてみると結構時間を使っていますね。"
+    },
+    {
+      "id": "0ef7a8b5-003b-5001-b86c-8383759c968b",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 291.0,
+      "end_sec": 297.0,
+      "content": "ありがとうございます。一度私の理解が合っているか整理させてください。"
+    },
+    {
+      "id": "9643b2e2-0c83-5170-be53-bb76af1ba39a",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 297.0,
+      "end_sec": 306.0,
+      "content": "前回は在庫が分かりづらいというお話でしたが、今日伺ったところでは、まず販売管理システムの在庫数だけでは、"
+    },
+    {
+      "id": "807db0c6-a3af-5087-a152-398b6b7f9dd6",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 306.0,
+      "end_sec": 312.0,
+      "content": "取り置きや入荷予定まで含めた実際に販売できる数量が判断しづらい。"
+    },
+    {
+      "id": "197b874f-722e-5efd-9bf9-59c8ede08324",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 312.0,
+      "end_sec": 319.0,
+      "content": "それからその不足情報を倉庫や仕入れ担当に電話やチャットで確認している。"
+    },
+    {
+      "id": "27ac2a8b-edf1-536c-8a00-2468811098cc",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 319.0,
+      "end_sec": 324.0,
+      "content": "さらに、一部の判断がベテラン社員の記憶や経験に依存している。"
+    },
+    {
+      "id": "29d808b4-bb64-54c9-a3f7-fcd5fcdc1cfb",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 324.0,
+      "end_sec": 333.0,
+      "content": "その結果、営業がお客様へ納期を回答するまでに時間がかかったり、時には回答を訂正する必要が出ている。"
+    },
+    {
+      "id": "3fb7af56-e1f2-5480-85ef-422922926c23",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 43,
+      "speaker": "salesperson",
+      "start_sec": 333.0,
+      "end_sec": 335.0,
+      "content": "この理解で合っていますか?"
+    },
+    {
+      "id": "ae16fe11-aee5-5155-af75-f30fa8472312",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 44,
+      "speaker": "customer",
+      "start_sec": 335.0,
+      "end_sec": 342.0,
+      "content": "はい、その通りです。こうやって整理すると単にシステムが古いという話でもないですね。"
+    },
+    {
+      "id": "4dde7177-2598-59e9-ae5d-f9be235bc41e",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 342.0,
+      "end_sec": 353.0,
+      "content": "私もそう感じます。仮に、今回の改善で一番実現したい状態を一つ決めるとしたら、中村さんとしては何でしょう?"
+    },
+    {
+      "id": "8eeec42e-f2b6-5bbd-80a4-e92d49f3e226",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 353.0,
+      "end_sec": 363.0,
+      "content": "業務部の確認作業を減らすことなのか、営業がお客様に早く回答できることなのか、それとも回答ミスを減らすことなのか?"
+    },
+    {
+      "id": "2b51abad-d740-540d-8f2e-33c656db1981",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 47,
+      "speaker": "customer",
+      "start_sec": 363.0,
+      "end_sec": 370.0,
+      "content": "一番は、営業がある程度自分で正しい納期を判断できることですかね。"
+    },
+    {
+      "id": "8dadc80e-1e84-52f5-908a-e1860ab5cdcc",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 48,
+      "speaker": "customer",
+      "start_sec": 370.0,
+      "end_sec": 376.0,
+      "content": "毎回こちらに確認しなくても済むようになれば、営業も私たちも楽です。"
+    },
+    {
+      "id": "76b34d4f-e939-57a7-affe-1ff1a7734e06",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 49,
+      "speaker": "salesperson",
+      "start_sec": 376.0,
+      "end_sec": 387.0,
+      "content": "なるほど。確認時間を短くするより、そもそも確認しなくても必要な情報が分かる状態を作りたいということですね。"
+    },
+    {
+      "id": "09a3b9b2-7785-5769-a82a-cd1c7a0288ba",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 50,
+      "speaker": "customer",
+      "start_sec": 387.0,
+      "end_sec": 391.0,
+      "content": "そうですね。理想はそれです。"
+    },
+    {
+      "id": "57823196-86a3-5e57-bbb4-060e61e67e97",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 51,
+      "speaker": "salesperson",
+      "start_sec": 392.0,
+      "end_sec": 401.0,
+      "content": "分かりました。その方向であれば、弊社のスマイル部位セカンドエディション販売、もう候補の一つとして検討できると思います。"
+    },
+    {
+      "id": "389cd97f-6943-5b31-9339-4c98235424c0",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 52,
+      "speaker": "salesperson",
+      "start_sec": 401.0,
+      "end_sec": 413.0,
+      "content": "販売や仕入れ、在庫に関する情報を扱えるので、今バラバラに確認されている情報をどうまとめられるか、一度整理してみる価値はありそうです。"
+    },
+    {
+      "id": "99d0d019-e68a-517c-b160-f8f811eb4690",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 53,
+      "speaker": "customer",
+      "start_sec": 413.0,
+      "end_sec": 415.0,
+      "content": "なるほど。"
+    },
+    {
+      "id": "25a5be5e-fb78-58ac-b5d6-ac853471b50f",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 54,
+      "speaker": "salesperson",
+      "start_sec": 415.0,
+      "end_sec": 422.0,
+      "content": "ただ、今日のお話だけでスマイルを入れれば解決しますとはまだ言えないと思っています。"
+    },
+    {
+      "id": "5c1837f0-34d8-574b-a800-245cf9bdd122",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 55,
+      "speaker": "salesperson",
+      "start_sec": 422.0,
+      "end_sec": 429.0,
+      "content": "例えば、取り置きの情報を今どこで管理しているのか、入荷予定をどう登録しているのか。"
+    },
+    {
+      "id": "fc27c964-7f5f-55be-81b3-8978bfc3d2d8",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 56,
+      "speaker": "salesperson",
+      "start_sec": 429.0,
+      "end_sec": 434.0,
+      "content": "それから、営業の方が実際に何を見て納期を回答しているのか。"
+    },
+    {
+      "id": "e0136c96-78ff-56de-97e1-d9fee7b30b33",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 57,
+      "speaker": "salesperson",
+      "start_sec": 434.0,
+      "end_sec": 441.0,
+      "content": "ここを確認しないと、システムを入れ替えても確認の電話だけ残ってしまう可能性があります。"
+    },
+    {
+      "id": "528ad471-2ecb-5081-b38f-16874ea3cd79",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 58,
+      "speaker": "customer",
+      "start_sec": 441.0,
+      "end_sec": 449.0,
+      "content": "それは困りますね。システムを入れたのに仕事が変わらないというのは避けたいです。"
+    },
+    {
+      "id": "349c5236-0f04-55c5-aa53-638bc46a75f2",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 59,
+      "speaker": "salesperson",
+      "start_sec": 449.0,
+      "end_sec": 459.0,
+      "content": "そうですよね。なので、次回は在庫確認から、お客様への納期回答までを一度業務フローにして、"
+    },
+    {
+      "id": "22bf6e48-2f22-55d3-a2c0-8c60904ee263",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 60,
+      "speaker": "salesperson",
+      "start_sec": 459.0,
+      "end_sec": 468.0,
+      "content": "どこまでシステム上で判断できるようにするのか、どの判断は人に残すのかを分けてご提案したいと思っています。"
+    },
+    {
+      "id": "36df6fb3-cad8-5ade-9bb4-e39213c13ab2",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 61,
+      "speaker": "customer",
+      "start_sec": 468.0,
+      "end_sec": 472.0,
+      "content": "それは分かりやすそうですね。"
+    },
+    {
+      "id": "57975de5-e63a-54fc-ad66-60bc89792b5f",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 62,
+      "speaker": "salesperson",
+      "start_sec": 472.0,
+      "end_sec": 484.0,
+      "content": "可能であれば、実際に在庫を確認されている担当者の方と営業の方、それぞれ一人ずつに15分程度お話を伺うことはできますか?"
+    },
+    {
+      "id": "2029bb40-fd61-5ce2-a361-92fbeb189d4f",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 63,
+      "speaker": "customer",
+      "start_sec": 484.0,
+      "end_sec": 488.0,
+      "content": "大丈夫だと思います。"
+    },
+    {
+      "id": "3f960248-bbab-5e1c-83fb-75a5133a9fa4",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 64,
+      "speaker": "salesperson",
+      "start_sec": 488.0,
+      "end_sec": 497.0,
+      "content": "ありがとうございます。できれば、実際に最近あった納期確認に時間がかかった案件を一つ例にして、"
+    },
+    {
+      "id": "fdacf527-f5f3-539c-999e-2ad4bc67880a",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 65,
+      "speaker": "salesperson",
+      "start_sec": 497.0,
+      "end_sec": 503.0,
+      "content": "その時、誰が何を確認したのかも教えていただけると、かなり具体的に整理できます。"
+    },
+    {
+      "id": "d38537bd-58da-51fe-89c7-5377c74e884b",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 66,
+      "speaker": "customer",
+      "start_sec": 503.0,
+      "end_sec": 506.0,
+      "content": "分かりました。用意しておきます。"
+    },
+    {
+      "id": "4a29535a-5058-5ae6-b789-35cb475362e0",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 67,
+      "speaker": "salesperson",
+      "start_sec": 506.0,
+      "end_sec": 511.0,
+      "content": "ありがとうございます。では、次回はその内容を確認した上で、"
+    },
+    {
+      "id": "8abc9366-e1ef-5591-99be-0efac2e190b6",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 68,
+      "speaker": "salesperson",
+      "start_sec": 511.0,
+      "end_sec": 521.0,
+      "content": "スマイルVセカンドエディション販売を使った場合に、今の在庫確認と納期回答がどう変えられそうかをお持ちします。"
+    },
+    {
+      "id": "4b561b2f-29b1-536f-b1fa-f99179787a2e",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 69,
+      "speaker": "salesperson",
+      "start_sec": 521.0,
+      "end_sec": 525.0,
+      "content": "その上で実際に効果がありそうか、一緒に見ていきましょう。"
+    },
+    {
+      "id": "d1e915c9-f7f6-573d-8d68-976d891dc5bd",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 70,
+      "speaker": "customer",
+      "start_sec": 525.0,
+      "end_sec": 527.0,
+      "content": "お願いします。"
+    },
+    {
+      "id": "eb696120-e78a-5e46-b8fa-383de5d94956",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "sequence_no": 71,
+      "speaker": "salesperson",
+      "start_sec": 527.0,
+      "end_sec": 531.0,
+      "content": "ありがとうございます。本日もお次回いただきありがとうございました。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "2ccea43c-7889-54bf-bffd-bbbb19a5b386",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "knowledge_type": "pain_point",
+      "title": "在庫情報の非可視化による確認時間とミス",
+      "situation": "販売管理システムでは在庫数が表示されるが、取り置き分や入荷予定が含まれていないため、実際の販売可能数量が不明瞭。",
+      "problem": "営業からの在庫確認に30分程度かかる場合があり、その間顧客への回答が滞る。また、システム情報だけで判断した結果、取り置き分と誤認して納期を誤答するリスクがある。",
+      "judgment": "単なるシステム老朽化ではなく、情報の分散と属人化が根本原因。",
+      "action": "倉庫や仕入れ担当への電話・チャットによる個別確認が発生している。",
+      "reasoning": "ベテラン社員は記憶で補完できるが、新人は全項目確認が必要であり、業務負荷と品質のばらつきが生じている。",
+      "outcome": "月1〜2回の重大な納期ミスと、毎日10〜20件の確認業務が発生。",
+      "lesson": "在庫管理において、システム上の数値と実態の乖離は、確認プロセスの非効率と顧客対応の品質低下を招く。",
+      "applicable_situations": "在庫管理システムを導入しているが、取り置き・予約・入荷予定などの状態が可視化されていない製造・卸売業。",
+      "limitations": "属人化の程度や確認頻度は業種・規模により異なる。",
+      "industry": "卸売・製造",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "在庫情報の非可視化による確認時間とミス\n販売管理システムでは在庫数が表示されるが、取り置き分や入荷予定が含まれていないため、実際の販売可能数量が不明瞭。\n営業からの在庫確認に30分程度かかる場合があり、その間顧客への回答が滞る。また、システム情報だけで判断した結果、取り置き分と誤認して納期を誤答するリスクがある。\n単なるシステム老朽化ではなく、情報の分散と属人化が根本原因。\n倉庫や仕入れ担当への電話・チャットによる個別確認が発生している。\nベテラン社員は記憶で補完できるが、新人は全項目確認が必要であり、業務負荷と品質のばらつきが生じている。\n月1〜2回の重大な納期ミスと、毎日10〜20件の確認業務が発生。\n在庫管理において、システム上の数値と実態の乖離は、確認プロセスの非効率と顧客対応の品質低下を招く。\n在庫管理システムを導入しているが、取り置き・予約・入荷予定などの状態が可視化されていない製造・卸売業。\n属人化の程度や確認頻度は業種・規模により異なる。\n卸売・製造\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:46.056608Z"
+    },
+    {
+      "id": "17e4b5cf-d63c-5076-92b3-500874705799",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "knowledge_type": "customer_need",
+      "title": "営業の自律的な納期判断能力の向上",
+      "situation": "顧客は業務部の確認作業削減やミス防止よりも、営業が顧客に対して迅速かつ正確に回答できることを最優先課題として認識。",
+      "problem": "現状、営業は在庫確認のため業務部に依存しており、顧客対応のスピードが低下している。",
+      "judgment": "「確認時間の短縮」ではなく「確認不要な状態の構築」が真のニーズ。",
+      "action": "営業がシステムや情報源から直接、正しい納期を判断できる仕組みを求める。",
+      "reasoning": "確認プロセス自体を排除することで、営業と業務部双方の負荷を軽減し、顧客満足度を向上させたい。",
+      "outcome": null,
+      "lesson": "顧客の表面的な不満（時間がかかる）の背後にある本質的な欲求（自律性・スピード）を掘り下げ、解決策の方向性を定義する。",
+      "applicable_situations": "フロントライン（営業）とバックオフィス（業務・倉庫）の連携がボトルネックになっている組織。",
+      "limitations": "営業の権限や情報アクセスのポリシーが厳格な場合、完全な自律は難しい。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "営業の自律的な納期判断能力の向上\n顧客は業務部の確認作業削減やミス防止よりも、営業が顧客に対して迅速かつ正確に回答できることを最優先課題として認識。\n現状、営業は在庫確認のため業務部に依存しており、顧客対応のスピードが低下している。\n「確認時間の短縮」ではなく「確認不要な状態の構築」が真のニーズ。\n営業がシステムや情報源から直接、正しい納期を判断できる仕組みを求める。\n確認プロセス自体を排除することで、営業と業務部双方の負荷を軽減し、顧客満足度を向上させたい。\n顧客の表面的な不満（時間がかかる）の背後にある本質的な欲求（自律性・スピード）を掘り下げ、解決策の方向性を定義する。\nフロントライン（営業）とバックオフィス（業務・倉庫）の連携がボトルネックになっている組織。\n営業の権限や情報アクセスのポリシーが厳格な場合、完全な自律は難しい。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:46.056608Z"
+    },
+    {
+      "id": "249885ad-7895-5c16-a850-f31b2b3453b0",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "knowledge_type": "sales_technique",
+      "title": "現状整理の復唱と合意形成",
+      "situation": "ヒアリング後、顧客の発言を構造化して復唱し、理解のズレを確認する。",
+      "problem": "顧客の「分かりづらい」という曖昧な不満を、具体的な業務フロー上のボトルネックに落とし込む必要がある。",
+      "judgment": "顧客の言葉を使わず、営業側の視点で論点を整理して提示することで、顧客の認識を深め、次の提案への橋渡しを行う。",
+      "action": "「システム情報の不足」「人的確認の依存」「属人化」「結果としてのミス・遅延」という4つの軸で整理し、合意を得る。",
+      "reasoning": "顧客自身も「単にシステムが古いという話ではない」と認識し、問題の構造化に同意した。",
+      "outcome": "顧客の合意（「はい、その通りです」）を得て、提案の土台を確立。",
+      "lesson": "ヒアリングの終盤で、収集した情報を構造化して復唱することは、顧客の課題意識を明確にし、提案への抵抗を下げることができる。",
+      "applicable_situations": "課題が漠然としている、または顧客が自社の課題を言語化しきれていない場合。",
+      "limitations": "整理が顧客の認識と大きく乖離している場合、否定的な反応を招く可能性がある。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "現状整理の復唱と合意形成\nヒアリング後、顧客の発言を構造化して復唱し、理解のズレを確認する。\n顧客の「分かりづらい」という曖昧な不満を、具体的な業務フロー上のボトルネックに落とし込む必要がある。\n顧客の言葉を使わず、営業側の視点で論点を整理して提示することで、顧客の認識を深め、次の提案への橋渡しを行う。\n「システム情報の不足」「人的確認の依存」「属人化」「結果としてのミス・遅延」という4つの軸で整理し、合意を得る。\n顧客自身も「単にシステムが古いという話ではない」と認識し、問題の構造化に同意した。\n顧客の合意（「はい、その通りです」）を得て、提案の土台を確立。\nヒアリングの終盤で、収集した情報を構造化して復唱することは、顧客の課題意識を明確にし、提案への抵抗を下げることができる。\n課題が漠然としている、または顧客が自社の課題を言語化しきれていない場合。\n整理が顧客の認識と大きく乖離している場合、否定的な反応を招く可能性がある。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:46.056608Z"
+    },
+    {
+      "id": "649fdcfd-3c87-59b7-a65b-3c4c43457eb1",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "knowledge_type": "proposal",
+      "title": "業務フロー分析に基づくソリューション提案",
+      "situation": "顧客のニーズ（営業の自律判断）に対し、既存の製品（スマイルVセカンドエディション販売）を候補として提示する。",
+      "problem": "製品導入だけで解決する保証はなく、現状の業務フロー（取り置き管理、入荷登録、判断基準）が不明なため、単純な製品提案はリスクがある。",
+      "judgment": "まずは業務フローの可視化と、システムで判断可能な部分と人が判断すべき部分の分離を行う必要がある。",
+      "action": "次回、在庫確認から納期回答までのフローを整理し、製品活用による改善案を提示する。また、担当者へのヒアリングを依頼。",
+      "reasoning": "「システムを入れ替えても確認の電話だけ残る」ことを避けるため、業務プロセスの再設計が前提となる。",
+      "outcome": null,
+      "lesson": "製品提案の前に、顧客の業務プロセスを詳細に分析し、製品がどのプロセスを代替・支援できるかを明確にする。",
+      "applicable_situations": "既存の業務プロセスが複雑で、単なるツール導入では解決しない場合。",
+      "limitations": "顧客側の協力（ヒアリング、資料提供）が得られない場合は、提案の精度が下がる。",
+      "industry": null,
+      "product": "スマイルVセカンドエディション販売",
+      "sales_stage": "proposal",
+      "search_text": "業務フロー分析に基づくソリューション提案\n顧客のニーズ（営業の自律判断）に対し、既存の製品（スマイルVセカンドエディション販売）を候補として提示する。\n製品導入だけで解決する保証はなく、現状の業務フロー（取り置き管理、入荷登録、判断基準）が不明なため、単純な製品提案はリスクがある。\nまずは業務フローの可視化と、システムで判断可能な部分と人が判断すべき部分の分離を行う必要がある。\n次回、在庫確認から納期回答までのフローを整理し、製品活用による改善案を提示する。また、担当者へのヒアリングを依頼。\n「システムを入れ替えても確認の電話だけ残る」ことを避けるため、業務プロセスの再設計が前提となる。\n製品提案の前に、顧客の業務プロセスを詳細に分析し、製品がどのプロセスを代替・支援できるかを明確にする。\n既存の業務プロセスが複雑で、単なるツール導入では解決しない場合。\n顧客側の協力（ヒアリング、資料提供）が得られない場合は、提案の精度が下がる。\nスマイルVセカンドエディション販売\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:46.056608Z"
+    },
+    {
+      "id": "636db15d-c296-550d-a9a9-8ceb70da319d",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "knowledge_type": "next_action",
+      "title": "具体的な事例と担当者ヒアリングの実施",
+      "situation": "提案の具体性を持たせるため、顧客に次のアクションを依頼する。",
+      "problem": "一般的な業務フローではなく、実際の現場の動きを把握する必要がある。",
+      "judgment": "「最近あった納期確認に時間がかかった案件」を1つ特定し、その時の判断プロセスを再現してもらう。",
+      "action": "在庫担当者と営業担当者それぞれ1名に15分程度のヒアリングを実施し、具体的な事例を提供してもらう。",
+      "reasoning": "具体的な事例があることで、次回商談で「今の業務がどう変わるか」を視覚的・具体的に示すことができる。",
+      "outcome": "顧客は「大丈夫だと思います」「用意しておきます」と協力に同意。",
+      "lesson": "次の商談の準備として、顧客に具体的な事例やデータを提供してもらうことで、提案の説得力を高める。",
+      "applicable_situations": "業務改善やシステム導入の提案段階で、現状の課題を定量化・具体化したい場合。",
+      "limitations": "顧客が事例を準備するコストや時間を過大評価しないこと。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "follow_up",
+      "search_text": "具体的な事例と担当者ヒアリングの実施\n提案の具体性を持たせるため、顧客に次のアクションを依頼する。\n一般的な業務フローではなく、実際の現場の動きを把握する必要がある。\n「最近あった納期確認に時間がかかった案件」を1つ特定し、その時の判断プロセスを再現してもらう。\n在庫担当者と営業担当者それぞれ1名に15分程度のヒアリングを実施し、具体的な事例を提供してもらう。\n具体的な事例があることで、次回商談で「今の業務がどう変わるか」を視覚的・具体的に示すことができる。\n顧客は「大丈夫だと思います」「用意しておきます」と協力に同意。\n次の商談の準備として、顧客に具体的な事例やデータを提供してもらうことで、提案の説得力を高める。\n業務改善やシステム導入の提案段階で、現状の課題を定量化・具体化したい場合。\n顧客が事例を準備するコストや時間を過大評価しないこと。\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:16:46.056608Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "ab1a2e8e-9649-5666-9657-1410cd79c8e2",
+      "knowledge_id": "2ccea43c-7889-54bf-bffd-bbbb19a5b386",
+      "start_utterance_id": "d94fa1ef-93f3-5088-b374-70800b57de03",
+      "end_utterance_id": "08d3509d-0295-5b5b-a878-cf5e2f4e5784"
+    },
+    {
+      "id": "046e7e42-fb05-5896-ac1a-8a450eb14add",
+      "knowledge_id": "2ccea43c-7889-54bf-bffd-bbbb19a5b386",
+      "start_utterance_id": "38998e56-8d66-56d9-b90d-ec88c3e67fad",
+      "end_utterance_id": "547cb50e-21f6-5e67-ae8f-3e85885540b7"
+    },
+    {
+      "id": "34d2dabb-65b0-5cc6-a88c-afc929e63fb7",
+      "knowledge_id": "2ccea43c-7889-54bf-bffd-bbbb19a5b386",
+      "start_utterance_id": "f996b14d-335d-5d51-a29c-744151e52c65",
+      "end_utterance_id": "7579eeaf-4770-5582-b580-57dea1c97ebf"
+    },
+    {
+      "id": "62ea18a8-5f85-5f28-a87c-0d7c4a6024ca",
+      "knowledge_id": "17e4b5cf-d63c-5076-92b3-500874705799",
+      "start_utterance_id": "4dde7177-2598-59e9-ae5d-f9be235bc41e",
+      "end_utterance_id": "09a3b9b2-7785-5769-a82a-cd1c7a0288ba"
+    },
+    {
+      "id": "c5e6fcc3-7267-55f8-9686-5b4e131634c0",
+      "knowledge_id": "249885ad-7895-5c16-a850-f31b2b3453b0",
+      "start_utterance_id": "0ef7a8b5-003b-5001-b86c-8383759c968b",
+      "end_utterance_id": "ae16fe11-aee5-5155-af75-f30fa8472312"
+    },
+    {
+      "id": "29b4f582-c6e5-5202-8972-cb4271e2fb06",
+      "knowledge_id": "649fdcfd-3c87-59b7-a65b-3c4c43457eb1",
+      "start_utterance_id": "57823196-86a3-5e57-bbb4-060e61e67e97",
+      "end_utterance_id": "22bf6e48-2f22-55d3-a2c0-8c60904ee263"
+    },
+    {
+      "id": "05dd42be-80c8-5536-8b00-761d6d38a603",
+      "knowledge_id": "636db15d-c296-550d-a9a9-8ceb70da319d",
+      "start_utterance_id": "57975de5-e63a-54fc-ad66-60bc89792b5f",
+      "end_utterance_id": "d38537bd-58da-51fe-89c7-5377c74e884b"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "aca01110-643d-5424-9a88-8de4f37acedd",
+      "data_source_id": "c44d615d-4367-5186-bbe0-db99a0716e67",
+      "summary": "販売管理システムの在庫確認における非効率性と属人化の問題を掘り下げ、営業が自律的に納期を判断できる状態を構築することを目指した。次回、業務フローの整理と担当者ヒアリングを通じて、スマイルVセカンドエディション販売を活用した具体的な改善案を提示する予定。",
+      "customer_needs": [
+        "営業が業務部に確認しなくても、正しい納期を判断できる状態の構築",
+        "在庫確認に伴う時間短縮と顧客対応スピードの向上",
+        "取り置き分や入荷予定を含む実在庫の可視化"
+      ],
+      "proposals": [
+        "スマイルVセカンドエディション販売の導入検討",
+        "在庫確認から納期回答までの業務フローの可視化と再設計",
+        "システムで判断可能な部分と人が判断すべき部分の分離"
+      ],
+      "decisions": [
+        "次回商談までに、在庫担当者と営業担当者へのヒアリングを実施する",
+        "最近の納期確認に時間がかかった具体的な事例を1つ準備する"
+      ],
+      "next_actions": [
+        "顧客側：担当者へのヒアリング調整と事例準備",
+        "営業側：業務フローの整理と、製品活用による改善案の作成"
+      ]
+    }
+  ]
+}

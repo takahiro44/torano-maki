@@ -1,0 +1,566 @@
+{
+  "data_sources": [
+    {
+      "id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "source_type": "audio",
+      "file_name": "long_005.wav",
+      "occurred_at": "2026-08-25T00:01:20Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "474dfb1a-eb7a-5f22-8891-4abc789f0178",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 7.32,
+      "content": "臨時の承認に時間がかかるとのことでした 最後に納期へ影響した申請を教えてください"
+    },
+    {
+      "id": "a8494c1e-2055-53ad-967a-cf8baf26c420",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 2,
+      "speaker": "customer",
+      "start_sec": 7.32,
+      "end_sec": 16.8,
+      "content": "先月の工具購入です 現場から急ぎで申請が来ましたが、部長が3日間出張で"
+    },
+    {
+      "id": "0485fbab-2b33-520a-ab21-b231288e639b",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 3,
+      "speaker": "salesperson",
+      "start_sec": 16.8,
+      "end_sec": 27.0,
+      "content": "紙が机に置かれたままでした 工具が届かなかったことで現場ではどんな対応を取りましたか"
+    },
+    {
+      "id": "bfa95d53-245f-5eaf-a791-fa43e1e0edd4",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 4,
+      "speaker": "customer",
+      "start_sec": 27.04,
+      "end_sec": 35.2,
+      "content": "別現場から借りました 運搬のために社員が往復し作業開始が1時間遅れました"
+    },
+    {
+      "id": "e4b6f3d1-045b-530f-801f-05f1f5cedcc3",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 5,
+      "speaker": "salesperson",
+      "start_sec": 35.2,
+      "end_sec": 42.32,
+      "content": "承認の遅れが購買部門だけでなく現場の人員と肯定へ影響したんですね はい"
+    },
+    {
+      "id": "605cb6da-a390-54fb-941c-9d7f20564bcf",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 42.32,
+      "end_sec": 51.28,
+      "content": "申請金額は3万円でしたが周囲の手間の方が大きかったです 金額の代償と"
+    },
+    {
+      "id": "58d1d0ee-7b81-5e6f-90ec-fa1e33511dbf",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 7,
+      "speaker": "salesperson",
+      "start_sec": 51.36,
+      "end_sec": 59.72,
+      "content": "業務上の緊急度が一致しないケースですね 安全に関わる者は小学でも急ぎです"
+    },
+    {
+      "id": "45a93c3f-2faa-5ed8-9c41-05e1d5e685aa",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 8,
+      "speaker": "customer",
+      "start_sec": 59.72,
+      "end_sec": 70.56,
+      "content": "申請者は泊まっている場所を把握できましたか 総務へ電話が来てこちらが紙を探しました"
+    },
+    {
+      "id": "a00ccc54-a736-5f25-b655-d6da44a048cc",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 9,
+      "speaker": "salesperson",
+      "start_sec": 70.56,
+      "end_sec": 79.36,
+      "content": "代理承認して良いかも曖昧でした 承認ルートは申請の金額や種類で変わりますか"
+    },
+    {
+      "id": "cf83e22c-d9a3-5bc4-8719-0bd90432e66e",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 10,
+      "speaker": "customer",
+      "start_sec": 79.4,
+      "end_sec": 83.16,
+      "content": "変わります 10万円以上は役員まで"
+    },
+    {
+      "id": "331f638c-0b4b-50d4-a56b-220531b30c67",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 83.16,
+      "end_sec": 90.48,
+      "content": "現場の安全設備は別の確認者が入ります ルートを間違えた場合は"
+    },
+    {
+      "id": "0675b069-17b6-57ee-b0e1-486ed885e11b",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 12,
+      "speaker": "salesperson",
+      "start_sec": 90.48,
+      "end_sec": 97.76,
+      "content": "どうなりますか 申請者はどの承認ルートになるか事前にわかりますか"
+    },
+    {
+      "id": "e92e8b07-85ca-5e21-ac9e-43097b240c1c",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 13,
+      "speaker": "customer",
+      "start_sec": 97.76,
+      "end_sec": 106.4,
+      "content": "一覧表はありますが更新されていません 人事移動の旅に宛先を間違えます"
+    },
+    {
+      "id": "9deda718-caef-5e45-9558-9e536147050f",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 14,
+      "speaker": "salesperson",
+      "start_sec": 106.48,
+      "end_sec": 112.16,
+      "content": "差し戻しの理由は ルート間違い以外に何がありますか"
+    },
+    {
+      "id": "8e757fa0-d62c-5ac8-9874-de3a11970c7a",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 15,
+      "speaker": "customer",
+      "start_sec": 112.16,
+      "end_sec": 120.8,
+      "content": "三森諸の店舗漏れ 目的の記載不足 予算高度の誤りです"
+    },
+    {
+      "id": "f3451e21-1bc1-5fe7-ab80-34f925ee4c0e",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 120.8,
+      "end_sec": 128.64,
+      "content": "申請時点で必須項目や店舗を確認できれば 総務が後から探す件数を減らせそうです"
+    },
+    {
+      "id": "fffb637c-fbce-5723-8349-63b3f9ee6347",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 128.64,
+      "end_sec": 136.88,
+      "content": "ただ 申請フォームが長くなると現場が嫌がります"
+    },
+    {
+      "id": "40e5c94d-ab13-5621-8170-4c3104ed7522",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 136.88,
+      "end_sec": 145.76,
+      "content": "全申請に同じ項目を要求せず 種類と金額で必要項目を分ける設計を検討しましょう"
+    },
+    {
+      "id": "49902527-a6bb-5cd3-aa77-e6e6288a7f77",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 145.76,
+      "end_sec": 153.92,
+      "content": "工具購入と設備投資では確かに必要な情報が違いますね"
+    },
+    {
+      "id": "5af86325-7620-5861-98e7-449b06a65430",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 154.08,
+      "end_sec": 163.52,
+      "content": "総務が差し戻して最初から回し直します 月に数件あります"
+    },
+    {
+      "id": "80af9886-4c97-5431-98cd-6a337b59e07a",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 163.52,
+      "end_sec": 175.04,
+      "content": "つまり紙を電子化することだけでなく 申請条件に応じたルートと代理時のルールを標準化する必要がありますね"
+    },
+    {
+      "id": "d168a527-c6cf-5a16-afc9-11dde126cfdb",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 175.04,
+      "end_sec": 180.16,
+      "content": "そうです 外出中でも承認できれば助かります"
+    },
+    {
+      "id": "f1915d44-8466-51da-9210-3f96226d43ed",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 180.24,
+      "end_sec": 188.32,
+      "content": "外出先からの承認について会社支給端末はありますか 部長以上にはスマートフォンがあります"
+    },
+    {
+      "id": "c7e74a00-0338-5f7b-b51c-e5cf79e3c4bf",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 24,
+      "speaker": "customer",
+      "start_sec": 188.32,
+      "end_sec": 196.24,
+      "content": "ただし機密資料を端末へ保存することは禁止です モバイル利用では操作だけでなく"
+    },
+    {
+      "id": "65baa727-e0a3-547c-8c8e-c96374ca6498",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 25,
+      "speaker": "salesperson",
+      "start_sec": 196.24,
+      "end_sec": 208.16,
+      "content": "閲覧範囲や端末側に残る情報も確認が必要ですね 情報システム部にも同席してもらった方が良さそうですね"
+    },
+    {
+      "id": "ad233935-7525-5a25-822e-275e993140a1",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 208.24,
+      "end_sec": 217.2,
+      "content": "お願いします 承認の速さだけを優先せず既存の端末ルールと整合する方法を確認します"
+    },
+    {
+      "id": "365a043d-740f-5983-8bdc-23d723da547b",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 27,
+      "speaker": "customer",
+      "start_sec": 217.2,
+      "end_sec": 225.76,
+      "content": "現場からは早くしてほしい 情報システムからは慎重にと言われるので両方見てください"
+    },
+    {
+      "id": "f666d1a1-2ba5-53b5-99e3-967d864e7a81",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 225.76,
+      "end_sec": 236.32,
+      "content": "evalu v 2nd エディションワークフローは申請フォームへ承認ルートや運用ルールを組み込み モバイルからの申請承認も検討できます"
+    },
+    {
+      "id": "58480fdd-9cdd-5a65-b095-905c796d8b80",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 236.32,
+      "end_sec": 244.72,
+      "content": "ただ例外を全部システム任せにするのではなく 緊急購入時に誰が判断するかは社内で決める必要があります"
+    },
+    {
+      "id": "97c834d9-53da-54b1-a748-4e5f2d8c534b",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 244.72,
+      "end_sec": 255.68,
+      "content": "代理承認の基準は役員と相談します 最初からすべての申請書を対象にするより件数と影響が大きいものから始めたいです"
+    },
+    {
+      "id": "2d32a827-ba7e-5361-a8a3-ecc6ba2ab5fd",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 255.68,
+      "end_sec": 263.08,
+      "content": "月間件数が多い申請は何ですか 物品購入と交通費です"
+    },
+    {
+      "id": "b9e1799f-1cbd-5473-bb49-a5ecacf4450a",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 263.08,
+      "end_sec": 276.28,
+      "content": "設備投資は件数は少ないですが承認者が多いです では件数が多い物品購入と複雑な設備投資の2種類で試し"
+    },
+    {
+      "id": "8322e85d-2c9e-5589-85c0-f4b3b7d7bd60",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 276.28,
+      "end_sec": 287.44,
+      "content": "標準と複雑例の両方を確認しましょう 交通費まで一度に始めるよりその2つの方が良さそうです"
+    },
+    {
+      "id": "3c95b111-fb43-54ec-8c55-227f3b0f4c07",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 287.44,
+      "end_sec": 297.44,
+      "content": "評価は承認日数 差し戻し率 総務からの確認回数で比較します 緊急申請は別に事例を集めます"
+    },
+    {
+      "id": "89b427bb-a86e-5777-95e2-1c062dd4487d",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 35,
+      "speaker": "customer",
+      "start_sec": 297.44,
+      "end_sec": 306.68,
+      "content": "数字で示せれば役員にも説明できます 現場側にも結果を返し"
+    },
+    {
+      "id": "01a5dc43-67c3-50fc-84d8-892b13031efd",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 306.68,
+      "end_sec": 319.92,
+      "content": "申請が早くなったかだけでなく入力の手間が増えていないか確認します 承認者と申請者の両方が納得できる形にしたいです"
+    },
+    {
+      "id": "2b03883a-d78b-5aac-93eb-e58540c9ebae",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 37,
+      "speaker": "salesperson",
+      "start_sec": 319.92,
+      "end_sec": 324.62,
+      "content": "試行後の聞き取りまで含めて評価します お願いします"
+    },
+    {
+      "id": "36e07b1d-aa26-5948-87a7-9a59d25386cc",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 324.62,
+      "end_sec": 337.88,
+      "content": "次回申請書を種類別に10件ほど確認し 通常ルート 金額条件 緊急時 差し戻し条件を整理しましょう"
+    },
+    {
+      "id": "e41a6095-f42c-5697-99bb-81e35c1e8504",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "sequence_no": 39,
+      "speaker": "customer",
+      "start_sec": 337.88,
+      "end_sec": 347.24,
+      "content": "承認後の文書保存まで必要かも一緒に確認します そこまで見てもらえると助かります"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "5ad4550b-1d6b-57c3-92ea-5a49eae18fa9",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "knowledge_type": "pain_point",
+      "title": "承認遅延による現場作業の遅れと人的コスト",
+      "situation": "部長の出張により紙の申請書が処理されず、工具購入の承認が遅れた事例",
+      "problem": "承認の遅れが購買部門だけでなく、現場の人員移動や作業開始時刻に影響し、金額以上のコストが発生している",
+      "judgment": "承認プロセスの遅延は単なる事務処理の問題ではなく、現場の生産性や安全性に直結する重大なボトルネックである",
+      "action": "承認遅延が引き起こした具体的な現場対応（他現場からの借用、人員の往復）を聞き取り、影響範囲を可視化する",
+      "reasoning": "顧客は3万円の申請に対して、人員の手間や1時間の遅れという代償を支払っており、業務上の緊急度と承認スピードの乖離が問題の核心である",
+      "outcome": "承認遅延の真のコストが金額ではなく「時間」と「人的リソース」であることが明確になった",
+      "lesson": "承認プロセスの改善提案を行う際は、金額ではなく現場への波及影響（遅延時間、代替作業の手間）を定量化して訴求する",
+      "applicable_situations": "紙ベースの承認プロセスが現場の業務効率を阻害している場合",
+      "limitations": "緊急度が低い申請では、この影響は軽微である可能性がある",
+      "industry": "製造業・建設業",
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "承認遅延による現場作業の遅れと人的コスト\n部長の出張により紙の申請書が処理されず、工具購入の承認が遅れた事例\n承認の遅れが購買部門だけでなく、現場の人員移動や作業開始時刻に影響し、金額以上のコストが発生している\n承認プロセスの遅延は単なる事務処理の問題ではなく、現場の生産性や安全性に直結する重大なボトルネックである\n承認遅延が引き起こした具体的な現場対応（他現場からの借用、人員の往復）を聞き取り、影響範囲を可視化する\n顧客は3万円の申請に対して、人員の手間や1時間の遅れという代償を支払っており、業務上の緊急度と承認スピードの乖離が問題の核心である\n承認遅延の真のコストが金額ではなく「時間」と「人的リソース」であることが明確になった\n承認プロセスの改善提案を行う際は、金額ではなく現場への波及影響（遅延時間、代替作業の手間）を定量化して訴求する\n紙ベースの承認プロセスが現場の業務効率を阻害している場合\n緊急度が低い申請では、この影響は軽微である可能性がある\n製造業・建設業\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:41.232371Z"
+    },
+    {
+      "id": "632ce6ff-6256-547f-a02f-8b4b0534902b",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "knowledge_type": "operational_insight",
+      "title": "承認ルートの不明確さとリストの陳腐化",
+      "situation": "申請者が承認ルートを把握できず、総務が紙を探したり、代理承認の可否が曖昧な状態",
+      "problem": "承認ルート一覧表が更新されておらず、人事異動などで宛先が間違えやすい。また、代理承認の基準が不明確",
+      "judgment": "承認ルートの可視化と、例外（代理承認）のルール整備が、差し戻しや処理遅延を防ぐための前提条件である",
+      "action": "金額や種類に応じた承認ルートの整理と、代理承認時の判断基準の明確化を提案する",
+      "reasoning": "顧客はルート間違いや書類漏れによる差し戻しが月数件発生しており、申請者側が事前に正しいルートを把握できない構造的問題がある",
+      "outcome": "ルートの標準化と代理承認ルールの明確化が、業務効率化の鍵であることが合意された",
+      "lesson": "ワークフロー導入時に、単なる電子化だけでなく「誰が・いつ・どの条件で承認するか」というルールの整備をセットで提案する",
+      "applicable_situations": "承認者が複数存在し、金額や種類でルートが変わる組織",
+      "limitations": "ルートの複雑さが高すぎると、システム化しても運用負荷が増える可能性がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "承認ルートの不明確さとリストの陳腐化\n申請者が承認ルートを把握できず、総務が紙を探したり、代理承認の可否が曖昧な状態\n承認ルート一覧表が更新されておらず、人事異動などで宛先が間違えやすい。また、代理承認の基準が不明確\n承認ルートの可視化と、例外（代理承認）のルール整備が、差し戻しや処理遅延を防ぐための前提条件である\n金額や種類に応じた承認ルートの整理と、代理承認時の判断基準の明確化を提案する\n顧客はルート間違いや書類漏れによる差し戻しが月数件発生しており、申請者側が事前に正しいルートを把握できない構造的問題がある\nルートの標準化と代理承認ルールの明確化が、業務効率化の鍵であることが合意された\nワークフロー導入時に、単なる電子化だけでなく「誰が・いつ・どの条件で承認するか」というルールの整備をセットで提案する\n承認者が複数存在し、金額や種類でルートが変わる組織\nルートの複雑さが高すぎると、システム化しても運用負荷が増える可能性がある\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:41.232371Z"
+    },
+    {
+      "id": "42ccf98f-04f9-5101-9075-897e0b9f1958",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "knowledge_type": "sales_technique",
+      "title": "申請フォームの条件分岐による入力負荷の軽減",
+      "situation": "申請フォームが長くなると現場が嫌がるという顧客の懸念",
+      "problem": "全申請に同じ項目を要求すると、現場の入力負荷が増え、利用抵抗が高まる",
+      "judgment": "申請の種類や金額に応じて必要項目を動的に変える設計により、現場の負担を減らしつつ必要な情報を確保できる",
+      "action": "「種類と金額で必要項目を分ける設計」を提案し、顧客の懸念（フォームの長さ）を解消する",
+      "reasoning": "工具購入と設備投資では必要な情報が異なるため、一律のフォームは非効率である",
+      "outcome": "顧客は「確かに必要な情報が違う」と同意し、条件分岐の設計に前向きになった",
+      "lesson": "現場のユーザー体験（UX）を阻害する要因（入力の手間）を先回りして指摘し、条件分岐などの機能で解決策を提示する",
+      "applicable_situations": "多様な申請種別が存在し、現場からの反発が懸念される場合",
+      "limitations": "条件分岐のロジックが複雑すぎると、メンテナンスコストが増える",
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "申請フォームの条件分岐による入力負荷の軽減\n申請フォームが長くなると現場が嫌がるという顧客の懸念\n全申請に同じ項目を要求すると、現場の入力負荷が増え、利用抵抗が高まる\n申請の種類や金額に応じて必要項目を動的に変える設計により、現場の負担を減らしつつ必要な情報を確保できる\n「種類と金額で必要項目を分ける設計」を提案し、顧客の懸念（フォームの長さ）を解消する\n工具購入と設備投資では必要な情報が異なるため、一律のフォームは非効率である\n顧客は「確かに必要な情報が違う」と同意し、条件分岐の設計に前向きになった\n現場のユーザー体験（UX）を阻害する要因（入力の手間）を先回りして指摘し、条件分岐などの機能で解決策を提示する\n多様な申請種別が存在し、現場からの反発が懸念される場合\n条件分岐のロジックが複雑すぎると、メンテナンスコストが増える\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:41.232371Z"
+    },
+    {
+      "id": "51974ef0-0528-56a9-8422-ebc9acf77c86",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "knowledge_type": "proposal",
+      "title": "モバイル承認と情報セキュリティのバランス",
+      "situation": "外出中の承認を可能にするためのモバイル利用の検討",
+      "problem": "機密資料の端末保存が禁止されており、モバイル利用には情報セキュリティ部の関与が必要",
+      "judgment": "承認の速さだけでなく、既存の端末ルールや情報セキュリティとの整合性を確認した上で提案する必要がある",
+      "action": "情報システム部の同席を提案し、閲覧範囲や端末に残る情報も含めたセキュリティ観点での検討を行う",
+      "reasoning": "現場は速さを、情報システムは慎重さを求めているため、両者の合意形成が不可欠である",
+      "outcome": "情報システム部への相談と、既存ルールとの整合性確認が次のステップとして決定された",
+      "lesson": "モバイルワークフローの提案時は、IT部門やセキュリティ部門の懸念を先回りして把握し、関係者同席の場を設けることで信頼性を高める",
+      "applicable_situations": "セキュリティポリシーが厳格な組織でのモバイル承認提案",
+      "limitations": "セキュリティ要件が厳しすぎると、モバイル承認の範囲が限定される可能性がある",
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "モバイル承認と情報セキュリティのバランス\n外出中の承認を可能にするためのモバイル利用の検討\n機密資料の端末保存が禁止されており、モバイル利用には情報セキュリティ部の関与が必要\n承認の速さだけでなく、既存の端末ルールや情報セキュリティとの整合性を確認した上で提案する必要がある\n情報システム部の同席を提案し、閲覧範囲や端末に残る情報も含めたセキュリティ観点での検討を行う\n現場は速さを、情報システムは慎重さを求めているため、両者の合意形成が不可欠である\n情報システム部への相談と、既存ルールとの整合性確認が次のステップとして決定された\nモバイルワークフローの提案時は、IT部門やセキュリティ部門の懸念を先回りして把握し、関係者同席の場を設けることで信頼性を高める\nセキュリティポリシーが厳格な組織でのモバイル承認提案\nセキュリティ要件が厳しすぎると、モバイル承認の範囲が限定される可能性がある\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:41.232371Z"
+    },
+    {
+      "id": "09d45bef-b06c-5b06-b7bd-c74f560eb8eb",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "knowledge_type": "decision",
+      "title": "試行範囲の絞り込みと評価指標の定義",
+      "situation": "全申請を対象にするのではなく、試行範囲を絞って効果を検証したいという顧客の意向",
+      "problem": "一度にすべての申請書を対象にすると、影響範囲が広すぎて評価が困難になる",
+      "judgment": "件数が多い「物品購入」と複雑な「設備投資」の2種類を軸に、標準と複雑例の両方を確認する試行計画を立てる",
+      "action": "承認日数、差し戻し率、総務からの確認回数、入力の手間増減を評価指標として設定し、試行後の聞き取りまで含めて評価する",
+      "reasoning": "数字で示せれば役員への説明が可能であり、現場と承認者の両方が納得できる形にする必要がある",
+      "outcome": "試行範囲と評価指標が合意され、次回以降のアクションプランが具体化された",
+      "lesson": "大規模な変革を提案する際は、小さく始めて成功事例を作る（PoC）戦略を採り、定量的な評価指標を事前に合意しておく",
+      "applicable_situations": "組織全体への展開を前に、効果検証が必要な段階",
+      "limitations": "試行範囲が狭すぎると、他の申請種別への適用性が検証されない",
+      "industry": null,
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "試行範囲の絞り込みと評価指標の定義\n全申請を対象にするのではなく、試行範囲を絞って効果を検証したいという顧客の意向\n一度にすべての申請書を対象にすると、影響範囲が広すぎて評価が困難になる\n件数が多い「物品購入」と複雑な「設備投資」の2種類を軸に、標準と複雑例の両方を確認する試行計画を立てる\n承認日数、差し戻し率、総務からの確認回数、入力の手間増減を評価指標として設定し、試行後の聞き取りまで含めて評価する\n数字で示せれば役員への説明が可能であり、現場と承認者の両方が納得できる形にする必要がある\n試行範囲と評価指標が合意され、次回以降のアクションプランが具体化された\n大規模な変革を提案する際は、小さく始めて成功事例を作る（PoC）戦略を採り、定量的な評価指標を事前に合意しておく\n組織全体への展開を前に、効果検証が必要な段階\n試行範囲が狭すぎると、他の申請種別への適用性が検証されない\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:41.232371Z"
+    },
+    {
+      "id": "9dd52825-12b5-5027-9bdd-0caba13f7493",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "knowledge_type": "next_action",
+      "title": "申請書の整理と文書保存の確認",
+      "situation": "試行に向けた準備段階",
+      "problem": "現在の申請書の種類や条件、承認後の文書保存の必要性が整理されていない",
+      "judgment": "次回までに申請書を種類別に確認し、通常ルート、金額条件、緊急時、差し戻し条件を整理する",
+      "action": "申請書10件程度の確認と、承認後の文書保存までのプロセス確認を行う",
+      "reasoning": "正確なワークフロー設計のためには、現状の申請パターンと文書管理の要件を把握する必要がある",
+      "outcome": "次回商談での具体的な作業項目が決定された",
+      "lesson": "提案前のヒアリングでは、具体的なサンプルデータ（申請書）の分析を約束し、次の商談への布石とする",
+      "applicable_situations": "ワークフロー設計の初期段階",
+      "limitations": null,
+      "industry": null,
+      "product": null,
+      "sales_stage": "follow_up",
+      "search_text": "申請書の整理と文書保存の確認\n試行に向けた準備段階\n現在の申請書の種類や条件、承認後の文書保存の必要性が整理されていない\n次回までに申請書を種類別に確認し、通常ルート、金額条件、緊急時、差し戻し条件を整理する\n申請書10件程度の確認と、承認後の文書保存までのプロセス確認を行う\n正確なワークフロー設計のためには、現状の申請パターンと文書管理の要件を把握する必要がある\n次回商談での具体的な作業項目が決定された\n提案前のヒアリングでは、具体的なサンプルデータ（申請書）の分析を約束し、次の商談への布石とする\nワークフロー設計の初期段階\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:19:41.232371Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "0a7e664a-7138-59c0-bb1e-4ef658733001",
+      "knowledge_id": "5ad4550b-1d6b-57c3-92ea-5a49eae18fa9",
+      "start_utterance_id": "a8494c1e-2055-53ad-967a-cf8baf26c420",
+      "end_utterance_id": "605cb6da-a390-54fb-941c-9d7f20564bcf"
+    },
+    {
+      "id": "33b4c2ae-2c14-5b10-bca3-2633c77f2321",
+      "knowledge_id": "632ce6ff-6256-547f-a02f-8b4b0534902b",
+      "start_utterance_id": "45a93c3f-2faa-5ed8-9c41-05e1d5e685aa",
+      "end_utterance_id": "8e757fa0-d62c-5ac8-9874-de3a11970c7a"
+    },
+    {
+      "id": "954b1ee8-5619-54c6-849a-7fccd284bd4a",
+      "knowledge_id": "42ccf98f-04f9-5101-9075-897e0b9f1958",
+      "start_utterance_id": "f3451e21-1bc1-5fe7-ab80-34f925ee4c0e",
+      "end_utterance_id": "49902527-a6bb-5cd3-aa77-e6e6288a7f77"
+    },
+    {
+      "id": "355704db-ad21-554c-9270-13b900fd303a",
+      "knowledge_id": "51974ef0-0528-56a9-8422-ebc9acf77c86",
+      "start_utterance_id": "f1915d44-8466-51da-9210-3f96226d43ed",
+      "end_utterance_id": "365a043d-740f-5983-8bdc-23d723da547b"
+    },
+    {
+      "id": "ffcd0241-61a4-5b0d-a72a-ba466f7d23b8",
+      "knowledge_id": "09d45bef-b06c-5b06-b7bd-c74f560eb8eb",
+      "start_utterance_id": "97c834d9-53da-54b1-a748-4e5f2d8c534b",
+      "end_utterance_id": "2b03883a-d78b-5aac-93eb-e58540c9ebae"
+    },
+    {
+      "id": "864ebdb0-e128-5f93-9893-6eb7a737c0f7",
+      "knowledge_id": "9dd52825-12b5-5027-9bdd-0caba13f7493",
+      "start_utterance_id": "36e07b1d-aa26-5948-87a7-9a59d25386cc",
+      "end_utterance_id": "e41a6095-f42c-5697-99bb-81e35c1e8504"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "e4c260db-6057-5ef7-9e3f-e413bafabe4e",
+      "data_source_id": "79fd94b5-7b94-509d-bd9c-9305bbf4b154",
+      "summary": "顧客の紙ベースの承認プロセスにおける遅延と差し戻し問題についてヒアリングし、電子化とルール整備の必要性を合意。モバイル承認のセキュリティ面や、試行範囲の絞り込み、評価指標の定義について議論し、次回に向けたアクションプランを策定した。",
+      "customer_needs": [
+        "承認遅延による現場作業への影響を減らすこと",
+        "承認ルートの明確化と差し戻しの防止",
+        "外出先からの承認（モバイル）の活用",
+        "申請フォームの入力負荷の軽減",
+        "情報セキュリティとの整合性"
+      ],
+      "proposals": [
+        "申請種類や金額に応じた条件分岐フォームの設計",
+        "代理承認ルールの標準化",
+        "情報システム部同席でのモバイル承認検討",
+        "物品購入と設備投資を軸にした試行計画",
+        "承認日数、差し戻し率、入力手間などの定量的評価指標の設定"
+      ],
+      "decisions": [
+        "試行範囲を「物品購入」と「設備投資」の2種類に絞る",
+        "評価指標として承認日数、差し戻し率、総務確認回数、入力手間増減を採用する",
+        "情報システム部を巻き込んでセキュリティ観点での検討を行う"
+      ],
+      "next_actions": [
+        "申請書を種類別に10件程度確認し、ルートや条件を整理する",
+        "承認後の文書保存の必要性を確認する",
+        "情報システム部への相談を行う"
+      ]
+    }
+  ]
+}

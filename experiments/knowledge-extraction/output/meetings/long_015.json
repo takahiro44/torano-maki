@@ -1,0 +1,667 @@
+{
+  "data_sources": [
+    {
+      "id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "source_type": "audio",
+      "file_name": "long_015.wav",
+      "occurred_at": "2026-08-25T00:40:48Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "07f8e12f-1bbe-53bd-9503-d248951d5a0a",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 7.0,
+      "content": "はい、前回の安否確認訓練で、回答が集まらなかった後のことでした。"
+    },
+    {
+      "id": "0ce2b20c-023a-5242-81cc-c8fb55d3406b",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 2,
+      "speaker": "salesperson",
+      "start_sec": 7.0,
+      "end_sec": 12.0,
+      "content": "最初の1時間で何割ほど回答がありましたか?"
+    },
+    {
+      "id": "7a542e7c-d2c3-50e7-8222-3461ac16a8bd",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 3,
+      "speaker": "customer",
+      "start_sec": 12.0,
+      "end_sec": 18.0,
+      "content": "6割です。最終的には電話とチャットで追いかけて9割まで集めました。"
+    },
+    {
+      "id": "f0e21140-5265-5c8a-85ce-c4271c5391c9",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 18.0,
+      "end_sec": 23.0,
+      "content": "未回答は特定の店舗や勤務形態に偏っていましたか?"
+    },
+    {
+      "id": "8f983065-94cf-5301-8268-66e60d7810fd",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 5,
+      "speaker": "customer",
+      "start_sec": 23.0,
+      "end_sec": 29.0,
+      "content": "最終的に1割の方は回答できなかったんですね。"
+    },
+    {
+      "id": "0dd4a353-1867-5f08-86d2-cb0377c5c7d5",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 6,
+      "speaker": "salesperson",
+      "start_sec": 29.0,
+      "end_sec": 33.0,
+      "content": "その方たちの安否はどう確認しましたか?"
+    },
+    {
+      "id": "c0498de3-dfb2-5e8c-9cb6-b41bb22007b2",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 33.0,
+      "end_sec": 42.0,
+      "content": "店舗へ電話し、同僚から出勤状況を聞きました。休日の人が翌日に本人へ確認しました。"
+    },
+    {
+      "id": "7f5ee120-7401-592e-b14d-bb9ea6a7c047",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 42.0,
+      "end_sec": 50.0,
+      "content": "実際の災害では店舗電話が使えない可能性もあります。代替手段を決めていますか?"
+    },
+    {
+      "id": "2a067330-0734-53a4-a79f-498ca587c02e",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 50.0,
+      "end_sec": 57.0,
+      "content": "決めていません。チャットはありますが、全アルバイトにはアカウントがありません。"
+    },
+    {
+      "id": "af3483e1-373b-5799-b6dd-a6bac3a7909c",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 57.0,
+      "end_sec": 63.0,
+      "content": "雇用形態によって連絡手段が違うことを前提に設計する必要がありますね。"
+    },
+    {
+      "id": "85623281-20f8-551c-9258-45fc088f135a",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 63.0,
+      "end_sec": 68.0,
+      "content": "短期スタッフまでどこまで対象にするかも迷っています。"
+    },
+    {
+      "id": "a0cb30ba-18f2-5851-a9ee-b69c4b8e8051",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 68.0,
+      "end_sec": 74.0,
+      "content": "アルバイトと夜勤が多い店舗です。連絡先が古い人もいました。"
+    },
+    {
+      "id": "15c9f493-297f-5bc6-88e0-18b7c51b985d",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 74.0,
+      "end_sec": 80.0,
+      "content": "訓練通知を受けた人は何をすればよいか理解していましたか?"
+    },
+    {
+      "id": "c8a4e6c8-c789-59ee-b06f-c913c2bca32e",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 80.0,
+      "end_sec": 87.0,
+      "content": "店長へ連絡すればよいと思った人と、本人が回答すると思った人が混在していました。"
+    },
+    {
+      "id": "5e2c3c80-e3b1-5327-be80-8f358432dce2",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 87.0,
+      "end_sec": 97.0,
+      "content": "通知手段の問題だけでなく、誰がいつ回答し、店長がどこまで集約するかという役割が曖昧なんですね。"
+    },
+    {
+      "id": "5fa2b09e-15e6-5f8c-acf0-582e35471d25",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 97.0,
+      "end_sec": 102.0,
+      "content": "店長が集約する方式にはどんな利点がありますか?"
+    },
+    {
+      "id": "5cabb381-6d34-531f-af92-e0e6f6260582",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 17,
+      "speaker": "customer",
+      "start_sec": 102.0,
+      "end_sec": 110.0,
+      "content": "勤務中の人は店長が一度に確認できます。ただ、店長自身が対応できないと止まります。"
+    },
+    {
+      "id": "b5819723-3b55-5912-8645-64546de17ee4",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 18,
+      "speaker": "salesperson",
+      "start_sec": 110.0,
+      "end_sec": 118.0,
+      "content": "本人回答と店舗確認を組み合わせ、重複や未確認をどう扱うか決める必要があります。"
+    },
+    {
+      "id": "68cfb8ec-908f-59e9-8bb6-aa73bdcc41d5",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 118.0,
+      "end_sec": 125.0,
+      "content": "本部からは個人別一覧が欲しいんですが、店舗は人数だけ早く知りたいです。"
+    },
+    {
+      "id": "864c122a-ee55-574e-b6d6-c64216762318",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 20,
+      "speaker": "salesperson",
+      "start_sec": 125.0,
+      "end_sec": 130.0,
+      "content": "本部と店舗で必要な流度と時間が違いますね。"
+    },
+    {
+      "id": "c9690f1d-2229-5486-98a2-514e76e16ae3",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 130.0,
+      "end_sec": 135.0,
+      "content": "最初の1時間とその後の詳細確認を分けましょう。"
+    },
+    {
+      "id": "1c2ab695-e735-580c-a058-222e85e64683",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 135.0,
+      "end_sec": 141.0,
+      "content": "最初から全項目を答えさせていたので、入力が面倒だったのかもしれません。"
+    },
+    {
+      "id": "853ea7c0-c517-5647-8ad3-f945b22fb8b3",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 23,
+      "speaker": "salesperson",
+      "start_sec": 141.0,
+      "end_sec": 152.0,
+      "content": "初動は無事、要支援、未確認など最低限にし、必要な詳細は後から取る考え方があります。"
+    },
+    {
+      "id": "e003d0cd-c2f6-50ba-ab1c-f455afda9db0",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 152.0,
+      "end_sec": 158.0,
+      "content": "具体項目は運用とサービス仕様を称号します。"
+    },
+    {
+      "id": "d7c84efc-de1f-5ef0-9f48-0096ed008cf5",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 158.0,
+      "end_sec": 162.0,
+      "content": "回答の速さを優先する段階を作りたいです。"
+    },
+    {
+      "id": "807a68b9-62ae-5024-8727-d71d38c69821",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 26,
+      "speaker": "customer",
+      "start_sec": 162.0,
+      "end_sec": 168.0,
+      "content": "そうです。サービスを入れれば自動で集まると思っていました。"
+    },
+    {
+      "id": "c7a87b01-f4be-5075-b673-1cbec8bed1ac",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 27,
+      "speaker": "salesperson",
+      "start_sec": 168.0,
+      "end_sec": 177.0,
+      "content": "安否確認サービスは、災害時に従業員の安否を迅速に確認する目的でクラウド提供されるものですが、"
+    },
+    {
+      "id": "377f3c58-36e6-52f8-950a-4d8facd33870",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 28,
+      "speaker": "salesperson",
+      "start_sec": 177.0,
+      "end_sec": 185.0,
+      "content": "連絡先の更新、回答ルール、未回答者への対応、定期訓練は運用として必要です。"
+    },
+    {
+      "id": "c8b96bc9-38fa-58be-aea4-579eb8c06859",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 185.0,
+      "end_sec": 191.0,
+      "content": "具体的な通知、回答、集計仕様は要件と照らして確認します。"
+    },
+    {
+      "id": "c012153f-815c-5e57-885b-d61793493270",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 30,
+      "speaker": "salesperson",
+      "start_sec": 191.0,
+      "end_sec": 196.0,
+      "content": "連絡先は誰がどのタイミングで更新していますか?"
+    },
+    {
+      "id": "894f3733-acb4-5928-bbf1-43a50de43fd3",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 31,
+      "speaker": "customer",
+      "start_sec": 196.0,
+      "end_sec": 205.0,
+      "content": "入社時に人事が登録し、変更は本人申告です。退職情報の反映が遅れることがあります。"
+    },
+    {
+      "id": "9fdd68f1-a9ec-5f19-bd1f-450ebd24593b",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 205.0,
+      "end_sec": 213.0,
+      "content": "訓練は回答練習だけでなく、連絡先と在籍情報の点検機会にもできます。"
+    },
+    {
+      "id": "5a1cea48-8508-5381-9f14-f45e40d8d955",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 213.0,
+      "end_sec": 218.0,
+      "content": "店舗移動も多いので、所属が古い人もいました。"
+    },
+    {
+      "id": "f2ceca3c-dfe4-5545-9ff3-f2b96b0af9f9",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 218.0,
+      "end_sec": 224.0,
+      "content": "人事情報の成本と安否確認側の同期方法を確認しましょう。"
+    },
+    {
+      "id": "30a2e63d-c2be-51cd-b165-c0267d7dc603",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 224.0,
+      "end_sec": 229.0,
+      "content": "自動連携できない場合も更新責任と頻度を決めます。"
+    },
+    {
+      "id": "4337b4ec-3e15-5c1e-846d-46b43af54503",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 36,
+      "speaker": "customer",
+      "start_sec": 229.0,
+      "end_sec": 234.0,
+      "content": "毎月の入隊者処理に組み込めると良いです。"
+    },
+    {
+      "id": "5fc4488f-b6df-521a-afa4-cafd5de100ae",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 37,
+      "speaker": "customer",
+      "start_sec": 234.0,
+      "end_sec": 239.0,
+      "content": "店舗ごとに連絡網が違うので、整理が先ですね。"
+    },
+    {
+      "id": "a2085cdb-a098-5faa-9a5a-b44311565286",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 239.0,
+      "end_sec": 251.0,
+      "content": "改善目標は回答率100%と決めるより、例えば発祭後1時間で出勤中の従業員と用支援者を把握し、"
+    },
+    {
+      "id": "15c2b9f8-ba3c-5000-b687-56c634c1ae8f",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 251.0,
+      "end_sec": 257.0,
+      "content": "店舗責任者が次の行動を決められる状態と具体化しませんか?"
+    },
+    {
+      "id": "6244f48d-6297-5509-9b74-8499d9c9a1b9",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 40,
+      "speaker": "customer",
+      "start_sec": 257.0,
+      "end_sec": 261.0,
+      "content": "その方がBCPとして意味があります。"
+    },
+    {
+      "id": "d7400634-40da-58e6-b864-23bf751b004e",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 41,
+      "speaker": "customer",
+      "start_sec": 262.0,
+      "end_sec": 267.0,
+      "content": "はい。次回訓練では、地震発生だけでなく、"
+    },
+    {
+      "id": "fef7179b-fd78-5a0a-b386-ae4d8327378d",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 42,
+      "speaker": "customer",
+      "start_sec": 267.0,
+      "end_sec": 275.0,
+      "content": "店長不在、通信障害、休日など条件を一つずつ変えたいです。"
+    },
+    {
+      "id": "e66f2fdd-21c9-5e61-bce0-80c4f51fe601",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 43,
+      "speaker": "customer",
+      "start_sec": 275.0,
+      "end_sec": 282.0,
+      "content": "最初は店長不在の1店舗で試したいです。代理者が動けるか確認できます。"
+    },
+    {
+      "id": "e4838fcf-d845-5c16-af21-79d025343944",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 44,
+      "speaker": "customer",
+      "start_sec": 282.0,
+      "end_sec": 289.0,
+      "content": "評価は、最初の1時間の回答率、用支援者の把握時間、"
+    },
+    {
+      "id": "d7d462fa-ea47-5d36-8e39-6ff856e884b2",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 45,
+      "speaker": "customer",
+      "start_sec": 289.0,
+      "end_sec": 296.0,
+      "content": "未回答者の追跡時間、店舗と本部の判断の迷いを記録します。"
+    },
+    {
+      "id": "c6000dff-8282-590f-b2ce-5fb6d0b9e728",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 46,
+      "speaker": "customer",
+      "start_sec": 296.0,
+      "end_sec": 302.0,
+      "content": "訓練後の振り返りも店長任せず、本部で共通化したいです。"
+    },
+    {
+      "id": "cde95b97-7b7d-507b-a630-209d366f4709",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 47,
+      "speaker": "salesperson",
+      "start_sec": 302.0,
+      "end_sec": 311.0,
+      "content": "結果を責任追求に使わず、連絡手段と役割の改善へ使うことも事前に伝えましょう。"
+    },
+    {
+      "id": "da09a7d6-6c7a-5175-aae1-b4f0b3bb220d",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 48,
+      "speaker": "customer",
+      "start_sec": 311.0,
+      "end_sec": 315.0,
+      "content": "それなら店舗も協力しやすいと思います。"
+    },
+    {
+      "id": "e486067a-1c8f-5f6d-9909-e03f7d6f58da",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 49,
+      "speaker": "salesperson",
+      "start_sec": 315.0,
+      "end_sec": 329.0,
+      "content": "次回、前回未回答者の理由を、勤務形態、連絡先、操作、役割理解に分けて確認し、次の訓練シナリオを作りましょう。"
+    },
+    {
+      "id": "0334fae6-304f-51de-a819-7ce1d93e96c6",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "sequence_no": 50,
+      "speaker": "customer",
+      "start_sec": 329.0,
+      "end_sec": 332.0,
+      "content": "店舗側にも協力してもらいます。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "f3b6b94d-923b-53fb-825d-dfede7a80d22",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "knowledge_type": "pain_point",
+      "title": "雇用形態による連絡手段の非対称性と未回答リスク",
+      "situation": "安否確認訓練において、全従業員への通知と回答収集を実施した場面。",
+      "problem": "アルバイトや短期スタッフにはチャットアカウントがなく、店舗電話も災害時に使えない可能性があるため、連絡手段が雇用形態によって異なり、未回答者が発生しやすい。",
+      "judgment": "単一の連絡手段に依存する設計では、多様な雇用形態を持つ組織では安否確認の網羅性が担保できない。",
+      "action": "雇用形態別の連絡手段を前提とした設計が必要であることを指摘し、代替手段の欠如を課題として特定した。",
+      "reasoning": "顧客はチャットがあるが全アルバイトにアカウントがないと回答しており、店舗電話への依存が脆弱であることを示唆している。",
+      "outcome": "連絡手段の多様化と、対象範囲（短期スタッフ含む）の明確化が今後の検討事項として浮上した。",
+      "lesson": "多様な雇用形態を持つ企業では、安否確認システム導入時に「全員が同一手段で到達可能」であることを前提にせず、手段別のフォールバック設計を行う必要がある。",
+      "applicable_situations": "アルバイトやパートタイマーを含む多様な雇用形態の組織におけるBCP構築時。",
+      "limitations": "特定の業界（小売・飲食など）の事例に基づくため、正社員中心の組織では影響度が異なる可能性がある。",
+      "industry": "小売・飲食",
+      "product": "安否確認サービス",
+      "sales_stage": "discovery",
+      "search_text": "雇用形態による連絡手段の非対称性と未回答リスク\n安否確認訓練において、全従業員への通知と回答収集を実施した場面。\nアルバイトや短期スタッフにはチャットアカウントがなく、店舗電話も災害時に使えない可能性があるため、連絡手段が雇用形態によって異なり、未回答者が発生しやすい。\n単一の連絡手段に依存する設計では、多様な雇用形態を持つ組織では安否確認の網羅性が担保できない。\n雇用形態別の連絡手段を前提とした設計が必要であることを指摘し、代替手段の欠如を課題として特定した。\n顧客はチャットがあるが全アルバイトにアカウントがないと回答しており、店舗電話への依存が脆弱であることを示唆している。\n連絡手段の多様化と、対象範囲（短期スタッフ含む）の明確化が今後の検討事項として浮上した。\n多様な雇用形態を持つ企業では、安否確認システム導入時に「全員が同一手段で到達可能」であることを前提にせず、手段別のフォールバック設計を行う必要がある。\nアルバイトやパートタイマーを含む多様な雇用形態の組織におけるBCP構築時。\n特定の業界（小売・飲食など）の事例に基づくため、正社員中心の組織では影響度が異なる可能性がある。\n小売・飲食\n安否確認サービス\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:29:57.752285Z"
+    },
+    {
+      "id": "c48f2f32-524d-576d-8e55-6f039f996379",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "knowledge_type": "customer_need",
+      "title": "本部と店舗の異なる情報粒度とタイムライン要件",
+      "situation": "安否確認の結果を本部と店舗でどのように活用するか検討中。",
+      "problem": "本部は個人別の一覧を必要とするが、店舗は人数の把握を急いでおり、必要な情報の粒度と時間が異なる。",
+      "judgment": "単一のレポート形式では両者のニーズを満たせないため、段階的な情報提供が必要。",
+      "action": "最初の1時間は速やかな人数把握、その後は詳細な個人確認を行うという2段階の運用を提案した。",
+      "reasoning": "顧客が「本部は個人別、店舗は人数だけ早く」と発言し、ニーズの乖離を明確に示した。",
+      "outcome": "初動と詳細確認を分ける運用設計の合意が得られた。",
+      "lesson": "組織内の上位層（本部）と現場層（店舗）では、危機管理時の情報要求が異なる。システム設計時は、タイムラインと情報粒度を分離して設計する必要がある。",
+      "applicable_situations": "多店舗展開企業や階層構造の明確な組織における危機管理システム導入時。",
+      "limitations": null,
+      "industry": "小売・飲食",
+      "product": "安否確認サービス",
+      "sales_stage": "proposal",
+      "search_text": "本部と店舗の異なる情報粒度とタイムライン要件\n安否確認の結果を本部と店舗でどのように活用するか検討中。\n本部は個人別の一覧を必要とするが、店舗は人数の把握を急いでおり、必要な情報の粒度と時間が異なる。\n単一のレポート形式では両者のニーズを満たせないため、段階的な情報提供が必要。\n最初の1時間は速やかな人数把握、その後は詳細な個人確認を行うという2段階の運用を提案した。\n顧客が「本部は個人別、店舗は人数だけ早く」と発言し、ニーズの乖離を明確に示した。\n初動と詳細確認を分ける運用設計の合意が得られた。\n組織内の上位層（本部）と現場層（店舗）では、危機管理時の情報要求が異なる。システム設計時は、タイムラインと情報粒度を分離して設計する必要がある。\n多店舗展開企業や階層構造の明確な組織における危機管理システム導入時。\n小売・飲食\n安否確認サービス\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:29:57.752285Z"
+    },
+    {
+      "id": "fe9dfd6a-837c-50a5-a886-441932cf01e4",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "knowledge_type": "sales_technique",
+      "title": "初動時の回答項目の最小化による入力負荷の軽減",
+      "situation": "安否確認訓練で回答率が伸び悩んでいる原因を分析中。",
+      "problem": "最初から全項目を答えさせていたため、従業員の入力が面倒になり、回答が遅延または未回答となっていた。",
+      "judgment": "初動時は「無事、要支援、未確認」などの最低限の項目に絞り、詳細は後から取得する方が回答率を向上させる。",
+      "action": "初動時の回答項目を最小限にし、回答の速さを優先する段階を作る提案を行った。",
+      "reasoning": "顧客が「入力が面倒だったかもしれない」と自認しており、UXの簡素化がボトルネック解消に有効だと判断した。",
+      "outcome": "顧客は「回答の速さを優先する段階を作りたい」と同意した。",
+      "lesson": "緊急時のアンケートや報告では、認知負荷を減らすため、初動時は選択肢を極力少なくし、詳細なデータ収集は二段階目で行う設計が有効である。",
+      "applicable_situations": "緊急時の従業員調査、災害時の安否確認、その他迅速なフィードバックが必要な場面。",
+      "limitations": "初動時に詳細な情報が必要な特殊な業務（例：医療現場の初期対応など）には適用しにくい。",
+      "industry": null,
+      "product": "安否確認サービス",
+      "sales_stage": "proposal",
+      "search_text": "初動時の回答項目の最小化による入力負荷の軽減\n安否確認訓練で回答率が伸び悩んでいる原因を分析中。\n最初から全項目を答えさせていたため、従業員の入力が面倒になり、回答が遅延または未回答となっていた。\n初動時は「無事、要支援、未確認」などの最低限の項目に絞り、詳細は後から取得する方が回答率を向上させる。\n初動時の回答項目を最小限にし、回答の速さを優先する段階を作る提案を行った。\n顧客が「入力が面倒だったかもしれない」と自認しており、UXの簡素化がボトルネック解消に有効だと判断した。\n顧客は「回答の速さを優先する段階を作りたい」と同意した。\n緊急時のアンケートや報告では、認知負荷を減らすため、初動時は選択肢を極力少なくし、詳細なデータ収集は二段階目で行う設計が有効である。\n緊急時の従業員調査、災害時の安否確認、その他迅速なフィードバックが必要な場面。\n初動時に詳細な情報が必要な特殊な業務（例：医療現場の初期対応など）には適用しにくい。\n安否確認サービス\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:29:57.752285Z"
+    },
+    {
+      "id": "10a1bba3-b7b9-5a0d-8120-a94eaa558b65",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "knowledge_type": "operational_insight",
+      "title": "訓練を人事情報の点検機会として活用する",
+      "situation": "安否確認訓練の実施後、未回答者や連絡先エラーの原因を調査中。",
+      "problem": "退職情報の反映が遅れ、店舗移動による所属情報の古さ、連絡先の誤りなど、人事情報の鮮度が保てていない。",
+      "judgment": "安否確認訓練は単なる回答練習ではなく、連絡先や在籍情報の点検・更新の機会として機能させるべき。",
+      "action": "訓練を人事情報の点検機会に活用し、自動連携できない場合は更新責任と頻度（例：毎月の入退社処理）を決めることを提案した。",
+      "reasoning": "顧客が「退職情報の反映が遅れる」「所属が古い」と指摘しており、データ品質の問題が安否確認の精度を毀損している。",
+      "outcome": "人事情報の同期方法と更新責任の明確化が次のアクションとして決定された。",
+      "lesson": "BCP訓練は、システム機能の確認だけでなく、基盤となるマスターデータ（人事情報）の品質管理プロセスとして組み込むことで、実災害時の有効性を高めることができる。",
+      "applicable_situations": "人事異動が多い組織、または外部委託スタッフを多く使う組織。",
+      "limitations": null,
+      "industry": null,
+      "product": "安否確認サービス",
+      "sales_stage": "operational_insight",
+      "search_text": "訓練を人事情報の点検機会として活用する\n安否確認訓練の実施後、未回答者や連絡先エラーの原因を調査中。\n退職情報の反映が遅れ、店舗移動による所属情報の古さ、連絡先の誤りなど、人事情報の鮮度が保てていない。\n安否確認訓練は単なる回答練習ではなく、連絡先や在籍情報の点検・更新の機会として機能させるべき。\n訓練を人事情報の点検機会に活用し、自動連携できない場合は更新責任と頻度（例：毎月の入退社処理）を決めることを提案した。\n顧客が「退職情報の反映が遅れる」「所属が古い」と指摘しており、データ品質の問題が安否確認の精度を毀損している。\n人事情報の同期方法と更新責任の明確化が次のアクションとして決定された。\nBCP訓練は、システム機能の確認だけでなく、基盤となるマスターデータ（人事情報）の品質管理プロセスとして組み込むことで、実災害時の有効性を高めることができる。\n人事異動が多い組織、または外部委託スタッフを多く使う組織。\n安否確認サービス\noperational_insight",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:29:57.752285Z"
+    },
+    {
+      "id": "412d2055-46a3-5c43-9ab5-708d8cdefedc",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "knowledge_type": "decision",
+      "title": "BCP目標の具体化：100%回答率から「行動可能な状態」へ",
+      "situation": "安否確認訓練の改善目標を設定する場面。",
+      "problem": "「回答率100%」という抽象的な目標では、実際の災害時に店舗責任者が次の行動を決められる状態が保証されない。",
+      "judgment": "目標は「発災後1時間で出勤中の従業員と要支援者を把握し、店舗責任者が次の行動を決められる状態」に具体化するべき。",
+      "action": "顧客に具体的なKPI（把握時間、行動可能な状態）を提案し、BCPとしての意味を問うた。",
+      "reasoning": "顧客が「その方がBCPとして意味があります」と同意し、目標の質的変化を認めた。",
+      "outcome": "次回訓練の評価指標として、回答率だけでなく「要支援者の把握時間」「未回答者の追跡時間」などを設定することになった。",
+      "lesson": "危機管理の目標設定は、数値（%）だけでなく、組織が「何ができるようになるか」という行動可能性（Actionability）で定義する方が、実務的なBCPとして機能する。",
+      "applicable_situations": "BCP策定、危機管理KPI設定、組織のレジリエンス強化プロジェクト。",
+      "limitations": null,
+      "industry": null,
+      "product": "安否確認サービス",
+      "sales_stage": "negotiation",
+      "search_text": "BCP目標の具体化：100%回答率から「行動可能な状態」へ\n安否確認訓練の改善目標を設定する場面。\n「回答率100%」という抽象的な目標では、実際の災害時に店舗責任者が次の行動を決められる状態が保証されない。\n目標は「発災後1時間で出勤中の従業員と要支援者を把握し、店舗責任者が次の行動を決められる状態」に具体化するべき。\n顧客に具体的なKPI（把握時間、行動可能な状態）を提案し、BCPとしての意味を問うた。\n顧客が「その方がBCPとして意味があります」と同意し、目標の質的変化を認めた。\n次回訓練の評価指標として、回答率だけでなく「要支援者の把握時間」「未回答者の追跡時間」などを設定することになった。\n危機管理の目標設定は、数値（%）だけでなく、組織が「何ができるようになるか」という行動可能性（Actionability）で定義する方が、実務的なBCPとして機能する。\nBCP策定、危機管理KPI設定、組織のレジリエンス強化プロジェクト。\n安否確認サービス\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:29:57.752285Z"
+    },
+    {
+      "id": "35f10f63-a2ae-515a-9177-483081dd6294",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "knowledge_type": "next_action",
+      "title": "シナリオ別訓練の実施と振り返りの共通化",
+      "situation": "次回訓練の計画を立てる段階。",
+      "problem": "通常の訓練では、店長不在や通信障害などの異常事態への対応力が検証されていない。",
+      "judgment": "条件を一つずつ変えたシナリオ訓練（店長不在、通信障害、休日など）を実施し、代理者の機能や代替手段の有効性を確認する。",
+      "action": "最初は店長不在の1店舗で試すことを提案し、訓練後の振り返りを本部で共通化し、結果を責任追求ではなく改善に使うことを事前に伝えることを合意した。",
+      "reasoning": "顧客が「店長不在の1店舗で試したい」と発言し、心理的安全性（責任追求しない）が店舗の協力に重要であることを示した。",
+      "outcome": "次回訓練のシナリオと評価方法、振り返りの運用ルールが決定された。",
+      "lesson": "訓練の効果を高めるには、単なるリハーサルではなく、想定外の障害（キーパーソン不在等）を含むシナリオを設計し、心理的安全性を確保して率直なフィードバックを得るプロセスが不可欠である。",
+      "applicable_situations": "BCP訓練、災害対応訓練、チームビルディング。",
+      "limitations": null,
+      "industry": null,
+      "product": "安否確認サービス",
+      "sales_stage": "follow_up",
+      "search_text": "シナリオ別訓練の実施と振り返りの共通化\n次回訓練の計画を立てる段階。\n通常の訓練では、店長不在や通信障害などの異常事態への対応力が検証されていない。\n条件を一つずつ変えたシナリオ訓練（店長不在、通信障害、休日など）を実施し、代理者の機能や代替手段の有効性を確認する。\n最初は店長不在の1店舗で試すことを提案し、訓練後の振り返りを本部で共通化し、結果を責任追求ではなく改善に使うことを事前に伝えることを合意した。\n顧客が「店長不在の1店舗で試したい」と発言し、心理的安全性（責任追求しない）が店舗の協力に重要であることを示した。\n次回訓練のシナリオと評価方法、振り返りの運用ルールが決定された。\n訓練の効果を高めるには、単なるリハーサルではなく、想定外の障害（キーパーソン不在等）を含むシナリオを設計し、心理的安全性を確保して率直なフィードバックを得るプロセスが不可欠である。\nBCP訓練、災害対応訓練、チームビルディング。\n安否確認サービス\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:29:57.752285Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "5c1d1c6b-f335-58bc-a9c9-3c7548d0f090",
+      "knowledge_id": "f3b6b94d-923b-53fb-825d-dfede7a80d22",
+      "start_utterance_id": "7f5ee120-7401-592e-b14d-bb9ea6a7c047",
+      "end_utterance_id": "a0cb30ba-18f2-5851-a9ee-b69c4b8e8051"
+    },
+    {
+      "id": "584852b7-7a60-53fd-bb47-f37a812b4ced",
+      "knowledge_id": "c48f2f32-524d-576d-8e55-6f039f996379",
+      "start_utterance_id": "68cfb8ec-908f-59e9-8bb6-aa73bdcc41d5",
+      "end_utterance_id": "c9690f1d-2229-5486-98a2-514e76e16ae3"
+    },
+    {
+      "id": "028d6c16-154a-5e1a-b514-010ea525dcde",
+      "knowledge_id": "fe9dfd6a-837c-50a5-a886-441932cf01e4",
+      "start_utterance_id": "1c2ab695-e735-580c-a058-222e85e64683",
+      "end_utterance_id": "d7c84efc-de1f-5ef0-9f48-0096ed008cf5"
+    },
+    {
+      "id": "df2230be-61a8-5a48-8b55-62ca0f1f3b04",
+      "knowledge_id": "10a1bba3-b7b9-5a0d-8120-a94eaa558b65",
+      "start_utterance_id": "c012153f-815c-5e57-885b-d61793493270",
+      "end_utterance_id": "4337b4ec-3e15-5c1e-846d-46b43af54503"
+    },
+    {
+      "id": "9debcbdb-f578-5276-a0e5-c4ed4e7c3368",
+      "knowledge_id": "412d2055-46a3-5c43-9ab5-708d8cdefedc",
+      "start_utterance_id": "a2085cdb-a098-5faa-9a5a-b44311565286",
+      "end_utterance_id": "6244f48d-6297-5509-9b74-8499d9c9a1b9"
+    },
+    {
+      "id": "fb4ff99c-865f-50be-b170-c8bf48e8c915",
+      "knowledge_id": "35f10f63-a2ae-515a-9177-483081dd6294",
+      "start_utterance_id": "d7400634-40da-58e6-b864-23bf751b004e",
+      "end_utterance_id": "da09a7d6-6c7a-5175-aae1-b4f0b3bb220d"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "936cf587-58b2-5851-86db-55cc1002bcc3",
+      "data_source_id": "27014b56-c6f9-5f55-98c8-b1a20f3fc01c",
+      "summary": "安否確認訓練の振り返りと改善策の検討。雇用形態による連絡手段の非対称性、本部と店舗の情報ニーズの乖離、初動時の入力負荷、人事情報の鮮度問題が特定された。改善として、初動時の項目最小化、訓練をデータ点検機会として活用、BCP目標の具体化（行動可能な状態）、シナリオ別訓練の実施が合意された。",
+      "customer_needs": [
+        "雇用形態（アルバイト等）を問わず到達可能な連絡手段の確保",
+        "本部（個人別詳細）と店舗（人数速報）の異なる情報ニーズへの対応",
+        "初動時の回答負荷を減らし、速やかに状況把握できる仕組み",
+        "人事情報（連絡先、所属、在籍）の鮮度を保つ運用",
+        "店長不在などの異常事態に対応できる代理者・代替手段の検証"
+      ],
+      "proposals": [
+        "初動時は「無事、要支援、未確認」など最低限の項目に絞り、詳細は後から取得する2段階運用",
+        "安否確認訓練を連絡先や在籍情報の点検・更新の機会として活用する",
+        "BCP目標を「回答率100%」から「発災後1時間で要支援者を把握し、店舗責任者が行動できる状態」に具体化する",
+        "店長不在、通信障害、休日などの条件を変えたシナリオ訓練を実施する",
+        "訓練結果を責任追求ではなく改善に使うことを事前に伝え、心理的安全性を確保する"
+      ],
+      "decisions": [
+        "初動と詳細確認を分ける運用設計を採用する",
+        "人事情報の同期方法と更新責任（毎月の入退社処理等）を明確にする",
+        "次回訓練は店長不在の1店舗から開始し、評価指標として把握時間・追跡時間を記録する",
+        "訓練後の振り返りは本部で共通化し、店舗任せにしない"
+      ],
+      "next_actions": [
+        "前回未回答者の理由を勤務形態、連絡先、操作、役割理解に分類して分析する",
+        "分析結果に基づき、次の訓練シナリオを作成する",
+        "人事情報と安否確認システムの同期方法を確認し、自動連携不可の場合の更新ルールを策定する",
+        "店舗側に次回訓練への協力を依頼する"
+      ]
+    }
+  ]
+}

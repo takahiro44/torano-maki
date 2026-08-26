@@ -1,0 +1,679 @@
+{
+  "data_sources": [
+    {
+      "id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "source_type": "audio",
+      "file_name": "long_007.wav",
+      "occurred_at": "2026-08-25T00:10:46Z"
+    }
+  ],
+  "utterance_segments": [
+    {
+      "id": "694ff74e-6c04-543d-9f9f-af6ec5e72a97",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 1,
+      "speaker": "salesperson",
+      "start_sec": 0.0,
+      "end_sec": 6.0,
+      "content": "本日は営業本部と情報システムのお二人にお時間をいただきありがとうございます。"
+    },
+    {
+      "id": "c2f98414-d701-5ce9-a0e7-2675452c96e2",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 2,
+      "speaker": "salesperson",
+      "start_sec": 6.0,
+      "end_sec": 13.0,
+      "content": "担当者の退職後、引き継ぎで困った直近の顧客を1社だけ教えていただけますか?"
+    },
+    {
+      "id": "c4dce66f-0714-5814-9a1d-ad7ecb22a307",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 3,
+      "speaker": "customer",
+      "start_sec": 13.0,
+      "end_sec": 24.0,
+      "content": "A社です。前任者が価格を下げない代わりに納品単位を調整していたらしいのですが、記録が残っていませんでした。"
+    },
+    {
+      "id": "4cbb908b-cb82-5fc6-974f-e7d047ca6393",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 4,
+      "speaker": "salesperson",
+      "start_sec": 24.0,
+      "end_sec": 28.0,
+      "content": "公認の方は何を見て確認しましたか?"
+    },
+    {
+      "id": "9712c13a-d0e4-57ac-82f6-1d9880a99e57",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 5,
+      "speaker": "salesperson",
+      "start_sec": 28.0,
+      "end_sec": 33.0,
+      "content": "A社へ聞き直すまでに、社内でどれくらい探しましたか?"
+    },
+    {
+      "id": "b3a087ef-c804-5b95-9c6c-8184883b12e7",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 6,
+      "speaker": "customer",
+      "start_sec": 33.0,
+      "end_sec": 42.0,
+      "content": "公認と営業事務で半日です。前任者のメールは残っていましたが、件名だけでは見つけにくかったです。"
+    },
+    {
+      "id": "2f6fb981-4d8b-5033-88f6-0da3a38167ec",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 7,
+      "speaker": "customer",
+      "start_sec": 42.0,
+      "end_sec": 49.0,
+      "content": "個人フォルダも確認しましたが、どれが正式な合意か判断できませんでした。"
+    },
+    {
+      "id": "20d992ca-5d63-557e-b503-c7c6dd0418d8",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 8,
+      "speaker": "salesperson",
+      "start_sec": 49.0,
+      "end_sec": 56.0,
+      "content": "情報の存在と、信頼できる最終情報であることは別ですね。"
+    },
+    {
+      "id": "748135cc-a6f8-5d40-b4b6-09bc90ccefa9",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 9,
+      "speaker": "customer",
+      "start_sec": 56.0,
+      "end_sec": 63.0,
+      "content": "メモがあっても、顧客と合意したのか、営業の考えなのか分かりません。"
+    },
+    {
+      "id": "4016f880-a47b-5b94-84b0-55e084a5e85c",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 10,
+      "speaker": "salesperson",
+      "start_sec": 63.0,
+      "end_sec": 73.0,
+      "content": "記録には、事実、営業の解釈、次の行動を分けて残すと、公認が判断しやすくなりそうです。"
+    },
+    {
+      "id": "78b94760-29fb-5d41-b174-e65217f7fa92",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 11,
+      "speaker": "customer",
+      "start_sec": 73.0,
+      "end_sec": 84.0,
+      "content": "メール見積もり書、本人が残した表計算です。最終的にはA社へ聞き直しました。"
+    },
+    {
+      "id": "979be011-8af4-5a45-8cb8-51bba970110e",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 12,
+      "speaker": "customer",
+      "start_sec": 84.0,
+      "end_sec": 90.0,
+      "content": "販売実績は機関システムにありますが、商談の経緯は営業ごとにバラバラです。"
+    },
+    {
+      "id": "028f1d79-9fbf-5cb9-b025-d464dc4e524b",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 13,
+      "speaker": "salesperson",
+      "start_sec": 90.0,
+      "end_sec": 95.0,
+      "content": "経緯を聞き直したことで、顧客側の反応はいかがでしたか?"
+    },
+    {
+      "id": "89cf4546-883d-5769-830b-530a4dac4867",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 14,
+      "speaker": "customer",
+      "start_sec": 95.0,
+      "end_sec": 102.0,
+      "content": "前にも説明したと言われました。公認はかなり落ち込んでいましたね。"
+    },
+    {
+      "id": "2a6a4034-52c4-5456-b094-039b28c16803",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 15,
+      "speaker": "salesperson",
+      "start_sec": 102.0,
+      "end_sec": 107.0,
+      "content": "売上機会だけでなく、若手が自信を失う影響もあるんですね。"
+    },
+    {
+      "id": "122a4ebd-418b-54bd-a2ff-de34a204f264",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 16,
+      "speaker": "salesperson",
+      "start_sec": 107.0,
+      "end_sec": 111.0,
+      "content": "普段商談記録を残さない理由は何でしょう?"
+    },
+    {
+      "id": "50e9e6e0-2f84-58fb-bce0-897852a65ba5",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 17,
+      "speaker": "salesperson",
+      "start_sec": 111.0,
+      "end_sec": 118.0,
+      "content": "公認者が落ち込んだ後、上司や事務の方はどのように支援しましたか?"
+    },
+    {
+      "id": "1b427439-c034-5b40-a6fa-fb858629446b",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 18,
+      "speaker": "customer",
+      "start_sec": 118.0,
+      "end_sec": 123.0,
+      "content": "私が顧客へ謝罪し、しばらく同行しました。"
+    },
+    {
+      "id": "6c9f2ff6-61ce-57d3-8b0c-0289c17f9175",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 19,
+      "speaker": "customer",
+      "start_sec": 123.0,
+      "end_sec": 128.0,
+      "content": "ただ他の引き継ぎ先も多く、全てには付き添えません。"
+    },
+    {
+      "id": "97025a01-7ac5-5e5f-b028-164caa428f3f",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 20,
+      "speaker": "customer",
+      "start_sec": 128.0,
+      "end_sec": 133.0,
+      "content": "代食者だけでなく、担当替えや給食でも同じことが起きます。"
+    },
+    {
+      "id": "4c4ce0c8-bb2c-5791-8429-260a5a338409",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 21,
+      "speaker": "salesperson",
+      "start_sec": 133.0,
+      "end_sec": 137.0,
+      "content": "発生頻度を把握していますか?"
+    },
+    {
+      "id": "6aa05101-02ca-56cf-9493-2a4719536b74",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 22,
+      "speaker": "customer",
+      "start_sec": 137.0,
+      "end_sec": 141.0,
+      "content": "年間で担当変更は20社ほどです。"
+    },
+    {
+      "id": "5de733d1-f9bc-5503-ab19-153455692342",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 23,
+      "speaker": "customer",
+      "start_sec": 141.0,
+      "end_sec": 144.0,
+      "content": "大口顧客ほど経緯が複雑です。"
+    },
+    {
+      "id": "fbdaa1ee-c070-56e4-8cb2-f1126827c18e",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 24,
+      "speaker": "salesperson",
+      "start_sec": 144.0,
+      "end_sec": 153.0,
+      "content": "20社全てで同じ詳細度が必要でしょうか?それとも重要顧客から優先したいですか?"
+    },
+    {
+      "id": "7090b6bc-663f-5913-8131-357a04d49956",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 25,
+      "speaker": "customer",
+      "start_sec": 153.0,
+      "end_sec": 159.0,
+      "content": "まず、売上上位とクレーム履歴のある顧客です。"
+    },
+    {
+      "id": "2eb41e15-b526-51a5-9323-3d3462ab38b4",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 26,
+      "speaker": "salesperson",
+      "start_sec": 159.0,
+      "end_sec": 165.0,
+      "content": "対象顧客を絞ることで、入力負担と効果を確認しやすくなります。"
+    },
+    {
+      "id": "a3f0f9c6-e58b-5e61-a825-ee30bd95dfec",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 27,
+      "speaker": "customer",
+      "start_sec": 165.0,
+      "end_sec": 175.0,
+      "content": "入力欄が多い、同じ情報を別システムにも入れる、忙しの3つです。"
+    },
+    {
+      "id": "69bcbd3c-ee55-5e95-a3ba-0b356d99828e",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 28,
+      "speaker": "customer",
+      "start_sec": 175.0,
+      "end_sec": 181.0,
+      "content": "システムを増やすと、さらに入力されなくなる懸念があります。"
+    },
+    {
+      "id": "19405770-095d-5aad-bcdb-4d2fc4fd4f05",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 29,
+      "speaker": "salesperson",
+      "start_sec": 181.0,
+      "end_sec": 191.0,
+      "content": "大事なご懸念です。入力を義務化する前に、どの情報が次の担当者や営業事務に再利用されるかを絞る必要があります。"
+    },
+    {
+      "id": "454f8f3e-8551-54f2-a353-12ab735e1039",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 30,
+      "speaker": "customer",
+      "start_sec": 191.0,
+      "end_sec": 202.0,
+      "content": "価格の理由、決裁者、過去のクレーム、次回約束は欲しいです。"
+    },
+    {
+      "id": "42526df5-bcdc-5165-ac38-03dc79942b6d",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 31,
+      "speaker": "salesperson",
+      "start_sec": 202.0,
+      "end_sec": 209.0,
+      "content": "入力項目を5つに絞っても、営業がかく時間がなければ定着しません。"
+    },
+    {
+      "id": "1eaca733-b1d5-576e-bd38-fe1f9ea91ccf",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 32,
+      "speaker": "salesperson",
+      "start_sec": 209.0,
+      "end_sec": 213.0,
+      "content": "商談後、どのタイミングなら入力できますか?"
+    },
+    {
+      "id": "6b7f1ed7-d802-56a0-8756-b76e7857fa2a",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 33,
+      "speaker": "customer",
+      "start_sec": 213.0,
+      "end_sec": 219.0,
+      "content": "記者後は見積もり作成があるので、移動中か訪問直後です。"
+    },
+    {
+      "id": "e331469e-53dd-56cc-b6d4-665f8a6bac8e",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 34,
+      "speaker": "salesperson",
+      "start_sec": 219.0,
+      "end_sec": 225.0,
+      "content": "スマートフォン利用の過費や認証方法も確認が必要です。"
+    },
+    {
+      "id": "0e151f26-82f4-58cb-a050-a9d4fe4a47fa",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 35,
+      "speaker": "salesperson",
+      "start_sec": 225.0,
+      "end_sec": 230.0,
+      "content": "操作環境を決める際は、便利さだけでなく端末ルールも見ます。"
+    },
+    {
+      "id": "92411e8b-8432-5508-a709-151da923b90c",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 36,
+      "speaker": "salesperson",
+      "start_sec": 230.0,
+      "end_sec": 236.0,
+      "content": "音声メモなど別手段を使う場合も、正式記録になるまでの確認者が必要です。"
+    },
+    {
+      "id": "b40614e1-33aa-5141-b07e-41585187ad55",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 37,
+      "speaker": "customer",
+      "start_sec": 236.0,
+      "end_sec": 242.0,
+      "content": "重要な条件をAIが勝手に要約して謝るのも困ります。"
+    },
+    {
+      "id": "24e11c24-1a6f-549b-afb5-bd7171517d8b",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 38,
+      "speaker": "salesperson",
+      "start_sec": 242.0,
+      "end_sec": 249.0,
+      "content": "自動化を検討する場合も、価格条件や次回約束など重要項目は、"
+    },
+    {
+      "id": "f32f9337-b7aa-5cf2-83d2-c7551d24b0d1",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 39,
+      "speaker": "salesperson",
+      "start_sec": 249.0,
+      "end_sec": 253.0,
+      "content": "営業本人が確認して確定する設計にしましょう。"
+    },
+    {
+      "id": "dbe29127-25a6-5230-8d1d-bda2b29c9dbb",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 40,
+      "speaker": "salesperson",
+      "start_sec": 253.0,
+      "end_sec": 257.0,
+      "content": "DX統合パッケージ、セールスマネジメントは、"
+    },
+    {
+      "id": "3fbfe9a5-eddd-57d8-9253-99de570bcf25",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 41,
+      "speaker": "salesperson",
+      "start_sec": 257.0,
+      "end_sec": 263.0,
+      "content": "機関系の情報と営業接点情報を連携して活用する選択肢になります。"
+    },
+    {
+      "id": "eac65ed8-bfac-5862-91d9-bd071aa8dfb0",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 42,
+      "speaker": "salesperson",
+      "start_sec": 263.0,
+      "end_sec": 269.0,
+      "content": "ただし、今の機関環境や必要な連携範囲は個別確認が必要です。"
+    },
+    {
+      "id": "0783035b-b998-585d-8d78-a81b2ce0a351",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 43,
+      "speaker": "customer",
+      "start_sec": 269.0,
+      "end_sec": 274.0,
+      "content": "既存システムから何を移すかも見たいです。"
+    },
+    {
+      "id": "bca05c5e-d1e0-53c0-b268-458106a47e20",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 44,
+      "speaker": "salesperson",
+      "start_sec": 274.0,
+      "end_sec": 280.0,
+      "content": "次回はA社の引き継ぎを題材に、公認が知りたかった情報を5項目以内で定義し、"
+    },
+    {
+      "id": "b65397b9-dc4a-5993-a0c2-364084f45a8f",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 45,
+      "speaker": "salesperson",
+      "start_sec": 280.0,
+      "end_sec": 283.0,
+      "content": "入力者と利用者を決めましょう。"
+    },
+    {
+      "id": "e2be4152-5e65-54bc-a523-438441224aea",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 46,
+      "speaker": "salesperson",
+      "start_sec": 283.0,
+      "end_sec": 287.0,
+      "content": "その後に連携課費と入力負担をデモで確認します。"
+    },
+    {
+      "id": "9ba7b5fa-408a-5902-8dfa-8fb942189b2e",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 47,
+      "speaker": "salesperson",
+      "start_sec": 287.0,
+      "end_sec": 291.0,
+      "content": "試行の評価は、入力率だけでなく、"
+    },
+    {
+      "id": "9aef6a81-d34c-5af8-87d1-656df6e46771",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 48,
+      "speaker": "salesperson",
+      "start_sec": 291.0,
+      "end_sec": 298.0,
+      "content": "公認が必要情報を見つける時間と顧客へ聞き直した件数で見たいです。"
+    },
+    {
+      "id": "f2bafca0-fe0b-5b13-af2c-16f6d8e21d96",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 49,
+      "speaker": "salesperson",
+      "start_sec": 298.0,
+      "end_sec": 303.0,
+      "content": "機関データとの重複入力回数も測りたいです。"
+    },
+    {
+      "id": "6c6ad1e6-3e74-5960-b0dd-1fcec7039fea",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 50,
+      "speaker": "customer",
+      "start_sec": 303.0,
+      "end_sec": 312.0,
+      "content": "営業には、記録が管理のためではなく、次の商談を助けるためだと伝えたいですね。"
+    },
+    {
+      "id": "54fc6e78-2040-5935-943a-06237400e37b",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 51,
+      "speaker": "salesperson",
+      "start_sec": 312.0,
+      "end_sec": 318.0,
+      "content": "では、重要顧客10社と営業3人で1ヶ月試し、"
+    },
+    {
+      "id": "a4b347ac-e316-560d-8f90-610fc472df08",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 52,
+      "speaker": "salesperson",
+      "start_sec": 318.0,
+      "end_sec": 323.0,
+      "content": "営業本人、公認役、営業事務の3社から評価をとります。"
+    },
+    {
+      "id": "9a1fa942-785d-5d08-973a-90bb713640ed",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 53,
+      "speaker": "customer",
+      "start_sec": 324.0,
+      "end_sec": 329.0,
+      "content": "うーん、現場の納得を確認してから広げましょう。"
+    },
+    {
+      "id": "1f731919-3df8-5da0-bd01-ab32a9a313a3",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "sequence_no": 54,
+      "speaker": "customer",
+      "start_sec": 329.0,
+      "end_sec": 333.0,
+      "content": "5項目なら、現場にも説明しやすそうです。"
+    }
+  ],
+  "knowledge_units": [
+    {
+      "id": "5172be8d-cac5-59e2-813b-d63987d5088e",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "knowledge_type": "pain_point",
+      "title": "引き継ぎ時の情報欠如による顧客対応コストと心理的負担",
+      "situation": "担当者の退職や異動により、顧客との合意内容が記録に残っていない場合",
+      "problem": "顧客に聞き直す必要が生じ、半日程度の社内調査時間がかかる。また、若手担当者が自信を失う原因となる。",
+      "judgment": "情報の存在と、信頼できる最終情報であることは別である。",
+      "action": "顧客へ謝罪し、上司が同行して対応する。",
+      "reasoning": "記録がないため、事実確認に時間と人的リソースを要し、顧客体験と社内士気に悪影響を及ぼす。",
+      "outcome": "顧客からの「前にも説明した」という反応を受け、担当者が落ち込む。",
+      "lesson": "引き継ぎリスクを軽減するため、合意内容の構造化された記録が不可欠である。",
+      "applicable_situations": "営業担当者の異動・退職時の顧客引き継ぎ",
+      "limitations": "記録が完全に欠如している場合、顧客への確認は避けられない。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "follow_up",
+      "search_text": "引き継ぎ時の情報欠如による顧客対応コストと心理的負担\n担当者の退職や異動により、顧客との合意内容が記録に残っていない場合\n顧客に聞き直す必要が生じ、半日程度の社内調査時間がかかる。また、若手担当者が自信を失う原因となる。\n情報の存在と、信頼できる最終情報であることは別である。\n顧客へ謝罪し、上司が同行して対応する。\n記録がないため、事実確認に時間と人的リソースを要し、顧客体験と社内士気に悪影響を及ぼす。\n顧客からの「前にも説明した」という反応を受け、担当者が落ち込む。\n引き継ぎリスクを軽減するため、合意内容の構造化された記録が不可欠である。\n営業担当者の異動・退職時の顧客引き継ぎ\n記録が完全に欠如している場合、顧客への確認は避けられない。\nfollow_up",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:22.275169Z"
+    },
+    {
+      "id": "d1be19ae-ed45-5fba-9c36-99ed2df4cf32",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "knowledge_type": "sales_technique",
+      "title": "記録の構造化による判断支援",
+      "situation": "商談記録を残す際の設計方針",
+      "problem": "メモがあっても、顧客との合意なのか営業の解釈なのか区別がつかない。",
+      "judgment": "記録には、事実、営業の解釈、次の行動を分けて残すと、引き継ぎ担当者が判断しやすくなる。",
+      "action": "記録項目を「事実」「解釈」「次の行動」に分類する。",
+      "reasoning": "情報の性質を区別することで、引き継ぎ時の曖昧さを解消し、迅速な意思決定を可能にする。",
+      "outcome": null,
+      "lesson": "単なるメモではなく、情報の信頼性と用途を明確にするための分類が有効である。",
+      "applicable_situations": "CRMや商談記録システムの設計、営業プロセスの標準化",
+      "limitations": "分類の定義が現場で共有されていない場合は機能しない。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "記録の構造化による判断支援\n商談記録を残す際の設計方針\nメモがあっても、顧客との合意なのか営業の解釈なのか区別がつかない。\n記録には、事実、営業の解釈、次の行動を分けて残すと、引き継ぎ担当者が判断しやすくなる。\n記録項目を「事実」「解釈」「次の行動」に分類する。\n情報の性質を区別することで、引き継ぎ時の曖昧さを解消し、迅速な意思決定を可能にする。\n単なるメモではなく、情報の信頼性と用途を明確にするための分類が有効である。\nCRMや商談記録システムの設計、営業プロセスの標準化\n分類の定義が現場で共有されていない場合は機能しない。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:22.275169Z"
+    },
+    {
+      "id": "0b07d7c0-3cee-5da0-83fa-be21ff93f3c0",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "knowledge_type": "proposal",
+      "title": "重要顧客への優先適用と入力項目の絞り込み",
+      "situation": "全顧客への記録義務化が難しい場合",
+      "problem": "入力欄が多い、別システムへの重複入力、忙しさから記録がされない。",
+      "judgment": "対象顧客を売上上位とクレーム履歴のある顧客に絞り、入力項目を5つに限定する。",
+      "action": "価格の理由、決裁者、過去のクレーム、次回約束など、再利用価値の高い項目に絞る。",
+      "reasoning": "対象を絞ることで入力負担と効果のバランスを確認しやすくし、定着率を高める。",
+      "outcome": null,
+      "lesson": "全社一律の記録より、リスクと価値の高い顧客・項目にリソースを集中させる方が現実的である。",
+      "applicable_situations": "営業プロセス改善、CRM導入時のスコープ定義",
+      "limitations": "重要顧客の定義が変動する場合、運用ルールを見直す必要がある。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "proposal",
+      "search_text": "重要顧客への優先適用と入力項目の絞り込み\n全顧客への記録義務化が難しい場合\n入力欄が多い、別システムへの重複入力、忙しさから記録がされない。\n対象顧客を売上上位とクレーム履歴のある顧客に絞り、入力項目を5つに限定する。\n価格の理由、決裁者、過去のクレーム、次回約束など、再利用価値の高い項目に絞る。\n対象を絞ることで入力負担と効果のバランスを確認しやすくし、定着率を高める。\n全社一律の記録より、リスクと価値の高い顧客・項目にリソースを集中させる方が現実的である。\n営業プロセス改善、CRM導入時のスコープ定義\n重要顧客の定義が変動する場合、運用ルールを見直す必要がある。\nproposal",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:22.275169Z"
+    },
+    {
+      "id": "6aaa0cac-0b0c-57bf-9c19-25059a3171f3",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "knowledge_type": "operational_insight",
+      "title": "入力タイミングと端末環境の制約",
+      "situation": "商談後の記録入力を行う際の現場環境",
+      "problem": "見積もり作成などで忙しく、入力時間が取れない。スマートフォン利用の規約や認証方法の制約がある。",
+      "judgment": "移動中か訪問直後に入力する必要があるが、端末ルールと認証方法を確認する必要がある。",
+      "action": "音声メモなどの別手段を使う場合でも、正式記録になるまでの確認者（人間）を置く。",
+      "reasoning": "自動化や簡便な手段だけでは、重要項目の正確性が保証されないため、人間の確認プロセスが必須である。",
+      "outcome": null,
+      "lesson": "記録の定着には、業務フローに組み込むタイミングと、ITポリシー（端末・認証）との整合性が重要である。",
+      "applicable_situations": "モバイルCRMの導入、営業現場の業務効率化",
+      "limitations": "セキュリティポリシーが厳格な場合、モバイル入力が制限される可能性がある。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "discovery",
+      "search_text": "入力タイミングと端末環境の制約\n商談後の記録入力を行う際の現場環境\n見積もり作成などで忙しく、入力時間が取れない。スマートフォン利用の規約や認証方法の制約がある。\n移動中か訪問直後に入力する必要があるが、端末ルールと認証方法を確認する必要がある。\n音声メモなどの別手段を使う場合でも、正式記録になるまでの確認者（人間）を置く。\n自動化や簡便な手段だけでは、重要項目の正確性が保証されないため、人間の確認プロセスが必須である。\n記録の定着には、業務フローに組み込むタイミングと、ITポリシー（端末・認証）との整合性が重要である。\nモバイルCRMの導入、営業現場の業務効率化\nセキュリティポリシーが厳格な場合、モバイル入力が制限される可能性がある。\ndiscovery",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:22.275169Z"
+    },
+    {
+      "id": "5cf812e5-cce2-5e45-ba1f-3b0bacdd2185",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "knowledge_type": "next_action",
+      "title": "小規模な試行（パイロット）と多角的な評価指標",
+      "situation": "新しい記録プロセスの導入前",
+      "problem": "現場の納得感なく広げると、形骸化するリスクがある。",
+      "judgment": "重要顧客10社と営業3人で1ヶ月間試行し、多角的な評価を行う。",
+      "action": "営業本人、引き継ぎ役、営業事務の3者から評価を得る。評価指標は入力率だけでなく、情報発見時間、顧客への聞き直し件数、重複入力回数を設定する。",
+      "reasoning": "記録の目的は管理ではなく、次の商談を助けることであるため、利用者の視点からの効果測定が必要である。",
+      "outcome": null,
+      "lesson": "KPIはプロセス指標（入力率）だけでなく、アウトカム指標（時間短縮、再確認削減）を含めることで、現場の納得感を高める。",
+      "applicable_situations": "新システム導入、業務プロセス改善プロジェクト",
+      "limitations": "試行期間が短すぎると、季節変動や個別事象の影響を排除できない。",
+      "industry": null,
+      "product": null,
+      "sales_stage": "negotiation",
+      "search_text": "小規模な試行（パイロット）と多角的な評価指標\n新しい記録プロセスの導入前\n現場の納得感なく広げると、形骸化するリスクがある。\n重要顧客10社と営業3人で1ヶ月間試行し、多角的な評価を行う。\n営業本人、引き継ぎ役、営業事務の3者から評価を得る。評価指標は入力率だけでなく、情報発見時間、顧客への聞き直し件数、重複入力回数を設定する。\n記録の目的は管理ではなく、次の商談を助けることであるため、利用者の視点からの効果測定が必要である。\nKPIはプロセス指標（入力率）だけでなく、アウトカム指標（時間短縮、再確認削減）を含めることで、現場の納得感を高める。\n新システム導入、業務プロセス改善プロジェクト\n試行期間が短すぎると、季節変動や個別事象の影響を排除できない。\nnegotiation",
+      "embedding": null,
+      "embedding_model": null,
+      "created_at": "2026-08-26T04:22:22.275169Z"
+    }
+  ],
+  "knowledge_evidence": [
+    {
+      "id": "8bac4b85-8600-5902-97a4-4cd1a452be9a",
+      "knowledge_id": "5172be8d-cac5-59e2-813b-d63987d5088e",
+      "start_utterance_id": "c4dce66f-0714-5814-9a1d-ad7ecb22a307",
+      "end_utterance_id": "2f6fb981-4d8b-5033-88f6-0da3a38167ec"
+    },
+    {
+      "id": "c1bdae45-591c-5363-9a5c-91cb0f973a9a",
+      "knowledge_id": "5172be8d-cac5-59e2-813b-d63987d5088e",
+      "start_utterance_id": "89cf4546-883d-5769-830b-530a4dac4867",
+      "end_utterance_id": "2a6a4034-52c4-5456-b094-039b28c16803"
+    },
+    {
+      "id": "2c68ff1e-6545-5e28-b7fd-ae59795da147",
+      "knowledge_id": "d1be19ae-ed45-5fba-9c36-99ed2df4cf32",
+      "start_utterance_id": "20d992ca-5d63-557e-b503-c7c6dd0418d8",
+      "end_utterance_id": "4016f880-a47b-5b94-84b0-55e084a5e85c"
+    },
+    {
+      "id": "09af4e3d-3098-5c48-90d0-03ad21ebd99e",
+      "knowledge_id": "0b07d7c0-3cee-5da0-83fa-be21ff93f3c0",
+      "start_utterance_id": "fbdaa1ee-c070-56e4-8cb2-f1126827c18e",
+      "end_utterance_id": "42526df5-bcdc-5165-ac38-03dc79942b6d"
+    },
+    {
+      "id": "c6211b52-1205-5f14-be2b-57b75c2c2c14",
+      "knowledge_id": "6aaa0cac-0b0c-57bf-9c19-25059a3171f3",
+      "start_utterance_id": "1eaca733-b1d5-576e-bd38-fe1f9ea91ccf",
+      "end_utterance_id": "f32f9337-b7aa-5cf2-83d2-c7551d24b0d1"
+    },
+    {
+      "id": "8ccbf371-2f53-59c2-91ab-d2085e0bc0db",
+      "knowledge_id": "5cf812e5-cce2-5e45-ba1f-3b0bacdd2185",
+      "start_utterance_id": "bca05c5e-d1e0-53c0-b268-458106a47e20",
+      "end_utterance_id": "1f731919-3df8-5da0-bd01-ab32a9a313a3"
+    }
+  ],
+  "call_summaries": [
+    {
+      "id": "117b7aa2-57a1-54eb-b910-9ac4a9e427b1",
+      "data_source_id": "fb635764-4b96-5202-b4a9-5013c02bbbe4",
+      "summary": "営業担当者の異動に伴う引き継ぎ困難を背景に、商談記録の構造化と入力プロセスの改善について議論した。重要顧客への優先適用、入力項目の絞り込み、モバイル環境での入力タイミング、そして小規模なパイロットテストによる多角的な評価指標の設定に合意した。",
+      "customer_needs": [
+        "引き継ぎ時の情報欠如による顧客対応コストの削減",
+        "若手担当者の心理的負担の軽減",
+        "入力負担の少ない記録プロセス",
+        "信頼できる最終合意情報の明確化"
+      ],
+      "proposals": [
+        "記録を「事実」「解釈」「次の行動」に分類する構造化",
+        "対象顧客を売上上位とクレーム履歴のある顧客に絞る",
+        "入力項目を価格理由、決裁者、クレーム、次回約束など5つに限定する",
+        "重要顧客10社と営業3人で1ヶ月間のパイロットテスト実施",
+        "入力率に加え、情報発見時間や聞き直し件数などのアウトカム指標で評価する"
+      ],
+      "decisions": [
+        "記録の目的は管理ではなく、次の商談を助けることであるという認識の共有",
+        "自動化された要約でも、重要項目は営業本人が確認して確定する設計とする",
+        "現場の納得を確認してから広げる方針"
+      ],
+      "next_actions": [
+        "A社の引き継ぎを題材に、必要な情報を5項目以内で定義する",
+        "入力者と利用者を明確にする",
+        "連携コストと入力負担をデモで確認する",
+        "1ヶ月間のパイロットテストを開始する"
+      ]
+    }
+  ]
+}
