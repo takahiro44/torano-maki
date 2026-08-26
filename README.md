@@ -361,6 +361,7 @@ torano-maki/
 │   │   │   └── roleplay.py     #   ロープレ
 │   │   └── services/
 │   │       ├── transcription.py  # 音声認識（差し替え可能な単一の窓口）
+│   │       ├── audio_ingest.py   # 音声→発話セグメントの取り込み
 │   │       ├── extraction.py     # LLM構造化抽出
 │   │       ├── embedding.py      # ベクトル化
 │   │       ├── search.py         # 検索

@@ -5,11 +5,12 @@ from __future__ import annotations
 import json
 import logging
 import re
+from bisect import bisect_right
 from typing import Any
 from uuid import UUID
 
 import httpx
-from sqlalchemy import func, select
+from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
@@ -266,6 +267,42 @@ def knowledge_row_from_extracted(
     )
 
 
+class _SegmentLocator:
+    """抽出に使った原文が、既存のどの発話にあたるかを引く。
+
+    音声から取り込んだデータソースには、時刻つきの本物の発話が既に入っている。
+    そこへ抽出のたびに合成セグメントを足すと、同じ内容が二重に並び、
+    根拠を「何分何秒の発話か」まで辿れなくなる（CLAUDE.md 6章の出典要件）。
+
+    照合は文字オフセットで行う。文字起こし本文は発話を順に連結したものなので、
+    抽出に渡したチャンクは連結文字列の中にそのまま現れる。
+    **人が本文を修正した場合は見つからない。** その場合は呼び出し側が
+    従来どおり合成セグメントを作る（誤った発話に紐づけるよりは良い）。
+    """
+
+    def __init__(self, segments: list[UtteranceSegmentTable]) -> None:
+        self._segments = segments
+        self._starts: list[int] = []
+        position = 0
+        for segment in segments:
+            self._starts.append(position)
+            position += len(segment.content)
+        self._joined = "".join(segment.content for segment in segments)
+
+    def locate(self, excerpt: str) -> tuple[UtteranceSegmentTable, UtteranceSegmentTable] | None:
+        if not self._segments or not excerpt:
+            return None
+        begin = self._joined.find(excerpt)
+        if begin < 0:
+            return None
+        last = begin + len(excerpt) - 1
+        return self._segments[self._index_of(begin)], self._segments[self._index_of(last)]
+
+    def _index_of(self, offset: int) -> int:
+        index = bisect_right(self._starts, offset) - 1
+        return max(0, min(index, len(self._segments) - 1))
+
+
 def process_text_to_knowledge(
     text: str,
     db: Session,
@@ -289,12 +326,17 @@ def process_text_to_knowledge(
     pairs = extract_knowledge_with_sources(text)
     saved: list[KnowledgeUnitTable] = []
     excerpt_to_segment: dict[str, UtteranceSegmentTable] = {}
-    max_seq = db.execute(
-        select(func.max(UtteranceSegmentTable.sequence_no)).where(
-            UtteranceSegmentTable.data_source_id == data_source_id
+    existing_segments = list(
+        db.execute(
+            select(UtteranceSegmentTable)
+            .where(UtteranceSegmentTable.data_source_id == data_source_id)
+            .order_by(UtteranceSegmentTable.sequence_no.asc())
         )
-    ).scalar()
-    next_seq = int(max_seq or 0) + 1
+        .scalars()
+        .all()
+    )
+    locator = _SegmentLocator(existing_segments)
+    next_seq = (existing_segments[-1].sequence_no + 1) if existing_segments else 1
 
     for item, excerpt in pairs:
         if not item.title.strip():
@@ -307,26 +349,31 @@ def process_text_to_knowledge(
         db.add(row)
         db.flush()
 
-        segment = excerpt_to_segment.get(excerpt)
-        if segment is None:
-            segment = UtteranceSegmentTable(
-                data_source_id=data_source_id,
-                sequence_no=next_seq,
-                speaker="source",
-                start_sec=0.0,
-                end_sec=0.01,
-                content=excerpt,
-            )
-            next_seq += 1
-            db.add(segment)
-            db.flush()
-            excerpt_to_segment[excerpt] = segment
+        # 既存の発話に対応づけられるならそちらを使う（音声から取り込んだ場合）。
+        # 対応づかない場合だけ、原文を保持するための合成セグメントを作る
+        span = locator.locate(excerpt)
+        if span is None:
+            segment = excerpt_to_segment.get(excerpt)
+            if segment is None:
+                segment = UtteranceSegmentTable(
+                    data_source_id=data_source_id,
+                    sequence_no=next_seq,
+                    speaker="source",
+                    start_sec=0.0,
+                    end_sec=0.01,
+                    content=excerpt,
+                )
+                next_seq += 1
+                db.add(segment)
+                db.flush()
+                excerpt_to_segment[excerpt] = segment
+            span = (segment, segment)
 
         db.add(
             KnowledgeEvidenceTable(
                 knowledge_id=row.id,
-                start_utterance_id=segment.id,
-                end_utterance_id=segment.id,
+                start_utterance_id=span[0].id,
+                end_utterance_id=span[1].id,
             )
         )
         saved.append(row)

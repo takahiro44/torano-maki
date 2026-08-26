@@ -6,6 +6,7 @@
  */
 
 import type {
+  AudioTranscribeResponse,
   ChatMessage,
   ChatResponse,
   ConfigHealthResponse,
@@ -33,23 +34,26 @@ export class ApiError extends Error {
   }
 }
 
+/** FastAPI の detail をそのまま例外に載せる。原因を追いやすいため */
+async function throwIfNotOk(res: Response, fallback: string): Promise<void> {
+  if (res.ok) return;
+  let detail = fallback;
+  try {
+    const body = await res.json();
+    if (typeof body?.detail === "string") detail = body.detail;
+    else if (Array.isArray(body?.detail)) detail = JSON.stringify(body.detail);
+  } catch {
+    // JSONでないエラー応答は無視して既定のメッセージを使う
+  }
+  throw new ApiError(detail, res.status);
+}
+
 async function request<T>(path: string, init?: RequestInit): Promise<T> {
   const res = await fetch(`${API_BASE_URL}${path}`, {
     ...init,
     headers: { "Content-Type": "application/json", ...init?.headers },
   });
-  if (!res.ok) {
-    // FastAPI は detail に理由を入れる。そのまま出した方が原因を追いやすい
-    let detail = `${init?.method ?? "GET"} ${path} failed`;
-    try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") detail = body.detail;
-      else if (Array.isArray(body?.detail)) detail = JSON.stringify(body.detail);
-    } catch {
-      // JSONでないエラー応答は無視して既定のメッセージを使う
-    }
-    throw new ApiError(detail, res.status);
-  }
+  await throwIfNotOk(res, `${init?.method ?? "GET"} ${path} failed`);
   if (res.status === 204) return undefined as T;
   return (await res.json()) as T;
 }
@@ -64,12 +68,42 @@ export type IngestTextResponse = {
   notes: string[];
 };
 
-export function ingestText(rawText: string) {
+/**
+ * 自由テキストを抽出して draft で保存する。
+ *
+ * dataSourceId を渡すと、そのデータソース（音声など）に紐づく。
+ * 渡さなければ source_type='manual' のデータソースが新しく作られる。
+ */
+export function ingestText(rawText: string, dataSourceId?: string) {
   return request<IngestTextResponse>("/ingest/text", {
     method: "POST",
-    body: JSON.stringify({ raw_text: rawText }),
+    body: JSON.stringify({ raw_text: rawText, data_source_id: dataSourceId ?? null }),
     signal: AbortSignal.timeout(720_000),
   });
+}
+
+// --- 音声の取り込み ---
+
+/**
+ * 音声ファイルを文字起こしする。**同期で待つ。**
+ *
+ * DGX上のGPUで実時間の約17倍速（8分50秒の音声で31秒）。
+ * ジョブ管理を足すコストに見合わないため待つ設計にしている。
+ *
+ * **Content-Type を自分で付けないこと。** FormData を渡したときに
+ * ブラウザが multipart の boundary 付きで設定するため、
+ * 手で書くと boundary が欠けてサーバ側でパースに失敗する。
+ */
+export async function transcribeAudio(file: File, signal?: AbortSignal) {
+  const form = new FormData();
+  form.append("file", file);
+  const res = await fetch(`${API_BASE_URL}/ingest/audio/transcribe`, {
+    method: "POST",
+    body: form,
+    signal: signal ?? AbortSignal.timeout(1_800_000),
+  });
+  await throwIfNotOk(res, "POST /ingest/audio/transcribe failed");
+  return (await res.json()) as AudioTranscribeResponse;
 }
 
 export function listKnowledge(

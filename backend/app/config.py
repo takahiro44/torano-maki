@@ -81,8 +81,10 @@ class Settings(BaseSettings):
     base_url: str = ""
     model_name: str = ""
 
-    # 音声認識サーバ（DGX Spark 上の faster-whisper）。
-    # STT_BASE_URL は OpenAI 互換の /v1/audio/transcriptions まで含める。
+    # 音声認識サーバ（DGX Spark 上の faster-whisper / OpenAI互換）。
+    # STT_BASE_URL は /v1 まででも /v1/audio/transcriptions まででも動く
+    # （transcription.py が吸収する）。
+    # 空なら音声の投入だけが使えなくなり、他の機能は動く。
     stt_base_url: str = ""
     stt_model: str = "medium"
 

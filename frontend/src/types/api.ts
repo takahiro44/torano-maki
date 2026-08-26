@@ -110,6 +110,31 @@ export type ConfigHealthResponse = {
   stt_model: string | null;
 };
 
+// --- 音声の取り込み ---
+
+export type TranscriptSegment = {
+  sequence_no: number;
+  start_sec: number;
+  end_sec: number;
+  text: string;
+};
+
+/**
+ * 文字起こしの結果。**この時点ではナレッジ化されていない。**
+ *
+ * 文字起こしの誤り（特に欠落と幻覚）は後段のLLMでは直せないため、
+ * 人が確認・修正してから抽出に回す。data_source_id は既に採番されており、
+ * ナレッジ化のときに渡すと出典として紐づく。
+ */
+export type AudioTranscribeResponse = {
+  data_source_id: string;
+  file_name: string;
+  text: string;
+  language: string | null;
+  duration_sec: number;
+  segments: TranscriptSegment[];
+};
+
 // --- AIチャット ---
 //
 // バックエンドの models/chat.py と対応させる。形の正は OpenAPI スキーマ
