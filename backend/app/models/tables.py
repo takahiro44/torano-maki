@@ -324,5 +324,30 @@ class RoleplayFeedbackTable(Base):
     session: Mapped[RoleplaySessionTable] = relationship(back_populates="feedback")
 
 
+class ChatReviewTable(Base):
+    __tablename__ = "chat_reviews"
+
+    __table_args__ = (
+        CheckConstraint("status IN ('pending', 'answered')", name="ck_chat_reviews_status"),
+    )
+
+    id: Mapped[UUID] = mapped_column(
+        PgUUID(as_uuid=True), primary_key=True, server_default=func.gen_random_uuid()
+    )
+    chat_history: Mapped[list[dict]] = mapped_column(JSONB, nullable=False)
+    summary: Mapped[str] = mapped_column(Text, nullable=False)
+    understood_points: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    knowledge_gaps: Mapped[list[str]] = mapped_column(JSONB, nullable=False, server_default="[]")
+    status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="pending")
+    supervisor_response: Mapped[str | None] = mapped_column(Text)
+    answered_data_source_id: Mapped[UUID | None] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("data_sources.id")
+    )
+    created_at: Mapped[datetime] = mapped_column(
+        DateTime(timezone=True), nullable=False, server_default=func.now()
+    )
+    answered_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True))
+
+
 # 既存の検索・CRUD が KnowledgeTable 名を参照していたため。
 KnowledgeTable = KnowledgeUnitTable
