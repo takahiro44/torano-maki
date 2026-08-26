@@ -52,8 +52,19 @@ export type Knowledge = {
   updated_at: string;
 };
 
+/**
+ * ハイブリッド検索の1件。
+ *
+ * **`score` を画面に出さないこと。** RRF スコアで 0.016 のような小さな値になり、
+ * 差も僅かで、類似度ではない（順位を決めるための内部値）。
+ * 人に見せるなら `semantic_score`（コサイン類似度）か順位そのものを使う。
+ */
 export type KnowledgeSearchResult = Knowledge & {
   score: number;
+  /** コサイン類似度。ベクトル検索で拾えなかった場合は null */
+  semantic_score: number | null;
+  /** pg_trgm の語の一致度。語が一致しなければ null */
+  lexical_score: number | null;
 };
 
 export type Utterance = {

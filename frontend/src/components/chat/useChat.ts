@@ -26,6 +26,17 @@ export type AgentStep = {
   /** null は実行中 */
   ok: boolean | null;
   errorCode: string | null;
+  /** `tool_call` に載っていた引数。何を条件に探したかを調査ビューで見せる */
+  args: Record<string, unknown>;
+  /**
+   * この実行で新しく現れた出典のID。
+   *
+   * `citations` はどのToolの結果か書かずに全件で届く。ただしTool実行の
+   * 直後に流れるため、「前回から増えた分は直前のToolが見つけたもの」と
+   * 対応づけられる。この対応が無いと、調査ビューでどの検索が何を
+   * 掘り当てたのかを線で結べない。
+   */
+  foundIds: string[];
 };
 
 export type TurnStatus = "streaming" | "done" | "error" | "aborted";
@@ -53,6 +64,17 @@ export type Turn = {
  * 長さそのものが問題になっているわけではない。
  */
 const MAX_HISTORY_TURNS = 9;
+
+/**
+ * 1回の検索でAgentに渡すナレッジの件数。
+ *
+ * **増やさない。** 12件にして実測したところ、初回応答が6.4秒→13.1秒、
+ * 全体が20.1秒→37.1秒になった。1件がCBRの全項目を含むため、
+ * 件数がそのままプロンプトの長さになる。
+ * 「もっと探している様子を見せたい」は、AgentWorkspace が同じ検索を
+ * 別に投げて候補を描くことで満たしている（LLMのプロンプトは増えない）。
+ */
+const SEARCH_TOP_K = 5;
 
 function usableTurns(turns: Turn[]): Turn[] {
   return turns.filter((t) => t.status === "done" && t.answer.trim()).slice(-MAX_HISTORY_TURNS);
@@ -145,6 +167,8 @@ export function useChat() {
                       summary: null,
                       ok: null,
                       errorCode: null,
+                      args: event.arguments,
+                      foundIds: [],
                     },
                   ],
                 }));
@@ -162,8 +186,25 @@ export function useChat() {
                 break;
 
               case "citations":
-                // 差分ではなく毎回すべて届く契約なので置き換える
-                patchTurn(id, (turn) => ({ ...turn, citations: event.citations }));
+                // 差分ではなく毎回すべて届く契約なので置き換える。
+                // 増えた分は直前のToolの成果として記録する（AgentStep.foundIds）
+                patchTurn(id, (turn) => {
+                  const known = new Set(turn.citations.map((c) => c.knowledge_id));
+                  const fresh = event.citations
+                    .map((c) => c.knowledge_id)
+                    .filter((knowledgeId) => !known.has(knowledgeId));
+                  const last = turn.steps.length - 1;
+                  return {
+                    ...turn,
+                    citations: event.citations,
+                    steps:
+                      fresh.length === 0 || last < 0
+                        ? turn.steps
+                        : turn.steps.map((s, i) =>
+                            i === last ? { ...s, foundIds: [...s.foundIds, ...fresh] } : s,
+                          ),
+                  };
+                });
                 break;
 
               case "text":
@@ -199,7 +240,7 @@ export function useChat() {
                 break;
             }
           },
-          { signal: controller.signal },
+          { topK: SEARCH_TOP_K, signal: controller.signal },
         );
 
         // `done` も `error` も来ないままストリームが閉じた場合。
