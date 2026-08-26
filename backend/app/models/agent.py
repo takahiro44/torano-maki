@@ -57,13 +57,10 @@ class GetUtteranceContextToolArgs(BaseModel):
 
     model_config = ConfigDict(extra="forbid")
 
-    start_utterance_id: UUID = Field(
-        description="単一発言の場合は対象ID、範囲の場合は開始発言ID"
-    )
+    start_utterance_id: UUID = Field(description="単一発言の場合は対象ID、範囲の場合は開始発言ID")
     end_utterance_id: UUID | None = Field(
         default=None,
         description="範囲の終了発言ID。省略時は開始発言だけを対象にする",
     )
     before: int = Field(default=2, ge=0, le=10, description="開始発言より前に追加する発言数")
     after: int = Field(default=2, ge=0, le=10, description="終了発言より後に追加する発言数")
-
