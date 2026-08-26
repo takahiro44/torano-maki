@@ -55,6 +55,9 @@ class ConfigHealthResponse(BaseModel):
     llm_configured: bool
     base_url: str | None
     model_name: str | None
+    stt_configured: bool
+    stt_base_url: str | None
+    stt_model: str | None
 
 
 @router.get("", response_model=HealthResponse)
@@ -115,4 +118,7 @@ def health_config(settings: AppSettings) -> ConfigHealthResponse:
         llm_configured=settings.is_llm_configured,
         base_url=settings.base_url or None,
         model_name=settings.model_name or None,
+        stt_configured=settings.is_stt_configured,
+        stt_base_url=settings.stt_base_url or None,
+        stt_model=settings.stt_model or None,
     )

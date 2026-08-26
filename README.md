@@ -41,7 +41,7 @@
 | 層 | 技術 | 選定理由 |
 |---|---|---|
 | LLM推論 | DGX Spark 上の vLLM（OpenAI互換API） | GPUは貸し出しで、こちらでサーバを選べない。詳細は `docs/decisions.md` |
-| 音声認識 | `faster-whisper` / `medium` / CPU `int8` | 実測でCER・欠落・業務用語を比較して選定。CPUで実用速度が出るため、ARM64+CUDAの検証を待たなくてよい |
+| 音声認識 | DGX Spark 上の `faster-whisper`（`medium` / CUDA `float16`） | OpenAI互換APIをLAN共有し、各PCから `.env` の `STT_BASE_URL` で利用する |
 | 埋め込み | sentence-transformers | 日本語対応の埋め込みモデルをローカル実行 |
 | バックエンド | FastAPI / Pydantic | スキーマ定義がLLM・DB・APIの型を兼ねる |
 | フロントエンド | Vite / React / TypeScript | SPAに徹し、バックエンドと責務を分離 |
@@ -80,6 +80,7 @@ x86_64向けのビルド済みパッケージが利用できない場合があ�
 | FastAPI | ホスト（`uv run`） | `--reload` の即時反映を優先。ビルド待ちを発生させない |
 | フロントエンド | ホスト（`npm run dev`） | Vite の HMR をそのまま使う |
 | vLLM | DGX Spark（貸し出し機） | 構成はGPU提供側の管理。`.env` の `BASE_URL` から参照する |
+| faster-whisper | DGX Spark（貸し出し機） | `.env` の `STT_BASE_URL` からOpenAI互換APIを参照する |
 
 ### 0. 事前準備
 
@@ -146,6 +147,10 @@ cp .env.example .env      # Windows: copy .env.example .env
 
 `.env` は Git 管理外。**コミットしないこと。**
 
+DGXを利用するPCでは、LLM用の `BASE_URL` / `MODEL_NAME` に加えて
+音声認識用の `STT_BASE_URL` / `STT_MODEL` を設定する。接続先の例と確認方法は
+[`.env.example`](.env.example) を参照すること。
+
 ### 2. データベースを起動
 
 ```bash
@@ -199,6 +204,10 @@ curl http://127.0.0.1:8000/health
 curl http://127.0.0.1:8000/health/db
 curl http://127.0.0.1:8000/health/config
 ```
+
+`/health/config` の `stt_configured` が `true`、`stt_model` が `medium` なら
+バックエンドの音声認識設定は読み込まれている。DGX自体の稼働状態は
+`.env.example` に記載した `/ready` で確認する。
 
 ### サンプルデータを入れる
 

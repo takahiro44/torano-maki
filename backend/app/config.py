@@ -81,6 +81,11 @@ class Settings(BaseSettings):
     base_url: str = ""
     model_name: str = ""
 
+    # 音声認識サーバ（DGX Spark 上の faster-whisper）。
+    # STT_BASE_URL は OpenAI 互換の /v1/audio/transcriptions まで含める。
+    stt_base_url: str = ""
+    stt_model: str = "medium"
+
     # 埋め込みは確定済み。DBの vector(N) と embedding_dim は必ず一致させること。
     embedding_model: str = DEFAULT_EMBEDDING_MODEL
     embedding_dim: int = DEFAULT_EMBEDDING_DIM
@@ -112,6 +117,10 @@ class Settings(BaseSettings):
     @property
     def is_llm_configured(self) -> bool:
         return bool(self.base_url) and bool(self.model_name)
+
+    @property
+    def is_stt_configured(self) -> bool:
+        return bool(self.stt_base_url) and bool(self.stt_model)
 
     @property
     def is_embedding_configured(self) -> bool:

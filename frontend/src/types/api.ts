@@ -105,6 +105,9 @@ export type ConfigHealthResponse = {
   llm_configured: boolean;
   base_url: string | null;
   model_name: string | null;
+  stt_configured: boolean;
+  stt_base_url: string | null;
+  stt_model: string | null;
 };
 
 // --- AIチャット ---
