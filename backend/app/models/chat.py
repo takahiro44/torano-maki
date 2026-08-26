@@ -14,6 +14,7 @@ FastAPI が OpenAPI スキーマを生成するので、フロント側の型
 from __future__ import annotations
 
 from enum import StrEnum
+from typing import Annotated, Any, Literal
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict, Field
@@ -120,3 +121,122 @@ class ChatResponse(BaseModel):
     )
     tool_trace: list[ToolTraceStep] = Field(default_factory=list)
     usage: ChatUsage
+
+
+# --- ストリーミング（POST /chat/stream）---
+#
+# 非ストリーミングの ChatResponse とは**別の契約**として足す。
+# 既存の定義には手を入れない（CLAUDE.md 1.1 の共有ファイルのため）。
+#
+# 1イベント = SSE の `data: <JSON>\n\n` 1件。
+# `event:` フィールドを使わず JSON の `type` で判別する形にしているのは、
+# フロントが型ごとに addEventListener を生やさずに済むようにするため。
+
+
+class ChatStreamErrorCode(StrEnum):
+    """`error` イベントの分類。
+
+    ストリームは接続確立時点で 200 が返るため、そのあとの失敗を
+    ステータスコードで表現できない。画面が「設定漏れ」「DGXが落ちている」
+    「想定外」を出し分けられるように、コードとして流す。
+    """
+
+    LLM_NOT_CONFIGURED = "llm_not_configured"
+    LLM_UNREACHABLE = "llm_unreachable"
+    INTERNAL = "internal"
+
+
+class ChatStreamToolCallEvent(BaseModel):
+    """Tool を実行する直前に出す。
+
+    検索に数秒かかる間、画面を無言にしないための材料。
+    `label` を**サーバが日本語で決める**のは、Tool が増えたときに
+    フロントの対応表を直さずに済ませるため。
+    """
+
+    type: Literal["tool_call"] = "tool_call"
+    step: int = Field(description="1から始まる実行順。tool_result と対応する")
+    tool: str
+    label: str = Field(description="画面にそのまま出せる日本語。例『ナレッジを検索しています』")
+    arguments: dict[str, Any] = Field(
+        default_factory=dict, description="実際に渡した引数。壊れていた場合は空"
+    )
+
+
+class ChatStreamToolResultEvent(BaseModel):
+    """Tool の実行後に出す。中身は既存 ToolTraceStep と同じ。"""
+
+    type: Literal["tool_result"] = "tool_result"
+    step: int
+    tool: str
+    ok: bool
+    summary: str = Field(description="人が読める1行。ToolTraceStep.summary と同じ文字列")
+    error_code: str | None = None
+
+
+class ChatStreamCitationsEvent(BaseModel):
+    """出典が増えたときに出す。
+
+    **差分ではなく毎回すべてを送る。** フロントは置き換えるだけでよく、
+    途中のイベントを1つ取りこぼしても表示が壊れない。
+    """
+
+    type: Literal["citations"] = "citations"
+    citations: list[Citation] = Field(default_factory=list)
+
+
+class ChatStreamTextEvent(BaseModel):
+    """最終回答のトークン。
+
+    **Tool 呼び出し中のラウンドの出力は流さない。**
+    体感待ち時間を縮めるのがこのイベントの唯一の目的で、
+    途中の思考を見せると読み手が回答と取り違える。
+    """
+
+    type: Literal["text"] = "text"
+    delta: str
+
+
+class ChatStreamAnswerResetEvent(BaseModel):
+    """ここまで流した `text` を破棄させる。
+
+    **最終回答のラウンドかどうかは、投げてみるまで分からない。**
+    Agent は「根拠の発言を確認します」のような前置きを書いてから
+    `tool_calls` を出すことがある。前置きを流し終えるまで Tool 呼び出しは
+    判明しないため、取り消す手段が無いと前置きが回答として確定してしまう
+    （実際、モデルが要求した Tool を捨てて前置きだけを回答にする不具合が出た）。
+
+    取り消せるようにしておけば、Agent の判断を曲げずに済む。
+    """
+
+    type: Literal["answer_reset"] = "answer_reset"
+    reason: Literal["tool_call"] = Field(
+        default="tool_call", description="破棄の理由。今は Tool 呼び出しの検出のみ"
+    )
+
+
+class ChatStreamDoneEvent(BaseModel):
+    """正常終了。途中経過と食い違ったらこちらが確定値。"""
+
+    type: Literal["done"] = "done"
+    usage: ChatUsage
+
+
+class ChatStreamErrorEvent(BaseModel):
+    """異常終了。これ以降イベントは来ない。"""
+
+    type: Literal["error"] = "error"
+    code: ChatStreamErrorCode
+    message: str
+
+
+ChatStreamEvent = Annotated[
+    ChatStreamToolCallEvent
+    | ChatStreamToolResultEvent
+    | ChatStreamCitationsEvent
+    | ChatStreamTextEvent
+    | ChatStreamAnswerResetEvent
+    | ChatStreamDoneEvent
+    | ChatStreamErrorEvent,
+    Field(discriminator="type"),
+]
