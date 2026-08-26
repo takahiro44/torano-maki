@@ -3,6 +3,10 @@
 一次検索は ``search_knowledge`` だけが行う。残りの Tool は、検索済み
 Knowledge の ``knowledge_id`` / ``data_source_id`` と外部キーを使って
 追加文脈を取得し、Semantic Search は行わない。
+
+**根拠の取得と整合性チェックは ``services/knowledge_context.py`` にある。**
+同じ処理をロープレでも使うため、ここには「Tool の引数を検証して
+結果をJSONにする」ことだけを残している（計画書5章）。
 """
 
 from __future__ import annotations
@@ -10,10 +14,8 @@ from __future__ import annotations
 import json
 from collections.abc import Callable
 from typing import Any
-from uuid import UUID
 
 from pydantic import BaseModel, ValidationError
-from sqlalchemy import select
 from sqlalchemy.orm import Session
 
 from app.models.agent import (
@@ -22,13 +24,14 @@ from app.models.agent import (
     GetUtteranceContextToolArgs,
     SearchKnowledgeToolArgs,
 )
-from app.models.knowledge import KnowledgeStatus
-from app.models.tables import (
-    CallSummaryTable,
-    DataSourceTable,
-    KnowledgeEvidenceTable,
-    KnowledgeUnitTable,
-    UtteranceSegmentTable,
+from app.models.tables import DataSourceTable
+from app.services.knowledge_context import (
+    ContextUtterance,
+    KnowledgeContextError,
+    get_call_summary,
+    get_confirmed_knowledge,
+    get_evidence_spans,
+    get_utterance_window,
 )
 
 SEARCH_KNOWLEDGE = "search_knowledge"
@@ -85,7 +88,7 @@ AGENT_TOOL_DEFINITIONS: list[dict[str, Any]] = [
 ]
 
 
-def _utterance_json(row: UtteranceSegmentTable, *, is_evidence: bool = True) -> dict[str, Any]:
+def _utterance_json(row: ContextUtterance) -> dict[str, Any]:
     return {
         "id": str(row.id),
         "data_source_id": str(row.data_source_id),
@@ -94,21 +97,8 @@ def _utterance_json(row: UtteranceSegmentTable, *, is_evidence: bool = True) -> 
         "start_sec": row.start_sec,
         "end_sec": row.end_sec,
         "content": row.content,
-        "is_evidence": is_evidence,
+        "is_evidence": row.is_evidence,
     }
-
-
-def _get_searchable_knowledge(db: Session, knowledge_id: UUID) -> KnowledgeUnitTable:
-    row = db.execute(
-        select(KnowledgeUnitTable).where(
-            KnowledgeUnitTable.id == knowledge_id,
-            KnowledgeUnitTable.deleted_at.is_(None),
-            KnowledgeUnitTable.status == KnowledgeStatus.CONFIRMED,
-        )
-    ).scalar_one_or_none()
-    if row is None:
-        raise AgentToolError("knowledge_not_found", "確認済みKnowledgeが見つかりません")
-    return row
 
 
 def _search_knowledge(db: Session, args: SearchKnowledgeToolArgs) -> dict[str, Any]:
@@ -129,56 +119,11 @@ def _search_knowledge(db: Session, args: SearchKnowledgeToolArgs) -> dict[str, A
     }
 
 
-def _get_knowledge_evidence(
-    db: Session, args: GetKnowledgeEvidenceToolArgs
-) -> dict[str, Any]:
-    knowledge = _get_searchable_knowledge(db, args.knowledge_id)
-    evidence_rows = list(
-        db.execute(
-            select(KnowledgeEvidenceTable)
-            .where(KnowledgeEvidenceTable.knowledge_id == knowledge.id)
-            .order_by(KnowledgeEvidenceTable.created_at, KnowledgeEvidenceTable.id)
-        )
-        .scalars()
-        .all()
-    )
-
-    spans: list[dict[str, Any]] = []
-    for evidence in evidence_rows:
-        start = db.get(UtteranceSegmentTable, evidence.start_utterance_id)
-        end = db.get(UtteranceSegmentTable, evidence.end_utterance_id)
-        if start is None or end is None:
-            raise AgentToolError("invalid_evidence", "Evidenceが存在しない発言を参照しています")
-        if start.data_source_id != end.data_source_id:
-            raise AgentToolError("invalid_evidence", "Evidenceの開始・終了発言の出典が異なります")
-        if knowledge.data_source_id != start.data_source_id:
-            raise AgentToolError("invalid_evidence", "KnowledgeとEvidenceの出典が異なります")
-        if start.sequence_no > end.sequence_no:
-            raise AgentToolError("invalid_evidence", "Evidenceの開始発言が終了発言より後です")
-
-        utterances = list(
-            db.execute(
-                select(UtteranceSegmentTable)
-                .where(
-                    UtteranceSegmentTable.data_source_id == start.data_source_id,
-                    UtteranceSegmentTable.sequence_no >= start.sequence_no,
-                    UtteranceSegmentTable.sequence_no <= end.sequence_no,
-                )
-                .order_by(UtteranceSegmentTable.sequence_no)
-            )
-            .scalars()
-            .all()
-        )
-        spans.append(
-            {
-                "evidence_id": str(evidence.id),
-                "start_utterance_id": str(start.id),
-                "end_utterance_id": str(end.id),
-                "start_sequence_no": start.sequence_no,
-                "end_sequence_no": end.sequence_no,
-                "utterances": [_utterance_json(row) for row in utterances],
-            }
-        )
+def _get_knowledge_evidence(db: Session, args: GetKnowledgeEvidenceToolArgs) -> dict[str, Any]:
+    knowledge = get_confirmed_knowledge(db, args.knowledge_id)
+    # 前後文脈を足さないのは、Agent が根拠の境界を見誤らないようにするため。
+    # 周辺が要る場合は Agent が get_utterance_context を選ぶ。
+    spans = get_evidence_spans(db, knowledge)
 
     return {
         "knowledge_id": str(knowledge.id),
@@ -186,7 +131,17 @@ def _get_knowledge_evidence(
             str(knowledge.data_source_id) if knowledge.data_source_id is not None else None
         ),
         "count": len(spans),
-        "spans": spans,
+        "spans": [
+            {
+                "evidence_id": str(span.evidence_id),
+                "start_utterance_id": str(span.start_utterance_id),
+                "end_utterance_id": str(span.end_utterance_id),
+                "start_sequence_no": span.start_sequence_no,
+                "end_sequence_no": span.end_sequence_no,
+                "utterances": [_utterance_json(row) for row in span.utterances],
+            }
+            for span in spans
+        ],
     }
 
 
@@ -195,9 +150,7 @@ def _get_call_summary(db: Session, args: GetCallSummaryToolArgs) -> dict[str, An
     if source is None:
         raise AgentToolError("data_source_not_found", "DataSourceが見つかりません")
 
-    row = db.execute(
-        select(CallSummaryTable).where(CallSummaryTable.data_source_id == args.data_source_id)
-    ).scalar_one_or_none()
+    row = get_call_summary(db, args.data_source_id)
     if row is None:
         return {
             "data_source_id": str(args.data_source_id),
@@ -219,51 +172,21 @@ def _get_call_summary(db: Session, args: GetCallSummaryToolArgs) -> dict[str, An
     }
 
 
-def _get_utterance_context(
-    db: Session, args: GetUtteranceContextToolArgs
-) -> dict[str, Any]:
-    start = db.get(UtteranceSegmentTable, args.start_utterance_id)
-    if start is None:
-        raise AgentToolError("utterance_not_found", "開始発言が見つかりません")
-
-    end_id = args.end_utterance_id or args.start_utterance_id
-    end = db.get(UtteranceSegmentTable, end_id)
-    if end is None:
-        raise AgentToolError("utterance_not_found", "終了発言が見つかりません")
-    if start.data_source_id != end.data_source_id:
-        raise AgentToolError("invalid_utterance_range", "開始・終了発言の出典が異なります")
-    if start.sequence_no > end.sequence_no:
-        raise AgentToolError("invalid_utterance_range", "開始発言が終了発言より後です")
-
-    context_start = max(1, start.sequence_no - args.before)
-    context_end = end.sequence_no + args.after
-    rows = list(
-        db.execute(
-            select(UtteranceSegmentTable)
-            .where(
-                UtteranceSegmentTable.data_source_id == start.data_source_id,
-                UtteranceSegmentTable.sequence_no >= context_start,
-                UtteranceSegmentTable.sequence_no <= context_end,
-            )
-            .order_by(UtteranceSegmentTable.sequence_no)
-        )
-        .scalars()
-        .all()
+def _get_utterance_context(db: Session, args: GetUtteranceContextToolArgs) -> dict[str, Any]:
+    window = get_utterance_window(
+        db,
+        args.start_utterance_id,
+        args.end_utterance_id,
+        before=args.before,
+        after=args.after,
     )
-
     return {
-        "data_source_id": str(start.data_source_id),
-        "evidence_start_sequence_no": start.sequence_no,
-        "evidence_end_sequence_no": end.sequence_no,
-        "context_start_sequence_no": context_start,
-        "context_end_sequence_no": context_end,
-        "utterances": [
-            _utterance_json(
-                row,
-                is_evidence=start.sequence_no <= row.sequence_no <= end.sequence_no,
-            )
-            for row in rows
-        ],
+        "data_source_id": str(window.data_source_id),
+        "evidence_start_sequence_no": window.evidence_start_sequence_no,
+        "evidence_end_sequence_no": window.evidence_end_sequence_no,
+        "context_start_sequence_no": window.context_start_sequence_no,
+        "context_end_sequence_no": window.context_end_sequence_no,
+        "utterances": [_utterance_json(row) for row in window.utterances],
     }
 
 
@@ -321,7 +244,7 @@ def execute_agent_tool(
 
     try:
         result = executor(db, parsed)
-    except AgentToolError as exc:
+    except (AgentToolError, KnowledgeContextError) as exc:
         return {
             "ok": False,
             "tool": tool_name,

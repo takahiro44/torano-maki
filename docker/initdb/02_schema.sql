@@ -10,12 +10,20 @@
 -- ============================================================================
 -- 1. DATA_SOURCES
 -- ============================================================================
+-- origin と source_type を1列に混ぜないこと。
+-- source_type は「どの媒体から入ったか」、origin は「実商談か合成か」を表す。
+-- 混ぜると、合成音声を取り込んだ瞬間にどちらの意味も表せなくなる。
+-- 合成データを実商談と誤認させないため、画面とDBの両方で区別できる状態を保つ。
 CREATE TABLE data_sources (
     id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
     source_type   VARCHAR(20) NOT NULL
                   CHECK (source_type IN ('audio', 'document', 'manual', 'roleplay', 'interview')),
     file_name     VARCHAR(255),
     occurred_at   TIMESTAMPTZ,
+    origin        VARCHAR(20) NOT NULL DEFAULT 'real'
+                  CHECK (origin IN ('real', 'synthetic')),
+    review_status VARCHAR(20) NOT NULL DEFAULT 'unreviewed'
+                  CHECK (review_status IN ('unreviewed', 'reviewed')),
     created_at    TIMESTAMPTZ NOT NULL DEFAULT now()
 );
 
@@ -158,7 +166,87 @@ CREATE TABLE call_summaries (
 );
 
 -- ============================================================================
--- 6. CHAT_REVIEWS
+-- 6. ROLEPLAY_SESSIONS
+-- ============================================================================
+-- 1回の練習＝1セッション。商談全体ではなく、値引き要求のような
+-- 判断が必要な一場面だけを扱う。
+--
+-- 認証を作らない方針（CLAUDE.md 3.1）のため社員IDを持たない。
+-- 匿名の練習履歴として扱う。
+CREATE TABLE roleplay_sessions (
+    id            UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    query         TEXT NOT NULL,
+    -- 生成時点のシナリオとrubricのスナップショット。
+    -- **Knowledge を後から編集しても、この練習の出題内容は変わらない。**
+    -- 参照で持つと、あとから根拠を直したときに
+    -- 「何を出題されたか」と「何で評価されたか」が食い違う。
+    scenario      JSONB NOT NULL,
+    status        VARCHAR(20) NOT NULL DEFAULT 'active'
+                  CHECK (status IN ('active', 'completed', 'abandoned')),
+    created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
+    completed_at  TIMESTAMPTZ
+);
+
+CREATE INDEX idx_roleplay_sessions_status
+    ON roleplay_sessions (status, created_at DESC);
+
+-- ============================================================================
+-- 7. ROLEPLAY_SESSION_KNOWLEDGE
+-- ============================================================================
+-- **画面に出す出典はこの表だけから組み立てる。**
+-- LLM が返した ID を信用すると、実在しないナレッジを出典として
+-- 表示してしまう（CLAUDE.md 6章）。
+CREATE TABLE roleplay_session_knowledge (
+    session_id    UUID NOT NULL REFERENCES roleplay_sessions(id) ON DELETE CASCADE,
+    knowledge_id  UUID NOT NULL REFERENCES knowledge_units(id),
+    rank          INT NOT NULL,
+    usage_type    VARCHAR(20) NOT NULL DEFAULT 'supporting'
+                  CHECK (usage_type IN ('primary', 'supporting')),
+    PRIMARY KEY (session_id, knowledge_id)
+);
+
+CREATE INDEX idx_roleplay_session_knowledge_knowledge
+    ON roleplay_session_knowledge (knowledge_id);
+
+-- ============================================================================
+-- 8. ROLEPLAY_TURNS
+-- ============================================================================
+-- 顧客役の最初の発言も1行として保存する。
+-- シナリオ側だけに持たせると、会話の並びを組み立てる処理が
+-- 「1件目だけ別扱い」になり、順番の取り違えを起こしやすい。
+CREATE TABLE roleplay_turns (
+    id           UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+    session_id   UUID NOT NULL REFERENCES roleplay_sessions(id) ON DELETE CASCADE,
+    sequence_no  INT NOT NULL,
+    role         VARCHAR(20) NOT NULL CHECK (role IN ('learner', 'customer')),
+    content      TEXT NOT NULL,
+    -- generated はAIが作った発言。人の回答（text / audio）と必ず区別する。
+    -- 混ざるとフィードバックが「本人が言っていないこと」を評価する。
+    input_mode   VARCHAR(20) NOT NULL CHECK (input_mode IN ('text', 'audio', 'generated')),
+    created_at   TIMESTAMPTZ NOT NULL DEFAULT now(),
+    UNIQUE (session_id, sequence_no)
+);
+
+CREATE INDEX idx_roleplay_turns_session
+    ON roleplay_turns (session_id, sequence_no);
+
+-- ============================================================================
+-- 9. ROLEPLAY_FEEDBACK
+-- ============================================================================
+-- 1セッション1件。session_id をそのまま主キーにして、
+-- 二重生成を DB 側で防ぐ（再送やダブルクリックで増えないこと）。
+CREATE TABLE roleplay_feedback (
+    session_id      UUID PRIMARY KEY REFERENCES roleplay_sessions(id) ON DELETE CASCADE,
+    rubric_result   JSONB NOT NULL DEFAULT '[]',
+    strengths       JSONB NOT NULL DEFAULT '[]',
+    improvements    JSONB NOT NULL DEFAULT '[]',
+    next_phrase     TEXT NOT NULL,
+    focus_next_try  TEXT NOT NULL,
+    created_at      TIMESTAMPTZ NOT NULL DEFAULT now()
+);
+
+-- ============================================================================
+-- 10. CHAT_REVIEWS
 -- ============================================================================
 -- AIチャットの会話ログを上司に確認してもらい、回答をナレッジ化するための記録。
 -- チャット自体はサーバに永続化しない設計（models/chat.py）のため、
