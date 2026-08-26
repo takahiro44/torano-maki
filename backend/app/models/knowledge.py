@@ -344,3 +344,28 @@ class KnowledgeEvidenceSpan(BaseModel):
 
 class GenerateSummaryRequest(BaseModel):
     data_source_id: UUID
+
+
+class TranscriptSegmentOut(BaseModel):
+    """文字起こしの1セグメント。画面で時刻付きの発話として並べる。"""
+
+    sequence_no: int
+    start_sec: float
+    end_sec: float
+    text: str
+
+
+class AudioTranscribeResponse(BaseModel):
+    """音声の文字起こし結果。
+
+    **この時点ではナレッジ化していない。** 文字起こしの誤りは後段のLLMでは
+    直せない（欠落・幻覚は誤りに見えない）ため、人が確認・修正してから
+    /ingest/text に渡す2段構えにしている。詳細は experiments/stt/README.md。
+    """
+
+    data_source_id: UUID
+    file_name: str
+    text: str
+    language: str | None = None
+    duration_sec: float
+    segments: list[TranscriptSegmentOut] = Field(default_factory=list)

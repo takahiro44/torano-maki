@@ -55,6 +55,10 @@ class ConfigHealthResponse(BaseModel):
     llm_configured: bool
     base_url: str | None
     model_name: str | None
+    # 音声認識サーバは他と独立して落ちうる。未設定なら「音声」タブだけが
+    # 使えなくなるので、どこが欠けているのかを画面から切り分けられるようにする
+    stt_configured: bool
+    stt_base_url: str | None
 
 
 @router.get("", response_model=HealthResponse)
@@ -115,4 +119,6 @@ def health_config(settings: AppSettings) -> ConfigHealthResponse:
         llm_configured=settings.is_llm_configured,
         base_url=settings.base_url or None,
         model_name=settings.model_name or None,
+        stt_configured=settings.is_stt_configured,
+        stt_base_url=settings.stt_base_url or None,
     )

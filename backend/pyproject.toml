@@ -19,6 +19,7 @@ dependencies = [
     # 詳細は docs/decisions.md を参照。
     # 6.0 で get_embedding_dimension に改名されたため 6.0 以上を要求する
     "sentence-transformers>=6.0",
+    "python-multipart>=0.0.32",
 ]
 
 [dependency-groups]

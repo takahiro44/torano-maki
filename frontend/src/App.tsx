@@ -9,17 +9,19 @@
 import { useEffect, useState } from "react";
 import { countKnowledge, getDbHealth } from "./api/client";
 import { AiChat } from "./components/AiChat";
+import { AudioIngest } from "./components/AudioIngest";
 import { KnowledgeInput } from "./components/KnowledgeInput";
 import { KnowledgeList } from "./components/KnowledgeList";
 import { KnowledgeSearch } from "./components/KnowledgeSearch";
 import type { KnowledgeCounts } from "./types/api";
 
-type Tab = "chat" | "search" | "input" | "list";
+type Tab = "chat" | "search" | "input" | "audio" | "list";
 
 const TABS: { key: Tab; label: string }[] = [
   { key: "chat", label: "AIに聞く" },
   { key: "search", label: "探す" },
   { key: "input", label: "登録" },
+  { key: "audio", label: "音声" },
   { key: "list", label: "一覧" },
 ];
 
@@ -86,6 +88,7 @@ export default function App() {
         {tab === "chat" && <AiChat />}
         {tab === "search" && <KnowledgeSearch />}
         {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
+        {tab === "audio" && <AudioIngest onChanged={() => setReloadKey((n) => n + 1)} />}
         {tab === "list" && (
           <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
         )}
