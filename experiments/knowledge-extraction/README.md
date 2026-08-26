@@ -76,6 +76,13 @@ uv run python scripts/load_extraction_json.py --replace  # 入れ直す
 引数なしで `output/meetings/` を丸ごと、**1トランザクションで**投入する。
 1件ずつ指定すると埋め込みモデル（2.2GB）の読み込みが件数分走るため、まとめて渡すこと。
 
+**`origin` は `synthetic` で入る。** この22件はすべて `tts-demo/scripts/*.json` の
+台本からTTSで合成した商談であり、実際の顧客との商談ではない。
+`data_sources.origin` の既定は `real` なので、指定しないと
+**合成データが実商談として並ぶ**（`docker/initdb/02_schema.sql` の
+「合成データを実商談と誤認させないため」を参照）。実データを入れる場合だけ
+`--origin real` を明示すること。
+
 > **`output/knowledge_extraction.json` は既定では読まない。**
 > これは2026-08-24の検証結果で、`output/meetings/01_order_entry.json` と**同じ商談**
 > （どちらも `tts-demo/scripts/01_order_entry.json` の台本から合成した音声）。

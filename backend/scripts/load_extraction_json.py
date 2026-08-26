@@ -42,6 +42,7 @@ from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
 from sqlalchemy import delete, select
+from sqlalchemy.exc import IntegrityError
 from sqlalchemy.orm import Session
 
 from app.config import get_settings
@@ -224,15 +225,28 @@ def delete_sources(db: Session, ids: list[UUID]) -> None:
     db.execute(delete(DataSourceTable).where(DataSourceTable.id.in_(ids)))
 
 
-def insert_result(db: Session, result: ExtractionResult, *, status: str) -> dict[str, int]:
+def insert_result(
+    db: Session,
+    result: ExtractionResult,
+    *,
+    status: str,
+    origin: str = "synthetic",
+) -> dict[str, int]:
     """5テーブルを外部キーの順に挿入する。commitは呼び出し側が行う。
 
     `search_text` はJSONの値をそのまま使わず `services/search_text.py` で
     作り直す。語彙検索（pg_trgm）は `search_text` を直接見るため、
     投入経路ごとに書式が違うと同じクエリでも当たり方が変わってしまう。
+
+    **`origin` は既定で `synthetic`。** この経路で入るのは
+    `tts-demo/scripts/*.json` の台本からTTSで合成した商談だけであり、
+    実際の顧客との商談ではない。`data_sources.origin` の既定は `real` なので、
+    指定しないと**合成データが実商談として並ぶ**（02_schema.sql の
+    「合成データを実商談と誤認させないため」を参照）。実データを入れる場合だけ
+    `origin="real"` を明示すること。
     """
     for source in result.data_sources:
-        db.add(DataSourceTable(**source.model_dump()))
+        db.add(DataSourceTable(**source.model_dump(), origin=origin))
     for segment in result.utterance_segments:
         db.add(UtteranceSegmentTable(**segment.model_dump()))
     db.flush()
@@ -293,6 +307,12 @@ def main() -> int:
         choices=[s.value for s in KnowledgeStatus],
         help="投入するナレッジの状態（既定: confirmed。draft は検索に出ない）",
     )
+    parser.add_argument(
+        "--origin",
+        default="synthetic",
+        choices=["synthetic", "real"],
+        help="商談の出所（既定: synthetic。この経路で入るのはTTSで合成した商談のため）",
+    )
     args = parser.parse_args()
 
     if args.file is not None:
@@ -328,11 +348,28 @@ def main() -> int:
             )
             return 1
         if existing:
-            delete_sources(db, existing)
+            try:
+                delete_sources(db, existing)
+            except IntegrityError as error:
+                # ロープレやチャットレビューが、消そうとしているナレッジを
+                # 参照していると外部キーで落ちる。素の IntegrityError は
+                # SQLとUUIDの羅列で、原因も対処も読み取れない。
+                # ここは他メンバーの担当領域なので**勝手に消さず**、
+                # 何が掴んでいるかだけを伝えて止める。
+                db.rollback()
+                print(
+                    "既存の商談を削除できません。ロープレ等のデータが"
+                    "ナレッジを参照しています。\n"
+                    "参照している側を先に消すか、DBを作り直してください:\n"
+                    "  docker compose down -v && docker compose up -d\n"
+                    f"詳細: {error.orig}",
+                    file=sys.stderr,
+                )
+                return 1
             print(f"既存の商談 {len(existing)}件を削除しました")
 
         print("埋め込みを生成しています（初回はモデル読み込みで数十秒かかります）…")
-        counts = insert_result(db, result, status=args.status)
+        counts = insert_result(db, result, status=args.status, origin=args.origin)
         db.commit()
     except Exception:
         db.rollback()
@@ -340,7 +377,7 @@ def main() -> int:
     finally:
         db.close()
 
-    print(f"\n投入しました（status={args.status}）")
+    print(f"\n投入しました（status={args.status} / origin={args.origin}）")
     for name, count in counts.items():
         print(f"  {name:<20} {count:>4}件")
     return 0
