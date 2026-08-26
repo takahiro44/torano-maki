@@ -16,11 +16,19 @@ import argparse
 import array
 import json
 import math
+import time
 import wave
 from dataclasses import dataclass
 from pathlib import Path
 
-from google.api_core.exceptions import InvalidArgument
+from google.api_core.exceptions import (
+    Aborted,
+    DeadlineExceeded,
+    InternalServerError,
+    InvalidArgument,
+    ResourceExhausted,
+    ServiceUnavailable,
+)
 from google.cloud import texttospeech
 
 MODEL = "gemini-3.1-flash-tts-preview"
@@ -35,6 +43,29 @@ SAFETY_MARGIN_BYTES = 200
 
 # 発話の切り替わりに入れる無音。詰まって聞こえるのを防ぐ
 GAP_MS = 250
+
+# 待てば直る失敗。台本の中身が原因ではないので、再試行する価値がある
+TRANSIENT_ERRORS = (
+    ResourceExhausted,
+    ServiceUnavailable,
+    DeadlineExceeded,
+    InternalServerError,
+    Aborted,
+)
+MAX_ATTEMPTS = 6
+BASE_RETRY_SECONDS = 5
+MAX_RETRY_SECONDS = 120
+
+# 実測の読み上げ速度は 4.4〜4.9字/秒。**まれに本文ではなくプロンプトを
+# 読み上げてしまう**ことがあり、そのとき音声だけが極端に長くなる。
+# 本文の文字数から見込みの長さを出し、これを大きく超えたら失敗とみなす。
+# 短い発話は見込みが小さく倍率だけでは弾きすぎるため、下駄も履かせる
+EXPECTED_CHARS_PER_SEC = 4.7
+MAX_SECONDS_FACTOR = 2.2
+MAX_SECONDS_MARGIN = 6.0
+
+# LINEAR16 の WAV ヘッダ長。長さの見積もりで本体だけを数えるために引く
+WAV_HEADER_BYTES = 44
 
 BASE_DIR = Path(__file__).parent
 SCRIPTS_DIR = BASE_DIR / "scripts"
@@ -227,16 +258,46 @@ def synthesize(
     voice: texttospeech.VoiceSelectionParams,
     prompt: str,
 ) -> bytes:
-    """1リクエストぶんを合成する。認証情報はADCから読むためコードには持たせない。"""
-    response = client.synthesize_speech(
-        input=texttospeech.SynthesisInput(text=text, prompt=prompt),
-        voice=voice,
-        audio_config=texttospeech.AudioConfig(
+    """1リクエストぶんを合成する。認証情報はADCから読むためコードには持たせない。
+
+    **一時的な失敗は待って再試行する。** 台本20本ぶんを流すと1000回を超える
+    リクエストになり、途中で1回でもレート制限に当たると全部止まってしまう。
+    人が見ていない時間帯に流すため、その場で待って続ける方が確実。
+    """
+    request = {
+        "input": texttospeech.SynthesisInput(text=text, prompt=prompt),
+        "voice": voice,
+        "audio_config": texttospeech.AudioConfig(
             audio_encoding=texttospeech.AudioEncoding.LINEAR16,
             sample_rate_hertz=SAMPLE_RATE_HERTZ,
         ),
-    )
-    return response.audio_content
+    }
+    for attempt in range(1, MAX_ATTEMPTS + 1):
+        try:
+            return client.synthesize_speech(**request).audio_content
+        except TRANSIENT_ERRORS as error:
+            if attempt == MAX_ATTEMPTS:
+                raise
+            delay = min(BASE_RETRY_SECONDS * 2 ** (attempt - 1), MAX_RETRY_SECONDS)
+            print(
+                f"    一時的な失敗（{type(error).__name__}）。"
+                f"{delay}秒待って再試行する [{attempt}/{MAX_ATTEMPTS - 1}]"
+            )
+            time.sleep(delay)
+    msg = "再試行の上限に達した"  # 到達しないが、戻り値の型を確定させる
+    raise RuntimeError(msg)
+
+
+def audio_seconds(audio: bytes) -> float:
+    """合成結果の長さ。ファイルに書く前に判断したいのでバイト数から求める。"""
+    return max(len(audio) - WAV_HEADER_BYTES, 0) / 2 / SAMPLE_RATE_HERTZ
+
+
+def is_too_long(audio: bytes, text: str) -> bool:
+    """本文の量に対して音声が長すぎないか。プロンプトの読み上げを検知するため。"""
+    expected = len(text) / EXPECTED_CHARS_PER_SEC
+    limit = max(expected * MAX_SECONDS_FACTOR, expected + MAX_SECONDS_MARGIN)
+    return audio_seconds(audio) > limit
 
 
 def synthesize_with_fallback(
@@ -262,11 +323,24 @@ def synthesize_with_fallback(
         ("", "プロンプト無し"),
     ]
     last_error: Exception | None = None
+    too_long: list[tuple[bytes, str]] = []
     for candidate, label in attempts:
         try:
-            return synthesize(client, text, voice, candidate), label
+            audio = synthesize(client, text, voice, candidate)
         except InvalidArgument as error:
             last_error = error
+            continue
+        if is_too_long(audio, text):
+            # プロンプトを読み上げている可能性が高い。プロンプトを短くして測り直す
+            too_long.append((audio, label))
+            continue
+        return audio, label
+
+    if too_long:
+        # どれも長い場合は、いちばん短いものを採る（無音を返すよりはましなため）
+        audio, label = min(too_long, key=lambda item: len(item[0]))
+        print(f"    ⚠ どのプロンプトでも長さが想定を超えた（{text[:16]}…）")
+        return audio, f"{label}・要確認"
     raise RuntimeError(f"合成に失敗した: {text[:20]}") from last_error
 
 
@@ -425,9 +499,9 @@ def main() -> None:
     )
     parser.add_argument(
         "--mode",
-        choices=("chunk", "per-turn"),
-        default="chunk",
-        help="chunk: 会話をまとめて合成 / per-turn: 1発話ずつ合成して声を固定する",
+        choices=("per-turn", "chunk"),
+        default="per-turn",
+        help="per-turn: 1発話ずつ合成して声を固定する（推奨） / chunk: まとめて合成",
     )
     parser.add_argument(
         "--limit",
