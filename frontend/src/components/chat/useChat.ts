@@ -54,17 +54,28 @@ export type Turn = {
  */
 const MAX_HISTORY_TURNS = 9;
 
-function buildMessages(turns: Turn[], question: string): ChatMessage[] {
-  const usable = turns
-    .filter((t) => t.status === "done" && t.answer.trim())
-    .slice(-MAX_HISTORY_TURNS);
+function usableTurns(turns: Turn[]): Turn[] {
+  return turns.filter((t) => t.status === "done" && t.answer.trim()).slice(-MAX_HISTORY_TURNS);
+}
 
+function buildMessages(turns: Turn[], question: string): ChatMessage[] {
+  const messages = turnsToMessages(turns);
+  messages.push({ role: "user", content: question });
+  return messages;
+}
+
+/**
+ * 完了した往復だけをAPIの履歴形式に変換する。
+ *
+ * 上司レビューの「まとめる」でも同じ履歴が要る。送信中の質問を
+ * 末尾に足さない点だけが `buildMessages` と違うため、ここを共有する。
+ */
+export function turnsToMessages(turns: Turn[]): ChatMessage[] {
   const messages: ChatMessage[] = [];
-  for (const turn of usable) {
+  for (const turn of usableTurns(turns)) {
     messages.push({ role: "user", content: turn.question });
     messages.push({ role: "assistant", content: turn.answer });
   }
-  messages.push({ role: "user", content: question });
   return messages;
 }
 

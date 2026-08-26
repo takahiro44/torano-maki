@@ -277,6 +277,46 @@ export type ChatStreamEvent =
   | ChatDoneEvent
   | ChatErrorEvent;
 
+// --- 上司レビュー ---
+//
+// バックエンドの models/chat_review.py と対応させる。
+
+/** 「まとめる」の中身。DBに書く前の状態でも同じ形 */
+export type ChatReviewSummary = {
+  summary: string;
+  understood_points: string[];
+  knowledge_gaps: string[];
+};
+
+export type ChatReviewStatus = "pending" | "answered";
+
+export type ChatReviewListItem = {
+  id: string;
+  summary: string;
+  status: ChatReviewStatus;
+  created_at: string;
+  answered_at: string | null;
+};
+
+export type CreatedKnowledgeItem = {
+  id: string;
+  title: string;
+};
+
+export type ChatReviewDetail = {
+  id: string;
+  chat_history: ChatMessage[];
+  summary: string;
+  understood_points: string[];
+  knowledge_gaps: string[];
+  status: ChatReviewStatus;
+  supervisor_response: string | null;
+  answered_data_source_id: string | null;
+  created_at: string;
+  answered_at: string | null;
+  created_knowledge: CreatedKnowledgeItem[];
+};
+
 // --- ロープレ ---
 //
 // バックエンドの models/roleplay.py と対応させる。形の正は OpenAPI スキーマ

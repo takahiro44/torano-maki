@@ -21,16 +21,18 @@ import { KnowledgeInput } from "./components/KnowledgeInput";
 import { KnowledgeList } from "./components/KnowledgeList";
 import { KnowledgeSearch } from "./components/KnowledgeSearch";
 import { Roleplay } from "./components/roleplay/Roleplay";
+import { SupervisorInbox } from "./components/SupervisorInbox";
 import { navigate, readKnowledgeIdParam, useRoutePath } from "./lib/router";
 import type { KnowledgeCounts } from "./types/api";
 
-type Tab = "chat" | "search" | "input" | "audio" | "list" | "roleplay";
+type Tab = "chat" | "search" | "input" | "audio" | "supervisor" | "list" | "roleplay";
 
 const TABS: { key: Tab; label: string }[] = [
   { key: "chat", label: "AIに聞く" },
   { key: "search", label: "探す" },
   { key: "input", label: "登録" },
   { key: "audio", label: "音声" },
+  { key: "supervisor", label: "上司レビュー" },
   { key: "list", label: "一覧" },
   { key: "roleplay", label: "ロープレ" },
 ];
@@ -40,6 +42,7 @@ function tabFromRoute(route: string): Tab {
   if (path === "/search") return "search";
   if (path === "/input") return "input";
   if (path === "/audio") return "audio";
+  if (path === "/supervisor") return "supervisor";
   if (path === "/list") return "list";
   if (path === "/roleplay" || path.startsWith("/roleplay/")) return "roleplay";
   return "chat";
@@ -126,6 +129,7 @@ export default function App() {
               {tab === "search" && <KnowledgeSearch />}
               {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
               {tab === "audio" && <AudioIngest onChanged={() => setReloadKey((n) => n + 1)} />}
+              {tab === "supervisor" && <SupervisorInbox />}
               {tab === "list" && (
                 <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
               )}

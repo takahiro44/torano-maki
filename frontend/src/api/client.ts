@@ -10,6 +10,10 @@ import type {
   CategoryOption,
   ChatMessage,
   ChatResponse,
+  ChatReviewDetail,
+  ChatReviewListItem,
+  ChatReviewStatus,
+  ChatReviewSummary,
   ChatStreamEvent,
   ConfigHealthResponse,
   DbHealthResponse,
@@ -204,6 +208,44 @@ export function sendChat(messages: ChatMessage[], topK = 5) {
   });
 }
 
+// --- 上司レビュー ---
+
+/** 「まとめる」。DBには書き込まない */
+export function summarizeChatReview(messages: ChatMessage[]) {
+  return request<ChatReviewSummary>("/chat-reviews/summarize", {
+    method: "POST",
+    body: JSON.stringify({ messages }),
+    signal: AbortSignal.timeout(90_000),
+  });
+}
+
+/** 「上司に送信」。要約をサーバ側で再生成し、pendingで保存する */
+export function sendChatReview(messages: ChatMessage[]) {
+  return request<ChatReviewDetail>("/chat-reviews", {
+    method: "POST",
+    body: JSON.stringify({ messages }),
+    signal: AbortSignal.timeout(90_000),
+  });
+}
+
+export function listChatReviews(status?: ChatReviewStatus) {
+  const q = status ? `?status=${status}` : "";
+  return request<ChatReviewListItem[]>(`/chat-reviews${q}`);
+}
+
+export function getChatReview(id: string) {
+  return request<ChatReviewDetail>(`/chat-reviews/${id}`);
+}
+
+/** 上司の回答。そのままconfirmedのナレッジとして登録される */
+export function respondChatReview(id: string, responseText: string) {
+  return request<ChatReviewDetail>(`/chat-reviews/${id}/respond`, {
+    method: "POST",
+    body: JSON.stringify({ response_text: responseText }),
+    signal: AbortSignal.timeout(120_000),
+  });
+}
+
 // --- ロープレ ---
 //
 // **待ち時間が用途ごとに大きく違う。** セッション作成は検索とシナリオ生成、
@@ -296,7 +338,6 @@ export async function transcribeRoleplayAnswer(
   await throwIfNotOk(res, "POST /roleplay/sessions/{id}/turns/audio failed");
   return (await res.json()) as RoleplayTranscription;
 }
-
 // --- 疎通確認 ---
 
 export const getDbHealth = () => request<DbHealthResponse>("/health/db");
