@@ -9,7 +9,7 @@
  * 思われるので、何をしているかと経過秒数を出し続ける。
  */
 
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { listRoleplayCategories, startRoleplaySession } from "../../api/client";
 import type { CategoryOption, RoleplayCategory, RoleplaySession } from "../../types/api";
 
@@ -50,6 +50,23 @@ export function RoleplayStart({ knowledgeId, seedQuery, onStarted }: Props) {
       .catch(() => setCategories([]));
   }, []);
 
+  // AIチャットから「この疑問を練習する」で来た場合は、そのまま生成へ入る。
+  //
+  // **確認画面を挟まない。** ボタンを押した時点で意図は表明されており、
+  // もう一度「この疑問から練習する」を押させるのは同じ操作の繰り返しになる。
+  // ref で止めているのは、StrictMode の二重実行と再描画で
+  // 30秒かかる生成を二度走らせないため。
+  const autoStarted = useRef(false);
+  useEffect(() => {
+    if (!seedQuery || autoStarted.current) return;
+    autoStarted.current = true;
+    void start({ query: seedQuery, knowledgeId });
+    // start は毎描画で作り直されるため依存に入れない。
+    // 依存に入れても ref で止まるが、「何をきっかけに走るか」が
+    // 読み取れなくなる。走る条件は seedQuery が来たときの1回だけ。
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [seedQuery, knowledgeId]);
+
   useEffect(() => {
     if (!pending) return;
     const started = Date.now();
@@ -85,6 +102,13 @@ export function RoleplayStart({ knowledgeId, seedQuery, onStarted }: Props) {
   if (pending) {
     return (
       <div className="rounded-lg border border-slate-200 bg-white p-6">
+        {/* 何を練習しようとしているかを出す。30秒待つ間、押したものが
+            効いているのか分からないと不安になる */}
+        {query && (
+          <p className="mb-3 border-l-2 border-indigo-300 pl-3 text-sm text-slate-700">
+            {query}
+          </p>
+        )}
         <p className="flex items-center gap-2 text-sm text-slate-600">
           <span className="inline-block size-2 animate-pulse rounded-full bg-slate-400" />
           {waitingLabel(elapsed)}
@@ -121,7 +145,7 @@ export function RoleplayStart({ knowledgeId, seedQuery, onStarted }: Props) {
             className="mt-3 rounded-lg bg-indigo-600 px-4 py-2 text-sm font-medium text-white
                        hover:bg-indigo-500"
           >
-            この疑問から練習する
+            {error ? "もう一度試す" : "この疑問から練習する"}
           </button>
           <p className="mt-2 text-[11px] text-indigo-900/70">
             {knowledgeId
