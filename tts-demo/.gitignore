@@ -1,2 +1,6 @@
 # 生成した音声はコミットしない（CLAUDE.md 4.2）
 output/
+
+# ChatGPTの出力そのまま。正はレビュー済みの scripts/*.json
+drafts/*
+!drafts/.gitkeep
