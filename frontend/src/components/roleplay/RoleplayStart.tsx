@@ -12,6 +12,8 @@
 import { useEffect, useRef, useState } from "react";
 import { listRoleplayCategories, startRoleplaySession } from "../../api/client";
 import type { CategoryOption, RoleplayCategory, RoleplaySession } from "../../types/api";
+import { PastScenes } from "./PastScenes";
+import { RoleplayHistory } from "./RoleplayHistory";
 
 type Props = {
   /** AIチャットの「この場面を練習する」から入った場合に渡る */
@@ -176,6 +178,11 @@ export function RoleplayStart({ knowledgeId, seedQuery, onStarted }: Props) {
         </div>
       </section>
 
+      {/* 場面ボタンのすぐ下に置く。どちらも「何を練習するか」を選ぶ操作だが、
+          こちらは生成を待たない。先輩が作った場面をそのまま使えることが、
+          待ち時間ゼロと同じくらい大事な違いになる */}
+      <PastScenes onStarted={onStarted} />
+
       <section>
         <h3 className="text-sm font-medium text-slate-700">練習したいことを書く</h3>
         <div className="mt-2 flex gap-2">
@@ -212,6 +219,10 @@ export function RoleplayStart({ knowledgeId, seedQuery, onStarted }: Props) {
         />
         1往復で終える（短時間で試したいとき）
       </label>
+
+      {/* 開始手段の下に置く。初見の人がまず見るべきなのは始め方で、
+          読み返しはやったことがある人だけが使う */}
+      <RoleplayHistory />
     </div>
   );
 }

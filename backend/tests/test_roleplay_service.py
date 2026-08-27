@@ -19,6 +19,7 @@ from sqlalchemy.orm import Session
 from app.models.roleplay import (
     InputMode,
     LearnerTurnRequest,
+    RoleplayCategory,
     RoleplayScenario,
     RoleplaySessionCreate,
     RubricResult,
@@ -44,6 +45,7 @@ from app.services.roleplay import (
     build_session_view,
     create_feedback,
     create_session,
+    list_sessions,
     retry_session,
     scenario_of,
     select_knowledge,
@@ -431,3 +433,127 @@ def test_存在しないセッションIDは業務エラーになる(db: Session
     with pytest.raises(RoleplayError) as exc:
         get_session(db, uuid4())
     assert exc.value.code == "session_not_found"
+
+
+# ---------------------------------------------------------------------------
+# 履歴
+# ---------------------------------------------------------------------------
+
+
+def test_カテゴリから始めた練習は場面が記録される(db: Session) -> None:
+    # query には検索用の言い換え文が入るため、場面名は query から復元できない。
+    # 履歴一覧に「値引き」と出せるかはこの列にかかっている
+    knowledge = _make_knowledge(db)
+    session = _create_session_with_llm(
+        db,
+        RoleplaySessionCreate(category=RoleplayCategory.PRICE_OBJECTION),
+        [knowledge.id],
+    )
+
+    assert session.category == RoleplayCategory.PRICE_OBJECTION.value
+    assert session.query != RoleplayCategory.PRICE_OBJECTION.value
+    assert build_session_view(db, session).category is RoleplayCategory.PRICE_OBJECTION
+
+
+def test_自由入力から始めた練習に場面は付かない(db: Session) -> None:
+    knowledge = _make_knowledge(db)
+    session = _create_session_with_llm(db, RoleplaySessionCreate(query="値引き"), [knowledge.id])
+
+    assert session.category is None
+    assert build_session_view(db, session).category is None
+
+
+def test_再挑戦は同じ場面のまとまりとして数えられる(db: Session) -> None:
+    knowledge = _make_knowledge(db)
+    first = _create_session_with_llm(db, RoleplaySessionCreate(query="値引き"), [knowledge.id])
+    second = retry_session(db, first)
+    third = retry_session(db, second)
+
+    # 3回目が2回目ではなく1回目を指すこと。親を辿る形にすると、
+    # 履歴でまとめるのに再帰クエリが要る
+    assert (first.root_session_id, first.attempt_no) == (None, 1)
+    assert (second.root_session_id, second.attempt_no) == (first.id, 2)
+    assert (third.root_session_id, third.attempt_no) == (first.id, 3)
+    # 1回目は自分が根として返る。画面が分岐なしで同じ場面かを判定できる
+    assert build_session_view(db, first).root_session_id == first.id
+
+
+def test_履歴に進み具合と場面名が付いて返る(db: Session) -> None:
+    knowledge = _make_knowledge(db)
+    session = _create_session_with_llm(
+        db,
+        RoleplaySessionCreate(category=RoleplayCategory.PRICE_OBJECTION),
+        [knowledge.id],
+    )
+    with patch("app.services.roleplay.chat_completion", return_value=_reply_body("なるほど。")):
+        add_learner_turn(db, session, LearnerTurnRequest(content="背景を教えてください"))
+    retried = retry_session(db, session)
+
+    items = {item.session_id: item for item in list_sessions(db)}
+
+    done = items[session.id]
+    assert done.title == _SCENARIO_JSON["title"]
+    assert done.category_label == "値引き"
+    assert done.learner_turns_used == 1
+    assert done.max_turns == 2
+    assert done.has_feedback is False
+
+    fresh = items[retried.id]
+    assert fresh.attempt_no == 2
+    assert fresh.learner_turns_used == 0
+    assert fresh.category_label == "値引き"
+
+
+def test_履歴は同じ場面なら新しい挑戦が先に来る(db: Session) -> None:
+    # created_at はトランザクション開始時刻なので、同じ処理内で作った
+    # セッションは時刻が並ぶ。並び順が実行ごとに変わらないことを確かめる
+    knowledge = _make_knowledge(db)
+    first = _create_session_with_llm(db, RoleplaySessionCreate(query="値引き"), [knowledge.id])
+    second = retry_session(db, first)
+
+    order = [item.session_id for item in list_sessions(db)]
+    assert order.index(second.id) < order.index(first.id)
+
+
+def test_履歴は壊れたシナリオでも一覧を止めない(db: Session) -> None:
+    # 1件の破損で履歴全体が開けなくなる方が困る。見出しが取れなければ
+    # 利用者が打った文で代替し、その行だけ情報が減るに留める
+    knowledge = _make_knowledge(db)
+    session = _create_session_with_llm(db, RoleplaySessionCreate(query="値引き"), [knowledge.id])
+    session.scenario = {"situation": "見出しが欠けた記録"}
+    db.flush()
+
+    item = next(i for i in list_sessions(db) if i.session_id == session.id)
+    assert item.title == session.query
+    assert item.max_turns == 0
+
+
+def test_振り返り済みだけに絞れる(db: Session) -> None:
+    # 「終えた練習を読み返す」一覧に、途中で抜けた練習が混ざらないこと
+    knowledge = _make_knowledge(db)
+    unfinished = _create_session_with_llm(db, RoleplaySessionCreate(query="値引き"), [knowledge.id])
+    reviewed = _create_session_with_llm(db, RoleplaySessionCreate(query="値引き"), [knowledge.id])
+    with patch("app.services.roleplay.chat_completion", return_value=_reply_body("なるほど。")):
+        add_learner_turn(db, reviewed, LearnerTurnRequest(content="なぜ高いと感じますか"))
+    with patch("app.services.roleplay.chat_completion", return_value=_llm_body(_FEEDBACK_JSON)):
+        create_feedback(db, reviewed)
+
+    ids = {item.session_id for item in list_sessions(db, reviewed_only=True)}
+    assert reviewed.id in ids
+    assert unfinished.id not in ids
+    # 絞り込みの有無で件数だけが変わり、内容は同じ形で返る
+    assert all(item.has_feedback for item in list_sessions(db, reviewed_only=True))
+
+
+def test_履歴に主役の社内事例が付いて返る(db: Session) -> None:
+    # 画面は見出しではなくこれで「同じ場面か」を判定する。
+    # 見出しはLLMが書くため、同じ事例からでも一言一句は揃わない
+    knowledge = _make_knowledge(db)
+    first = _create_session_with_llm(db, RoleplaySessionCreate(query="値引き"), [knowledge.id])
+    second = _create_session_with_llm(db, RoleplaySessionCreate(query="価格が高い"), [knowledge.id])
+
+    items = {item.session_id: item for item in list_sessions(db)}
+    assert items[first.id].primary_knowledge_id == knowledge.id
+    assert items[first.id].primary_knowledge_title == knowledge.title
+    # 別々に作った2セッションが、同じ事例として1場面にまとまる
+    assert items[second.id].primary_knowledge_id == items[first.id].primary_knowledge_id

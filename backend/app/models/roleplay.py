@@ -330,12 +330,53 @@ class RoleplaySession(BaseModel):
     session_id: UUID
     status: SessionStatus
     query: str
+    category: RoleplayCategory | None = None
+    attempt_no: int = 1
+    root_session_id: UUID
     scenario: RoleplayScenario
     turns: list[RoleplayTurn]
     references: list[ReferencedKnowledge]
     feedback: RoleplayFeedback | None = None
     learner_turns_used: int
     remaining_learner_turns: int
+    created_at: datetime
+    completed_at: datetime | None = None
+
+
+class RoleplaySessionSummary(BaseModel):
+    """履歴一覧の1行。
+
+    **`RoleplaySession` を一覧に使わない。** 1件ごとに発言・出典・振り返りまで
+    組み立てると、20件並べるだけで数十回のクエリになる。一覧に要るのは
+    「いつ・何を・どこまでやったか」だけである。
+
+    `title` は保存済みシナリオの見出しをそのまま出す。`query` は自由入力なら
+    その文、カテゴリ開始なら検索用の言い換え文（CATEGORY_QUERIES）が入るため、
+    見出しの代わりにはならない。
+    """
+
+    session_id: UUID
+    title: str = Field(description="保存済みシナリオの見出し")
+    query: str
+    category: RoleplayCategory | None = None
+    category_label: str | None = Field(
+        default=None, description="画面に出す場面名。CATEGORY_LABELS から引く"
+    )
+    status: SessionStatus
+    attempt_no: int = Field(ge=1, description="同じ場面の何回目か")
+    root_session_id: UUID = Field(
+        description="同じ場面の試行をまとめる鍵。1回目のセッションでは自分のIDが入る"
+    )
+    learner_turns_used: int
+    max_turns: int
+    has_feedback: bool = Field(description="振り返りまで終わったか。再開できるかの判断に使う")
+    primary_knowledge_id: UUID | None = Field(
+        default=None,
+        description="主役にした社内事例。**同じ場面かどうかの判定はこれで行う**",
+    )
+    primary_knowledge_title: str | None = Field(
+        default=None, description="その事例の見出し。どの商談から来た場面かを画面に出す"
+    )
     created_at: datetime
     completed_at: datetime | None = None
 

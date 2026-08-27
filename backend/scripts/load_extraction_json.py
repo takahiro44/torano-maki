@@ -78,10 +78,26 @@ class _Strict(BaseModel):
 
 
 class DataSourceIn(_Strict):
+    """1商談の出典。
+
+    **検証JSONと、DBから書き出したJSON（`export_audio_knowledge.py`）の
+    両方を受ける。** 前者は id / source_type / file_name / occurred_at しか
+    持たないため、それ以外は省略可能にしてある。
+
+    `origin` を運べるようにしているのは、実商談として登録した音声を
+    退避して戻したときに、合成商談として並んでしまうのを防ぐため
+    （02_schema.sql の「合成データを実商談と誤認させないため」）。
+    """
+
     id: UUID
     source_type: str
-    file_name: str
-    occurred_at: datetime
+    # 画面からアップロードした音声は、日時が分からないまま登録されることがある
+    file_name: str | None = None
+    occurred_at: datetime | None = None
+    # 省略時は投入コマンドの --origin に従う（検証JSONにはこの列が無い）
+    origin: str | None = None
+    review_status: str | None = None
+    created_at: datetime | None = None
 
 
 class UtteranceSegmentIn(_Strict):
@@ -246,7 +262,12 @@ def insert_result(
     `origin="real"` を明示すること。
     """
     for source in result.data_sources:
-        db.add(DataSourceTable(**source.model_dump(), origin=origin))
+        # JSONが origin を持っていればそちらを優先する。退避したデータを
+        # 戻すときに、実商談が合成として復元されると区別が付かなくなる。
+        # None の列は落としてDBの既定（review_status / created_at）に任せる
+        values = {k: v for k, v in source.model_dump().items() if v is not None}
+        values.setdefault("origin", origin)
+        db.add(DataSourceTable(**values))
     for segment in result.utterance_segments:
         db.add(UtteranceSegmentTable(**segment.model_dump()))
     db.flush()
