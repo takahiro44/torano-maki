@@ -58,6 +58,25 @@ from app.models.tables import (
 from app.services.embedding import embed_passages
 from app.services.search_text import generate_search_text_from_mapping
 
+# 検証JSON（2026-08-24作成）は customer_need / decision / next_action /
+# operational_insight / pain_point / proposal / sales_technique という
+# 独自の細分類を持つ。これは backend/app/models/knowledge.py の
+# KnowledgeCategory（business / casual の2値、PR #45）より前に作られたもので、
+# どちらでもない値のまま投入すると「営業/その他」のタブ絞り込みに
+# 一切ヒットしなくなる（検索からは漏れないが、絞り込み表示から漏れる）。
+# JSON側は検証時点の記録として直さず、投入時にここで正規化する。
+_KNOWN_CATEGORIES = frozenset({"business", "casual"})
+
+
+def _normalize_knowledge_type(value: str) -> str:
+    """business/casual以外の値は、実態が営業ナレッジのためbusinessへ寄せる。
+
+    2026-08-24時点のJSONに casual に相当する分類は無い
+    （全件が商談から抽出された営業ナレッジのため）。
+    """
+    return value if value in _KNOWN_CATEGORIES else "business"
+
+
 _REPO_ROOT = Path(__file__).resolve().parents[2]
 _EXTRACTION_DIR = _REPO_ROOT / "experiments" / "knowledge-extraction" / "output"
 # 商談1件につき1ファイル。既定でこのディレクトリを丸ごと入れる。
@@ -286,6 +305,7 @@ def insert_result(
         values["search_text"] = search_text
         values["embedding"] = vector
         values["embedding_model"] = embedding_model
+        values["knowledge_type"] = _normalize_knowledge_type(values["knowledge_type"])
         db.add(KnowledgeUnitTable(**values, status=status))
     db.flush()
 
