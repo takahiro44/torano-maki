@@ -5,11 +5,24 @@
  * 先に見えると、考える前に写して終わってしまう。
  *
  * 顧客役の生成に十数秒かかるため、待っている間も何をしているかを出す。
+ *
+ * **顧客役をアシスタントに演じさせる。** 相手に顔があるだけで、練習が
+ * 「フォームに文章を打つ作業」から「誰かと話すこと」に変わる。十数秒の
+ * 沈黙も、考えている顔があれば待てる（AgentPet と同じ理由）。
+ *
+ * **ここの子は歩かない・しまえない。** 徘徊するアシスタントは「見てほしい
+ * ものの隣に立つ」役だが、この子は会話の相手そのものである。歩き回られると
+ * 誰に向かって話しているのか分からなくなり、消せてしまうと相手のいない
+ * 練習画面になる（AgentPet.tsx の PetFace）。
+ *
+ * **姿の既定はロボット。** いつもの虎と同じ姿だと「味方が喋っている」ように
+ * 見えて、顧客の言葉として受け取れない（lib/pet.ts の DEFAULT_SKIN）。
  */
 
 import { useEffect, useState } from "react";
 import { finishRoleplay, sendRoleplayTurn } from "../../api/client";
 import type { InputMode, RoleplaySession as Session } from "../../types/api";
+import { PetFace, type PetMood } from "../chat/AgentPet";
 import { MicAnswer } from "./MicAnswer";
 
 type Props = {
@@ -27,6 +40,7 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
 
   const scenario = session.scenario;
   const done = session.remaining_learner_turns === 0;
+  const mood = customerMood({ pending, done, failed: error !== null });
 
   useEffect(() => {
     if (pending === null) return;
@@ -76,11 +90,22 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
       <SituationCard scenario={scenario} />
 
       <div className="space-y-3">
-        {session.turns.map((turn) => (
+        {session.turns.map((turn, i) => (
           <div
             key={turn.sequence_no}
-            className={turn.role === "learner" ? "flex justify-end" : "flex justify-start"}
+            className={turn.role === "learner" ? "flex justify-end" : "flex justify-start gap-2"}
           >
+            {turn.role === "customer" && (
+              // 気分が動くのは最新の発言だけ。過去の顔まで一緒に変わると、
+              // 会話を読み返したときに今どこの話なのか分からなくなる
+              <span className="mt-0.5 shrink-0">
+                <PetFace
+                  scene="roleplay"
+                  mood={i === session.turns.length - 1 ? mood : "idle"}
+                  sizeClass="size-9"
+                />
+              </span>
+            )}
             <div
               className={
                 "max-w-[85%] rounded-lg px-4 py-2 text-sm whitespace-pre-wrap " +
@@ -90,7 +115,7 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
               }
             >
               {turn.role === "customer" && (
-                <p className="mb-1 text-[11px] font-medium text-slate-400">顧客</p>
+                <p className="mb-1 text-[11px] font-medium text-slate-400">顧客役</p>
               )}
               {turn.content}
             </div>
@@ -98,7 +123,10 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
         ))}
 
         {pending === "turn" && (
-          <div className="flex justify-start">
+          <div className="flex justify-start gap-2">
+            <span className="mt-0.5 shrink-0">
+              <PetFace scene="roleplay" mood="thinking" sizeClass="size-9" />
+            </span>
             <p className="flex items-center gap-2 rounded-lg border border-slate-200 bg-white px-4 py-2 text-sm text-slate-500">
               <span className="inline-block size-2 animate-pulse rounded-full bg-slate-400" />
               顧客が考えています…
@@ -190,6 +218,27 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
   );
 }
 
+/**
+ * 顧客役の気分。
+ *
+ * **話し終えた直後を「考え中」にしない。** 応答が返った時点で相手は喋り終えて
+ * おり、そこで考えている顔をしていると、まだ続きがあるように見える。
+ */
+function customerMood({
+  pending,
+  done,
+  failed,
+}: {
+  pending: null | "turn" | "feedback";
+  done: boolean;
+  failed: boolean;
+}): PetMood {
+  if (failed) return "sad";
+  if (pending === "turn") return "thinking";
+  if (pending === "feedback") return "writing";
+  return done ? "done" : "idle";
+}
+
 function SituationCard({ scenario }: { scenario: Session["scenario"] }) {
   return (
     <section className="rounded-lg border border-slate-200 bg-slate-50 p-4">
@@ -201,7 +250,12 @@ function SituationCard({ scenario }: { scenario: Session["scenario"] }) {
         </div>
         <div>
           <dt className="text-xs font-medium text-slate-500">相手</dt>
-          <dd className="text-slate-800">{scenario.customer_persona}</dd>
+          {/* 誰を演じているのかを、姿と説明文を並べて結びつける。
+              ここで一度顔を見せておくと、会話に出てくる同じ顔が顧客だと分かる */}
+          <dd className="flex items-center gap-2 text-slate-800">
+            <PetFace scene="roleplay" mood="idle" sizeClass="size-8" />
+            <span className="min-w-0 flex-1">{scenario.customer_persona}</span>
+          </dd>
         </div>
         <div>
           <dt className="text-xs font-medium text-slate-500">今回の目標</dt>

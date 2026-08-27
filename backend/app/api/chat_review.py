@@ -18,12 +18,13 @@ from app.models.chat_review import (
     ChatReviewDetail,
     ChatReviewListItem,
     ChatReviewSummary,
-    CreatedKnowledgeItem,
     RespondChatReviewRequest,
     ReviewStreamErrorEvent,
     ReviewStreamEvent,
+    SendChatReviewRequest,
     SummarizeChatReviewRequest,
 )
+from app.models.knowledge import Knowledge
 from app.models.tables import ChatReviewTable
 from app.services.chat_review import (
     create_chat_review,
@@ -54,7 +55,10 @@ _SSE_HEADERS = {"Cache-Control": "no-cache", "X-Accel-Buffering": "no"}
 def _to_detail(row: ChatReviewTable, db: Session) -> ChatReviewDetail:
     created = get_created_knowledge(row.answered_data_source_id, db)
     detail = ChatReviewDetail.model_validate(row)
-    detail.created_knowledge = [CreatedKnowledgeItem(id=k.id, title=k.title) for k in created]
+    detail.created_knowledge = [Knowledge.model_validate(k) for k in created]
+    # 名乗った名前は問いに入っている（列を足さないため）。上司の画面が
+    # 配列の先頭を覗きに行かなくて済むよう、ここで1つに寄せる
+    detail.learner_name = next((q.asked_by for q in detail.knowledge_gaps if q.asked_by), None)
     return detail
 
 
@@ -119,10 +123,15 @@ def _sse_error(code: ChatStreamErrorCode, message: str) -> str:
 
 
 @router.post("", response_model=ChatReviewDetail, status_code=status.HTTP_201_CREATED)
-def send_chat_review(payload: SummarizeChatReviewRequest, db: DbSession) -> ChatReviewDetail:
-    """「上司に送信」ボタン。要約を再生成してpendingで保存する。"""
+def send_chat_review(payload: SendChatReviewRequest, db: DbSession) -> ChatReviewDetail:
+    """「上司に質問する」ボタン。pendingで保存する。
+
+    `hearing` が付いていれば、後輩が実際に見て答えた内容をそのまま保存する
+    （services/chat_review.py の理由）。付いていなければ従来どおり
+    サーバ側で要約を生成する。
+    """
     try:
-        row = create_chat_review(payload.messages, db)
+        row = create_chat_review(payload, db)
     except LlmNotConfiguredError as exc:
         raise HTTPException(status_code=503, detail=str(exc)) from exc
     except LlmRequestError as exc:

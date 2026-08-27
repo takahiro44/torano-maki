@@ -26,16 +26,31 @@ export type PetSpot = { x: number; y: number } | null;
 export type PetSkin = "tiger" | "robot";
 
 /** アシスタントが住んでいる画面。姿と行き先はここで分かれる */
-export type PetScene = "chat" | "ingest";
+export type PetScene = "chat" | "ingest" | "review" | "roleplay";
+
+/**
+ * 歩き回る子が住む画面。
+ *
+ * **ロープレだけ別扱いにする。** あの画面の子は顧客役として会話の中に
+ * 座っており、目印を探して歩かない。行き先もセリフも持たないので、
+ * 徘徊する側の対応表（ANCHORS / LINES）に空の枠を並べさせない。
+ */
+export type WanderScene = Exclude<PetScene, "roleplay">;
 
 /**
  * 画面ごとの既定の姿。
  *
  * AIチャットは虎（プロダクト名がAI虎の巻なので）、ナレッジ登録はロボット。
+ * 上司レビューは虎（後輩の代理で話す役なので、いつもの相棒と同じ姿でよい）。
+ *
+ * **ロープレだけロボットにする。** あそこに出る子は顧客を演じている別人格で、
+ * いつもの虎と同じ姿だと「味方が喋っている」ように見えて練習にならない。
  */
 const DEFAULT_SKIN: Record<PetScene, PetSkin> = {
   chat: "tiger",
   ingest: "robot",
+  review: "tiger",
+  roleplay: "robot",
 };
 
 const HIDDEN_KEY = "torano-maki:pet:hidden";
