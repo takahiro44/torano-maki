@@ -13,9 +13,9 @@
  * （会話が細くなる方が損失が大きい）。
  */
 
-import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
+import { useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { AgentPet } from "./AgentPet";
-import { AgentWorkspace } from "./AgentWorkspace";
+import { WorkspacePane } from "./WorkspacePane";
 import { currentPhase } from "./phase";
 import { ChatReviewPanel } from "./ChatReviewPanel";
 import { Composer } from "./Composer";
@@ -35,17 +35,8 @@ const EXAMPLE_QUESTIONS = [
 /** 質問の吹き出しを上端に寄せるときの余白 */
 const TOP_PADDING_PX = 12;
 
-/** 調査ビューの開閉。毎回開き直させないため端末に覚えさせる */
+/** 調査ビューの開閉。毎回開き直させないため端末に覚えさせる（WorkspacePane が読む） */
 const WORKSPACE_KEY = "torano-maki:chat:workspace";
-
-function loadWorkspaceOpen(): boolean {
-  try {
-    return localStorage.getItem(WORKSPACE_KEY) !== "0";
-  } catch {
-    // プライベートモードで読めないことがある。既定（開く）で始めればよい
-    return true;
-  }
-}
 
 type Props = {
   knowledgeCount: number | null;
@@ -55,7 +46,6 @@ type Props = {
 
 export function AiChat({ knowledgeCount, reloadKey }: Props) {
   const { turns, busy, send, stop, reset, retry } = useChat();
-  const [workspaceOpen, setWorkspaceOpen] = useState(loadWorkspaceOpen);
   // 「上司に確認する」を押した合図。要約の状態そのものは
   // ChatReviewPanel が持っているので、番号を送って起こすだけにする
   const [reviewSignal, setReviewSignal] = useState(0);
@@ -91,14 +81,6 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
     el.scrollTop += bubbleRect.top - containerRect.top - TOP_PADDING_PX;
   }, [lastTurnId]);
 
-  useEffect(() => {
-    try {
-      localStorage.setItem(WORKSPACE_KEY, workspaceOpen ? "1" : "0");
-    } catch {
-      // 覚えられなくても開閉そのものは動く
-    }
-  }, [workspaceOpen]);
-
   const empty = turns.length === 0;
   // 調査ビューは最新のターンだけを映す。過去の分まで重ねると、
   // どれが今の質問のグラフなのか分からなくなる
@@ -107,24 +89,8 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
   return (
     <div className="flex h-full">
       {/* 調査ビューは会話の左。読む列（会話）を画面の同じ位置に置いたまま、
-          開閉できる面を外側に足す。境界の三角タブは開閉どちらでも常に表示し、
-          同じボタンで出し入れできるようにする */}
-      <div className="hidden shrink-0 lg:flex">
-        {workspaceOpen && (
-          <div className="w-[360px] xl:w-[420px]">
-            <AgentWorkspace turn={latest} reloadKey={reloadKey} />
-          </div>
-        )}
-        <button
-          onClick={() => setWorkspaceOpen((v) => !v)}
-          aria-label={workspaceOpen ? "調査ビューを閉じる" : "調査ビューを開く"}
-          aria-expanded={workspaceOpen}
-          className="flex w-5 shrink-0 items-center justify-center border-r border-indigo-100
-                     bg-indigo-50/40 text-sm text-slate-300 hover:bg-indigo-100/60 hover:text-slate-600"
-        >
-          {workspaceOpen ? "◀" : "▶"}
-        </button>
-      </div>
+          開閉できる面を外側に足す */}
+      <WorkspacePane storageKey={WORKSPACE_KEY} turn={latest} reloadKey={reloadKey} />
 
       {/* 画面全体を歩く。パネルを閉じていても、AIが今どこを見ているかは伝わる */}
       <AgentPet phase={currentPhase(latest)} foundCount={latest?.citations.length ?? 0} />

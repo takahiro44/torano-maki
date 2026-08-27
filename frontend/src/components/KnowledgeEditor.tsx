@@ -374,6 +374,12 @@ function RefinePanel({
 }) {
   const busy = refining || disabled;
 
+  /** 送信の条件はボタンと同じ。押す経路が2つあるので、片方だけ緩いと不整合になる */
+  function submit() {
+    if (busy || !instruction.trim()) return;
+    onConsult(instruction);
+  }
+
   return (
     <section className="space-y-2.5 rounded-2xl bg-indigo-50/50 p-3.5 ring-1 ring-indigo-100">
       <div className="flex items-baseline gap-2">
@@ -437,7 +443,13 @@ function RefinePanel({
           value={instruction}
           onChange={(e) => onInstruction(e.target.value)}
           onKeyDown={(e) => {
-            if ((e.metaKey || e.ctrlKey) && e.key === "Enter") onConsult(instruction);
+            // Enterの扱いはチャットの入力欄（Composer）と同じにする。
+            // ここもAIとの会話であり、送り方だけ別の作法にする理由が無い
+            if (e.key !== "Enter" || e.shiftKey) return;
+            // 変換確定のEnterで送らない。keyCode 229 は古い実装への保険
+            if (e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return;
+            e.preventDefault();
+            submit();
           }}
           disabled={busy}
           rows={2}
@@ -450,7 +462,7 @@ function RefinePanel({
         />
         <button
           type="button"
-          onClick={() => onConsult(instruction)}
+          onClick={submit}
           disabled={busy || !instruction.trim()}
           className="shrink-0 rounded-xl bg-indigo-600 px-3.5 py-2 text-xs font-medium text-white
                      transition-colors hover:bg-indigo-500
@@ -560,7 +572,7 @@ export function AiConsultBar({
 
   function ask(instruction: string) {
     const asked = instruction.trim();
-    if (!asked) return;
+    if (disabled || !asked) return;
     setText("");
     onAsk(asked);
   }
@@ -593,7 +605,14 @@ export function AiConsultBar({
           value={text}
           onChange={(e) => setText(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === "Enter") ask(text);
+            // Enterの扱いはチャットの入力欄（Composer）と同じにする。
+            // ここだけ違うと、同じAIへの入力なのに日本語の変換確定Enterで
+            // 送られてしまう欄と、そうでない欄が混在する
+            if (e.key !== "Enter" || e.shiftKey) return;
+            // 変換確定のEnterで送らない。keyCode 229 は古い実装への保険
+            if (e.nativeEvent.isComposing || e.nativeEvent.keyCode === 229) return;
+            e.preventDefault();
+            ask(text);
           }}
           disabled={disabled}
           placeholder={PLACEHOLDER}

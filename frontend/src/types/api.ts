@@ -347,6 +347,73 @@ export type ChatReviewSummary = {
   knowledge_gaps: string[];
 };
 
+/**
+ * 疑問点1つに対するナレッジDBの状態。
+ *
+ * **サーバが決める。** LLMには書かせない（実際に検索した結果から埋める）。
+ * この2つを分ける理由は、上司がやるべきことが全く違うため。
+ * `missing` は上司にしか無い知見。`found_but_unreachable` は答えを書く必要が無く、
+ * 既存ナレッジの適用場面を直すだけで済む。
+ */
+export type GapDbState = "missing" | "found_but_unreachable";
+
+export type GapKnowledgeHit = {
+  knowledge_id: string;
+  title: string;
+  /** コサイン類似度。RRFの score は類似度ではないので載っていない */
+  semantic_score: number | null;
+};
+
+export type GapDiagnosis = {
+  gap: string;
+  db_state: GapDbState;
+  existing_knowledge: GapKnowledgeHit[];
+};
+
+/** 実況つき「まとめる」の最終成果。`done` イベントに載る */
+export type ChatReviewDiagnosis = {
+  summary: string;
+  understood_points: string[];
+  gaps: GapDiagnosis[];
+};
+
+/**
+ * 実況の1工程。
+ *
+ * **チャットの `tool_call` と名前を変えている。** こちらはLLMが選んだToolではなく、
+ * サーバが順に踏む工程である。tool と呼ぶとモデルが判断したように読めてしまう。
+ */
+export type ReviewStepEvent = {
+  type: "step";
+  step: number;
+  label: string;
+};
+
+export type ReviewStepResultEvent = {
+  type: "step_result";
+  step: number;
+  ok: boolean;
+  summary: string;
+  error_code: string | null;
+};
+
+export type ReviewDoneEvent = {
+  type: "done";
+  diagnosis: ChatReviewDiagnosis;
+};
+
+export type ReviewErrorEvent = {
+  type: "error";
+  code: "llm_not_configured" | "llm_unreachable" | "internal" | (string & {});
+  message: string;
+};
+
+export type ReviewStreamEvent =
+  | ReviewStepEvent
+  | ReviewStepResultEvent
+  | ReviewDoneEvent
+  | ReviewErrorEvent;
+
 export type ChatReviewStatus = "pending" | "answered";
 
 export type ChatReviewListItem = {
