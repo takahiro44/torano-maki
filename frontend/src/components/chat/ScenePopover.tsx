@@ -88,7 +88,7 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
               {target.semanticScore !== null && (
                 <span className="font-mono">意味の近さ {target.semanticScore.toFixed(3)}</span>
               )}
-              {target.cited && <span className="text-emerald-600">AIが参照</span>}
+              {target.cited && <span className="text-indigo-600">AIが参照</span>}
             </p>
           </div>
           <button
