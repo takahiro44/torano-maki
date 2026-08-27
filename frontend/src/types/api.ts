@@ -7,7 +7,11 @@ export type KnowledgeSortField = "created_at" | "updated_at" | "title" | "status
 export type SortDirection = "asc" | "desc";
 export type SourceType = "audio" | "document" | "manual" | "roleplay" | "interview";
 
-export const CBR_FIELD_LABELS: { key: keyof Knowledge; label: string }[] = [
+/**
+ * 表示と編集の並び順。**キーは編集できる項目（KnowledgeDraftFields）に限る。**
+ * 詳細表示と編集フォームが別々に並びを持つと、片方にだけ項目が増える。
+ */
+export const CBR_FIELD_LABELS: { key: KnowledgeDraftField; label: string }[] = [
   { key: "title", label: "タイトル" },
   { key: "situation", label: "状況" },
   { key: "problem", label: "顧客課題" },
@@ -80,6 +84,50 @@ export type KnowledgeEvidenceSpan = {
   start_sequence_no: number;
   end_sequence_no: number;
   utterances: Utterance[];
+};
+
+/**
+ * 編集・AI相談でやり取りする本文の項目。
+ *
+ * **PATCH /knowledge/{id} が受け取れる項目と同じ集合にする。** ここが
+ * ずれると「AIが直したのに保存されない項目」が生まれ、しかも
+ * エラーにならないので気づけない。正はバックエンドの
+ * `models/knowledge.py` の `KnowledgeDraft`。
+ */
+export type KnowledgeDraftFields = {
+  title: string;
+  situation: string | null;
+  problem: string | null;
+  judgment: string | null;
+  action: string | null;
+  reasoning: string | null;
+  outcome: string | null;
+  lesson: string | null;
+  applicable_situations: string | null;
+  limitations: string | null;
+  industry: string | null;
+  product: string | null;
+  sales_stage: string | null;
+};
+
+export type KnowledgeDraftField = keyof KnowledgeDraftFields;
+
+/** AI相談のやりとり1件。サーバは履歴を持たないので毎回すべて送る */
+export type RefineMessage = {
+  role: "user" | "assistant";
+  content: string;
+};
+
+/**
+ * AI相談の結果。**まだ保存されていない。**
+ *
+ * `changed_fields` はサーバが値を突き合わせて出したもので、AIの自己申告
+ * ではない。画面はこれを信じて差分を出してよい。
+ */
+export type KnowledgeRefineResponse = {
+  comment: string;
+  proposal: KnowledgeDraftFields;
+  changed_fields: KnowledgeDraftField[];
 };
 
 export type KnowledgeCounts = {

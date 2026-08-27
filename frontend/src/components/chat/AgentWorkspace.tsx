@@ -73,6 +73,10 @@ export function AgentWorkspace({ turn, reloadKey }: Props) {
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
   const [scene, setScene] = useState<SceneTarget | null>(null);
+  // 札の中で内容を直したときの取り直し。App から来る reloadKey とは別に持つ。
+  // 編集は件数を変えないので App 側は bump されず、ここで拾わないと
+  // 一覧の見出しが直す前のまま残る
+  const [editKey, setEditKey] = useState(0);
 
   useEffect(() => {
     // 失敗しても会話には影響しない。星図と走査表示・待機中の一覧が出ないだけ
@@ -81,7 +85,7 @@ export function AgentWorkspace({ turn, reloadKey }: Props) {
         setCorpus(items.map((k) => ({ id: k.id, title: k.title, knowledgeType: k.knowledge_type }))),
       )
       .catch(() => setCorpus([]));
-  }, [reloadKey]);
+  }, [reloadKey, editKey]);
 
   async function runSearch(q: string, cat: CategoryFilter) {
     const text = q.trim();
@@ -231,7 +235,14 @@ export function AgentWorkspace({ turn, reloadKey }: Props) {
         )}
       </div>
 
-      {scene && <ScenePopover key={scene.knowledgeId} target={scene} onClose={() => setScene(null)} />}
+      {scene && (
+        <ScenePopover
+          key={scene.knowledgeId}
+          target={scene}
+          onClose={() => setScene(null)}
+          onEdited={() => setEditKey((n) => n + 1)}
+        />
+      )}
 
       {(phase === "planning" || phase === "searching") && (
         <ScanTicker corpus={corpus} phase={phase} />

@@ -223,6 +223,99 @@ class KnowledgeStatusPatch(BaseModel):
     status: KnowledgeStatus
 
 
+# --- AIと一緒に直す ---
+#
+# **本文の項目だけを扱う。** ここでやり取りする形が KnowledgeUpdate と
+# 食い違うと、AIが直した項目を保存できないという分かりにくい形で壊れる。
+# 保存できる項目（KnowledgeUpdate の status 以外）と同じ集合に揃えてある。
+
+_EDITABLE_FIELD_NAMES = _SEARCH_FIELD_NAMES
+
+
+class KnowledgeDraft(BaseModel):
+    """AIと一緒に直している最中のナレッジ本文。
+
+    **まだ保存されていない状態も表せる必要がある。** 画面では人が直した値を
+    そのままAIに渡して相談するため、DBの行ではなく編集中の値が入ってくる。
+    """
+
+    model_config = ConfigDict(extra="forbid")
+
+    title: str = Field(..., max_length=100)
+    situation: str | None = None
+    problem: str | None = None
+    judgment: str | None = None
+    action: str | None = None
+    reasoning: str | None = None
+    outcome: str | None = None
+    lesson: str | None = None
+    applicable_situations: str | None = None
+    limitations: str | None = None
+    industry: str | None = None
+    product: str | None = None
+    sales_stage: str | None = None
+
+    @field_validator("title", mode="before")
+    @classmethod
+    def _clip_title(cls, v: object) -> object:
+        # 長さ超過で相談ごと失敗させない。切り詰めた方を人が直せばよい
+        if isinstance(v, str) and len(v) > 100:
+            return v[:100]
+        return v
+
+    @field_validator(*_EDITABLE_FIELD_NAMES[1:], mode="before")
+    @classmethod
+    def _blank_to_none(cls, v: object) -> object:
+        """空文字と null を同じ「未記入」に寄せる。
+
+        画面の入力欄は消すと空文字を返し、LLMも項目を空文字で埋めることがある。
+        両方を残すと「未記入かどうか」の判定が場所ごとに食い違う。
+        """
+        if isinstance(v, str) and not v.strip():
+            return None
+        return v
+
+
+class RefineMessage(BaseModel):
+    """相談のやりとり1件。サーバは履歴を持たないので画面から毎回送る。"""
+
+    model_config = ConfigDict(extra="forbid")
+
+    role: Literal["user", "assistant"]
+    content: str
+
+
+class KnowledgeRefineRequest(BaseModel):
+    draft: KnowledgeDraft
+    instruction: Annotated[
+        str, StringConstraints(strip_whitespace=True, min_length=1, max_length=2000)
+    ]
+    history: list[RefineMessage] = Field(default_factory=list)
+    source_text: str | None = Field(
+        default=None, description="もとの原文。渡すと事実の裏取りに使われる"
+    )
+
+
+class KnowledgeRefineProposal(BaseModel):
+    """LLM に守らせる出力の形。"""
+
+    model_config = ConfigDict(extra="forbid")
+
+    comment: str = Field(description="利用者への短い返事")
+    proposal: KnowledgeDraft
+
+
+class KnowledgeRefineResponse(BaseModel):
+    """相談の結果。**まだ保存していない。** 反映するかは人が決める。"""
+
+    comment: str
+    proposal: KnowledgeDraft
+    changed_fields: list[str] = Field(
+        default_factory=list,
+        description="実際に値が変わった項目名。LLMの自己申告ではなくサーバ側で比較した結果",
+    )
+
+
 class Knowledge(BaseModel):
     """APIが返す Knowledge。search_text / embedding は出さない。"""
 

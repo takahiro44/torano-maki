@@ -8,8 +8,10 @@
  * **置き場所を覚える。** 掴んで動かしたということは「そこに居てほしい」
  * ということなので、次に開いたときに元の徘徊へ戻すのは裏切りになる。
  *
- * **姿も覚える。** 虎とロボットのどちらで出すかは好みで、正解が無い。
- * 選べるようにした以上、選び直させないこと。
+ * **既定の姿は画面ごと、選んだ姿は全画面で共有する。** 既定は AIチャットが虎、
+ * ナレッジ登録がロボット。画面が違うことが姿で分かる。ただしこれは
+ * 「まだ好みが無い人」のための既定であって、いったん選んだ後まで分け続ける
+ * 理由は無い。片方で選んだ姿がもう片方に効かないと、同じ操作を2回させられる。
  *
  * **状態をモジュールに1つだけ置く。** view.ts / router.ts と同じ理由。
  * ヘッダーの「呼び戻す」ボタンと本体が別々に覚えると必ず食い違う。
@@ -20,8 +22,21 @@ import { useSyncExternalStore } from "react";
 /** 掴んで置いた場所。null なら目印を追いかける */
 export type PetSpot = { x: number; y: number } | null;
 
-/** アシスタントの姿。既定は虎（プロダクト名がAI虎の巻なので） */
+/** アシスタントの姿 */
 export type PetSkin = "tiger" | "robot";
+
+/** アシスタントが住んでいる画面。姿と行き先はここで分かれる */
+export type PetScene = "chat" | "ingest";
+
+/**
+ * 画面ごとの既定の姿。
+ *
+ * AIチャットは虎（プロダクト名がAI虎の巻なので）、ナレッジ登録はロボット。
+ */
+const DEFAULT_SKIN: Record<PetScene, PetSkin> = {
+  chat: "tiger",
+  ingest: "robot",
+};
 
 const HIDDEN_KEY = "torano-maki:pet:hidden";
 const SPOT_KEY = "torano-maki:pet:spot";
@@ -50,17 +65,20 @@ function loadSpot(): PetSpot {
   }
 }
 
-function loadSkin(): PetSkin {
+/** null は「まだ選んでいない」。画面ごとの既定で出す合図になる */
+function loadChosenSkin(): PetSkin | null {
   try {
-    return localStorage.getItem(SKIN_KEY) === "robot" ? "robot" : "tiger";
+    const saved = localStorage.getItem(SKIN_KEY);
+    if (saved === "robot" || saved === "tiger") return saved;
   } catch {
-    return "tiger";
+    // 読めなくても既定の姿で出せばよい
   }
+  return null;
 }
 
 let hidden = typeof window === "undefined" ? false : loadHidden();
 let spot: PetSpot = typeof window === "undefined" ? null : loadSpot();
-let skin: PetSkin = typeof window === "undefined" ? "tiger" : loadSkin();
+let chosenSkin: PetSkin | null = typeof window === "undefined" ? null : loadChosenSkin();
 
 const listeners = new Set<() => void>();
 
@@ -79,9 +97,6 @@ function getHidden(): boolean {
   return hidden;
 }
 
-function getSkin(): PetSkin {
-  return skin;
-}
 
 /** `spot` は差し替えでしか変わらない。同じ参照を返し続けるので再描画が暴れない */
 function getSpot(): PetSpot {
@@ -119,13 +134,24 @@ export function setPetSpot(next: PetSpot): void {
   emit();
 }
 
-export function usePetSkin(): PetSkin {
-  return useSyncExternalStore(subscribe, getSkin, () => "tiger" as PetSkin);
+/**
+ * その画面に出す姿。選ばれていればそれ、まだなら画面ごとの既定。
+ *
+ * 返すのは文字列なので、描画のたびに新しい値を作ることにはならない
+ * （`useSyncExternalStore` は同じ値を返し続ける必要がある）。
+ */
+export function usePetSkin(scene: PetScene): PetSkin {
+  return useSyncExternalStore(
+    subscribe,
+    () => chosenSkin ?? DEFAULT_SKIN[scene],
+    () => DEFAULT_SKIN[scene],
+  );
 }
 
+/** 選んだ姿は全画面で共有する。画面を跨ぐたびに選び直させない */
 export function setPetSkin(next: PetSkin): void {
-  if (skin === next) return;
-  skin = next;
+  if (chosenSkin === next) return;
+  chosenSkin = next;
   remember(SKIN_KEY, next);
   emit();
 }
