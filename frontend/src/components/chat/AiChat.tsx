@@ -22,8 +22,8 @@ import { Composer } from "./Composer";
 import { AgentTimeline, Spinner } from "./AgentTimeline";
 import { Citations } from "./Citations";
 import { Markdown } from "./Markdown";
+import { NextActions } from "./NextActions";
 import { useChat, type Turn } from "./useChat";
-import { navigate, roleplayStartPath } from "../../lib/router";
 
 const EXAMPLE_QUESTIONS = [
   "在庫が合わなくて顧客に謝ることになった事例は？",
@@ -56,6 +56,9 @@ type Props = {
 export function AiChat({ knowledgeCount, reloadKey }: Props) {
   const { turns, busy, send, stop, reset, retry } = useChat();
   const [workspaceOpen, setWorkspaceOpen] = useState(loadWorkspaceOpen);
+  // 「上司に確認する」を押した合図。要約の状態そのものは
+  // ChatReviewPanel が持っているので、番号を送って起こすだけにする
+  const [reviewSignal, setReviewSignal] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   // 利用者が上へスクロールして読んでいる間は追わない。
   // トークンが届くたびに引き戻されると、過去の回答を読めない
@@ -90,16 +93,24 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
   return (
     <div className="flex h-full">
       {/* 調査ビューは会話の左。読む列（会話）を画面の同じ位置に置いたまま、
-          開閉できる面を外側に足す */}
-      {workspaceOpen && (
-        <div className="hidden w-[360px] shrink-0 lg:block xl:w-[420px]">
-          <AgentWorkspace
-            turn={latest}
-            onClose={() => setWorkspaceOpen(false)}
-            reloadKey={reloadKey}
-          />
-        </div>
-      )}
+          開閉できる面を外側に足す。境界の三角タブは開閉どちらでも常に表示し、
+          同じボタンで出し入れできるようにする */}
+      <div className="hidden shrink-0 lg:flex">
+        {workspaceOpen && (
+          <div className="w-[360px] xl:w-[420px]">
+            <AgentWorkspace turn={latest} reloadKey={reloadKey} />
+          </div>
+        )}
+        <button
+          onClick={() => setWorkspaceOpen((v) => !v)}
+          aria-label={workspaceOpen ? "調査ビューを閉じる" : "調査ビューを開く"}
+          aria-expanded={workspaceOpen}
+          className="flex w-5 shrink-0 items-center justify-center border-r border-indigo-100
+                     bg-indigo-50/40 text-sm text-slate-300 hover:bg-indigo-100/60 hover:text-slate-600"
+        >
+          {workspaceOpen ? "◀" : "▶"}
+        </button>
+      </div>
 
       {/* 画面全体を歩く。パネルを閉じていても、AIが今どこを見ているかは伝わる */}
       <AgentPet phase={currentPhase(latest)} foundCount={latest?.citations.length ?? 0} />
@@ -124,6 +135,7 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
                     key={turn.id}
                     turn={turn}
                     onRetry={() => retry(turn.id)}
+                    onReview={() => setReviewSignal((n) => n + 1)}
                     busy={busy}
                     latest={turn.id === latest?.id}
                   />
@@ -134,14 +146,6 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
         </div>
 
         <div className="mx-auto flex w-full max-w-3xl items-center justify-end gap-1 px-4">
-          {!workspaceOpen && (
-            <button
-              onClick={() => setWorkspaceOpen(true)}
-              className="hidden rounded-lg px-2 py-1 text-xs text-slate-400 hover:bg-slate-100 hover:text-slate-600 lg:block"
-            >
-              調査ビューを開く
-            </button>
-          )}
           {!empty && (
             <button
               onClick={reset}
@@ -152,7 +156,7 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
           )}
         </div>
 
-        <ChatReviewPanel turns={turns} />
+        <ChatReviewPanel turns={turns} startSignal={reviewSignal} />
 
         {/* アシスタントが寄ってくる先。入力欄そのものに印を付けると
             Composer 側の都合に引きずられるので、隣に置いておく */}
@@ -223,11 +227,13 @@ function EmptyState({
 function TurnView({
   turn,
   onRetry,
+  onReview,
   busy,
   latest,
 }: {
   turn: Turn;
   onRetry: () => void;
+  onReview: () => void;
   busy: boolean;
   /** 最新のターンだけがアシスタントの行き先になる。過去の回答を指されても困る */
   latest: boolean;
@@ -283,27 +289,14 @@ function TurnView({
             </div>
           )}
 
-          {/* **出典の一覧より上に、右寄せで置く。** 出典カードや場面の札にも
-              練習ボタンがあるが、あちらは開かないと見えず「読んで終わり」で
-              流れてしまう。読み終えた直後が最も動機の高い瞬間なので、
-              事例を選ばせる前にここから入れるようにする。
-              ナレッジIDは渡さない。どの事例で練習するかはサーバの検索に任せ、
-              利用者には「何を練習したいか」だけを決めさせる */}
-          {turn.status === "done" && (
-            <div className="flex justify-end">
-              <button
-                onClick={() => navigate(roleplayStartPath({ query: turn.question }))}
-                className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white
-                           hover:bg-indigo-500"
-              >
-                この疑問を練習する
-              </button>
-            </div>
-          )}
-
           <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
             <Citations citations={turn.citations} question={turn.question} />
           </div>
+
+          {/* **最新のターンにだけ出す。** 過去の回答すべてにボタンが並ぶと、
+              会話を読み返すときに邪魔になるうえ、どれが今の話なのか
+              分からなくなる（NextActions.tsx） */}
+          {latest && <NextActions turn={turn} onReview={onReview} />}
 
           {turn.status === "done" && <TurnFooter turn={turn} />}
         </div>

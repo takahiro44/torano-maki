@@ -1,18 +1,29 @@
 /**
- * 商談音声を文字起こしし、確認・修正のうえでナレッジ化する。
+ * 登録の材料になるファイルを受け取り、本文のテキストにして返す。
  *
- * **文字起こしとナレッジ化を分けている。** 文字起こしの欠落や幻覚は
- * 後段のLLMでは直せない（誤りに見えないまま自然な文で埋められる）ため、
- * 必ず人が目を通す段を挟む。詳細は experiments/stt/README.md。
+ * **音声もテキストも同じ入口にする。** 抽出の入力は結局テキストであり、
+ * 経路を2本持つとプロンプトやチャンク分割の改善を両方に当て続けることに
+ * なる（旧 AudioIngest の判断）。画面も同じ理由で分けない。
+ * 利用者から見ても「登録するもの」は1つで、それが音声かテキストかは
+ * 入口の違いでしかない。
+ *
+ * **文字起こしとナレッジ化は分ける。** 文字起こしの欠落や幻覚は後段のLLMでは
+ * 直せない（誤りに見えないまま自然な文で埋められる）ため、必ず人が目を通す
+ * 段を挟む。ここは本文を渡すところまでで、抽出は呼び出し側が行う。
  */
 
 import { useCallback, useEffect, useRef, useState } from "react";
 import { getConfigHealth, transcribeAudio } from "../api/client";
 import { formatClock } from "../lib/time";
 import type { AudioTranscribeResponse } from "../types/api";
+import { Spinner } from "./chat/AgentTimeline";
 
 /** バックエンドの _ALLOWED_SUFFIXES と揃える */
-const ACCEPT = ".wav,.mp3,.m4a,.mp4,.flac,.ogg,.webm,.aac";
+const AUDIO_SUFFIXES = [".wav", ".mp3", ".m4a", ".mp4", ".flac", ".ogg", ".webm", ".aac"];
+/** そのまま本文にできるもの。文字起こしを挟まない */
+const TEXT_SUFFIXES = [".txt", ".md", ".csv", ".vtt", ".srt"];
+const ACCEPT = [...AUDIO_SUFFIXES, ...TEXT_SUFFIXES].join(",");
+
 const MAX_BYTES = 200 * 1024 * 1024;
 
 /**
@@ -21,6 +32,18 @@ const MAX_BYTES = 200 * 1024 * 1024;
  * 実測より遅めの15倍で見積もる。
  */
 const REALTIME_FACTOR = 15;
+
+export type PickedSource = {
+  text: string;
+  fileName: string;
+  /** 音声から来た場合のみ。抽出時に渡すと、ナレッジがこの音声を出典に持つ */
+  transcript: AudioTranscribeResponse | null;
+};
+
+function suffixOf(name: string): string {
+  const dot = name.lastIndexOf(".");
+  return dot === -1 ? "" : name.slice(dot).toLowerCase();
+}
 
 function formatSize(bytes: number): string {
   return `${(bytes / 1024 / 1024).toFixed(1)}MB`;
@@ -43,9 +66,12 @@ function readDuration(file: File): Promise<number | null> {
   });
 }
 
-type Props = { onTranscribed: (result: AudioTranscribeResponse) => void };
+type Props = {
+  onPicked: (source: PickedSource) => void;
+  disabled?: boolean;
+};
 
-export function AudioInput({ onTranscribed }: Props) {
+export function SourcePicker({ onPicked, disabled = false }: Props) {
   const [file, setFile] = useState<File | null>(null);
   const [duration, setDuration] = useState<number | null>(null);
   const [running, setRunning] = useState(false);
@@ -55,8 +81,8 @@ export function AudioInput({ onTranscribed }: Props) {
   const [sttReady, setSttReady] = useState<boolean | null>(null);
   const inputRef = useRef<HTMLInputElement>(null);
 
-  // STT未設定は「音声タブだけが動かない」状態になる。押してから
-  // 503で気づくより、開いた時点で原因が分かる方が早い
+  // STT未設定は「音声だけが動かない」状態になる。押してから503で気づくより、
+  // 開いた時点で原因が分かる方が早い
   useEffect(() => {
     getConfigHealth()
       .then((c) => setSttReady(c.stt_configured))
@@ -70,15 +96,34 @@ export function AudioInput({ onTranscribed }: Props) {
     return () => window.clearInterval(timer);
   }, [running]);
 
-  const pick = useCallback(async (picked: File) => {
-    setError(null);
-    if (picked.size > MAX_BYTES) {
-      setError(`ファイルが大きすぎます（${formatSize(picked.size)} / 上限 200MB）`);
-      return;
-    }
-    setFile(picked);
-    setDuration(await readDuration(picked));
-  }, []);
+  const pick = useCallback(
+    async (picked: File) => {
+      setError(null);
+      const suffix = suffixOf(picked.name);
+
+      if (TEXT_SUFFIXES.includes(suffix)) {
+        // テキストは文字起こしを挟まない。読んですぐ本文になる
+        try {
+          onPicked({ text: await picked.text(), fileName: picked.name, transcript: null });
+        } catch {
+          setError("ファイルを読み込めませんでした。文字コードを確認してください。");
+        }
+        return;
+      }
+
+      if (!AUDIO_SUFFIXES.includes(suffix)) {
+        setError(`対応していない形式です（${suffix || "拡張子なし"}）。${ACCEPT} に対応しています`);
+        return;
+      }
+      if (picked.size > MAX_BYTES) {
+        setError(`ファイルが大きすぎます（${formatSize(picked.size)} / 上限 200MB）`);
+        return;
+      }
+      setFile(picked);
+      setDuration(await readDuration(picked));
+    },
+    [onPicked],
+  );
 
   async function run() {
     if (!file) return;
@@ -87,7 +132,7 @@ export function AudioInput({ onTranscribed }: Props) {
     setError(null);
     try {
       const result = await transcribeAudio(file);
-      onTranscribed(result);
+      onPicked({ text: result.text, fileName: result.file_name, transcript: result });
       setFile(null);
       setDuration(null);
       if (inputRef.current) inputRef.current.value = "";
@@ -101,20 +146,13 @@ export function AudioInput({ onTranscribed }: Props) {
   const estimate = duration === null ? null : Math.max(5, Math.round(duration / REALTIME_FACTOR));
 
   return (
-    <div className="space-y-4">
-      <div>
-        <h2 className="text-lg font-semibold">商談音声から登録</h2>
-        <p className="mt-1 text-sm text-slate-500">
-          音声をアップロードすると文字起こしします。内容を確認・修正してからナレッジ化するので、
-          聞き取りの誤りをそのまま貯めずに済みます。
-        </p>
-      </div>
-
+    <div className="space-y-3">
       {sttReady === false && (
-        <div className="rounded-lg border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900">
+        <p className="rounded-xl bg-amber-50 px-3.5 py-2.5 text-xs leading-relaxed text-amber-900 ring-1 ring-amber-200/70">
           音声認識サーバが未設定です。リポジトリ直下の <code>.env</code> に{" "}
           <code>STT_BASE_URL</code> を設定してバックエンドを再起動してください。
-        </div>
+          テキストファイルは設定なしでも使えます。
+        </p>
       )}
 
       <div
@@ -130,23 +168,23 @@ export function AudioInput({ onTranscribed }: Props) {
           if (dropped) void pick(dropped);
         }}
         className={
-          "rounded-lg border-2 border-dashed p-8 text-center transition-colors " +
-          (dragging ? "border-slate-500 bg-slate-50" : "border-slate-300 bg-white")
+          "rounded-2xl border border-dashed px-4 py-6 text-center transition-colors " +
+          (dragging ? "border-indigo-400 bg-indigo-50/60" : "border-slate-300 bg-white")
         }
       >
         <p className="text-sm text-slate-600">
-          音声ファイルをここにドラッグするか、
+          商談の録音やメモをここにドラッグするか、
           <button
             type="button"
             onClick={() => inputRef.current?.click()}
-            disabled={running}
-            className="mx-1 underline underline-offset-2 hover:text-slate-900 disabled:text-slate-400"
+            disabled={running || disabled}
+            className="mx-1 font-medium text-indigo-600 underline underline-offset-2 hover:text-indigo-500 disabled:text-slate-400"
           >
-            選択してください
+            ファイルを選ぶ
           </button>
         </p>
-        <p className="mt-2 text-xs text-slate-400">
-          wav / mp3 / m4a / flac / ogg など・上限 200MB
+        <p className="mt-1.5 text-[11px] text-slate-400">
+          音声 wav / mp3 / m4a など・テキスト txt / md / csv・上限 200MB
         </p>
         <input
           ref={inputRef}
@@ -161,10 +199,10 @@ export function AudioInput({ onTranscribed }: Props) {
       </div>
 
       {file && (
-        <div className="rounded-lg border border-slate-200 bg-white p-4">
+        <div className="rounded-2xl bg-white p-3.5 ring-1 ring-slate-200/80">
           <div className="flex flex-wrap items-baseline justify-between gap-2">
             <span className="text-sm font-medium text-slate-800">{file.name}</span>
-            <span className="text-xs text-slate-500">
+            <span className="text-[11px] text-slate-400">
               {formatSize(file.size)}
               {duration !== null && ` ・ ${formatClock(duration)}`}
             </span>
@@ -173,20 +211,22 @@ export function AudioInput({ onTranscribed }: Props) {
           <div className="mt-3 flex flex-wrap items-center gap-3">
             <button
               onClick={() => void run()}
-              disabled={running}
-              className="rounded-lg bg-slate-900 px-4 py-2 text-sm font-medium text-white
-                         hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+              disabled={running || disabled}
+              className="flex items-center gap-2 rounded-xl bg-indigo-600 px-3.5 py-2 text-sm
+                         font-medium text-white transition-colors hover:bg-indigo-500
+                         disabled:cursor-not-allowed disabled:bg-slate-200 disabled:text-slate-400"
             >
+              {running && <Spinner className="size-4 text-white" />}
               {running ? `文字起こし中… ${elapsed}秒` : "文字起こしする"}
             </button>
             {running ? (
-              <span className="text-xs text-slate-500">
+              <span className="text-[11px] text-slate-500">
                 {estimate !== null && `目安 約${estimate}秒。`}
-                完了するまでこのタブを閉じないでください
+                完了するまでこの画面を閉じないでください
               </span>
             ) : (
               estimate !== null && (
-                <span className="text-xs text-slate-400">目安 約{estimate}秒</span>
+                <span className="text-[11px] text-slate-400">目安 約{estimate}秒</span>
               )
             )}
           </div>
@@ -194,7 +234,7 @@ export function AudioInput({ onTranscribed }: Props) {
       )}
 
       {error && (
-        <p className="rounded-lg border border-red-200 bg-red-50 p-3 text-sm text-red-800">
+        <p className="rounded-xl bg-rose-50 px-3.5 py-2.5 text-sm text-rose-800 ring-1 ring-rose-200/70">
           {error}
         </p>
       )}

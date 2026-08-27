@@ -80,7 +80,7 @@ export function RankingView({
 function PendingStep({ step }: { step: AgentStep }) {
   return (
     <p className="flex items-baseline gap-1.5 text-[11px] text-slate-500">
-      <span className={step.ok === null ? "text-amber-500" : "text-indigo-500"}>
+      <span className={step.ok === null ? "text-sky-500" : "text-indigo-500"}>
         {step.ok === null ? "▶" : "✓"}
       </span>
       <span className="min-w-0 flex-1 truncate">{step.summary ?? step.label}</span>
@@ -142,7 +142,7 @@ function SearchBlock({
                 className={
                   "w-full rounded-md px-2 py-1.5 text-left transition-colors " +
                   (handed
-                    ? "bg-emerald-50/70 ring-1 ring-emerald-200/70 hover:bg-emerald-100/70"
+                    ? "bg-indigo-50/80 ring-1 ring-indigo-200/70 hover:bg-indigo-100/70"
                     : "bg-slate-50 hover:bg-slate-100")
                 }
               >
@@ -150,7 +150,7 @@ function SearchBlock({
                 <span
                   className={
                     "w-4 shrink-0 text-right font-mono text-[10px] " +
-                    (handed ? "text-emerald-600" : "text-slate-400")
+                    (handed ? "text-indigo-600" : "text-slate-400")
                   }
                 >
                   {i + 1}
@@ -164,7 +164,7 @@ function SearchBlock({
                   {candidate.title}
                 </span>
                 {citedIds.has(candidate.id) && (
-                  <span className="shrink-0 text-[9px] font-medium text-emerald-600">参照</span>
+                  <span className="shrink-0 text-[9px] font-medium text-indigo-600">参照</span>
                 )}
               </div>
 
@@ -173,7 +173,7 @@ function SearchBlock({
                   <div
                     className={
                       "h-full rounded-full transition-all duration-500 " +
-                      (handed ? "bg-emerald-400" : "bg-slate-300")
+                      (handed ? "bg-indigo-400" : "bg-slate-300")
                     }
                     style={{ width: barWidth(candidate.semanticScore, max, min) }}
                   />
@@ -183,7 +183,7 @@ function SearchBlock({
                 </span>
                 {/* 語の一致でも拾えた場合。ハイブリッド検索のもう一方の経路 */}
                 {candidate.lexicalScore !== null && (
-                  <span className="shrink-0 rounded bg-indigo-50 px-1 text-[9px] text-indigo-500">
+                  <span className="shrink-0 rounded bg-sky-100 px-1 text-[9px] text-sky-600">
                     語句
                   </span>
                 )}

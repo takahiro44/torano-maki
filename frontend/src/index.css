@@ -45,7 +45,7 @@ body {
   }
 }
 
-/* 調査ビューのロボット。**動きだけで生きている感じを出す。**
+/* 調査ビューの虎。**動きだけで生きている感じを出す。**
    セリフを増やして賑やかにすると読む量が増えるが、浮き沈みと瞬きは
    視界の端に置いておける。 */
 @keyframes agent-pet-float {
@@ -79,6 +79,23 @@ body {
   animation: agent-pet-blink 4.5s ease-in-out infinite;
 }
 
+/* 忙しいときは尻尾が揺れる。以前はアンテナが光っていた役目 */
+@keyframes agent-pet-tail {
+  0%,
+  100% {
+    transform: rotate(-7deg);
+  }
+  50% {
+    transform: rotate(9deg);
+  }
+}
+
+.agent-pet-tail {
+  transform-box: fill-box;
+  transform-origin: left center;
+  animation: agent-pet-tail 0.9s ease-in-out infinite;
+}
+
 /* 探しているときは目が左右に動く */
 @keyframes agent-pet-scan {
   0%,
@@ -99,7 +116,8 @@ body {
 @media (prefers-reduced-motion: reduce) {
   .agent-pet,
   .agent-pet-eye,
-  .agent-pet-scan {
+  .agent-pet-scan,
+  .agent-pet-tail {
     animation: none;
   }
 }
