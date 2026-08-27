@@ -8,7 +8,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import StrEnum
-from typing import Annotated
+from typing import Annotated, Literal
 from uuid import UUID
 
 from pydantic import (
@@ -48,6 +48,18 @@ class SourceType(StrEnum):
     MANUAL = "manual"
     ROLEPLAY = "roleplay"
     INTERVIEW = "interview"
+
+
+# 営業ナレッジ以外も受け付けるための大分類。ざっくり2値に留める
+# （細分類は検索フィルタの要件が出てから）。
+# DB列は VARCHAR(50) の自由文字列で CHECK 制約が無いため、
+# この2値以外が入っても壊れない。ただし正はここ（Pydantic）に置く。
+KnowledgeCategory = Literal["business", "casual"]
+
+KNOWLEDGE_CATEGORY_LABELS: dict[str, str] = {
+    "business": "営業",
+    "casual": "その他",
+}
 
 
 TitleText = Annotated[str, StringConstraints(strip_whitespace=True, min_length=1, max_length=100)]
@@ -103,7 +115,7 @@ class ExtractedKnowledge(BaseModel):
     industry: str | None = None
     product: str | None = None
     sales_stage: str | None = None
-    knowledge_type: str = "sales_knowhow"
+    knowledge_type: KnowledgeCategory
 
     @field_validator("title", mode="before")
     @classmethod
@@ -166,7 +178,7 @@ class KnowledgeCreate(BaseModel):
     """手入力登録。title があればよい。"""
 
     title: TitleText
-    knowledge_type: str = "sales_knowhow"
+    knowledge_type: KnowledgeCategory = "business"
     situation: str | None = None
     problem: str | None = None
     judgment: str | None = None
@@ -280,6 +292,9 @@ class KnowledgeSearchResult(Knowledge):
 class SearchRequest(BaseModel):
     query: str = Field(min_length=1, description="自然文の検索クエリ")
     top_k: int = Field(default=5, ge=1, le=50)
+    knowledge_type: KnowledgeCategory | None = Field(
+        default=None, description="指定時はbusiness/casualのどちらかに絞り込む"
+    )
 
 
 class ExtractRequest(BaseModel):

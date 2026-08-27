@@ -69,7 +69,7 @@ from app.services.knowledge_context import (
     build_knowledge_context,
 )
 from app.services.llm_client import chat_completion
-from app.services.search import search_knowledge
+from app.services.search import KnowledgeFilter, search_knowledge
 
 logger = logging.getLogger(__name__)
 
@@ -287,7 +287,11 @@ def select_knowledge(db: Session, payload: RoleplaySessionCreate) -> list[Select
         used.add(payload.knowledge_id)
 
     query = _effective_query(payload)
-    for hit in search_knowledge(db, query, _SEARCH_CANDIDATES):
+    # ロープレは営業の一場面を練習する機能のため、casual（雑多な実用情報）は
+    # 候補に混ぜない。
+    for hit in search_knowledge(
+        db, query, _SEARCH_CANDIDATES, filters=KnowledgeFilter(knowledge_type="business")
+    ):
         if len(selected) >= MAX_KNOWLEDGE_PER_SESSION:
             break
         if hit.id in used:

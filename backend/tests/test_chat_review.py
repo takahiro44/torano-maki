@@ -26,6 +26,7 @@ _SAMPLE_KNOWLEDGE = ExtractedKnowledge(
     problem="顧客への説明が後手に回った",
     action="差異理由を先に伝え、代替納期を提示した",
     lesson="差異が分かった時点で先に連絡する",
+    knowledge_type="business",
 )
 _FAKE_VECTOR = [0.0] * 1024
 

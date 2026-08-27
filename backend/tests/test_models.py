@@ -21,7 +21,7 @@ class TestKnowledgeCreate:
     def test_titleだけで登録できる(self) -> None:
         k = KnowledgeCreate(title="A社はサポートを重視する")
         assert k.status == KnowledgeStatus.CONFIRMED
-        assert k.knowledge_type == "sales_knowhow"
+        assert k.knowledge_type == "business"
 
     def test_空文字は弾く(self) -> None:
         with pytest.raises(ValidationError):
@@ -51,7 +51,7 @@ class TestKnowledgeUpdate:
 
 
 def test_CBR項目は見出し付きで整形できる() -> None:
-    item = ExtractedKnowledge(title="見出し", lesson="学びだけある")
+    item = ExtractedKnowledge(title="見出し", lesson="学びだけある", knowledge_type="business")
     text = format_item_as_content(item)
     assert "【タイトル】\n見出し" in text
     assert "【学び】\n学びだけある" in text
