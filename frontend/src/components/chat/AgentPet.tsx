@@ -30,6 +30,7 @@ import {
   usePetSkin,
   usePetSpot,
   type PetScene,
+  type WanderScene,
 } from "../../lib/pet";
 import type { Phase } from "./phase";
 
@@ -49,7 +50,7 @@ const TALK_INTERVAL_MS = 5200;
  * 1フレームごとに画面全体が描き直される。目印だけDOMに置いておけば、
  * 寄っていく側が自分のペースで読みに来られる。
  */
-const ANCHORS: Record<PetScene, Record<Phase, string[]>> = {
+const ANCHORS: Record<WanderScene, Record<Phase, string[]>> = {
   chat: {
     // 開いている札が最優先。利用者がいま見ているものと同じ場所に立つ
     idle: ["popup", "composer", "focus"],
@@ -67,6 +68,16 @@ const ANCHORS: Record<PetScene, Record<Phase, string[]>> = {
     answering: ["ingest-result", "ingest-composer"],
     done: ["ingest-result", "ingest-composer"],
     error: ["ingest-message", "ingest-composer"],
+  },
+  review: {
+    // 上司の目を、生ログではなく診断の隣へ連れて行く。開いていなければ一覧。
+    // 回答したあとは抽出結果の隣（そこが次にやることになる）
+    idle: ["review-briefing", "review-list"],
+    planning: ["review-briefing", "review-list"],
+    searching: ["review-answer", "review-briefing", "review-list"],
+    answering: ["review-drafts", "review-answer", "review-briefing"],
+    done: ["review-drafts", "review-briefing", "review-answer", "review-list"],
+    error: ["review-list"],
   },
 };
 
@@ -94,6 +105,9 @@ const DRAG_SLOP_PX = 4;
 
 type Mood = "idle" | "thinking" | "searching" | "happy" | "writing" | "done" | "sad" | "cheering";
 
+/** 気分。会話の中に座る子（PetFace）にも同じものを使う */
+export type PetMood = Mood;
+
 /**
  * セリフ。`{n}` は件数に置き換わる。
  *
@@ -101,7 +115,7 @@ type Mood = "idle" | "thinking" | "searching" | "happy" | "writing" | "done" | "
  * 言われると、何を探しているのか分からない。やっていることが違うのだから、
  * 言うことも違っていなければ、居るだけの飾りになる。
  */
-const LINES: Record<PetScene, Record<Mood, string[]>> = {
+const LINES: Record<WanderScene, Record<Mood, string[]>> = {
   chat: {
     idle: ["ひまだな〜", "なんでも聞いてね", "準備はできてるよ", "待機ちゅう…"],
     thinking: ["うーん、どこから探そう", "ちょっと考えさせて", "たしかこの辺に…"],
@@ -123,6 +137,18 @@ const LINES: Record<PetScene, Record<Mood, string[]>> = {
     sad: ["うまく抽出できなかった…", "もう少し詳しく書いてみて？", "ごめん、もう一回だけ"],
     // 件数は祝いの札が大きく出している。ここで繰り返すと画面が二重になる
     cheering: ["やったー！", "おつかれさま！", "これでみんなが使えるよ", "また持ってきてね"],
+  },
+  // 上司レビューの子は「後輩の代理」として喋る。ここに並ぶのは開く前の
+  // 待機セリフだけで、開いたあとの中身は `says` で差し込まれる（AgentPet）
+  review: {
+    idle: ["質問、来てるかな", "1件ずつ見ていこ", "どれから見る？"],
+    thinking: ["どこが分かってないか、まとめてる", "会話を読み返してるよ"],
+    searching: ["ナレッジにあるか探してるよ", "似た事例がないか見てる"],
+    happy: ["ここは分かってるみたい", "お、いい質問じゃん"],
+    done: ["これ、答えてあげて", "あとは回答を書くだけだよ"],
+    writing: ["回答、ナレッジになるからね", "書けたら押してね"],
+    sad: ["うまく読み込めなかった…", "ごめん、もう一回だけ"],
+    cheering: ["ありがとう！", "これでみんなが使えるよ"],
   },
 };
 
@@ -154,12 +180,23 @@ export function AgentPet({
   foundCount,
   scene = "chat",
   cheer = 0,
+  says = null,
 }: {
   phase: Phase;
   foundCount: number;
-  scene?: PetScene;
+  scene?: WanderScene;
   /** 祝う合図。増えるたびに数秒だけ跳ねて喜ぶ（KnowledgeInput の登録完了） */
   cheer?: number;
+  /**
+   * 気分セリフの代わりに喋らせる内容。
+   *
+   * **AIに書かせない。** ここに渡すのは、画面が持っているデータから
+   * 機械的に組み立てた文である（lib/reviewBriefing.ts）。待たせている最中に
+   * さらにLLMを呼ばないという既定の判断（このファイル冒頭）は変えていない。
+   *
+   * 配列なのは、長い説明を一息で喋らせないため。一定間隔で次の行に移る。
+   */
+  says?: string[] | null;
 }) {
   // セリフの番号だけを持つ。気分が変わっても番号は据え置きでよく、
   // リセットしないぶん「同じ台詞に戻る」感じが出ない
@@ -181,7 +218,9 @@ export function AgentPet({
   // 「書けたら押してね」と言い出す
   const mood = cheering ? "cheering" : moodOf(phase, foundCount);
   const reacting = useReaction(mood);
-  const lines = LINES[scene][mood];
+  // 言うべきことがあるときだけ差し替える。無ければこれまでどおり気分セリフ
+  const speaking = says !== null && says.length > 0;
+  const lines = speaking ? says : LINES[scene][mood];
   const line = lines[index % lines.length].replace("{n}", String(foundCount));
 
   if (hidden) return null;
@@ -249,7 +288,9 @@ export function AgentPet({
 
       <div
         className={
-          "absolute top-1/2 w-max max-w-[160px] -translate-y-1/2 rounded-2xl bg-white px-3 py-2 shadow-md ring-1 ring-slate-200/80 " +
+          "absolute top-1/2 w-max -translate-y-1/2 rounded-2xl bg-white px-3 py-2 shadow-md ring-1 ring-slate-200/80 " +
+          // 診断を喋らせるときは一言より長い。160pxだと3行4行に折り返して読めない
+          (speaking ? "max-w-[260px] " : "max-w-[160px] ") +
           (place.flipped ? "right-full mr-2" : "left-full ml-2")
         }
       >
@@ -416,7 +457,7 @@ type Place = { x: number; y: number; facing: number; flipped: boolean };
  * 左に余白があれば左、無ければ右に立つ。画面の右寄りにいるときは
  * 吹き出しを左に出す（そのままだと画面の外へ出て、黙ったように見える）。
  */
-function useChase(phase: Phase, scene: PetScene): Place | null {
+function useChase(phase: Phase, scene: WanderScene): Place | null {
   const [place, setPlace] = useState<Place | null>(null);
   // 行き先を読むのはタイマーの中。その時点のフェーズを見に行けるようにする
   const phaseRef = useRef(phase);
@@ -540,7 +581,15 @@ function TigerEyes({ mood }: { mood: Mood }) {
  *
  * 64pxで描くので、これ以上の作り込みは潰れて効かない。
  */
-function Tiger({ mood, facing }: { mood: Mood; facing: number }) {
+function Tiger({
+  mood,
+  facing,
+  sizeClass = "size-16",
+}: {
+  mood: Mood;
+  facing: number;
+  sizeClass?: string;
+}) {
   const busy = mood === "searching" || mood === "thinking" || mood === "writing";
   // **IDを実体ごとに分ける。** 登録とチャットで2匹が同時にDOMに居るようになり、
   // 固定のIDだと同じ姿を選んだ瞬間に重複する。`url(#...)` は先に見つかった方を
@@ -548,7 +597,7 @@ function Tiger({ mood, facing }: { mood: Mood; facing: number }) {
   const furId = useId();
 
   return (
-    <svg viewBox="0 0 54 50" className="size-16 drop-shadow-sm" aria-hidden="true">
+    <svg viewBox="0 0 54 50" className={sizeClass + " drop-shadow-sm"} aria-hidden="true">
       <defs>
         <linearGradient id={furId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#fbbf24" />
@@ -686,13 +735,21 @@ function RobotEyes({ mood }: { mood: Mood }) {
  * 光っているように見せたいのは忙しいときのアンテナだけで、
  * それ以外の部品は本体と同じくらいはっきり出ている必要がある。
  */
-function Robot({ mood, facing }: { mood: Mood; facing: number }) {
+function Robot({
+  mood,
+  facing,
+  sizeClass = "size-16",
+}: {
+  mood: Mood;
+  facing: number;
+  sizeClass?: string;
+}) {
   const busy = mood === "searching" || mood === "thinking" || mood === "writing";
   // 虎と同じ理由（実体ごとに分ける）
   const bodyId = useId();
 
   return (
-    <svg viewBox="0 0 54 50" className="size-16 drop-shadow-sm" aria-hidden="true">
+    <svg viewBox="0 0 54 50" className={sizeClass + " drop-shadow-sm"} aria-hidden="true">
       <defs>
         <linearGradient id={bodyId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#818cf8" />
@@ -722,5 +779,36 @@ function Robot({ mood, facing }: { mood: Mood; facing: number }) {
         <RobotEyes mood={mood} />
       </g>
     </svg>
+  );
+}
+
+
+/**
+ * 会話の中に座っている子。ロープレの顧客役はこれで出す。
+ *
+ * **歩かせない。** 徘徊する子（AgentPet）は「見てほしいものの隣に立つ」役で、
+ * こちらは会話の相手そのものである。相手が画面を歩き回っていたら、
+ * どこに向かって話しているのか分からなくなる。
+ *
+ * **しまえない。** 「アシスタントをしまう」は、邪魔だと感じた人が
+ * 徘徊する子を消すための口である。顧客役まで一緒に消えると、
+ * 誰と練習しているのか分からない画面になる。
+ *
+ * 姿の選択（虎／ロボット）は徘徊する子と共有する（lib/pet.ts）。
+ */
+export function PetFace({
+  scene,
+  mood,
+  sizeClass = "size-10",
+}: {
+  scene: PetScene;
+  mood: PetMood;
+  sizeClass?: string;
+}) {
+  const skin = usePetSkin(scene);
+  return skin === "tiger" ? (
+    <Tiger mood={mood} facing={0} sizeClass={sizeClass} />
+  ) : (
+    <Robot mood={mood} facing={0} sizeClass={sizeClass} />
   );
 }

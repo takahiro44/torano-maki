@@ -13,6 +13,10 @@
 **演じない。** 出しているのは実際に踏んだ工程だけで、割合や残り時間は
 出さない（ExtractionProgress.tsx と同じ理由）。検索の件数と類似度は
 実測値であり、上司が判定を検証できる材料になる。
+
+**照合そのものは `chat_review.match_gap` に置いている。** 送信時にも同じ判定が
+要るため（ヒアリングで本人が足した問いを当てる）、ここに持つと2箇所に
+同じ閾値が並び、画面と保存結果が食い違う。
 """
 
 from __future__ import annotations
@@ -27,29 +31,18 @@ from app.models.chat_review import (
     ChatReviewDiagnosis,
     GapDbState,
     GapDiagnosis,
-    GapKnowledgeHit,
     ReviewStreamDoneEvent,
     ReviewStreamEvent,
     ReviewStreamStepEvent,
     ReviewStreamStepResultEvent,
 )
-from app.services.chat_review import generate_chat_review_summary
-from app.services.search import search_knowledge
+from app.services.chat_review import generate_chat_review_summary, match_gap
 
 logger = logging.getLogger(__name__)
 
 # 照合する疑問点の上限。1件ごとに埋め込み生成＋検索が走るため、
-# 増やすと「上司に送信」の待ち時間がそのまま伸びる（計画 3.7）
+# 増やすと「まとめる」の待ち時間がそのまま伸びる（計画 3.7）
 _MAX_GAPS_TO_MATCH = 4
-
-_SEARCH_TOP_K = 3
-
-# **コサイン類似度で判定する。** RRF の score は順位のための内部値で、
-# 絶対値として閾値に使えない（models/knowledge.py:369）。
-#
-# 0.80 は暫定値。seed の15件と実レビュー数件で当ててから固定する（計画 9章）。
-# 決めた値と根拠は docs/decisions.md に残すこと。
-_SEMANTIC_MATCH_THRESHOLD = 0.80
 
 # 画面に出す疑問点の文字数。長い1文がそのまま label になると行が折り返して読めない
 _GAP_LABEL_LIMIT = 28
@@ -88,7 +81,7 @@ def stream_chat_review_diagnosis(
         yield ReviewStreamStepEvent(
             step=step, label=f"「{_shorten(gap)}」をナレッジDBで探しています"
         )
-        diagnosis = _match_gap(db, gap)
+        diagnosis = match_gap(db, gap)
         gaps.append(diagnosis)
         yield ReviewStreamStepResultEvent(step=step, ok=True, summary=_describe(diagnosis))
 
@@ -101,34 +94,6 @@ def stream_chat_review_diagnosis(
             understood_points=summary.understood_points,
             gaps=gaps,
         )
-    )
-
-
-def _match_gap(db: Session, gap: str) -> GapDiagnosis:
-    """疑問点1つをナレッジDBに当てる。
-
-    **検索が落ちても打ち切らない。** 1件の照合に失敗しただけで要約ごと
-    失うのは割に合わない。その疑問は `missing` として扱い、先へ進む。
-    """
-    try:
-        hits = search_knowledge(db, gap, top_k=_SEARCH_TOP_K)
-    except Exception:
-        logger.exception("疑問点の照合に失敗しました: %s", gap)
-        hits = []
-
-    matched = [h for h in hits if h.semantic_score is not None]
-    top = matched[0].semantic_score if matched else None
-    if top is None or top < _SEMANTIC_MATCH_THRESHOLD:
-        return GapDiagnosis(gap=gap, db_state=GapDbState.MISSING)
-
-    return GapDiagnosis(
-        gap=gap,
-        db_state=GapDbState.FOUND_BUT_UNREACHABLE,
-        existing_knowledge=[
-            GapKnowledgeHit(knowledge_id=h.id, title=h.title, semantic_score=h.semantic_score)
-            for h in matched
-            if h.semantic_score is not None and h.semantic_score >= _SEMANTIC_MATCH_THRESHOLD
-        ],
     )
 
 

@@ -12,9 +12,8 @@
  * 分類フォームは出さない。入力の手間を増やさないことが価値のため。
  * 承認は一覧へ行かず、この画面で完了できるようにする。
  *
- * **承認の前に直せる。** 抽出は当たっているのに一言だけ違う、という状態が
- * 一番多い。「承認する」しか出せないと、直したい人は承認してから別の場所で
- * 直すか、捨ててもう一度書くことになる（KnowledgeEditor）。
+ * **抽出結果の確認・修正・承認は共有部品に置いた**（KnowledgeDrafts）。
+ * 上司レビューでも同じ作業をするため、ここに抱えると片方だけ直る。
  *
  * **待っている間、この子が居る。** 抽出は1分近くかかる。止まったのか動いて
  * いるのかを読み取る負担を減らすのは、調査ビューと同じ理由（AgentPet）。
@@ -29,7 +28,7 @@
  */
 
 import { useState } from "react";
-import { ingestText, updateKnowledge } from "../api/client";
+import { ingestText } from "../api/client";
 import { formatClock } from "../lib/time";
 import type { AudioTranscribeResponse, Knowledge } from "../types/api";
 import { Celebration } from "./Celebration";
@@ -37,8 +36,7 @@ import { AgentPet } from "./chat/AgentPet";
 import { Spinner } from "./chat/AgentTimeline";
 import type { Phase } from "./chat/phase";
 import { ExtractionProgress } from "./ExtractionProgress";
-import { KnowledgeCard } from "./KnowledgeCard";
-import { AiConsultBar, KnowledgeEditor } from "./KnowledgeEditor";
+import { KnowledgeDrafts } from "./KnowledgeDrafts";
 import { MicButton } from "./MicButton";
 import { SourcePicker, type PickedSource } from "./SourcePicker";
 
@@ -47,9 +45,6 @@ const EXAMPLES = [
   "B商事の担当が来月から交代。前任との関係を新任に引き継がないと、更新の話が止まる。",
   "A社の初回訪問で、標準プラン360万円が年間予算300万円を超えると言われた。その場で値引きせず、営業部30名だけの段階導入を出した。「稟議しやすい」と言われ、次回は情シス入りの見積になった。",
 ];
-
-/** 抽出結果が1枚ずつ現れる間隔。速いと一斉に出て、遅いと待たされる */
-const CARD_STAGGER_MS = 90;
 
 type Props = {
   onCreated: () => void;
@@ -64,15 +59,14 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
   const [sourceName, setSourceName] = useState<string | null>(null);
   const [showSegments, setShowSegments] = useState(false);
   const [saving, setSaving] = useState(false);
+  // 承認そのものは KnowledgeDrafts が行う。ここが持つのは
+  // 「その間は入力を止める」ためと、アシスタントの機嫌のため
   const [confirming, setConfirming] = useState(false);
   const [pending, setPending] = useState<Knowledge[]>([]);
   const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
   // 送った原文。抽出中の表示に映し、抽出後はAI相談の裏取りに渡す。
   // 本文欄は成功時に空にするので、そちらは使えない
   const [submitted, setSubmitted] = useState<string | null>(null);
-  const [editingId, setEditingId] = useState<string | null>(null);
-  // 編集フォームを開くと同時にAIへ投げる指示。カードのボタンから直接相談するため
-  const [autoConsult, setAutoConsult] = useState<string | null>(null);
   const [aiBusy, setAiBusy] = useState(false);
   // この抽出で出た件数。祝いに出す数はこれ（承認するたびに pending から
   // 抜けるので、承認し終えた時点では数え直せない）
@@ -94,17 +88,6 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
     setCheer((n) => n + 1);
   }
 
-  /** カードから直接AIへ相談する。指示が空なら編集フォームを開くだけ */
-  function askAi(id: string, instruction: string) {
-    setEditingId(id);
-    setAutoConsult(instruction || null);
-  }
-
-  function closeEditor() {
-    setEditingId(null);
-    setAutoConsult(null);
-  }
-
   /** ファイルから来た本文を受け取る。打ちかけの内容は消さず、続きに足す */
   function accept(source: PickedSource) {
     setContent((prev) => (prev.trim() ? `${prev.trim()}\n\n${source.text}` : source.text));
@@ -113,7 +96,6 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
     setShowSegments(false);
     setPending([]);
     setBatchSize(0);
-    closeEditor();
     setMessage({
       kind: "ok",
       text: source.transcript
@@ -134,7 +116,6 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
     setSaving(true);
     setSubmitted(text);
     setMessage(null);
-    closeEditor();
     setCelebration(null);
     try {
       const result = await ingestText(text, transcript?.data_source_id);
@@ -165,44 +146,20 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
     }
   }
 
-  async function confirmIds(ids: string[]) {
-    if (ids.length === 0) return;
-    setConfirming(true);
-    setMessage(null);
-    try {
-      const updated: Knowledge[] = [];
-      for (const id of ids) {
-        updated.push(await updateKnowledge(id, { status: "confirmed" }));
-      }
-      const confirmedIds = new Set(updated.map((k) => k.id));
-      setPending((prev) => prev.filter((k) => !confirmedIds.has(k.id)));
-      setMessage({
-        kind: "ok",
-        text: `${updated.length}件を承認しました。AIに聞く画面から検索できます。`,
-      });
-      celebrateIfDone(drafts.filter((k) => !confirmedIds.has(k.id)).length);
-      onCreated();
-    } catch (e) {
-      setMessage({ kind: "error", text: e instanceof Error ? e.message : String(e) });
-    } finally {
-      setConfirming(false);
+  /**
+   * 承認・保存された分を手元へ返す。
+   *
+   * **まとめて受け取る。** 「すべて承認する」で1件ずつ返されると、
+   * 最後の1件を処理する時点でも残り件数を数え直せず、出し切った瞬間に
+   * 祝えない（celebrateIfDone）
+   */
+  function applyUpdated(updated: Knowledge[]) {
+    const byId = new Map(updated.map((k) => [k.id, k]));
+    const next = pending.map((k) => byId.get(k.id) ?? k);
+    setPending(next);
+    if (updated.some((k) => k.status === "confirmed")) {
+      celebrateIfDone(next.filter((k) => k.status === "draft").length);
     }
-  }
-
-  /** 編集の結果を手元の一覧へ返す。承認済みになったものは下書きから外れる */
-  function applySaved(updated: Knowledge) {
-    setPending((prev) => prev.map((k) => (k.id === updated.id ? updated : k)));
-    closeEditor();
-    if (updated.status === "confirmed") {
-      celebrateIfDone(drafts.filter((k) => k.id !== updated.id).length);
-    }
-    setMessage({
-      kind: "ok",
-      text:
-        updated.status === "confirmed"
-          ? `「${updated.title}」を保存して承認しました。`
-          : `「${updated.title}」の変更を保存しました。承認するとAIが使えるようになります。`,
-    });
     onCreated();
   }
 
@@ -332,87 +289,15 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
         </p>
       )}
 
-      {drafts.length > 0 && (
-        <div
-          data-pet-anchor="ingest-result"
-          className="space-y-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200/80"
-        >
-          <div className="flex flex-wrap items-center justify-between gap-2">
-            <h3 className="text-sm font-medium text-slate-800">抽出結果（下書き）</h3>
-            <button
-              type="button"
-              onClick={() => void confirmIds(drafts.map((k) => k.id))}
-              disabled={confirming || editingId !== null}
-              className="rounded-xl bg-indigo-600 px-3.5 py-1.5 text-xs font-medium text-white
-                         transition-colors hover:bg-indigo-500 disabled:bg-slate-200 disabled:text-slate-400"
-            >
-              {confirming ? "承認しています…" : "すべて承認する"}
-            </button>
-          </div>
-          <p className="text-xs text-slate-400">
-            詳細を開くと根拠の原文も確認できます。承認しない場合は下書きのまま残ります。
-          </p>
-          {drafts.map((k, i) =>
-            editingId === k.id ? (
-              <KnowledgeEditor
-                key={k.id}
-                knowledge={k}
-                sourceText={submitted}
-                offerConfirm
-                autoConsult={autoConsult}
-                onSaved={applySaved}
-                onCancel={closeEditor}
-                onAiBusy={setAiBusy}
-              />
-            ) : (
-              // 1枚ずつ現れる。まとめて出ると、何件出たのかを数え直すことになる
-              <div
-                key={k.id}
-                className="agent-rise overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm"
-                style={{ animationDelay: `${i * CARD_STAGGER_MS}ms` }}
-              >
-                <KnowledgeCard
-                  flush
-                  knowledge={k}
-                  showEmptyDetails
-                  extra={
-                    <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-500">
-                      {k.status}
-                    </span>
-                  }
-                  actions={
-                    <>
-                      <button
-                        type="button"
-                        onClick={() => askAi(k.id, "")}
-                        disabled={confirming}
-                        className="text-slate-500 underline underline-offset-2 hover:text-slate-700
-                                   disabled:text-slate-300"
-                      >
-                        手で直す
-                      </button>
-                      <button
-                        type="button"
-                        onClick={() => void confirmIds([k.id])}
-                        disabled={confirming}
-                        className="text-indigo-600 underline underline-offset-2 hover:text-indigo-500
-                                   disabled:text-slate-300"
-                      >
-                        承認する
-                      </button>
-                    </>
-                  }
-                />
-                {/* AIに聞きたいのは「これでいいか分からない」段階であって、
-                    直すと決めた後ではない。ボタン1つで相談が始まる */}
-                <div className="px-4 pb-3">
-                  <AiConsultBar onAsk={(text) => askAi(k.id, text)} disabled={confirming} />
-                </div>
-              </div>
-            ),
-          )}
-        </div>
-      )}
+      <KnowledgeDrafts
+        drafts={drafts}
+        sourceText={submitted}
+        anchor="ingest-result"
+        onUpdated={applyUpdated}
+        onMessage={setMessage}
+        onAiBusy={setAiBusy}
+        onConfirming={setConfirming}
+      />
 
       <div className="rounded-2xl bg-white p-4 ring-1 ring-slate-200/80">
         <p className="text-xs font-medium text-slate-500">

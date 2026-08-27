@@ -59,8 +59,11 @@ export function nextActions(turn: Turn, onReview: () => void): NextAction[] {
 
   actions.push({
     key: "review",
-    label: "上司に確認する",
-    hint: "この会話をまとめて送る",
+    // **「確認する」から「質問する」に変えている。** 押した先でやるのは
+    // 会話の要約を投げることではなく、分からなかった点をAIに聞き取って
+    // もらったうえで、上司に問いとして渡すことである（ReviewHearing.tsx）
+    label: "わからないところを上司に聞く",
+    hint: "AIが聞き取ってから送る",
     tone: "quiet",
     run: onReview,
   });

@@ -28,6 +28,7 @@ import type {
   KnowledgeStatus,
   KnowledgeEvidenceSpan,
   RefineMessage,
+  ReviewHearing,
   ReviewStreamEvent,
   RoleplayCategory,
   RoleplaySession,
@@ -299,12 +300,20 @@ export function streamChatReviewSummary(
   );
 }
 
-/** 「上司に送信」。要約をサーバ側で再生成し、pendingで保存する */
-export function sendChatReview(messages: ChatMessage[]) {
+/**
+ * 「上司に質問する」。pendingで保存する。
+ *
+ * **ヒアリング結果を付けると、サーバは要約を作り直さない。** 後輩は画面に出た
+ * 要約と疑問点を読んだうえで答えているため、作り直すと本人が答えたのとは
+ * 別の文面が上司に届く。付けない場合はこれまでどおりサーバが要約する。
+ *
+ * `db_state`（ナレッジDBに有るか）は送らない。実際に検索したサーバだけが言える。
+ */
+export function sendChatReview(messages: ChatMessage[], hearing?: ReviewHearing) {
   return request<ChatReviewDetail>("/chat-reviews", {
     method: "POST",
-    body: JSON.stringify({ messages }),
-    signal: AbortSignal.timeout(90_000),
+    body: JSON.stringify(hearing ? { messages, hearing } : { messages }),
+    signal: AbortSignal.timeout(120_000),
   });
 }
 

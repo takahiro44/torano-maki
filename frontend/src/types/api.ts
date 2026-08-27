@@ -437,23 +437,77 @@ export type ChatReviewListItem = {
   answered_at: string | null;
 };
 
-export type CreatedKnowledgeItem = {
-  id: string;
-  title: string;
+/**
+ * その論点を後輩がどこまで分かっているか。
+ *
+ * **決めるのはAIではなく本人。** 既定は要約が出した `understood` で、
+ * 送る前のヒアリングで本人が下げる。自分が怪しいと思っているかどうかは、
+ * 会話ログからは読み取れない。
+ */
+export type UnderstandingLevel = "understood" | "shaky" | "unknown";
+
+export type UnderstoodPoint = {
+  point: string;
+  level: UnderstandingLevel;
+};
+
+/**
+ * その問いを誰が立てたか。
+ *
+ * `learner` はヒアリングで本人が自分の言葉で書いたもの。会話に現れていないため、
+ * **AIには決して出せない。** 上司にとってはここが最も価値のある問いになる。
+ */
+export type QuestionSource = "agent" | "learner";
+
+/** 上司に投げる問い1つ。`db_state` はサーバが実際に検索して埋める */
+export type ReviewQuestion = {
+  question: string;
+  source: QuestionSource;
+  /** null は「まだ照合していない」。ヒアリング無しで送られた古い依頼で出る */
+  db_state: GapDbState | null;
+  existing_knowledge: GapKnowledgeHit[];
+  asked_by: string | null;
+};
+
+/** ヒアリングで確定した問い。`db_state` は送らない（サーバが決める） */
+export type HearingQuestion = {
+  question: string;
+  source: QuestionSource;
+};
+
+/**
+ * 送る前にAIが後輩から聞き取った結果。
+ *
+ * 要約と論点は、**後輩が画面で読んだ文面そのもの**を送る。サーバで作り直すと
+ * 自己申告がどれに対する答えなのか分からなくなる（backend の ReviewHearing）。
+ */
+export type ReviewHearing = {
+  learner_name: string | null;
+  summary: string;
+  understood: UnderstoodPoint[];
+  questions: HearingQuestion[];
 };
 
 export type ChatReviewDetail = {
   id: string;
   chat_history: ChatMessage[];
   summary: string;
-  understood_points: string[];
-  knowledge_gaps: string[];
+  understood_points: UnderstoodPoint[];
+  knowledge_gaps: ReviewQuestion[];
   status: ChatReviewStatus;
   supervisor_response: string | null;
   answered_data_source_id: string | null;
   created_at: string;
   answered_at: string | null;
-  created_knowledge: CreatedKnowledgeItem[];
+  /**
+   * 回答から抽出されたナレッジ。**下書きで作られる。**
+   *
+   * 見出しだけでなく中身ごと返ってくる。上司はこの画面で確認・修正してから
+   * 承認する（ナレッジ登録と同じ扱い。KnowledgeDrafts.tsx）
+   */
+  created_knowledge: Knowledge[];
+  /** 名乗った名前。認証が無いので任意。未入力なら null */
+  learner_name: string | null;
 };
 
 // --- ロープレ ---
