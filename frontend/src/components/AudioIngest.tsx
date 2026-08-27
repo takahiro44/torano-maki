@@ -55,7 +55,7 @@ export function AudioIngest({ onChanged }: Props) {
       const extra = res.notes?.length ? ` ${res.notes.join(" ")}` : "";
       setMessage({
         kind: "ok",
-        text: `${res.saved.length}件を構造化しました。内容を確認して承認すると「探す」の対象になります。${extra}`,
+        text: `${res.saved.length}件を構造化しました。内容を確認して承認するとAIに聞く画面の検索・一覧の対象になります。${extra}`,
       });
       onChanged();
     } catch (e) {
@@ -78,7 +78,7 @@ export function AudioIngest({ onChanged }: Props) {
       setPending((prev) => prev.filter((k) => !confirmedIds.has(k.id)));
       setMessage({
         kind: "ok",
-        text: `${updated.length}件を承認しました。「探す」から検索できます。`,
+        text: `${updated.length}件を承認しました。AIに聞く画面から検索できます。`,
       });
       onChanged();
     } catch (e) {

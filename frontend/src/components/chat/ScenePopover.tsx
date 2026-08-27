@@ -14,6 +14,7 @@ import { useEffect, useState } from "react";
 import { getKnowledge, getKnowledgeEvidence } from "../../api/client";
 import { navigate, roleplayStartPath } from "../../lib/router";
 import type { Knowledge, KnowledgeEvidenceSpan } from "../../types/api";
+import { KnowledgeArticle } from "../KnowledgeArticle";
 import { Spinner } from "./AgentTimeline";
 
 const SPEAKER_LABEL: Record<string, string> = {
@@ -109,10 +110,10 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
             </p>
           )}
 
-          {knowledge?.situation && (
+          {knowledge && (
             <section>
-              <h4 className="text-[10px] font-medium text-slate-400">状況</h4>
-              <p className="mt-0.5 text-xs leading-relaxed text-slate-600">{knowledge.situation}</p>
+              <h4 className="mb-1.5 text-[10px] font-medium text-slate-400">構造化データ</h4>
+              <KnowledgeArticle knowledge={knowledge} showEmpty />
             </section>
           )}
 
@@ -149,13 +150,6 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
                   </li>
                 ))}
               </ol>
-            </section>
-          )}
-
-          {knowledge?.lesson && (
-            <section>
-              <h4 className="text-[10px] font-medium text-slate-400">学び</h4>
-              <p className="mt-0.5 text-xs leading-relaxed text-slate-600">{knowledge.lesson}</p>
             </section>
           )}
         </div>
