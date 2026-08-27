@@ -430,12 +430,53 @@ export type RoleplaySession = {
   session_id: string;
   status: SessionStatus;
   query: string;
+  /** 場面から始めた練習だけ入る。自由入力・Citation からの練習は null */
+  category: RoleplayCategory | null;
+  /** 同じ場面の何回目か。「もう一度」で増える */
+  attempt_no: number;
+  /** 同じ場面の試行をまとめる鍵。1回目のセッションでは自分のIDが入る */
+  root_session_id: string;
   scenario: RoleplayScenario;
   turns: RoleplayTurn[];
   references: ReferencedKnowledge[];
   feedback: RoleplayFeedback | null;
   learner_turns_used: number;
   remaining_learner_turns: number;
+  created_at: string;
+  completed_at: string | null;
+};
+
+/**
+ * 履歴一覧の1行。
+ *
+ * **`RoleplaySession` とは別の型。** 一覧に発言・出典・振り返りまで載せると、
+ * 1画面のために数十回のクエリを走らせることになる。ここに無いものが要るなら、
+ * その練習を開いて `getRoleplaySession` を呼ぶ。
+ */
+export type RoleplaySessionSummary = {
+  session_id: string;
+  /** 保存済みシナリオの見出し。取れなければ利用者が打った文が入る */
+  title: string;
+  query: string;
+  category: RoleplayCategory | null;
+  /** 画面に出す場面名。対応表をフロントに持たないためサーバが埋める */
+  category_label: string | null;
+  status: SessionStatus;
+  attempt_no: number;
+  root_session_id: string;
+  learner_turns_used: number;
+  max_turns: number;
+  /** 振り返りまで終わったか。続きから再開できるかの判断に使う */
+  has_feedback: boolean;
+  /**
+   * 主役にした社内事例。
+   *
+   * **同じ場面かどうかはこれで判定する。** 見出し（`title`）はLLMが書くため、
+   * 同じ事例から作った場面でも一言一句は揃わない。
+   */
+  primary_knowledge_id: string | null;
+  /** その事例の見出し。どの商談から来た場面かを画面に出す */
+  primary_knowledge_title: string | null;
   created_at: string;
   completed_at: string | null;
 };

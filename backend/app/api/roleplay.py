@@ -14,7 +14,7 @@
 from typing import Annotated
 from uuid import UUID
 
-from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
+from fastapi import APIRouter, Depends, File, HTTPException, Query, UploadFile
 from sqlalchemy.orm import Session
 
 from app.db import get_db
@@ -24,11 +24,14 @@ from app.models.roleplay import (
     LearnerTurnRequest,
     RoleplaySession,
     RoleplaySessionCreate,
+    RoleplaySessionSummary,
     RoleplayTranscription,
 )
 from app.services.audio_upload import AudioUploadError, resolve_suffix, temporary_audio
 from app.services.llm_client import LlmNotConfiguredError, LlmRequestError
 from app.services.roleplay import (
+    DEFAULT_HISTORY_LIMIT,
+    MAX_HISTORY_LIMIT,
     RoleplayError,
     RoleplayGenerationError,
     add_learner_turn,
@@ -37,6 +40,7 @@ from app.services.roleplay import (
     create_session,
     ensure_can_answer,
     get_session,
+    list_sessions,
     retry_session,
 )
 from app.services.transcription import (
@@ -111,6 +115,24 @@ def start_session(payload: RoleplaySessionCreate, db: DbSession) -> RoleplaySess
     except (LlmRequestError, RoleplayGenerationError) as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     return build_session_view(db, session)
+
+
+@router.get("/sessions", response_model=list[RoleplaySessionSummary])
+def list_history(
+    db: DbSession,
+    limit: Annotated[int, Query(ge=1, le=MAX_HISTORY_LIMIT)] = DEFAULT_HISTORY_LIMIT,
+    offset: Annotated[int, Query(ge=0)] = 0,
+    reviewed_only: Annotated[bool, Query(description="振り返りまで終わった練習だけに絞る")] = False,
+) -> list[RoleplaySessionSummary]:
+    """練習履歴を新しい順に返す。
+
+    **`GET /sessions/{id}` と違い、LLMもDBの重い結合も使わない。**
+    画面を開いた直後に出したいので、待たせない形にしてある。
+
+    認証を作らない方針（CLAUDE.md 3.1）のため、返るのはそのDBにある
+    全員分の練習である。個人の履歴として見せないこと。
+    """
+    return list_sessions(db, limit=limit, offset=offset, reviewed_only=reviewed_only)
 
 
 @router.get("/sessions/{session_id}", response_model=RoleplaySession)

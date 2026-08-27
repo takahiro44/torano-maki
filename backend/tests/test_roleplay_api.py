@@ -161,3 +161,33 @@ def test_ロープレのシナリオはOpenAPIに出る(client: TestClient) -> N
     schema = json.loads(client.get("/openapi.json").text)
     assert "RoleplayScenario" in schema["components"]["schemas"]
     assert "/roleplay/sessions" in schema["paths"]
+
+
+def test_履歴一覧に作ったセッションが出る(client: TestClient, db: Session) -> None:
+    session = _session_in_db(db)
+    response = client.get("/roleplay/sessions")
+
+    assert response.status_code == 200
+    items = response.json()
+    found = next(item for item in items if item["session_id"] == str(session.id))
+    # 一覧は発言も出典も返さない。1画面で数十回のクエリを走らせないため
+    assert "turns" not in found
+    assert found["title"] == "値引き要求の背景を確認する"
+    assert found["attempt_no"] == 1
+    assert found["has_feedback"] is False
+
+
+def test_履歴の件数指定が範囲外なら422(client: TestClient) -> None:
+    assert client.get("/roleplay/sessions?limit=0").status_code == 422
+    assert client.get("/roleplay/sessions?limit=101").status_code == 422
+    assert client.get("/roleplay/sessions?offset=-1").status_code == 422
+
+
+def test_履歴は振り返り済みだけに絞れる(client: TestClient, db: Session) -> None:
+    session = _session_in_db(db)
+    response = client.get("/roleplay/sessions?reviewed_only=true")
+
+    assert response.status_code == 200
+    ids = [item["session_id"] for item in response.json()]
+    # 振り返り前なので出てこない
+    assert str(session.id) not in ids

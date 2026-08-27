@@ -183,12 +183,41 @@ CREATE TABLE roleplay_sessions (
     scenario      JSONB NOT NULL,
     status        VARCHAR(20) NOT NULL DEFAULT 'active'
                   CHECK (status IN ('active', 'completed', 'abandoned')),
+    -- どの場面から始めたか。**query から復元できない。**
+    -- カテゴリ開始時の query には検索用の言い換え文
+    -- （models/roleplay.py の CATEGORY_QUERIES）が入るため、
+    -- 履歴一覧に「値引き」と出すにはカテゴリ自体を残す必要がある。
+    -- 自由入力・Citation から始めた練習には対応する場面が無いので NULL。
+    category      VARCHAR(30)
+                  CHECK (category IS NULL OR category IN (
+                      'needs_discovery', 'price_objection', 'objection',
+                      'complaint', 'next_commitment')),
+    -- 「もう一度」で作られた練習を、最初の1回へ紐づける。
+    --
+    -- **親ではなく根を指す。** 3回目が2回目を指す形にすると、
+    -- 同じ場面の試行をまとめるのに再帰クエリが要る。
+    -- 履歴一覧は1クエリで組み立てたいので、常に1回目を指す。
+    -- NULL は「自分が1回目」。自己参照のため、行を作る前に
+    -- 自分のIDを入れられない（DEFAULTでは表現できない）。
+    root_session_id UUID REFERENCES roleplay_sessions(id) ON DELETE CASCADE,
+    -- 何回目の挑戦か。root からの件数を数えれば出せるが、
+    -- 一覧の1行ごとに数えることになるため保存しておく。
+    attempt_no    INT NOT NULL DEFAULT 1 CHECK (attempt_no >= 1),
     created_at    TIMESTAMPTZ NOT NULL DEFAULT now(),
     completed_at  TIMESTAMPTZ
 );
 
 CREATE INDEX idx_roleplay_sessions_status
     ON roleplay_sessions (status, created_at DESC);
+
+-- 履歴一覧は「新しい順」しか引かない。status を先頭に置いた上の索引では
+-- 絞り込みなしの並べ替えに使えないため、時刻だけの索引を別に持つ。
+CREATE INDEX idx_roleplay_sessions_created_at
+    ON roleplay_sessions (created_at DESC);
+
+CREATE INDEX idx_roleplay_sessions_root
+    ON roleplay_sessions (root_session_id, attempt_no)
+    WHERE root_session_id IS NOT NULL;
 
 -- ============================================================================
 -- 7. ROLEPLAY_SESSION_KNOWLEDGE
