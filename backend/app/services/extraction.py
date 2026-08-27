@@ -114,7 +114,11 @@ _SYSTEM_PROMPT = """あなたは経験・ノウハウの抽出の専門家です
 _CHUNK_CHARS = 4000
 _CHUNK_OVERLAP = 250
 _MAX_CHUNKS = 8
-_EXTRACT_TIMEOUT = 90.0
+# DGXは4人で共有しており、他メンバーの利用状況次第で1チャンク90秒を
+# 超えることが実測で確認された（chat.py が180秒以上を推奨しているのと同じ理由）。
+# フロント側（api/client.ts の ingestText）は720秒まで待つ設計なので、
+# ここを詰まらせているのはこの値だった。
+_EXTRACT_TIMEOUT = 180.0
 
 
 class LlmNotConfiguredError(RuntimeError):
