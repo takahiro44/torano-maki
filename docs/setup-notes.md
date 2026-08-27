@@ -64,6 +64,78 @@ DBコンテナが動作確認できたら、自分の環境の行を埋めるこ
 
 ## 記録
 
+### 2026-08-27 AIチャット・ナレッジ検索が0件になる（knowledge_typeが正規化されていない）
+
+- **やろうとしたこと**: AIチャットに「在庫が合わなくて顧客に謝ることになった事例は？」と質問した
+- **起きたこと**: 「該当する事例がありません」と返ってきた。`/chat` のレスポンスの
+  `tool_trace` を見ると `search_knowledge` が5回とも0件。一方、同じ文言を
+  `/search` に直接投げると5件ヒットしていた（検索ロジック自体は壊れていない）
+
+  ```json
+  {"step":1,"tool":"search_knowledge","ok":true,"summary":"ナレッジを検索しました（0件）"}
+  ```
+
+- **原因**: `backend/app/services/agent_tools.py` の `search_knowledge` Toolは、
+  Agentが明示しない限り既定で `knowledge_type=business` に絞り込む
+  （2026-08-27 PR #45、`docs/decisions.md` 参照）。
+  一方、2026-08-24作成の検証用JSON（`experiments/knowledge-extraction/output/meetings/*.json`）
+  経由で投入したナレッジは `pain_point` / `sales_technique` 等の独自の細分類のまま
+  DBに入っており、`business` / `casual` のどちらでもなかったため、絞り込みに
+  一切ヒットしていなかった。`docs/decisions.md` の2026-08-26の決定では
+  「既存データを一括UPDATEで統一した」とあるが、DBを作り直した／再投入した
+  タイミングでこの正規化が失われていた
+- **解決策**: 2026-08-27に `backend/scripts/normalize_knowledge_type.py` が
+  main へマージされ、既存DBを安全に正規化できるようになっている
+  （DELETEを伴わない単純なUPDATEなので、ロープレ等で参照済みの行があっても壊れない）。
+
+  1. まず現状を確認する
+
+     ```sql
+     SELECT knowledge_type, count(*) FROM knowledge_units GROUP BY knowledge_type;
+     ```
+
+  2. `business` / `casual` 以外の値がある行の**中身を必ず目視確認する**（機械的に流さない）
+
+     ```sql
+     SELECT id, title, knowledge_type
+     FROM knowledge_units
+     WHERE knowledge_type NOT IN ('business', 'casual')
+     ORDER BY knowledge_type, title;
+     ```
+
+     検証用JSON（`experiments/knowledge-extraction/output/meetings/`）だけを
+     投入している場合は、全件が商談から抽出された営業ナレッジのため
+     `business` に統一してよいことを確認済み。
+     **自分で録音した音声や手入力など、検証用JSON以外のソースも投入している場合は、
+     そのソース由来の行に casual 相当の内容が混ざっていないか特に注意して確認すること。**
+     （`normalize_knowledge_type.py` は対象を無条件に `business` へ寄せるため、
+     casual相当の行を先に個別で直しておかないと巻き込まれる）
+
+  3. casual相当のものが見つかったら、その行だけ先に直す
+
+     ```sql
+     UPDATE knowledge_units SET knowledge_type = 'casual' WHERE id = '<該当ID>';
+     ```
+
+  4. 残りをまとめて正規化する
+
+     ```bash
+     cd backend
+     uv run python scripts/normalize_knowledge_type.py --dry-run   # 件数確認
+     uv run python scripts/normalize_knowledge_type.py              # 適用
+     ```
+
+  5. `/health/db` では検知できない。実際に `/chat` か `/search` へ同じ質問を
+     投げて直ったことを確認すること
+
+  **実機で確認済み（2026-08-27）**: `decision` のうち1件を一時的に `casual` に
+  変更してから実行したところ、その1件だけは書き換わらずに残り、他118件のみ
+  `business` になった。`/chat` に同じ質問を再度投げると、想定通り事例が返るように
+  なった
+- **未解決の場合**: `--dry-run` の対象が0件なのに症状が再現する場合、原因は
+  `knowledge_type` ではない。`backend/app/services/search.py` の `_base_query()`
+  （`status == confirmed` 以外は検索対象外）を確認する
+
 ### 2026-08-26 ⚠️ TTSが本文ではなく「プロンプトを読み上げる」ことがある
 
 - **やろうとしたこと**: 長編台本20本（845発話）を無人で音声化する
