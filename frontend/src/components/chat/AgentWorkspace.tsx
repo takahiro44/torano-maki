@@ -104,8 +104,8 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
   const citedIds = new Set(turn?.citations.map((c) => c.knowledge_id) ?? []);
 
   return (
-    <aside className="flex h-full flex-col border-r border-slate-200/80 bg-slate-50">
-      <header className="flex shrink-0 items-center gap-2 border-b border-slate-200/80 bg-white px-3 py-2.5">
+    <aside className="flex h-full flex-col border-r border-indigo-100 bg-indigo-50/40">
+      <header className="flex shrink-0 items-center gap-2 border-b border-indigo-100 bg-white px-3 py-2.5">
         <StatusPill phase={phase} />
         <span className="min-w-0 flex-1 truncate text-xs text-slate-400">
           {turn ? turn.question : `検索対象 ${corpus.length}件`}
@@ -121,7 +121,7 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
 
       {/* 検索は待機中・調査中を問わず常に出す */}
       <form
-        className="flex shrink-0 items-center gap-1.5 border-b border-slate-200/80 bg-white px-3 py-2"
+        className="flex shrink-0 items-center gap-1.5 border-b border-indigo-100 bg-white px-3 py-2"
         onSubmit={(e) => {
           e.preventDefault();
           void runSearch(query);
@@ -131,8 +131,8 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
           value={query}
           onChange={(e) => setQuery(e.target.value)}
           placeholder="ナレッジを探す"
-          className="min-w-0 flex-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs
-                     outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+          className="min-w-0 flex-1 rounded-md border border-indigo-200 bg-white px-2 py-1 text-xs
+                     outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
         />
         {query && (
           <button
@@ -147,8 +147,8 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
         <button
           type="submit"
           disabled={searching || !query.trim()}
-          className="shrink-0 rounded-md bg-slate-900 px-2.5 py-1 text-xs font-medium text-white
-                     hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+          className="shrink-0 rounded-md bg-indigo-600 px-2.5 py-1 text-xs font-medium text-white
+                     hover:bg-indigo-500 disabled:cursor-not-allowed disabled:bg-slate-300"
         >
           {searching ? "…" : "検索"}
         </button>
@@ -198,12 +198,18 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
   );
 }
 
+/**
+ * 状態の色。**チャット側のアクセント（indigo）を基準に、青の濃さで進み具合を出す。**
+ * 以前は工程ごとに黄・緑と色相を変えていたが、会話の面と調査の面で色の系統が
+ * 違うと、同じ1つの応答を見ている画面に見えない。失敗だけは赤のまま残す
+ * （止まっていることは色相で分からないと気づけない）。
+ */
 const PHASE_PILL: Record<Phase, [string, string]> = {
   idle: ["待機中", "bg-slate-100 text-slate-500 ring-slate-200"],
-  planning: ["思考中", "bg-amber-50 text-amber-700 ring-amber-200"],
-  searching: ["調査中", "bg-amber-50 text-amber-700 ring-amber-200"],
+  planning: ["思考中", "bg-sky-50 text-sky-700 ring-sky-200"],
+  searching: ["調査中", "bg-sky-50 text-sky-700 ring-sky-200"],
   answering: ["回答中", "bg-indigo-50 text-indigo-700 ring-indigo-200"],
-  done: ["完了", "bg-emerald-50 text-emerald-700 ring-emerald-200"],
+  done: ["完了", "bg-indigo-600 text-white ring-indigo-600"],
   error: ["失敗", "bg-rose-50 text-rose-700 ring-rose-200"],
 };
 
@@ -245,9 +251,9 @@ function ScanTicker({ corpus, phase }: { corpus: CorpusItem[]; phase: Phase }) {
   );
 
   return (
-    <div className="shrink-0 border-t border-slate-200/80 bg-white px-3 py-2">
-      <p className="mb-1 flex items-center gap-1.5 text-[10px] font-medium tracking-wide text-amber-600">
-        <span className="inline-block size-1.5 animate-pulse rounded-full bg-amber-400" />
+    <div className="shrink-0 border-t border-indigo-100 bg-white px-3 py-2">
+      <p className="mb-1 flex items-center gap-1.5 text-[10px] font-medium tracking-wide text-sky-600">
+        <span className="inline-block size-1.5 animate-pulse rounded-full bg-sky-400" />
         {phase === "searching"
           ? `SCANNING · ${corpus.length}件を照合中`
           : "PLANNING · 検索の条件を組み立て中"}

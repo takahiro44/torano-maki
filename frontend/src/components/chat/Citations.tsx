@@ -8,6 +8,10 @@
  *
  * 中身は必要になったときだけ取りに行く。出典は毎回5件つくため、
  * 開かれるか分からない詳細をまとめて読むとチャットの応答を邪魔する。
+ *
+ * **閉じている間は1件1行に畳む。** 出典は毎回5件つくので、1件ずつ枠を持つと
+ * 回答本文より背が高くなり、次の質問へ進むのにスクロールが要る。読むのは
+ * 回答であって出典の一覧ではないため、開くまでは索引の大きさに留める。
  */
 
 import { useState } from "react";
@@ -32,12 +36,13 @@ export function Citations({ citations, question }: { citations: Citation[]; ques
   if (citations.length === 0) return null;
 
   return (
-    <section className="space-y-2">
-      <h3 className="text-xs font-medium text-slate-500">
+    <section className="space-y-1">
+      <h3 className="text-[11px] font-medium text-slate-400">
         AIが参照したナレッジ
-        <span className="ml-1.5 text-slate-400">{citations.length}件</span>
+        <span className="ml-1 text-slate-300">{citations.length}件</span>
       </h3>
-      <div className="space-y-1.5">
+      <div className="divide-y divide-slate-100 overflow-hidden rounded-lg bg-white
+                      ring-1 ring-slate-200/70">
         {citations.map((citation) => (
           <CitationCard
             key={citation.knowledge_id}
@@ -72,24 +77,24 @@ function CitationCard({ citation, question }: { citation: Citation; question: st
   }
 
   return (
-    <div className="overflow-hidden rounded-xl bg-white ring-1 ring-slate-200/80">
+    <div>
       <button
         onClick={() => void toggle()}
         aria-expanded={open}
-        className="flex w-full items-start gap-2.5 px-3 py-2.5 text-left hover:bg-slate-50"
+        className="flex w-full items-center gap-2 px-2.5 py-1.5 text-left hover:bg-slate-50"
       >
         <Chevron open={open} />
-        <span className="min-w-0 flex-1">
-          <span className="block text-sm font-medium text-slate-800">{citation.title}</span>
-          <span className="mt-0.5 block text-[11px] text-slate-500">
-            {citation.file_name ?? sourceLabel(citation.source_type)}
-            {citation.utterances.length > 0 && ` · 根拠の発言 ${citation.utterances.length}件`}
-          </span>
+        <span className="min-w-0 flex-1 truncate text-[12.5px] text-slate-700">
+          {citation.title}
+        </span>
+        <span className="shrink-0 text-[10px] text-slate-400">
+          {citation.file_name ?? sourceLabel(citation.source_type)}
+          {citation.utterances.length > 0 && ` · ${citation.utterances.length}発言`}
         </span>
       </button>
 
       {open && (
-        <div className="space-y-3 border-t border-slate-100 px-3 py-3">
+        <div className="space-y-2.5 border-t border-slate-100 px-2.5 py-2.5">
           {/* Agentが根拠の発話まで取りに行った場合だけ入る。
               追加のリクエストなしで出せるので先に見せる */}
           {citation.utterances.length > 0 && (
@@ -150,7 +155,7 @@ function Chevron({ open }: { open: boolean }) {
       viewBox="0 0 12 12"
       aria-hidden="true"
       className={
-        "mt-1 size-3 shrink-0 text-slate-400 transition-transform " + (open ? "rotate-90" : "")
+        "size-3 shrink-0 text-slate-300 transition-transform " + (open ? "rotate-90" : "")
       }
     >
       <path
