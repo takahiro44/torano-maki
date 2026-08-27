@@ -13,7 +13,7 @@
  * （会話が細くなる方が損失が大きい）。
  */
 
-import { useCallback, useEffect, useRef, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState, type RefObject } from "react";
 import { AgentPet } from "./AgentPet";
 import { AgentWorkspace } from "./AgentWorkspace";
 import { currentPhase } from "./phase";
@@ -32,8 +32,8 @@ const EXAMPLE_QUESTIONS = [
   "値引きを求められたときはどう対応した？",
 ];
 
-/** 下端からこの距離以内なら「追いかけている」とみなす */
-const STICK_THRESHOLD_PX = 120;
+/** 質問の吹き出しを上端に寄せるときの余白 */
+const TOP_PADDING_PX = 12;
 
 /** 調査ビューの開閉。毎回開き直させないため端末に覚えさせる */
 const WORKSPACE_KEY = "torano-maki:chat:workspace";
@@ -60,22 +60,36 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
   // ChatReviewPanel が持っているので、番号を送って起こすだけにする
   const [reviewSignal, setReviewSignal] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
-  // 利用者が上へスクロールして読んでいる間は追わない。
-  // トークンが届くたびに引き戻されると、過去の回答を読めない
-  const stickRef = useRef(true);
+  const latestUserBubbleRef = useRef<HTMLDivElement | null>(null);
+  const spacerRef = useRef<HTMLDivElement | null>(null);
+  const lastTurnId = turns.length > 0 ? turns[turns.length - 1].id : null;
+  // 起動直後（StrictModeの開発時二重実行を含む）を判定する基準。
+  // 副作用の中で書き換えるフラグにすると、Reactが開発時に行う
+  // mount→cleanup→mount の再実行でフラグだけ先に立ってしまい、
+  // 再読み込み直後なのに「新しいターン」の分岐に入ってしまう
+  const initialTurnIdRef = useRef(lastTurnId);
 
-  const onScroll = useCallback(() => {
+  useLayoutEffect(() => {
     const el = scrollRef.current;
     if (!el) return;
-    stickRef.current = el.scrollHeight - el.scrollTop - el.clientHeight < STICK_THRESHOLD_PX;
-  }, []);
 
-  useEffect(() => {
-    const el = scrollRef.current;
-    if (!el || !stickRef.current) return;
-    // トークンごとに呼ばれるため smooth にしない。滑らかさより追従を優先する
-    el.scrollTop = el.scrollHeight;
-  }, [turns]);
+    if (lastTurnId === initialTurnIdRef.current) {
+      // 起動直後は、復元した会話の末尾（直近のやり取り）を見せる
+      el.scrollTop = el.scrollHeight;
+      return;
+    }
+
+    const bubble = latestUserBubbleRef.current;
+    if (!bubble) return;
+
+    // 短い回答でも質問を上端まで寄せられるよう、先に1画面分の余白を確保する
+    if (spacerRef.current) {
+      spacerRef.current.style.minHeight = `${el.clientHeight}px`;
+    }
+    const containerRect = el.getBoundingClientRect();
+    const bubbleRect = bubble.getBoundingClientRect();
+    el.scrollTop += bubbleRect.top - containerRect.top - TOP_PADDING_PX;
+  }, [lastTurnId]);
 
   useEffect(() => {
     try {
@@ -116,11 +130,7 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
       <AgentPet phase={currentPhase(latest)} foundCount={latest?.citations.length ?? 0} />
 
       <div className="flex min-w-0 flex-1 flex-col">
-        <div
-          ref={scrollRef}
-          onScroll={onScroll}
-          className="flex-1 overflow-y-auto overscroll-contain"
-        >
+        <div ref={scrollRef} className="flex-1 overflow-y-auto overscroll-contain">
           <div className="mx-auto max-w-3xl px-4 py-6">
             {empty ? (
               <EmptyState
@@ -130,18 +140,23 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
               />
             ) : (
               <div className="space-y-8">
-                {turns.map((turn) => (
-                  <TurnView
-                    key={turn.id}
-                    turn={turn}
-                    onRetry={() => retry(turn.id)}
-                    onReview={() => setReviewSignal((n) => n + 1)}
-                    busy={busy}
-                    latest={turn.id === latest?.id}
-                  />
-                ))}
+                {turns.map((turn) => {
+                  const isLatest = turn.id === latest?.id;
+                  return (
+                    <TurnView
+                      key={turn.id}
+                      turn={turn}
+                      onRetry={() => retry(turn.id)}
+                      onReview={() => setReviewSignal((n) => n + 1)}
+                      busy={busy}
+                      latest={isLatest}
+                      anchorRef={isLatest ? latestUserBubbleRef : undefined}
+                    />
+                  );
+                })}
               </div>
             )}
+            <div ref={spacerRef} aria-hidden="true" />
           </div>
         </div>
 
@@ -230,6 +245,7 @@ function TurnView({
   onReview,
   busy,
   latest,
+  anchorRef,
 }: {
   turn: Turn;
   onRetry: () => void;
@@ -237,12 +253,14 @@ function TurnView({
   busy: boolean;
   /** 最新のターンだけがアシスタントの行き先になる。過去の回答を指されても困る */
   latest: boolean;
+  /** 送信直後にこの質問を画面上端へ寄せるための参照。最新のターンにだけ渡す */
+  anchorRef?: RefObject<HTMLDivElement | null>;
 }) {
   const streaming = turn.status === "streaming";
 
   return (
     <div className="space-y-4">
-      <div className="flex justify-end">
+      <div ref={anchorRef} className="flex justify-end">
         <p className="max-w-[85%] rounded-2xl rounded-br-md bg-slate-900 px-4 py-2.5 text-[15px] leading-6 whitespace-pre-wrap text-white">
           {turn.question}
         </p>
@@ -289,14 +307,14 @@ function TurnView({
             </div>
           )}
 
-          <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
-            <Citations citations={turn.citations} question={turn.question} />
-          </div>
-
           {/* **最新のターンにだけ出す。** 過去の回答すべてにボタンが並ぶと、
               会話を読み返すときに邪魔になるうえ、どれが今の話なのか
               分からなくなる（NextActions.tsx） */}
           {latest && <NextActions turn={turn} onReview={onReview} />}
+
+          <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
+            <Citations citations={turn.citations} question={turn.question} />
+          </div>
 
           {turn.status === "done" && <TurnFooter turn={turn} />}
         </div>
