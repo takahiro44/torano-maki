@@ -365,7 +365,9 @@ def test_音声由来なら根拠が実際の発話に紐づく(client: TestClie
         ).json()
 
     item = ExtractedKnowledge(
-        title="受注まわりから段階導入する", lesson="全社入れ替えを先に出さない"
+        title="受注まわりから段階導入する",
+        lesson="全社入れ替えを先に出さない",
+        knowledge_type="business",
     )
     with (
         patch(
@@ -412,7 +414,9 @@ def test_本文を修正した場合は合成セグメントに退避する(clie
         ).json()
 
     edited = "受注のたびにエクセルにも入力しているとのことでした。"
-    item = ExtractedKnowledge(title="二重入力の把握", lesson="入力経路を先に洗い出す")
+    item = ExtractedKnowledge(
+        title="二重入力の把握", lesson="入力経路を先に洗い出す", knowledge_type="business"
+    )
     with (
         patch(
             "app.services.extraction.extract_knowledge_with_sources",

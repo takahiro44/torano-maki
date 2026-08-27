@@ -12,6 +12,7 @@
 
 import { useEffect, useState } from "react";
 import { getKnowledge, getKnowledgeEvidence } from "../../api/client";
+import { knowledgeCategoryBadge } from "../../lib/knowledgeCategory";
 import { navigate, roleplayStartPath } from "../../lib/router";
 import type { Knowledge, KnowledgeEvidenceSpan } from "../../types/api";
 import { KnowledgeArticle } from "../KnowledgeArticle";
@@ -83,7 +84,21 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
       >
         <header className="flex items-start gap-2 border-b border-slate-100 px-3.5 py-2.5">
           <div className="min-w-0 flex-1">
-            <p className="text-[13px] font-medium text-slate-800">{target.title}</p>
+            <div className="flex items-center gap-1.5">
+              <p className="min-w-0 flex-1 truncate text-[13px] font-medium text-slate-800">
+                {target.title}
+              </p>
+              {knowledge && (
+                <span
+                  className={
+                    "shrink-0 rounded px-1.5 py-0.5 text-[10px] font-medium " +
+                    knowledgeCategoryBadge(knowledge.knowledge_type).className
+                  }
+                >
+                  {knowledgeCategoryBadge(knowledge.knowledge_type).label}
+                </span>
+              )}
+            </div>
             <p className="mt-0.5 flex items-center gap-2 text-[10px] text-slate-400">
               {target.semanticScore !== null && (
                 <span className="font-mono">意味の近さ {target.semanticScore.toFixed(3)}</span>

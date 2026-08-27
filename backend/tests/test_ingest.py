@@ -12,6 +12,7 @@ _SAMPLE = ExtractedKnowledge(
     problem="価格が高いことが障壁",
     action="値引きせず比較軸を聞いた",
     lesson="値引きより先に評価軸を確認する",
+    knowledge_type="business",
 )
 _FAKE_VECTOR = [0.0] * 1024
 

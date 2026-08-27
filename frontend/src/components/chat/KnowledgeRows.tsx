@@ -8,10 +8,18 @@
  * ランキングで緑になっていたのと同じ項目は、ここでも緑のまま出す。
  */
 
+import { knowledgeCategoryBadge } from "../../lib/knowledgeCategory";
 import { barWidth, cardPosition } from "./rankingVisuals";
 import type { SceneTarget } from "./ScenePopover";
 
-export type KnowledgeRowItem = { id: string; title: string; score: number | null; cited?: boolean };
+export type KnowledgeRowItem = {
+  id: string;
+  title: string;
+  score: number | null;
+  cited?: boolean;
+  /** 未取得の場面(走査中の一覧など)では省略可。あるときだけ色点を出す */
+  knowledgeType?: string;
+};
 
 export function KnowledgeRows({
   items,
@@ -63,6 +71,15 @@ export function KnowledgeRows({
                 >
                   {i + 1}
                 </span>
+                {item.knowledgeType && (
+                  <span
+                    className={
+                      "size-1.5 shrink-0 rounded-full " +
+                      (item.knowledgeType === "casual" ? "bg-amber-400" : "bg-indigo-400")
+                    }
+                    title={knowledgeCategoryBadge(item.knowledgeType).label}
+                  />
+                )}
                 <span
                   className={
                     "min-w-0 flex-1 truncate text-[11.5px] " +

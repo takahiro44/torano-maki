@@ -4,6 +4,7 @@
 
 import { useEffect, useState, type ReactNode } from "react";
 import { getKnowledgeEvidence } from "../api/client";
+import { knowledgeCategoryBadge } from "../lib/knowledgeCategory";
 import type { Knowledge, KnowledgeEvidenceSpan } from "../types/api";
 import { KnowledgeArticle } from "./KnowledgeArticle";
 
@@ -79,7 +80,19 @@ export function KnowledgeCard({
           </span>
         )}
         <div className="min-w-0 flex-1">
-          <h3 className="text-base font-semibold leading-snug text-slate-900">{knowledge.title}</h3>
+          <div className="flex items-start gap-2">
+            <h3 className="text-base font-semibold leading-snug text-slate-900">
+              {knowledge.title}
+            </h3>
+            <span
+              className={
+                "mt-0.5 shrink-0 rounded px-1.5 py-0.5 text-[11px] font-medium " +
+                knowledgeCategoryBadge(knowledge.knowledge_type).className
+              }
+            >
+              {knowledgeCategoryBadge(knowledge.knowledge_type).label}
+            </span>
+          </div>
           <p className="mt-1 whitespace-pre-wrap text-sm leading-relaxed text-slate-600">{summary}</p>
           {meta.length > 0 && (
             <p className="mt-1 text-xs text-slate-400">{meta.join(" · ")}</p>

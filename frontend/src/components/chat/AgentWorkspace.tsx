@@ -49,7 +49,7 @@ const CORPUS_LIMIT = 200;
  */
 const SEARCH_TOP_K = 50;
 
-type CorpusItem = { id: string; title: string };
+type CorpusItem = { id: string; title: string; knowledgeType: string };
 
 type Props = {
   turn: Turn | null;
@@ -69,7 +69,9 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
   useEffect(() => {
     // 失敗しても会話には影響しない。星図と走査表示・待機中の一覧が出ないだけ
     listKnowledge({ status: "confirmed", limit: CORPUS_LIMIT })
-      .then((items) => setCorpus(items.map((k) => ({ id: k.id, title: k.title }))))
+      .then((items) =>
+        setCorpus(items.map((k) => ({ id: k.id, title: k.title, knowledgeType: k.knowledge_type }))),
+      )
       .catch(() => setCorpus([]));
   }, [reloadKey]);
 
@@ -168,6 +170,7 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
                 title: r.title,
                 score: r.semantic_score,
                 cited: citedIds.has(r.id),
+                knowledgeType: r.knowledge_type,
               }))}
               emptyLabel="該当が見つかりませんでした。"
               onOpen={setScene}
@@ -181,7 +184,12 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
         ) : (
           results === null && (
             <KnowledgeRows
-              items={corpus.map((c) => ({ id: c.id, title: c.title, score: null }))}
+              items={corpus.map((c) => ({
+                id: c.id,
+                title: c.title,
+                score: null,
+                knowledgeType: c.knowledgeType,
+              }))}
               emptyLabel="まだ登録済みのナレッジがありません。"
               onOpen={setScene}
             />
