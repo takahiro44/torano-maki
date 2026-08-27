@@ -9,13 +9,22 @@
  * **走査中に流すのは実在のナレッジ。** それらしい文字列を流すのは
  * 演出ではなく嘘になる。検索対象は confirmed のナレッジ全件なので
  * （backend/app/services/search.py）、その一覧を実際に流している。
+ *
+ * **検索は常に出す。旧「探す」「一覧」タブはここに吸収した。** 質問する前は
+ * ランキングの代わりに登録済み一覧を、質問した後もランキングの見た目は
+ * そのままに、検索欄だけは残す（検索結果はランキングの上に別枠で出す）。
+ * どちらの行リストも RankingView と同じ見た目（KnowledgeRows）にして、
+ * クリックすると ScenePopover で全文を読める。
  */
 
 import { useEffect, useState } from "react";
-import { listKnowledge } from "../../api/client";
+import { listKnowledge, searchKnowledge } from "../../api/client";
+import type { KnowledgeSearchResult } from "../../types/api";
 import { useCandidates } from "./candidates";
+import { KnowledgeRows } from "./KnowledgeRows";
 import { currentPhase, type Phase } from "./phase";
 import { RankingView } from "./RankingView";
+import { ScenePopover, type SceneTarget } from "./ScenePopover";
 import type { Turn } from "./useChat";
 
 /** 走査中に流す行の入れ替え間隔（ミリ秒）。速すぎると読めず、遅いと止まって見える */
@@ -31,20 +40,68 @@ const SCAN_ROWS = 5;
  */
 const CORPUS_LIMIT = 200;
 
+/**
+ * 手動検索で取る件数。
+ *
+ * **バックエンドの上限まで出す。** `/search` の `top_k` は
+ * `ge=1, le=50`（backend/app/models/knowledge.py）で頭打ちのため、
+ * 「全件」は技術的に50件が上限になる。
+ */
+const SEARCH_TOP_K = 50;
+
 type CorpusItem = { id: string; title: string };
 
-export function AgentWorkspace({ turn, onClose }: { turn: Turn | null; onClose: () => void }) {
+type Props = {
+  turn: Turn | null;
+  onClose: () => void;
+  /** 待機中の一覧の再取得トリガー。登録・音声タブでの登録時にApp側でbumpされる */
+  reloadKey: number;
+};
+
+export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
   const [corpus, setCorpus] = useState<CorpusItem[]>([]);
+  const [query, setQuery] = useState("");
+  const [results, setResults] = useState<KnowledgeSearchResult[] | null>(null);
+  const [searching, setSearching] = useState(false);
+  const [searchError, setSearchError] = useState<string | null>(null);
+  const [scene, setScene] = useState<SceneTarget | null>(null);
 
   useEffect(() => {
-    // 失敗しても会話には影響しない。星図と走査表示が出ないだけ
+    // 失敗しても会話には影響しない。星図と走査表示・待機中の一覧が出ないだけ
     listKnowledge({ status: "confirmed", limit: CORPUS_LIMIT })
       .then((items) => setCorpus(items.map((k) => ({ id: k.id, title: k.title }))))
       .catch(() => setCorpus([]));
-  }, []);
+  }, [reloadKey]);
+
+  async function runSearch(q: string) {
+    const text = q.trim();
+    if (!text) {
+      setResults(null);
+      setSearchError(null);
+      return;
+    }
+    setSearching(true);
+    try {
+      setResults(await searchKnowledge(text, SEARCH_TOP_K));
+      setSearchError(null);
+    } catch (e) {
+      setSearchError(e instanceof Error ? e.message : String(e));
+      setResults(null);
+    } finally {
+      setSearching(false);
+    }
+  }
+
+  function clearSearch() {
+    setQuery("");
+    setResults(null);
+    setSearchError(null);
+  }
 
   const candidates = useCandidates(turn);
   const phase = currentPhase(turn);
+  // 検索結果のうち、AIの回答が実際に参照したものはランキングと同じ緑にする
+  const citedIds = new Set(turn?.citations.map((c) => c.knowledge_id) ?? []);
 
   return (
     <aside className="flex h-full flex-col border-r border-slate-200/80 bg-slate-50">
@@ -62,7 +119,77 @@ export function AgentWorkspace({ turn, onClose }: { turn: Turn | null; onClose: 
         </button>
       </header>
 
-      <RankingView turn={turn} candidates={candidates} />
+      {/* 検索は待機中・調査中を問わず常に出す */}
+      <form
+        className="flex shrink-0 items-center gap-1.5 border-b border-slate-200/80 bg-white px-3 py-2"
+        onSubmit={(e) => {
+          e.preventDefault();
+          void runSearch(query);
+        }}
+      >
+        <input
+          value={query}
+          onChange={(e) => setQuery(e.target.value)}
+          placeholder="ナレッジを探す"
+          className="min-w-0 flex-1 rounded-md border border-slate-300 bg-white px-2 py-1 text-xs
+                     outline-none focus:border-slate-500 focus:ring-2 focus:ring-slate-200"
+        />
+        {query && (
+          <button
+            type="button"
+            onClick={clearSearch}
+            className="shrink-0 rounded px-1 text-slate-300 hover:bg-slate-100 hover:text-slate-600"
+            aria-label="検索をやめる"
+          >
+            ✕
+          </button>
+        )}
+        <button
+          type="submit"
+          disabled={searching || !query.trim()}
+          className="shrink-0 rounded-md bg-slate-900 px-2.5 py-1 text-xs font-medium text-white
+                     hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-300"
+        >
+          {searching ? "…" : "検索"}
+        </button>
+      </form>
+
+      <div className="min-h-0 flex-1 space-y-4 overflow-y-auto bg-white px-3 py-3">
+        {searchError && <p className="text-[11px] text-rose-600">{searchError}</p>}
+
+        {results !== null && (
+          <section>
+            <p className="mb-1.5 text-[10px] text-slate-400">
+              「{query}」の関連順・{results.length}件
+            </p>
+            <KnowledgeRows
+              items={results.map((r) => ({
+                id: r.id,
+                title: r.title,
+                score: r.semantic_score,
+                cited: citedIds.has(r.id),
+              }))}
+              emptyLabel="該当が見つかりませんでした。"
+              onOpen={setScene}
+            />
+          </section>
+        )}
+
+        {turn ? (
+          // ランキングの見た目はそのまま。検索結果は上の枠に別で出す
+          <RankingView turn={turn} candidates={candidates} />
+        ) : (
+          results === null && (
+            <KnowledgeRows
+              items={corpus.map((c) => ({ id: c.id, title: c.title, score: null }))}
+              emptyLabel="まだ登録済みのナレッジがありません。"
+              onOpen={setScene}
+            />
+          )
+        )}
+      </div>
+
+      {scene && <ScenePopover key={scene.knowledgeId} target={scene} onClose={() => setScene(null)} />}
 
       {(phase === "planning" || phase === "searching") && (
         <ScanTicker corpus={corpus} phase={phase} />

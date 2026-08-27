@@ -10,7 +10,12 @@
  *
  * **チャットだけは常にマウントしたままにする。** 条件レンダーで切り替えると、
  * 他のタブを見て戻ったときに会話が消える。回答に数十秒かかるので、
- * 待っている間に「探す」を見に行くのは自然な操作であり、そこで消えるのは困る。
+ * 待っている間に他のタブを見に行くのは自然な操作であり、そこで消えるのは困る。
+ *
+ * **「探す」「一覧」はタブを持たない。** 左の調査ビュー（AgentWorkspace）に
+ * 検索ボックスを常時、待機中はランキングの代わりに登録済み一覧を出している。
+ * 「音声」「登録」は個別のルート（/audio, /input）のまま、ナビ上だけ
+ * 「ナレッジ登録」という1つのホバー/クリックのメニューにまとめている。
  */
 
 import { useEffect, useState } from "react";
@@ -18,32 +23,37 @@ import { countKnowledge, getDbHealth } from "./api/client";
 import { AiChat } from "./components/chat/AiChat";
 import { AudioIngest } from "./components/AudioIngest";
 import { KnowledgeInput } from "./components/KnowledgeInput";
-import { KnowledgeList } from "./components/KnowledgeList";
-import { KnowledgeSearch } from "./components/KnowledgeSearch";
+import { NavGroup } from "./components/NavGroup";
 import { Roleplay } from "./components/roleplay/Roleplay";
 import { SupervisorInbox } from "./components/SupervisorInbox";
 import { navigate, readRoleplaySeed, useRoutePath } from "./lib/router";
 import type { KnowledgeCounts } from "./types/api";
 
-type Tab = "chat" | "search" | "input" | "audio" | "supervisor" | "list" | "roleplay";
+type Tab = "chat" | "input" | "audio" | "supervisor" | "roleplay";
 
-const TABS: { key: Tab; label: string }[] = [
-  { key: "chat", label: "AIに聞く" },
-  { key: "search", label: "探す" },
-  { key: "input", label: "登録" },
-  { key: "audio", label: "音声" },
-  { key: "supervisor", label: "上司レビュー" },
-  { key: "list", label: "一覧" },
-  { key: "roleplay", label: "ロープレ" },
+type NavEntry =
+  | { kind: "tab"; key: Tab; label: string }
+  | { kind: "group"; label: string; items: { key: Tab; label: string }[] };
+
+const NAV: NavEntry[] = [
+  { kind: "tab", key: "chat", label: "AIに聞く" },
+  {
+    kind: "group",
+    label: "ナレッジ登録",
+    items: [
+      { key: "input", label: "テキストで登録" },
+      { key: "audio", label: "音声で登録" },
+    ],
+  },
+  { kind: "tab", key: "supervisor", label: "上司レビュー" },
+  { kind: "tab", key: "roleplay", label: "ロープレ" },
 ];
 
 function tabFromRoute(route: string): Tab {
   const path = route.split("?", 1)[0];
-  if (path === "/search") return "search";
   if (path === "/input") return "input";
   if (path === "/audio") return "audio";
   if (path === "/supervisor") return "supervisor";
-  if (path === "/list") return "list";
   if (path === "/roleplay" || path.startsWith("/roleplay/")) return "roleplay";
   return "chat";
 }
@@ -59,6 +69,8 @@ export default function App() {
   const [reloadKey, setReloadKey] = useState(0);
   const [counts, setCounts] = useState<KnowledgeCounts | null>(null);
   const [apiError, setApiError] = useState<string | null>(null);
+
+  const onChanged = () => setReloadKey((n) => n + 1);
 
   useEffect(() => {
     countKnowledge()
@@ -87,21 +99,31 @@ export default function App() {
             </p>
           </div>
           <nav className="flex gap-1">
-            {TABS.map((t) => (
-              <button
-                key={t.key}
-                onClick={() => navigate(tabPath(t.key))}
-                aria-current={tab === t.key ? "page" : undefined}
-                className={
-                  "-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors " +
-                  (tab === t.key
-                    ? "border-indigo-600 text-slate-900"
-                    : "border-transparent text-slate-400 hover:text-slate-600")
-                }
-              >
-                {t.label}
-              </button>
-            ))}
+            {NAV.map((entry) =>
+              entry.kind === "tab" ? (
+                <button
+                  key={entry.key}
+                  onClick={() => navigate(tabPath(entry.key))}
+                  aria-current={tab === entry.key ? "page" : undefined}
+                  className={
+                    "-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors " +
+                    (tab === entry.key
+                      ? "border-indigo-600 text-slate-900"
+                      : "border-transparent text-slate-400 hover:text-slate-600")
+                  }
+                >
+                  {entry.label}
+                </button>
+              ) : (
+                <NavGroup
+                  key={entry.label}
+                  label={entry.label}
+                  items={entry.items}
+                  active={entry.items.some((i) => i.key === tab)}
+                  onNavigate={(key) => navigate(tabPath(key))}
+                />
+              ),
+            )}
           </nav>
         </div>
       </header>
@@ -120,19 +142,15 @@ export default function App() {
       <main className="min-h-0 flex-1">
         {/* チャットは隠すだけでアンマウントしない（会話と実行中の応答を保つ） */}
         <div className={tab === "chat" ? "h-full" : "hidden"}>
-          <AiChat knowledgeCount={counts?.confirmed ?? null} />
+          <AiChat knowledgeCount={counts?.confirmed ?? null} reloadKey={reloadKey} />
         </div>
 
         {tab !== "chat" && (
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl px-4 py-8">
-              {tab === "search" && <KnowledgeSearch />}
-              {tab === "input" && <KnowledgeInput onCreated={() => setReloadKey((n) => n + 1)} />}
-              {tab === "audio" && <AudioIngest onChanged={() => setReloadKey((n) => n + 1)} />}
+              {tab === "input" && <KnowledgeInput onCreated={onChanged} />}
+              {tab === "audio" && <AudioIngest onChanged={onChanged} />}
               {tab === "supervisor" && <SupervisorInbox />}
-              {tab === "list" && (
-                <KnowledgeList reloadKey={reloadKey} onChanged={() => setReloadKey((n) => n + 1)} />
-              )}
               {tab === "roleplay" && (
                 <Roleplay {...readRoleplaySeed()} />
               )}

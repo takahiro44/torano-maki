@@ -47,7 +47,7 @@ export function KnowledgeInput({ onCreated }: Props) {
       const extra = result.notes?.length ? ` ${result.notes.join(" ")}` : "";
       setMessage({
         kind: "ok",
-        text: `${result.saved.length}件を構造化しました。内容を確認して承認すると、「探す」の対象になります。${extra}`,
+        text: `${result.saved.length}件を構造化しました。内容を確認して承認すると、AIに聞く画面の検索・一覧の対象になります。${extra}`,
       });
       onCreated();
     } catch (e) {
@@ -70,7 +70,7 @@ export function KnowledgeInput({ onCreated }: Props) {
       setPending((prev) => prev.filter((k) => !confirmedIds.has(k.id)));
       setMessage({
         kind: "ok",
-        text: `${updated.length}件を承認しました。「探す」から検索できます。`,
+        text: `${updated.length}件を承認しました。AIに聞く画面から検索できます。`,
       });
       onCreated();
     } catch (e) {

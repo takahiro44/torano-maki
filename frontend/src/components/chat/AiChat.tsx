@@ -47,7 +47,13 @@ function loadWorkspaceOpen(): boolean {
   }
 }
 
-export function AiChat({ knowledgeCount }: { knowledgeCount: number | null }) {
+type Props = {
+  knowledgeCount: number | null;
+  /** 調査ビューの待機中一覧の再取得トリガー。登録・音声タブでの登録時にApp側でbumpされる */
+  reloadKey: number;
+};
+
+export function AiChat({ knowledgeCount, reloadKey }: Props) {
   const { turns, busy, send, stop, reset, retry } = useChat();
   const [workspaceOpen, setWorkspaceOpen] = useState(loadWorkspaceOpen);
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -87,7 +93,11 @@ export function AiChat({ knowledgeCount }: { knowledgeCount: number | null }) {
           開閉できる面を外側に足す */}
       {workspaceOpen && (
         <div className="hidden w-[360px] shrink-0 lg:block xl:w-[420px]">
-          <AgentWorkspace turn={latest} onClose={() => setWorkspaceOpen(false)} />
+          <AgentWorkspace
+            turn={latest}
+            onClose={() => setWorkspaceOpen(false)}
+            reloadKey={reloadKey}
+          />
         </div>
       )}
 
@@ -174,7 +184,7 @@ function EmptyState({
           まだナレッジが登録されていません
         </p>
         <p className="mt-1 text-sm text-slate-500">
-          「登録」タブから商談の内容を追加すると、AIが検索して答えられるようになります。
+          「ナレッジ登録」から商談の内容を追加すると、AIが検索して答えられるようになります。
         </p>
       </div>
     );
