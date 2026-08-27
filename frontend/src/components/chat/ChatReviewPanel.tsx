@@ -5,22 +5,54 @@
  * 送らない選択肢を残すため。送信時はクライアントが計算した要約を
  * 信用せず、サーバ側で再計算する（chat.pyの「Agentの自己申告を
  * 信用しない」設計思想と合わせる）。
+ *
+ * **開始のボタンは持たない。** 会話から他機能へ移る導線は
+ * NextActions に集めてある。ここに独自のボタンを残すと、同じ操作の
+ * 入口が2つになり、どちらが正しいか分からなくなる。
  */
 
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useRef, useState } from "react";
 import { sendChatReview, summarizeChatReview } from "../../api/client";
 import type { ChatReviewSummary } from "../../types/api";
 import { turnsToMessages, type Turn } from "./useChat";
 
 type Phase = "idle" | "summarizing" | "summarized" | "sending" | "sent" | "error";
 
-export function ChatReviewPanel({ turns }: { turns: Turn[] }) {
+type Props = {
+  turns: Turn[];
+  /** 増えたら「まとめる」を始める合図。押した回数そのものに意味は無い */
+  startSignal: number;
+};
+
+export function ChatReviewPanel({ turns, startSignal }: Props) {
   const [phase, setPhase] = useState<Phase>("idle");
   const [summary, setSummary] = useState<ChatReviewSummary | null>(null);
   const [error, setError] = useState<string | null>(null);
   // 送信後に会話が続いた場合、古い要約のまま「送信済み」と表示され続けると
   // 何を送ったのか分からなくなるため、件数が増えたら状態を戻す
   const [snapshotCount, setSnapshotCount] = useState<number | null>(null);
+  const handledSignal = useRef(startSignal);
+
+  const summarize = useCallback(async () => {
+    setPhase("summarizing");
+    setError(null);
+    try {
+      const result = await summarizeChatReview(turnsToMessages(turns));
+      setSummary(result);
+      setPhase("summarized");
+    } catch (e) {
+      setError(e instanceof Error ? e.message : String(e));
+      setPhase("error");
+    }
+  }, [turns]);
+
+  // 押し直しでやり直せるようにする。まとめ直しても副作用は無い
+  // （送信は別のボタン）ので、状態を見て弾く必要がない
+  useEffect(() => {
+    if (startSignal === handledSignal.current) return;
+    handledSignal.current = startSignal;
+    void summarize();
+  }, [startSignal, summarize]);
 
   useEffect(() => {
     if (snapshotCount !== null && turns.length > snapshotCount) {
@@ -33,19 +65,6 @@ export function ChatReviewPanel({ turns }: { turns: Turn[] }) {
 
   const messages = turnsToMessages(turns);
   if (messages.length === 0) return null;
-
-  async function summarize() {
-    setPhase("summarizing");
-    setError(null);
-    try {
-      const result = await summarizeChatReview(messages);
-      setSummary(result);
-      setPhase("summarized");
-    } catch (e) {
-      setError(e instanceof Error ? e.message : String(e));
-      setPhase("error");
-    }
-  }
 
   async function sendToSupervisor() {
     setPhase("sending");
@@ -69,15 +88,6 @@ export function ChatReviewPanel({ turns }: { turns: Turn[] }) {
 
   return (
     <div className="mx-auto w-full max-w-3xl px-4 pb-2">
-      {phase === "idle" && (
-        <button
-          onClick={() => void summarize()}
-          className="rounded-lg px-2 py-1 text-xs text-indigo-600 hover:bg-indigo-50"
-        >
-          この会話をまとめる
-        </button>
-      )}
-
       {phase === "summarizing" && <p className="px-2 text-xs text-slate-400">まとめています…</p>}
 
       {(phase === "summarized" || phase === "sending") && summary && (

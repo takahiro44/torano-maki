@@ -14,45 +14,37 @@
  *
  * **「探す」「一覧」はタブを持たない。** 左の調査ビュー（AgentWorkspace）に
  * 検索ボックスを常時、待機中はランキングの代わりに登録済み一覧を出している。
- * 「音声」「登録」は個別のルート（/audio, /input）のまま、ナビ上だけ
- * 「ナレッジ登録」という1つのホバー/クリックのメニューにまとめている。
+ *
+ * **ナレッジ登録もタブを1つしか持たない。** 以前は「テキストで登録」と
+ * 「音声で登録」を分けていたが、抽出の入力は結局テキストで、経路を分ける
+ * 理由が無かった（KnowledgeInput の理由）。何で持っているか（メモ・録音・
+ * 議事録ファイル）で人に選ばせない。古い `/audio` も同じ画面へ寄せる。
  */
 
 import { useEffect, useState } from "react";
 import { countKnowledge, getDbHealth } from "./api/client";
 import { AiChat } from "./components/chat/AiChat";
-import { AudioIngest } from "./components/AudioIngest";
 import { KnowledgeInput } from "./components/KnowledgeInput";
-import { NavGroup } from "./components/NavGroup";
 import { Roleplay } from "./components/roleplay/Roleplay";
 import { SupervisorInbox } from "./components/SupervisorInbox";
+import { useHandoff } from "./lib/handoff";
+import { setPetHidden, usePetHidden } from "./lib/pet";
 import { navigate, readRoleplaySeed, useRoutePath } from "./lib/router";
 import type { KnowledgeCounts } from "./types/api";
 
-type Tab = "chat" | "input" | "audio" | "supervisor" | "roleplay";
+type Tab = "chat" | "input" | "supervisor" | "roleplay";
 
-type NavEntry =
-  | { kind: "tab"; key: Tab; label: string }
-  | { kind: "group"; label: string; items: { key: Tab; label: string }[] };
-
-const NAV: NavEntry[] = [
-  { kind: "tab", key: "chat", label: "AIに聞く" },
-  {
-    kind: "group",
-    label: "ナレッジ登録",
-    items: [
-      { key: "input", label: "テキストで登録" },
-      { key: "audio", label: "音声で登録" },
-    ],
-  },
-  { kind: "tab", key: "supervisor", label: "上司レビュー" },
-  { kind: "tab", key: "roleplay", label: "ロープレ" },
+const NAV: { key: Tab; label: string }[] = [
+  { key: "chat", label: "AIに聞く" },
+  { key: "input", label: "ナレッジ登録" },
+  { key: "supervisor", label: "上司レビュー" },
+  { key: "roleplay", label: "ロープレ" },
 ];
 
 function tabFromRoute(route: string): Tab {
   const path = route.split("?", 1)[0];
-  if (path === "/input") return "input";
-  if (path === "/audio") return "audio";
+  // `/audio` も登録へ寄せる。画面を1つにした以上、古いURLで迷子にしない
+  if (path === "/input" || path === "/audio") return "input";
   if (path === "/supervisor") return "supervisor";
   if (path === "/roleplay" || path.startsWith("/roleplay/")) return "roleplay";
   return "chat";
@@ -69,6 +61,9 @@ export default function App() {
   const [reloadKey, setReloadKey] = useState(0);
   const [counts, setCounts] = useState<KnowledgeCounts | null>(null);
   const [apiError, setApiError] = useState<string | null>(null);
+  const petHidden = usePetHidden();
+  // 会話から「この話題を登録する」で来たときのきっかけ（質問文）
+  const inputHandoff = useHandoff("/input");
 
   const onChanged = () => setReloadKey((n) => n + 1);
 
@@ -93,37 +88,39 @@ export default function App() {
       <header className="shrink-0 border-b border-slate-200/80 bg-white/80 backdrop-blur-sm">
         <div className="mx-auto max-w-3xl px-4">
           <div className="flex items-baseline justify-between pt-4 pb-3">
-            <h1 className="text-lg font-semibold tracking-tight">torano-maki</h1>
-            <p className="text-xs text-slate-400">
-              {counts ? `ナレッジ ${counts.confirmed} 件` : "　"}
-            </p>
+            <h1 className="text-lg font-semibold tracking-tight">AI虎の巻</h1>
+            <div className="flex items-baseline gap-3">
+              <p className="text-xs text-slate-400">
+                {counts ? `ナレッジ ${counts.confirmed} 件` : "　"}
+              </p>
+              {/* しまったアシスタントを呼び戻す口。消したきり戻せないと、
+                  押すのが怖いボタンになる */}
+              {petHidden && (
+                <button
+                  onClick={() => setPetHidden(false)}
+                  className="rounded-lg px-2 py-1 text-xs text-slate-400 hover:bg-slate-100 hover:text-slate-600"
+                >
+                  アシスタントを呼ぶ
+                </button>
+              )}
+            </div>
           </div>
           <nav className="flex gap-1">
-            {NAV.map((entry) =>
-              entry.kind === "tab" ? (
-                <button
-                  key={entry.key}
-                  onClick={() => navigate(tabPath(entry.key))}
-                  aria-current={tab === entry.key ? "page" : undefined}
-                  className={
-                    "-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors " +
-                    (tab === entry.key
-                      ? "border-indigo-600 text-slate-900"
-                      : "border-transparent text-slate-400 hover:text-slate-600")
-                  }
-                >
-                  {entry.label}
-                </button>
-              ) : (
-                <NavGroup
-                  key={entry.label}
-                  label={entry.label}
-                  items={entry.items}
-                  active={entry.items.some((i) => i.key === tab)}
-                  onNavigate={(key) => navigate(tabPath(key))}
-                />
-              ),
-            )}
+            {NAV.map((entry) => (
+              <button
+                key={entry.key}
+                onClick={() => navigate(tabPath(entry.key))}
+                aria-current={tab === entry.key ? "page" : undefined}
+                className={
+                  "-mb-px border-b-2 px-3 py-2 text-sm font-medium transition-colors " +
+                  (tab === entry.key
+                    ? "border-indigo-600 text-slate-900"
+                    : "border-transparent text-slate-400 hover:text-slate-600")
+                }
+              >
+                {entry.label}
+              </button>
+            ))}
           </nav>
         </div>
       </header>
@@ -148,8 +145,9 @@ export default function App() {
         {tab !== "chat" && (
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl px-4 py-8">
-              {tab === "input" && <KnowledgeInput onCreated={onChanged} />}
-              {tab === "audio" && <AudioIngest onChanged={onChanged} />}
+              {tab === "input" && (
+                <KnowledgeInput onCreated={onChanged} note={inputHandoff?.note ?? null} />
+              )}
               {tab === "supervisor" && <SupervisorInbox />}
               {tab === "roleplay" && (
                 <Roleplay {...readRoleplaySeed()} />
