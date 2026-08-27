@@ -307,14 +307,14 @@ function TurnView({
             </div>
           )}
 
-          <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
-            <Citations citations={turn.citations} question={turn.question} />
-          </div>
-
           {/* **最新のターンにだけ出す。** 過去の回答すべてにボタンが並ぶと、
               会話を読み返すときに邪魔になるうえ、どれが今の話なのか
               分からなくなる（NextActions.tsx） */}
           {latest && <NextActions turn={turn} onReview={onReview} />}
+
+          <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
+            <Citations citations={turn.citations} question={turn.question} />
+          </div>
 
           {turn.status === "done" && <TurnFooter turn={turn} />}
         </div>
