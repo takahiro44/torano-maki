@@ -22,8 +22,8 @@ import { Composer } from "./Composer";
 import { AgentTimeline, Spinner } from "./AgentTimeline";
 import { Citations } from "./Citations";
 import { Markdown } from "./Markdown";
+import { NextActions } from "./NextActions";
 import { useChat, type Turn } from "./useChat";
-import { navigate, roleplayStartPath } from "../../lib/router";
 
 const EXAMPLE_QUESTIONS = [
   "在庫が合わなくて顧客に謝ることになった事例は？",
@@ -56,6 +56,9 @@ type Props = {
 export function AiChat({ knowledgeCount, reloadKey }: Props) {
   const { turns, busy, send, stop, reset, retry } = useChat();
   const [workspaceOpen, setWorkspaceOpen] = useState(loadWorkspaceOpen);
+  // 「上司に確認する」を押した合図。要約の状態そのものは
+  // ChatReviewPanel が持っているので、番号を送って起こすだけにする
+  const [reviewSignal, setReviewSignal] = useState(0);
   const scrollRef = useRef<HTMLDivElement>(null);
   // 利用者が上へスクロールして読んでいる間は追わない。
   // トークンが届くたびに引き戻されると、過去の回答を読めない
@@ -124,6 +127,7 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
                     key={turn.id}
                     turn={turn}
                     onRetry={() => retry(turn.id)}
+                    onReview={() => setReviewSignal((n) => n + 1)}
                     busy={busy}
                     latest={turn.id === latest?.id}
                   />
@@ -152,7 +156,7 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
           )}
         </div>
 
-        <ChatReviewPanel turns={turns} />
+        <ChatReviewPanel turns={turns} startSignal={reviewSignal} />
 
         {/* アシスタントが寄ってくる先。入力欄そのものに印を付けると
             Composer 側の都合に引きずられるので、隣に置いておく */}
@@ -223,11 +227,13 @@ function EmptyState({
 function TurnView({
   turn,
   onRetry,
+  onReview,
   busy,
   latest,
 }: {
   turn: Turn;
   onRetry: () => void;
+  onReview: () => void;
   busy: boolean;
   /** 最新のターンだけがアシスタントの行き先になる。過去の回答を指されても困る */
   latest: boolean;
@@ -283,27 +289,14 @@ function TurnView({
             </div>
           )}
 
-          {/* **出典の一覧より上に、右寄せで置く。** 出典カードや場面の札にも
-              練習ボタンがあるが、あちらは開かないと見えず「読んで終わり」で
-              流れてしまう。読み終えた直後が最も動機の高い瞬間なので、
-              事例を選ばせる前にここから入れるようにする。
-              ナレッジIDは渡さない。どの事例で練習するかはサーバの検索に任せ、
-              利用者には「何を練習したいか」だけを決めさせる */}
-          {turn.status === "done" && (
-            <div className="flex justify-end">
-              <button
-                onClick={() => navigate(roleplayStartPath({ query: turn.question }))}
-                className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white
-                           hover:bg-indigo-500"
-              >
-                この疑問を練習する
-              </button>
-            </div>
-          )}
-
           <div data-pet-anchor={latest && turn.citations.length > 0 ? "citations" : undefined}>
             <Citations citations={turn.citations} question={turn.question} />
           </div>
+
+          {/* **最新のターンにだけ出す。** 過去の回答すべてにボタンが並ぶと、
+              会話を読み返すときに邪魔になるうえ、どれが今の話なのか
+              分からなくなる（NextActions.tsx） */}
+          {latest && <NextActions turn={turn} onReview={onReview} />}
 
           {turn.status === "done" && <TurnFooter turn={turn} />}
         </div>
