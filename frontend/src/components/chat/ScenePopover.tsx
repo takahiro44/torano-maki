@@ -8,6 +8,11 @@
  *
  * **開いてから取りに行く。** 候補は20件以上あり、全部の会話を先読みすると
  * 回答のストリーミングと帯域を取り合う。
+ *
+ * **ここから直せる。** 登録済みの誤りに気づくのは、たいてい検索して読み返した
+ * この瞬間で、直せる場所が別画面にあると次に開いたときには忘れている。
+ * 使うのは登録画面と同じ編集フォーム（KnowledgeEditor）で、AIと相談しながら
+ * 書き換えられる。
  */
 
 import { useEffect, useState } from "react";
@@ -16,6 +21,7 @@ import { knowledgeCategoryBadge } from "../../lib/knowledgeCategory";
 import { navigate, roleplayStartPath } from "../../lib/router";
 import type { Knowledge, KnowledgeEvidenceSpan } from "../../types/api";
 import { KnowledgeArticle } from "../KnowledgeArticle";
+import { AiConsultBar, KnowledgeEditor } from "../KnowledgeEditor";
 import { Spinner } from "./AgentTimeline";
 
 const SPEAKER_LABEL: Record<string, string> = {
@@ -37,16 +43,53 @@ export type SceneTarget = {
 
 const CARD_WIDTH = 400;
 
+/** 編集中だけ広げる。13項目の入力欄を400pxに詰めると読めない */
+const EDIT_CARD_WIDTH = 560;
+
+/** 画面の縁からこれだけは離す */
+const EDGE_PAD = 12;
+
+/**
+ * 札の高さの下限。
+ *
+ * **押した行の高さに素直に合わせると、下端が画面の外に出る。** 札の下端には
+ * 「この場面を練習する」と「手で編集する」があり、そこが消えると
+ * 一覧から練習にも編集にも入れなくなる。
+ */
+const MIN_CARD_HEIGHT = 260;
+
 function timeLabel(sec: number): string {
   const m = Math.floor(sec / 60);
   const s = Math.floor(sec % 60);
   return `${m}:${String(s).padStart(2, "0")}`;
 }
 
-export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose: () => void }) {
+export function ScenePopover({
+  target,
+  onClose,
+  onEdited,
+}: {
+  target: SceneTarget;
+  onClose: () => void;
+  /** 保存されたら呼ぶ。呼び出し側が一覧と件数を取り直すため */
+  onEdited?: () => void;
+}) {
   const [spans, setSpans] = useState<KnowledgeEvidenceSpan[] | null>(null);
   const [knowledge, setKnowledge] = useState<Knowledge | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [editing, setEditing] = useState(false);
+  // 開くと同時にAIへ投げる指示。「直す」を挟まずに相談へ入るため
+  const [autoConsult, setAutoConsult] = useState<string | null>(null);
+
+  function askAi(instruction: string) {
+    setAutoConsult(instruction || null);
+    setEditing(true);
+  }
+
+  function closeEditor() {
+    setEditing(false);
+    setAutoConsult(null);
+  }
 
   // 別の行を押したときは呼び出し側が key で作り直すので、ここで初期化しない
   useEffect(() => {
@@ -63,24 +106,49 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
     };
   }, [target.knowledgeId]);
 
-  // Escapeで閉じる。読み終わったあと、閉じるボタンを探させない
+  // Escapeで閉じる。読み終わったあと、閉じるボタンを探させない。
+  // **編集中は効かせない。** 書きかけがキー1つで消えるのは事故になる
   useEffect(() => {
+    if (editing) return;
     const onKey = (e: KeyboardEvent) => e.key === "Escape" && onClose();
     window.addEventListener("keydown", onKey);
     return () => window.removeEventListener("keydown", onKey);
-  }, [onClose]);
+  }, [onClose, editing]);
 
   const utterances = (spans ?? []).flatMap((span) => span.utterances);
+  const width = editing ? EDIT_CARD_WIDTH : CARD_WIDTH;
+  // 画面に収める。収まらないと下端の操作が押せない（MIN_CARD_HEIGHT）
+  const top = Math.max(
+    EDGE_PAD,
+    Math.min(target.top, window.innerHeight - MIN_CARD_HEIGHT - EDGE_PAD),
+  );
+  const left = Math.max(EDGE_PAD, Math.min(target.left, window.innerWidth - width - EDGE_PAD));
+  // 根拠の発話をつないだものが、このナレッジのもとの原文。
+  // AIに直させるとき、これが無いと今の値だけで書き直すことになる
+  const sourceText = utterances.map((u) => u.content).join("\n") || null;
 
   return (
     <>
-      {/* 外側を押したら閉じる。札の外に注意が移った時点で用は済んでいる */}
-      <div className="fixed inset-0 z-30" onClick={onClose} aria-hidden="true" />
+      {/* 外側を押したら閉じる。札の外に注意が移った時点で用は済んでいる。
+          編集中だけは閉じない（書きかけを誤って捨てさせないため） */}
+      <div
+        className="fixed inset-0 z-30"
+        onClick={editing ? undefined : onClose}
+        aria-hidden="true"
+      />
 
       <aside
         data-pet-anchor="popup"
-        className="agent-rise fixed z-40 flex max-h-[70vh] flex-col overflow-hidden rounded-xl bg-white shadow-xl ring-1 ring-slate-200"
-        style={{ top: target.top, left: target.left, width: CARD_WIDTH }}
+        className="agent-rise fixed z-40 flex flex-col overflow-hidden rounded-xl bg-white shadow-xl ring-1 ring-slate-200"
+        style={{
+          top,
+          left,
+          width,
+          maxWidth: `calc(100vw - ${EDGE_PAD * 2}px)`,
+          // 高さは出した位置から決める。固定の 80vh だと、下の方の行を
+          // 押したときだけ下端がはみ出す
+          maxHeight: `calc(100vh - ${top + EDGE_PAD}px)`,
+        }}
       >
         <header className="flex items-start gap-2 border-b border-slate-100 px-3.5 py-2.5">
           <div className="min-w-0 flex-1">
@@ -125,21 +193,39 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
             </p>
           )}
 
-          {knowledge && (
+          {knowledge && !editing && (
             <section>
               <h4 className="mb-1.5 text-[10px] font-medium text-slate-400">構造化データ</h4>
               <KnowledgeArticle knowledge={knowledge} showEmpty />
             </section>
           )}
 
-          {spans !== null && utterances.length === 0 && (
+          {knowledge && editing && (
+            <KnowledgeEditor
+              knowledge={knowledge}
+              sourceText={sourceText}
+              autoConsult={autoConsult}
+              onSaved={(updated) => {
+                setKnowledge(updated);
+                closeEditor();
+                onEdited?.();
+              }}
+              onCancel={closeEditor}
+            />
+          )}
+
+          {spans !== null && utterances.length === 0 && !editing && (
             <p className="rounded-lg bg-slate-50 px-3 py-2.5 text-xs leading-relaxed text-slate-500">
               このナレッジには会話の記録がありません。音声から取り込んだものだけ、
               元の商談のどこを指しているかを辿れます。
             </p>
           )}
 
-          {utterances.length > 0 && (
+          {/* AIに聞きたいのは「これでいいか分からない」段階であって、直すと
+              決めた後ではない。読んだ直後の位置に置き、ボタン1つで相談が始まる */}
+          {knowledge && !editing && <AiConsultBar onAsk={askAi} />}
+
+          {utterances.length > 0 && !editing && (
             <section>
               <h4 className="text-[10px] font-medium text-slate-400">
                 この記事のもとになった会話
@@ -169,14 +255,29 @@ export function ScenePopover({ target, onClose }: { target: SceneTarget; onClose
           )}
         </div>
 
-        <footer className="shrink-0 border-t border-slate-100 px-3.5 py-2.5">
-          <button
-            onClick={() => navigate(roleplayStartPath({ knowledgeId: target.knowledgeId }))}
-            className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
-          >
-            この場面を練習する
-          </button>
-        </footer>
+        {/* 編集中は自前の保存・やめるを持っているので、こちらの導線は引っ込める。
+            2種類の「やめる」が並ぶと、どちらが書きかけを捨てるのか分からない。
+            **フッターは常に2つのボタンだけに保つ。** ここに他のものを足すと
+            札が縦に伸び、下の方の行から開いたときに画面外へ出る */}
+        {!editing && (
+          <footer className="flex shrink-0 items-center gap-2 border-t border-slate-100 px-3.5 py-2.5">
+            <button
+              onClick={() => navigate(roleplayStartPath({ knowledgeId: target.knowledgeId }))}
+              className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
+            >
+              この場面を練習する
+            </button>
+            <button
+              onClick={() => askAi("")}
+              disabled={!knowledge}
+              className="ml-auto rounded-lg px-3 py-1.5 text-xs font-medium text-indigo-600
+                         ring-1 ring-indigo-200 hover:bg-indigo-50
+                         disabled:text-slate-300 disabled:ring-slate-200"
+            >
+              手で編集する
+            </button>
+          </footer>
+        )}
       </aside>
     </>
   );

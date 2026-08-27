@@ -42,6 +42,50 @@ class TestUpdate:
         assert res.json()["status"] == "draft"
         assert res.json()["situation"] == "本文"
 
+    def test_編集画面が送る形で保存できる(self, client: TestClient) -> None:
+        """画面（KnowledgeEditor）は変わった項目だけを送り、承認と同時に保存する。
+
+        **消した項目は空文字で送る。** 明示的な null は拒まれるため
+        （変更しない項目との区別が付かない）、画面側で空文字に寄せている。
+        その約束がここで崩れると、承認が丸ごと422になる。
+        """
+        row = _create(client, "元の本文")
+        client.patch(f"/knowledge/{row['id']}", json={"status": "draft", "lesson": "消される学び"})
+
+        res = client.patch(
+            f"/knowledge/{row['id']}",
+            json={
+                "title": "直したタイトル",
+                "situation": "直した状況",
+                "lesson": "",
+                "status": "confirmed",
+            },
+        )
+        assert res.status_code == 200, res.text
+        body = res.json()
+        assert body["status"] == "confirmed"
+        assert body["title"] == "直したタイトル"
+        assert body["situation"] == "直した状況"
+        assert not body["lesson"]
+
+    def test_本文を直すと検索の対象も入れ替わる(self, client: TestClient) -> None:
+        """編集で search_text と embedding を作り直さないと、直す前の文で当たり続ける。
+
+        **順位ではなく、当たった中身で見る。** 開発中のDBには他のナレッジが
+        入っており、1位に来るとは限らない（来ないこと自体は不具合ではない）。
+        """
+        row = _create(client, "在庫の締め日は毎月20日")
+        client.patch(
+            f"/knowledge/{row['id']}",
+            json={"title": "請求の締め日", "situation": "請求の締め日は毎月末"},
+        )
+
+        hits = client.post("/search", json={"query": "請求の締め日は毎月末", "top_k": 50}).json()
+        found = next((h for h in hits if h["id"] == row["id"]), None)
+        assert found is not None, "直した本文で検索しても、そのナレッジが出てこない"
+        assert "毎月末" in found["content"]
+        assert "毎月20日" not in found["content"]
+
     def test_status専用エンドポイント(self, client: TestClient) -> None:
         row = _create(client, "承認する")
         res = client.patch(f"/knowledge/{row['id']}/status", json={"status": "rejected"})

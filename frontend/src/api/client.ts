@@ -20,10 +20,13 @@ import type {
   InputMode,
   Knowledge,
   KnowledgeCounts,
+  KnowledgeDraftFields,
+  KnowledgeRefineResponse,
   KnowledgeSearchResult,
   KnowledgeSortField,
   KnowledgeStatus,
   KnowledgeEvidenceSpan,
+  RefineMessage,
   RoleplayCategory,
   RoleplaySession,
   RoleplaySessionSummary,
@@ -165,6 +168,35 @@ export function updateKnowledge(
   return request<Knowledge>(`/knowledge/${id}`, {
     method: "PATCH",
     body: JSON.stringify(changes),
+  });
+}
+
+/**
+ * AIと相談してナレッジを直した案をもらう。**保存はされない。**
+ *
+ * 反映するかどうかは画面の人が決める。DBに触れないので id を送らず、
+ * 登録直後の下書きも、一覧から開いた確定済みも、同じ口で相談できる。
+ *
+ * **編集中の値をそのまま送る。** 保存済みの値を送ると、人が手で直した
+ * 内容をAIが知らないまま書き直し、直したはずの箇所が巻き戻る。
+ *
+ * 27Bモデルに13項目を書き直させるので1分近くかかることがある。
+ */
+export function refineKnowledge(params: {
+  draft: KnowledgeDraftFields;
+  instruction: string;
+  history?: RefineMessage[];
+  sourceText?: string | null;
+}) {
+  return request<KnowledgeRefineResponse>("/knowledge/refine", {
+    method: "POST",
+    body: JSON.stringify({
+      draft: params.draft,
+      instruction: params.instruction,
+      history: params.history ?? [],
+      source_text: params.sourceText ?? null,
+    }),
+    signal: AbortSignal.timeout(300_000),
   });
 }
 

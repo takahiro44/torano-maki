@@ -13,6 +13,8 @@ from app.models.knowledge import (
     Knowledge,
     KnowledgeCreate,
     KnowledgeEvidenceSpan,
+    KnowledgeRefineRequest,
+    KnowledgeRefineResponse,
     KnowledgeSortField,
     KnowledgeStatus,
     KnowledgeStatusPatch,
@@ -31,6 +33,7 @@ from app.services.extraction import (
     LlmRequestError,
     process_text_to_knowledge,
 )
+from app.services.refine import refine_knowledge
 from app.services.search_text import generate_search_text_from_mapping
 
 router = APIRouter(prefix="/knowledge", tags=["knowledge"])
@@ -95,6 +98,25 @@ def extract_and_store(payload: ExtractRequest, db: DbSession) -> list[KnowledgeU
     except LlmRequestError as exc:
         raise HTTPException(status_code=502, detail=str(exc)) from exc
     return saved
+
+
+@router.post("/refine", response_model=KnowledgeRefineResponse)
+def refine(payload: KnowledgeRefineRequest) -> KnowledgeRefineResponse:
+    """AIと相談してナレッジを直した案を返す。**保存はしない。**
+
+    保存まで一気に行うと、AIが直した内容を人が見る前に上書きされる。
+    抽出は「原文から作る」処理で、こちらは「今ある値を直す」処理なので、
+    /ingest/text とは別の口にしている（理由は services/refine.py）。
+
+    **DBに触れないので `id` を取らない。** 登録直後の下書きも、一覧から開いた
+    確定済みも、保存前の編集中の値も、同じ口で相談できる必要がある。
+    """
+    try:
+        return refine_knowledge(payload)
+    except LlmNotConfiguredError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except LlmRequestError as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
 
 
 @router.post("", response_model=Knowledge, status_code=status.HTTP_201_CREATED)

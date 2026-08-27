@@ -14,6 +14,14 @@ type Props = {
   extra?: ReactNode;
   actions?: ReactNode;
   showEmptyDetails?: boolean;
+  /**
+   * 枠と影を自分では持たない。
+   *
+   * 呼び出し側がカードの下に何かを足すとき（登録画面のAI相談バー）、
+   * カードが自前の枠を持っていると枠が二重になり、足したものが
+   * カードの外に置かれたように見える。
+   */
+  flush?: boolean;
 };
 
 const SPEAKER_LABEL: Record<string, string> = {
@@ -42,6 +50,7 @@ export function KnowledgeCard({
   extra,
   actions,
   showEmptyDetails = false,
+  flush = false,
 }: Props) {
   const [open, setOpen] = useState(false);
   const [spans, setSpans] = useState<KnowledgeEvidenceSpan[] | null>(null);
@@ -72,7 +81,7 @@ export function KnowledgeCard({
   );
 
   return (
-    <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm">
+    <div className={flush ? "p-4" : "rounded-lg border border-slate-200 bg-white p-4 shadow-sm"}>
       <div className="flex items-start gap-3">
         {rank !== undefined && (
           <span className="mt-0.5 shrink-0 rounded bg-slate-100 px-2 py-0.5 text-xs font-medium text-slate-600">
