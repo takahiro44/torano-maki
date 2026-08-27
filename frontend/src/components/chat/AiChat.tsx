@@ -93,16 +93,24 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
   return (
     <div className="flex h-full">
       {/* 調査ビューは会話の左。読む列（会話）を画面の同じ位置に置いたまま、
-          開閉できる面を外側に足す */}
-      {workspaceOpen && (
-        <div className="hidden w-[360px] shrink-0 lg:block xl:w-[420px]">
-          <AgentWorkspace
-            turn={latest}
-            onClose={() => setWorkspaceOpen(false)}
-            reloadKey={reloadKey}
-          />
-        </div>
-      )}
+          開閉できる面を外側に足す。境界の三角タブは開閉どちらでも常に表示し、
+          同じボタンで出し入れできるようにする */}
+      <div className="hidden shrink-0 lg:flex">
+        {workspaceOpen && (
+          <div className="w-[360px] xl:w-[420px]">
+            <AgentWorkspace turn={latest} reloadKey={reloadKey} />
+          </div>
+        )}
+        <button
+          onClick={() => setWorkspaceOpen((v) => !v)}
+          aria-label={workspaceOpen ? "調査ビューを閉じる" : "調査ビューを開く"}
+          aria-expanded={workspaceOpen}
+          className="flex w-5 shrink-0 items-center justify-center border-r border-indigo-100
+                     bg-indigo-50/40 text-sm text-slate-300 hover:bg-indigo-100/60 hover:text-slate-600"
+        >
+          {workspaceOpen ? "◀" : "▶"}
+        </button>
+      </div>
 
       {/* 画面全体を歩く。パネルを閉じていても、AIが今どこを見ているかは伝わる */}
       <AgentPet phase={currentPhase(latest)} foundCount={latest?.citations.length ?? 0} />
@@ -138,14 +146,6 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
         </div>
 
         <div className="mx-auto flex w-full max-w-3xl items-center justify-end gap-1 px-4">
-          {!workspaceOpen && (
-            <button
-              onClick={() => setWorkspaceOpen(true)}
-              className="hidden rounded-lg px-2 py-1 text-xs text-slate-400 hover:bg-slate-100 hover:text-slate-600 lg:block"
-            >
-              調査ビューを開く
-            </button>
-          )}
           {!empty && (
             <button
               onClick={reset}

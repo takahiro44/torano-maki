@@ -35,6 +35,7 @@ from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
 from app.models.roleplay import (
+    CATEGORY_LABELS,
     CATEGORY_QUERIES,
     CustomerReply,
     GeneratedFeedback,
@@ -42,10 +43,12 @@ from app.models.roleplay import (
     LearnerTurnRequest,
     ReferencedKnowledge,
     ReferencedUtterance,
+    RoleplayCategory,
     RoleplayFeedback,
     RoleplayScenario,
     RoleplaySession,
     RoleplaySessionCreate,
+    RoleplaySessionSummary,
     RoleplayTurn,
     RubricResult,
     SessionStatus,
@@ -54,6 +57,7 @@ from app.models.roleplay import (
 )
 from app.models.tables import (
     DataSourceTable,
+    KnowledgeUnitTable,
     RoleplayFeedbackTable,
     RoleplaySessionKnowledgeTable,
     RoleplaySessionTable,
@@ -603,6 +607,9 @@ def create_session(db: Session, payload: RoleplaySessionCreate) -> RoleplaySessi
 
     session = RoleplaySessionTable(
         query=query,
+        # カテゴリは query から復元できない（query には言い換え文が入る）。
+        # 履歴一覧に場面名を出すため、選ばれた場面そのものを残す。
+        category=payload.category.value if payload.category is not None else None,
         scenario=scenario.model_dump(mode="json"),
         status=SessionStatus.ACTIVE.value,
     )
@@ -644,7 +651,12 @@ def retry_session(db: Session, session: RoleplaySessionTable) -> RoleplaySession
 
     retry = RoleplaySessionTable(
         query=session.query,
+        category=session.category,
         scenario=session.scenario,
+        # 親ではなく根（1回目）を指す。3回目が2回目を指す形にすると、
+        # 履歴一覧で同じ場面をまとめるのに再帰クエリが必要になる。
+        root_session_id=session.root_session_id or session.id,
+        attempt_no=session.attempt_no + 1,
         status=SessionStatus.ACTIVE.value,
     )
     db.add(retry)
@@ -869,6 +881,10 @@ def build_session_view(db: Session, session: RoleplaySessionTable) -> RoleplaySe
         session_id=session.id,
         status=SessionStatus(session.status),
         query=session.query,
+        category=RoleplayCategory(session.category) if session.category else None,
+        attempt_no=session.attempt_no,
+        # 1回目は自分が根。画面が「同じ場面か」を分岐なしで判定できる
+        root_session_id=session.root_session_id or session.id,
         scenario=scenario,
         turns=[RoleplayTurn.model_validate(turn) for turn in turns],
         references=[_reference_of(db, item) for item in _selected_from_links(db, session.id)],
@@ -878,3 +894,136 @@ def build_session_view(db: Session, session: RoleplaySessionTable) -> RoleplaySe
         created_at=session.created_at,
         completed_at=session.completed_at,
     )
+
+
+# ---------------------------------------------------------------------------
+# 履歴
+# ---------------------------------------------------------------------------
+
+# 一覧の既定件数。**「全部返す」にしない。** 練習は1人あたり何十件でも
+# 増えるうえ、画面に出しても選べるのはせいぜい上から数件である。
+DEFAULT_HISTORY_LIMIT = 20
+MAX_HISTORY_LIMIT = 100
+
+
+def _summary_of(
+    session: RoleplaySessionTable,
+    *,
+    learner_turns_used: int,
+    has_feedback: bool,
+    primary_knowledge_id: UUID | None = None,
+    primary_knowledge_title: str | None = None,
+) -> RoleplaySessionSummary:
+    """1行分に畳む。
+
+    **シナリオを厳密に検証しない。** `scenario_of` は壊れていれば例外を投げるが、
+    一覧では1件の破損で履歴全体が開けなくなる方が困る。見出しが取れなければ
+    利用者が打った文で代替し、その行だけ情報が減るに留める。
+    """
+    snapshot = session.scenario if isinstance(session.scenario, dict) else {}
+    title = snapshot.get("title")
+    max_turns = snapshot.get("max_turns")
+    category = RoleplayCategory(session.category) if session.category else None
+
+    return RoleplaySessionSummary(
+        session_id=session.id,
+        title=str(title) if isinstance(title, str) and title else session.query,
+        query=session.query,
+        category=category,
+        category_label=CATEGORY_LABELS[category] if category is not None else None,
+        status=SessionStatus(session.status),
+        attempt_no=session.attempt_no,
+        root_session_id=session.root_session_id or session.id,
+        learner_turns_used=learner_turns_used,
+        max_turns=int(max_turns) if isinstance(max_turns, int) else 0,
+        has_feedback=has_feedback,
+        primary_knowledge_id=primary_knowledge_id,
+        primary_knowledge_title=primary_knowledge_title,
+        created_at=session.created_at,
+        completed_at=session.completed_at,
+    )
+
+
+def list_sessions(
+    db: Session,
+    *,
+    limit: int = DEFAULT_HISTORY_LIMIT,
+    offset: int = 0,
+    reviewed_only: bool = False,
+) -> list[RoleplaySessionSummary]:
+    """新しい順に練習履歴を返す。
+
+    **発言数と振り返りの有無を1クエリで取る。** 行ごとに数え直すと、
+    20件の一覧で40回のクエリになる（N+1）。
+
+    `reviewed_only` は振り返りまで終わった練習だけに絞る。画面は
+    「もう一度やる場面を選ぶ」と「終えた練習を読み返す」で別の一覧を出しており、
+    後者に途中で抜けた練習が混ざると読み返す価値が無い行で埋まる。
+    **絞り込みをここでやる。** 呼び出し側で捨てると、限られた件数のうち
+    何件が捨てられるか分からず、一覧が理由もなく空になる。
+
+    同時刻の並びを `attempt_no` と `id` で確定させているのは、
+    `created_at` がトランザクション開始時刻であるため。「もう一度」を
+    同じトランザクション内で作ると時刻が並び、順序が実行ごとに変わる。
+    """
+    learner_turns = (
+        select(
+            RoleplayTurnTable.session_id.label("session_id"),
+            func.count().label("used"),
+        )
+        .where(RoleplayTurnTable.role == TurnRole.LEARNER.value)
+        .group_by(RoleplayTurnTable.session_id)
+        .subquery()
+    )
+
+    # 主役のナレッジ。1セッションに必ず1件だけ入る（`select_knowledge`）。
+    # **画面はこれで同じ場面かどうかを判断する。** 見出しはLLMが書くため、
+    # 同じ事例から作った場面でも一言一句は揃わない。
+    primary_link = (
+        select(
+            RoleplaySessionKnowledgeTable.session_id.label("session_id"),
+            RoleplaySessionKnowledgeTable.knowledge_id.label("knowledge_id"),
+        )
+        .where(RoleplaySessionKnowledgeTable.usage_type == UsageType.PRIMARY.value)
+        .subquery()
+    )
+
+    query = (
+        select(
+            RoleplaySessionTable,
+            func.coalesce(learner_turns.c.used, 0),
+            RoleplayFeedbackTable.session_id.is_not(None),
+            primary_link.c.knowledge_id,
+            KnowledgeUnitTable.title,
+        )
+        .outerjoin(learner_turns, learner_turns.c.session_id == RoleplaySessionTable.id)
+        .outerjoin(
+            RoleplayFeedbackTable,
+            RoleplayFeedbackTable.session_id == RoleplaySessionTable.id,
+        )
+        .outerjoin(primary_link, primary_link.c.session_id == RoleplaySessionTable.id)
+        .outerjoin(KnowledgeUnitTable, KnowledgeUnitTable.id == primary_link.c.knowledge_id)
+    )
+    if reviewed_only:
+        query = query.where(RoleplayFeedbackTable.session_id.is_not(None))
+
+    rows = db.execute(
+        query.order_by(
+            RoleplaySessionTable.created_at.desc(),
+            RoleplaySessionTable.attempt_no.desc(),
+            RoleplaySessionTable.id.desc(),
+        )
+        .limit(min(limit, MAX_HISTORY_LIMIT))
+        .offset(offset)
+    ).all()
+
+    return [
+        _summary_of(
+            session,
+            learner_turns_used=int(used),
+            has_feedback=bool(has_feedback),
+            primary_knowledge_id=knowledge_id,
+            primary_knowledge_title=knowledge_title,
+        )
+        for session, used, has_feedback, knowledge_id, knowledge_title in rows
+    ]

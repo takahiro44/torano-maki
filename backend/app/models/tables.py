@@ -214,6 +214,7 @@ class RoleplaySessionTable(Base):
             "status IN ('active', 'completed', 'abandoned')",
             name="ck_roleplay_sessions_status",
         ),
+        CheckConstraint("attempt_no >= 1", name="ck_roleplay_sessions_attempt_no"),
     )
 
     id: Mapped[UUID] = mapped_column(
@@ -222,6 +223,14 @@ class RoleplaySessionTable(Base):
     query: Mapped[str] = mapped_column(Text, nullable=False)
     scenario: Mapped[dict[str, object]] = mapped_column(JSONB, nullable=False)
     status: Mapped[str] = mapped_column(String(20), nullable=False, server_default="active")
+    # カテゴリ開始時の query は検索用の言い換え文なので、場面名はここに残す。
+    # 自由入力・Citation から始めた練習は None。
+    category: Mapped[str | None] = mapped_column(String(30))
+    # 同じ場面の試行をまとめる。親ではなく**根**（1回目）を指す。None は自分が1回目。
+    root_session_id: Mapped[UUID | None] = mapped_column(
+        PgUUID(as_uuid=True), ForeignKey("roleplay_sessions.id", ondelete="CASCADE")
+    )
+    attempt_no: Mapped[int] = mapped_column(Integer, nullable=False, server_default="1")
     created_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=False, server_default=func.now()
     )

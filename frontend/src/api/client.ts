@@ -26,6 +26,7 @@ import type {
   KnowledgeEvidenceSpan,
   RoleplayCategory,
   RoleplaySession,
+  RoleplaySessionSummary,
   RoleplayTranscription,
   SortDirection,
 } from "../types/api";
@@ -283,6 +284,22 @@ export function startRoleplaySession(params: {
     }),
     signal: AbortSignal.timeout(300_000),
   });
+}
+
+/**
+ * 過去の練習を新しい順に取る。
+ *
+ * **タイムアウトを指定しない（既定のまま）。** ここはLLMを呼ばないため、
+ * 数十秒待つ理由がない。開始画面を開いた直後に出す。
+ *
+ * `reviewedOnly` は振り返りまで終わった練習だけに絞る。**絞り込みを
+ * 受け取ってから捨てない。** 捨てると、取った件数のうち何件が残るか
+ * 分からず、一覧が理由もなく空になる。
+ */
+export function listRoleplaySessions(params?: { limit?: number; reviewedOnly?: boolean }) {
+  const query = new URLSearchParams({ limit: String(params?.limit ?? 20) });
+  if (params?.reviewedOnly) query.set("reviewed_only", "true");
+  return request<RoleplaySessionSummary[]>(`/roleplay/sessions?${query}`);
 }
 
 /** 再読込・復帰用。シナリオ・発言・出典・振り返りがすべて入って返る */

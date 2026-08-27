@@ -53,7 +53,6 @@ type CorpusItem = { id: string; title: string; knowledgeType: string };
 
 type Props = {
   turn: Turn | null;
-  onClose: () => void;
   /** 待機中の一覧の再取得トリガー。登録・音声タブでの登録時にApp側でbumpされる */
   reloadKey: number;
 };
@@ -66,7 +65,7 @@ const CATEGORY_OPTIONS: { key: CategoryFilter; label: string }[] = [
   { key: "casual", label: "その他" },
 ];
 
-export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
+export function AgentWorkspace({ turn, reloadKey }: Props) {
   const [corpus, setCorpus] = useState<CorpusItem[]>([]);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("all");
@@ -129,13 +128,6 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
         <span className="min-w-0 flex-1 truncate text-xs text-slate-400">
           {turn ? turn.question : `検索対象 ${corpus.length}件`}
         </span>
-        <button
-          onClick={onClose}
-          aria-label="調査ビューを閉じる"
-          className="rounded px-1.5 py-0.5 text-slate-300 hover:bg-slate-100 hover:text-slate-600"
-        >
-          ✕
-        </button>
       </header>
 
       {/* 検索は待機中・調査中を問わず常に出す */}
@@ -146,23 +138,26 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
           void runSearch(query, category);
         }}
       >
-        <input
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-          placeholder="ナレッジを探す"
-          className="min-w-0 flex-1 rounded-md border border-indigo-200 bg-white px-2 py-1 text-xs
-                     outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
-        />
-        {query && (
-          <button
-            type="button"
-            onClick={clearSearch}
-            className="shrink-0 rounded px-1 text-slate-300 hover:bg-slate-100 hover:text-slate-600"
-            aria-label="検索をやめる"
-          >
-            ✕
-          </button>
-        )}
+        <div className="relative min-w-0 flex-1">
+          <input
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
+            placeholder="ナレッジを探す"
+            className="w-full rounded-md border border-indigo-200 bg-white px-2 py-1 pr-6 text-xs
+                       outline-none focus:border-indigo-500 focus:ring-2 focus:ring-indigo-100"
+          />
+          {query && (
+            <button
+              type="button"
+              onClick={clearSearch}
+              aria-label="検索をやめる"
+              className="absolute inset-y-0 right-1 flex items-center px-1 text-slate-300
+                         hover:text-slate-600"
+            >
+              ✕
+            </button>
+          )}
+        </div>
         <button
           type="submit"
           disabled={searching || !query.trim()}
