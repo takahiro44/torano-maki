@@ -27,6 +27,7 @@ import type {
   KnowledgeStatus,
   KnowledgeEvidenceSpan,
   RefineMessage,
+  ReviewStreamEvent,
   RoleplayCategory,
   RoleplaySession,
   RoleplaySessionSummary,
@@ -252,6 +253,25 @@ export function summarizeChatReview(messages: ChatMessage[]) {
   });
 }
 
+/**
+ * 「まとめる」の実況版。工程が届くたびに onEvent が呼ばれる。
+ *
+ * 要約1往復に数十秒、そのあと疑問点ごとにナレッジDBを引く。
+ * 待ち切る `summarizeChatReview` も残してある（既存の呼び出し元のため）。
+ */
+export function streamChatReviewSummary(
+  messages: ChatMessage[],
+  onEvent: (event: ReviewStreamEvent) => void,
+  options: { signal?: AbortSignal } = {},
+): Promise<void> {
+  return streamSse<ReviewStreamEvent>(
+    "/chat-reviews/summarize/stream",
+    { messages },
+    onEvent,
+    options.signal,
+  );
+}
+
 /** 「上司に送信」。要約をサーバ側で再生成し、pendingで保存する */
 export function sendChatReview(messages: ChatMessage[]) {
   return request<ChatReviewDetail>("/chat-reviews", {
@@ -412,20 +432,43 @@ export async function streamChat(
   onEvent: (event: ChatStreamEvent) => void,
   options: { topK?: number; signal?: AbortSignal } = {},
 ): Promise<void> {
-  const res = await fetch(`${API_BASE_URL}/chat/stream`, {
+  await streamSse<ChatStreamEvent>(
+    "/chat/stream",
+    { messages, top_k: options.topK ?? 5 },
+    onEvent,
+    options.signal,
+  );
+}
+
+/**
+ * SSEのPOSTを読み切る共通部。
+ *
+ * **チャットとレビューで別々に書かない。** 区切りの解釈・中止の扱い・
+ * ストリーム開始前の失敗の見分け方は、契約が同じなら同じでなければならない。
+ * 2箇所に分かれると、片方だけ直された不具合が必ず残る（CLAUDE.md 6章）。
+ *
+ * イベントの**中身**の型だけを呼び出し側が決める。
+ */
+async function streamSse<TEvent>(
+  path: string,
+  body: unknown,
+  onEvent: (event: TEvent) => void,
+  signal?: AbortSignal,
+): Promise<void> {
+  const res = await fetch(`${API_BASE_URL}${path}`, {
     method: "POST",
     headers: { "Content-Type": "application/json", Accept: "text/event-stream" },
-    body: JSON.stringify({ messages, top_k: options.topK ?? 5 }),
-    signal: options.signal,
+    body: JSON.stringify(body),
+    signal,
   });
 
   // ストリームが始まる前の失敗（503 = 未設定 / 502 = DGXに届かない）は
   // ここで捕まる。始まったあとの失敗は error イベントで届く
   if (!res.ok) {
-    let detail = `POST /chat/stream failed (${res.status})`;
+    let detail = `POST ${path} failed (${res.status})`;
     try {
-      const body = await res.json();
-      if (typeof body?.detail === "string") detail = body.detail;
+      const errorBody = await res.json();
+      if (typeof errorBody?.detail === "string") detail = errorBody.detail;
     } catch {
       // JSONでないエラー応答は既定のメッセージのまま
     }
@@ -449,14 +492,14 @@ export async function streamChat(
       while (boundary !== -1) {
         const block = buffer.slice(0, boundary);
         buffer = buffer.slice(boundary + 2);
-        const event = parseSseBlock(block);
+        const event = parseSseBlock<TEvent>(block);
         if (event) onEvent(event);
         boundary = buffer.indexOf("\n\n");
       }
     }
   } catch (e) {
     // 中止は利用者の操作であって異常ではない。呼び出し側に投げ返さない
-    if (options.signal?.aborted) return;
+    if (signal?.aborted) return;
     throw e;
   } finally {
     reader.cancel().catch(() => {
@@ -466,7 +509,7 @@ export async function streamChat(
 }
 
 /** SSEの1ブロックを解釈する。壊れた行で全体を止めないよう、駄目なら null を返す */
-function parseSseBlock(block: string): ChatStreamEvent | null {
+function parseSseBlock<TEvent>(block: string): TEvent | null {
   const data = block
     .split("\n")
     // ":" 始まりはコメント（キープアライブ）。"event:" はこの契約では使わない
@@ -475,7 +518,7 @@ function parseSseBlock(block: string): ChatStreamEvent | null {
     .join("\n");
   if (!data) return null;
   try {
-    return JSON.parse(data) as ChatStreamEvent;
+    return JSON.parse(data) as TEvent;
   } catch {
     console.warn("解釈できないSSEイベントを無視しました", data);
     return null;

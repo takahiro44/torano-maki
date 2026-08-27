@@ -25,6 +25,7 @@ import { useEffect, useState } from "react";
 import { countKnowledge, getDbHealth } from "./api/client";
 import { AiChat } from "./components/chat/AiChat";
 import { KnowledgeInput } from "./components/KnowledgeInput";
+import { WorkspacePane } from "./components/chat/WorkspacePane";
 import { Roleplay } from "./components/roleplay/Roleplay";
 import { SupervisorInbox } from "./components/SupervisorInbox";
 import { useHandoff } from "./lib/handoff";
@@ -40,6 +41,9 @@ const NAV: { key: Tab; label: string }[] = [
   { key: "supervisor", label: "上司レビュー" },
   { key: "roleplay", label: "ロープレ" },
 ];
+
+/** 登録画面のナレッジの面の開閉。チャット側とは別に覚える（WorkspacePane の理由） */
+const INPUT_WORKSPACE_KEY = "torano-maki:input:workspace";
 
 function tabFromRoute(route: string): Tab {
   const path = route.split("?", 1)[0];
@@ -142,12 +146,23 @@ export default function App() {
           <AiChat knowledgeCount={counts?.confirmed ?? null} reloadKey={reloadKey} />
         </div>
 
-        {tab !== "chat" && (
+        {/* 登録もチャットと同じ器にする。書こうとしている話が蓄積に既に有るかを
+            その場で確かめられることが、重複を防ぐ一番安い手段になる。
+            開閉はチャットとは別に覚える（WorkspacePane） */}
+        {tab === "input" && (
+          <div className="flex h-full">
+            <WorkspacePane storageKey={INPUT_WORKSPACE_KEY} reloadKey={reloadKey} />
+            <div className="min-w-0 flex-1 overflow-y-auto">
+              <div className="mx-auto max-w-3xl px-4 py-8">
+                <KnowledgeInput onCreated={onChanged} note={inputHandoff?.note ?? null} />
+              </div>
+            </div>
+          </div>
+        )}
+
+        {(tab === "supervisor" || tab === "roleplay") && (
           <div className="h-full overflow-y-auto">
             <div className="mx-auto max-w-3xl px-4 py-8">
-              {tab === "input" && (
-                <KnowledgeInput onCreated={onChanged} note={inputHandoff?.note ?? null} />
-              )}
               {tab === "supervisor" && <SupervisorInbox />}
               {tab === "roleplay" && (
                 <Roleplay {...readRoleplaySeed()} />
