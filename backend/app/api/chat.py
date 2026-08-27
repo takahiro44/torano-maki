@@ -13,7 +13,7 @@ from collections.abc import Iterator
 from contextlib import closing
 from typing import Annotated, Any
 
-from fastapi import APIRouter, Depends, HTTPException
+from fastapi import APIRouter, Depends, File, HTTPException, UploadFile
 from fastapi.responses import StreamingResponse
 from pydantic import BaseModel
 from sqlalchemy.orm import Session
@@ -25,11 +25,20 @@ from app.models.chat import (
     ChatStreamErrorCode,
     ChatStreamErrorEvent,
     ChatStreamEvent,
+    ChatTranscription,
 )
 from app.services.agent_loop import run_agent_loop
 from app.services.agent_stream import stream_agent_answer
 from app.services.agent_tools import AGENT_TOOL_DEFINITIONS
+from app.services.audio_upload import AudioUploadError, resolve_suffix, temporary_audio
 from app.services.llm_client import LlmNotConfiguredError, LlmRequestError
+from app.services.transcription import (
+    EmptyTranscriptError,
+    SttNotConfiguredError,
+    SttRequestError,
+    SttResponseError,
+    transcribe,
+)
 
 logger = logging.getLogger(__name__)
 
@@ -83,6 +92,60 @@ def list_tools() -> list[dict[str, Any]]:
     Tool を増減したときの実際の姿がここに出るため、資料より先に真実になる。
     """
     return AGENT_TOOL_DEFINITIONS
+
+
+# 受け取る音声の上限。
+#
+# ここへ来るのは話しかけた質問1つで、長くても1分程度。商談1本用の200MB
+# （`/ingest/audio/transcribe`）と桁を合わせると、商談音声を誤ってこちらへ
+# 投げたときに数十秒待たされてから気づくことになる。
+_MAX_QUESTION_AUDIO_BYTES = 25 * 1024 * 1024
+
+# 短い質問の文字起こしにかかる上限。商談1本用の600秒は長すぎる。
+_QUESTION_STT_TIMEOUT = 120.0
+
+
+@router.post("/voice", response_model=ChatTranscription)
+def transcribe_question(
+    file: Annotated[UploadFile, File(description="マイク録音（webm / wav など）")],
+) -> ChatTranscription:
+    """話した質問を文字起こしして返す。**保存も回答もしない。**
+
+    **`/ingest/audio/transcribe` を使い回さない。** あちらは商談音声を
+    ナレッジの材料として取り込む口で、`data_sources` と `utterance_segments` に
+    行を作る。チャットの質問は出典ではないため、そこへ混ぜると
+    出典一覧に「質問だけの商談音声」が溜まり、Citation の意味が壊れる。
+
+    **文字起こしをそのまま質問として実行しない。** 結果は入力欄に入るだけで、
+    送るかどうかは人が決める。STTは誤認識するため、確認の段を挟まないと
+    誤った質問のまま Agent が検索してしまう（`roleplay` のマイク回答と同じ判断）。
+
+    **`async def` にしないこと。** 中で同期のHTTPクライアントを使うため、
+    async にするとイベントループを数十秒ブロックしてサーバ全体が止まる
+    （`api/ingest.py` と同じ理由）。
+    """
+    try:
+        suffix = resolve_suffix(file.filename, file.content_type)
+        with temporary_audio(file.file, suffix=suffix, max_bytes=_MAX_QUESTION_AUDIO_BYTES) as path:
+            transcript = transcribe(path, timeout=_QUESTION_STT_TIMEOUT)
+    except AudioUploadError as exc:
+        # 利用者の操作で直せる問題。サーバ障害と区別する
+        raise HTTPException(
+            status_code=413 if exc.code == "too_large" else 400, detail=exc.message
+        ) from exc
+    except SttNotConfiguredError as exc:
+        raise HTTPException(status_code=503, detail=str(exc)) from exc
+    except EmptyTranscriptError as exc:
+        # 送られた音声の問題なので、サーバ障害（502）と区別する
+        raise HTTPException(status_code=400, detail=str(exc)) from exc
+    except (SttRequestError, SttResponseError) as exc:
+        raise HTTPException(status_code=502, detail=str(exc)) from exc
+
+    return ChatTranscription(
+        text=transcript.text,
+        language=transcript.language,
+        duration_sec=transcript.segments[-1].end if transcript.segments else 0.0,
+    )
 
 
 # SSE はプロキシに溜め込まれると1トークンずつ流す意味が消える。

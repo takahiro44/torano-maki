@@ -240,3 +240,23 @@ ChatStreamEvent = Annotated[
     | ChatStreamErrorEvent,
     Field(discriminator="type"),
 ]
+
+
+# --- 音声入力（POST /chat/voice）---
+#
+# 話して質問するための文字起こし。**チャットの契約とは独立させる。**
+# 文字起こしの結果は入力欄に入るだけで、送信するかどうかは人が決めるため、
+# ChatRequest とは別のやりとりになる（理由は api/chat.py の transcribe_question）。
+
+
+class ChatTranscription(BaseModel):
+    """話した質問の文字起こし結果。
+
+    **`data_source_id` を返さない。** 質問はナレッジの出典ではなく保存もしないため、
+    返せるIDが存在しない。`AudioTranscribeResponse` と形を揃えなかったのは、
+    無いIDを `null` で埋めるとフロントが「取れなかった」と誤読するため。
+    """
+
+    text: str
+    language: str | None = None
+    duration_sec: float = Field(default=0.0, description="話した長さ。区間が取れなかった場合は 0")
