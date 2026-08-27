@@ -12,7 +12,17 @@
 
 import type { AgentStep } from "./useChat";
 
-export function AgentTimeline({ steps, streaming }: { steps: AgentStep[]; streaming: boolean }) {
+/**
+ * 実況に出せる1行。
+ *
+ * **チャットの `AgentStep` より狭い。** ここが使うのは「何をしていて、
+ * 終わったか、結果は何だったか」だけで、Tool名も引数も見ていない。
+ * 型を狭く取っておくと、Toolを持たない工程（上司レビューの照合など）も
+ * 同じ見た目で流せる。**見せ方を2つに分けないための型である。**
+ */
+export type TimelineStep = Pick<AgentStep, "step" | "label" | "summary" | "ok" | "errorCode">;
+
+export function AgentTimeline({ steps, streaming }: { steps: TimelineStep[]; streaming: boolean }) {
   // 検索せずに答える質問（挨拶など）もある。何も無いときに空の枠を出さない
   if (steps.length === 0) {
     if (!streaming) return null;
@@ -49,7 +59,7 @@ export function AgentTimeline({ steps, streaming }: { steps: AgentStep[]; stream
   );
 }
 
-function StepIcon({ step }: { step: AgentStep }) {
+function StepIcon({ step }: { step: TimelineStep }) {
   if (step.ok === null) {
     return (
       <span className="mt-0.5 flex size-4 shrink-0 items-center justify-center">
