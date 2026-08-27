@@ -12,6 +12,17 @@
  * 分類フォームは出さない。入力の手間を増やさないことが価値のため。
  * 承認は一覧へ行かず、この画面で完了できるようにする。
  *
+ * **承認の前に直せる。** 抽出は当たっているのに一言だけ違う、という状態が
+ * 一番多い。「承認する」しか出せないと、直したい人は承認してから別の場所で
+ * 直すか、捨ててもう一度書くことになる（KnowledgeEditor）。
+ *
+ * **待っている間、この子が居る。** 抽出は1分近くかかる。止まったのか動いて
+ * いるのかを読み取る負担を減らすのは、調査ビューと同じ理由（AgentPet）。
+ *
+ * **出し切ったら祝う。** ナレッジを貯める作業は、出した本人には見返りが無い。
+ * 役に立つのはずっと後の、見えないところでのこと。せめて終わった瞬間だけは
+ * 形にしておく（Celebration）。
+ *
  * **会話から開かれたときは、きっかけの質問を出す。** AIが答えられなかった
  * 直後にここへ来ることが多く、そのとき書くべきなのは「さっき聞いたあの件」
  * である。何を書けばいいか思い出すところから始めさせない。
@@ -21,8 +32,13 @@ import { useState } from "react";
 import { ingestText, updateKnowledge } from "../api/client";
 import { formatClock } from "../lib/time";
 import type { AudioTranscribeResponse, Knowledge } from "../types/api";
+import { Celebration } from "./Celebration";
+import { AgentPet } from "./chat/AgentPet";
 import { Spinner } from "./chat/AgentTimeline";
+import type { Phase } from "./chat/phase";
+import { ExtractionProgress } from "./ExtractionProgress";
 import { KnowledgeCard } from "./KnowledgeCard";
+import { AiConsultBar, KnowledgeEditor } from "./KnowledgeEditor";
 import { MicButton } from "./MicButton";
 import { SourcePicker, type PickedSource } from "./SourcePicker";
 
@@ -31,6 +47,9 @@ const EXAMPLES = [
   "B商事の担当が来月から交代。前任との関係を新任に引き継がないと、更新の話が止まる。",
   "A社の初回訪問で、標準プラン360万円が年間予算300万円を超えると言われた。その場で値引きせず、営業部30名だけの段階導入を出した。「稟議しやすい」と言われ、次回は情シス入りの見積になった。",
 ];
+
+/** 抽出結果が1枚ずつ現れる間隔。速いと一斉に出て、遅いと待たされる */
+const CARD_STAGGER_MS = 90;
 
 type Props = {
   onCreated: () => void;
@@ -48,6 +67,43 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
   const [confirming, setConfirming] = useState(false);
   const [pending, setPending] = useState<Knowledge[]>([]);
   const [message, setMessage] = useState<{ kind: "ok" | "error"; text: string } | null>(null);
+  // 送った原文。抽出中の表示に映し、抽出後はAI相談の裏取りに渡す。
+  // 本文欄は成功時に空にするので、そちらは使えない
+  const [submitted, setSubmitted] = useState<string | null>(null);
+  const [editingId, setEditingId] = useState<string | null>(null);
+  // 編集フォームを開くと同時にAIへ投げる指示。カードのボタンから直接相談するため
+  const [autoConsult, setAutoConsult] = useState<string | null>(null);
+  const [aiBusy, setAiBusy] = useState(false);
+  // この抽出で出た件数。祝いに出す数はこれ（承認するたびに pending から
+  // 抜けるので、承認し終えた時点では数え直せない）
+  const [batchSize, setBatchSize] = useState(0);
+  // 祝いに出す件数。出していないときは null（通し番号は cheer が兼ねる）
+  const [celebration, setCelebration] = useState<number | null>(null);
+  // ペットへの合図。増えるたびに数秒だけ喜ぶ
+  const [cheer, setCheer] = useState(0);
+
+  /**
+   * 下書きを出し切ったときだけ祝う。
+   *
+   * **1件ごとには祝わない。** まだ残っているのに終わったように見え、
+   * 3件登録すれば3回出ることになって、すぐ煩わしくなる。
+   */
+  function celebrateIfDone(remaining: number) {
+    if (remaining > 0 || batchSize === 0) return;
+    setCelebration(batchSize);
+    setCheer((n) => n + 1);
+  }
+
+  /** カードから直接AIへ相談する。指示が空なら編集フォームを開くだけ */
+  function askAi(id: string, instruction: string) {
+    setEditingId(id);
+    setAutoConsult(instruction || null);
+  }
+
+  function closeEditor() {
+    setEditingId(null);
+    setAutoConsult(null);
+  }
 
   /** ファイルから来た本文を受け取る。打ちかけの内容は消さず、続きに足す */
   function accept(source: PickedSource) {
@@ -56,6 +112,8 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
     setSourceName(source.fileName);
     setShowSegments(false);
     setPending([]);
+    setBatchSize(0);
+    closeEditor();
     setMessage({
       kind: "ok",
       text: source.transcript
@@ -74,11 +132,15 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
     const text = content.trim();
     if (!text) return;
     setSaving(true);
+    setSubmitted(text);
     setMessage(null);
+    closeEditor();
+    setCelebration(null);
     try {
       const result = await ingestText(text, transcript?.data_source_id);
       if (result.saved.length === 0) {
         setPending([]);
+        setBatchSize(0);
         setMessage({
           kind: "error",
           text: "具体的なナレッジを抽出できませんでした。エピソードをもう少し詳しく書いてみてください。",
@@ -89,10 +151,11 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
       setTranscript(null);
       setSourceName(null);
       setPending(result.saved);
+      setBatchSize(result.saved.length);
       const extra = result.notes?.length ? ` ${result.notes.join(" ")}` : "";
       setMessage({
         kind: "ok",
-        text: `${result.saved.length}件を構造化しました。内容を確認して承認すると、AIに聞く画面の検索・一覧の対象になります。${extra}`,
+        text: `${result.saved.length}件を構造化しました。内容を確認し、必要なら直してから承認すると、AIに聞く画面の検索・一覧の対象になります。${extra}`,
       });
       onCreated();
     } catch (e) {
@@ -117,6 +180,7 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
         kind: "ok",
         text: `${updated.length}件を承認しました。AIに聞く画面から検索できます。`,
       });
+      celebrateIfDone(drafts.filter((k) => !confirmedIds.has(k.id)).length);
       onCreated();
     } catch (e) {
       setMessage({ kind: "error", text: e instanceof Error ? e.message : String(e) });
@@ -125,16 +189,46 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
     }
   }
 
+  /** 編集の結果を手元の一覧へ返す。承認済みになったものは下書きから外れる */
+  function applySaved(updated: Knowledge) {
+    setPending((prev) => prev.map((k) => (k.id === updated.id ? updated : k)));
+    closeEditor();
+    if (updated.status === "confirmed") {
+      celebrateIfDone(drafts.filter((k) => k.id !== updated.id).length);
+    }
+    setMessage({
+      kind: "ok",
+      text:
+        updated.status === "confirmed"
+          ? `「${updated.title}」を保存して承認しました。`
+          : `「${updated.title}」の変更を保存しました。承認するとAIが使えるようになります。`,
+    });
+    onCreated();
+  }
+
   const drafts = pending.filter((k) => k.status === "draft");
   const busy = saving || confirming;
 
   return (
     <div className="space-y-5">
+      <AgentPet
+        scene="ingest"
+        phase={petPhase({ saving, confirming, aiBusy, drafts: drafts.length, message })}
+        foundCount={drafts.length}
+        cheer={cheer}
+      />
+
+      {/* 祝いは全面に出るが操作は素通しする（Celebration）。
+          key を入れ替えて、続けて登録したときに最初から出し直す */}
+      {celebration !== null && (
+        <Celebration key={cheer} count={celebration} onDone={() => setCelebration(null)} />
+      )}
+
       <div>
         <h2 className="text-xl font-semibold tracking-tight text-slate-900">ナレッジを登録</h2>
         <p className="mt-1.5 text-sm leading-relaxed text-slate-500">
           形式は問いません。走り書きでも、商談の録音でも、議事録ファイルでも構いません。
-          AIが構造化し、この画面で確認して承認すると検索対象になります。
+          AIが構造化し、この画面で確認・修正して承認すると検索対象になります。
         </p>
       </div>
 
@@ -147,7 +241,10 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
         </div>
       )}
 
-      <div className="rounded-2xl bg-white p-2 shadow-sm ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-indigo-400">
+      <div
+        data-pet-anchor="ingest-composer"
+        className="rounded-2xl bg-white p-2 shadow-sm ring-1 ring-slate-200 focus-within:ring-2 focus-within:ring-indigo-400"
+      >
         <textarea
           value={content}
           onChange={(e) => setContent(e.target.value)}
@@ -182,6 +279,8 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
           </button>
         </div>
       </div>
+
+      {saving && submitted && <ExtractionProgress text={submitted} />}
 
       {/* 時刻つきの文字起こしは閲覧専用。本文を直すと時刻とずれるため
           （時刻はDBのセグメントに紐づいており、本文を直しても変わらない） */}
@@ -221,6 +320,7 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
 
       {message && (
         <p
+          data-pet-anchor="ingest-message"
           className={
             "rounded-xl px-3.5 py-2.5 text-sm ring-1 " +
             (message.kind === "ok"
@@ -233,13 +333,16 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
       )}
 
       {drafts.length > 0 && (
-        <div className="space-y-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200/80">
+        <div
+          data-pet-anchor="ingest-result"
+          className="space-y-3 rounded-2xl bg-white p-4 ring-1 ring-slate-200/80"
+        >
           <div className="flex flex-wrap items-center justify-between gap-2">
             <h3 className="text-sm font-medium text-slate-800">抽出結果（下書き）</h3>
             <button
               type="button"
               onClick={() => void confirmIds(drafts.map((k) => k.id))}
-              disabled={confirming}
+              disabled={confirming || editingId !== null}
               className="rounded-xl bg-indigo-600 px-3.5 py-1.5 text-xs font-medium text-white
                          transition-colors hover:bg-indigo-500 disabled:bg-slate-200 disabled:text-slate-400"
             >
@@ -249,28 +352,65 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
           <p className="text-xs text-slate-400">
             詳細を開くと根拠の原文も確認できます。承認しない場合は下書きのまま残ります。
           </p>
-          {drafts.map((k) => (
-            <KnowledgeCard
-              key={k.id}
-              knowledge={k}
-              showEmptyDetails
-              extra={
-                <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-500">
-                  {k.status}
-                </span>
-              }
-              actions={
-                <button
-                  type="button"
-                  onClick={() => void confirmIds([k.id])}
-                  disabled={confirming}
-                  className="text-indigo-600 underline underline-offset-2 hover:text-indigo-500"
-                >
-                  承認する
-                </button>
-              }
-            />
-          ))}
+          {drafts.map((k, i) =>
+            editingId === k.id ? (
+              <KnowledgeEditor
+                key={k.id}
+                knowledge={k}
+                sourceText={submitted}
+                offerConfirm
+                autoConsult={autoConsult}
+                onSaved={applySaved}
+                onCancel={closeEditor}
+                onAiBusy={setAiBusy}
+              />
+            ) : (
+              // 1枚ずつ現れる。まとめて出ると、何件出たのかを数え直すことになる
+              <div
+                key={k.id}
+                className="agent-rise overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm"
+                style={{ animationDelay: `${i * CARD_STAGGER_MS}ms` }}
+              >
+                <KnowledgeCard
+                  flush
+                  knowledge={k}
+                  showEmptyDetails
+                  extra={
+                    <span className="rounded bg-slate-100 px-1.5 py-0.5 text-slate-500">
+                      {k.status}
+                    </span>
+                  }
+                  actions={
+                    <>
+                      <button
+                        type="button"
+                        onClick={() => askAi(k.id, "")}
+                        disabled={confirming}
+                        className="text-slate-500 underline underline-offset-2 hover:text-slate-700
+                                   disabled:text-slate-300"
+                      >
+                        手で直す
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => void confirmIds([k.id])}
+                        disabled={confirming}
+                        className="text-indigo-600 underline underline-offset-2 hover:text-indigo-500
+                                   disabled:text-slate-300"
+                      >
+                        承認する
+                      </button>
+                    </>
+                  }
+                />
+                {/* AIに聞きたいのは「これでいいか分からない」段階であって、
+                    直すと決めた後ではない。ボタン1つで相談が始まる */}
+                <div className="px-4 pb-3">
+                  <AiConsultBar onAsk={(text) => askAi(k.id, text)} disabled={confirming} />
+                </div>
+              </div>
+            ),
+          )}
         </div>
       )}
 
@@ -296,4 +436,26 @@ export function KnowledgeInput({ onCreated, note = null }: Props) {
       </div>
     </div>
   );
+}
+
+/**
+ * この画面の「今の段階」をアシスタントの気分に翻訳する。
+ *
+ * **フェーズの判定を1箇所に置く。** 吹き出しと表情と居場所がそれぞれ
+ * 独自に判定すると、同じ瞬間に別のことを言い出す（chat/phase.ts と同じ理由）。
+ *
+ * 失敗を成果より先に見る。抽出に失敗した直後に前回の結果が残っていると、
+ * 「できたよ！」と言いながらエラーが出ている状態になる。
+ */
+function petPhase(state: {
+  saving: boolean;
+  confirming: boolean;
+  aiBusy: boolean;
+  drafts: number;
+  message: { kind: "ok" | "error" } | null;
+}): Phase {
+  if (state.saving || state.aiBusy) return "searching";
+  if (state.confirming) return "answering";
+  if (state.message?.kind === "error") return "error";
+  return state.drafts > 0 ? "done" : "idle";
 }

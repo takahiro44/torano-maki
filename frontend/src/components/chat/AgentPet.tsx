@@ -21,7 +21,7 @@
  * ということなので）。
  */
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useId, useRef, useState } from "react";
 import {
   setPetHidden,
   setPetSkin,
@@ -29,6 +29,7 @@ import {
   usePetHidden,
   usePetSkin,
   usePetSpot,
+  type PetScene,
 } from "../../lib/pet";
 import type { Phase } from "./phase";
 
@@ -36,21 +37,37 @@ import type { Phase } from "./phase";
 const TALK_INTERVAL_MS = 5200;
 
 /**
- * 見てほしいものにつく目印の名前。
+ * 見てほしいものにつく目印の名前。（画面の型 `PetScene` は lib/pet.ts）
+ *
+ * **同じ子を別の画面に置く。** 登録の待ち時間も調査と同じくらい長く、
+ * そこだけ誰も居ないのは不自然だった。居場所と掴んだ位置は lib/pet.ts が
+ * 1つだけ覚えていて、画面ごとに違うのは「姿」「どこを見に行くか」
+ * 「何を言うか」の3つ。
  *
  * **要素の位置をReactのstateで配らない。** 注目先はグラフの中の点だったり
  * 会話の本文だったりと持ち主がばらばらで、座標を上へ集めると、力学計算の
  * 1フレームごとに画面全体が描き直される。目印だけDOMに置いておけば、
  * 寄っていく側が自分のペースで読みに来られる。
  */
-const ANCHORS: Record<Phase, string[]> = {
-  // 開いている札が最優先。利用者がいま見ているものと同じ場所に立つ
-  idle: ["popup", "composer", "focus"],
-  planning: ["popup", "focus", "composer"],
-  searching: ["popup", "focus", "composer"],
-  answering: ["popup", "answer", "focus"],
-  done: ["popup", "citations", "answer", "focus"],
-  error: ["popup", "answer", "composer"],
+const ANCHORS: Record<PetScene, Record<Phase, string[]>> = {
+  chat: {
+    // 開いている札が最優先。利用者がいま見ているものと同じ場所に立つ
+    idle: ["popup", "composer", "focus"],
+    planning: ["popup", "focus", "composer"],
+    searching: ["popup", "focus", "composer"],
+    answering: ["popup", "answer", "focus"],
+    done: ["popup", "citations", "answer", "focus"],
+    error: ["popup", "answer", "composer"],
+  },
+  ingest: {
+    // 抽出の前後で見る先が変わる。書いている間は本文、出たら結果の隣
+    idle: ["ingest-composer"],
+    planning: ["ingest-progress", "ingest-composer"],
+    searching: ["ingest-progress", "ingest-composer"],
+    answering: ["ingest-result", "ingest-composer"],
+    done: ["ingest-result", "ingest-composer"],
+    error: ["ingest-message", "ingest-composer"],
+  },
 };
 
 /** 目印を読みに行く間隔。歩いて寄る動きなので、毎フレーム追う必要はない */
@@ -75,17 +92,38 @@ const MIN_VISIBLE = 24;
 /** これ以内の動きは「つついた」とみなす。掴んだつもりのない微動で位置を固定しない */
 const DRAG_SLOP_PX = 4;
 
-type Mood = "idle" | "thinking" | "searching" | "happy" | "writing" | "done" | "sad";
+type Mood = "idle" | "thinking" | "searching" | "happy" | "writing" | "done" | "sad" | "cheering";
 
-const LINES: Record<Mood, string[]> = {
-  idle: ["ひまだな〜", "なんでも聞いてね", "準備はできてるよ", "待機ちゅう…"],
-  thinking: ["うーん、どこから探そう", "ちょっと考えさせて", "たしかこの辺に…"],
-  searching: ["探してる探してる！", "お、なんかありそう", "もうちょい待ってね"],
-  happy: ["みつけた！", "お、当たりっぽい", "これ、いいかも"],
-  // 終わったあとに「みつけた！」と言い続けると、まだ探しているように見える
-  done: ["できたよ！どうかな", "こんな感じでどう？", "また聞いてね", "ふぅ、ひと仕事"],
-  writing: ["いまカタカタ書いてる", "もうすぐできるよ", "あとちょっと！"],
-  sad: ["あれ、うまくいかなかった…", "ごめん、もう一回だけ", "ちょっと調子わるいかも"],
+/**
+ * セリフ。`{n}` は件数に置き換わる。
+ *
+ * **画面ごとに口ぶりを変える。** 登録画面で「探してる探してる！」と
+ * 言われると、何を探しているのか分からない。やっていることが違うのだから、
+ * 言うことも違っていなければ、居るだけの飾りになる。
+ */
+const LINES: Record<PetScene, Record<Mood, string[]>> = {
+  chat: {
+    idle: ["ひまだな〜", "なんでも聞いてね", "準備はできてるよ", "待機ちゅう…"],
+    thinking: ["うーん、どこから探そう", "ちょっと考えさせて", "たしかこの辺に…"],
+    searching: ["探してる探してる！", "お、なんかありそう", "もうちょい待ってね"],
+    happy: ["みつけた！", "お、当たりっぽい", "これ、いいかも"],
+    // 終わったあとに「みつけた！」と言い続けると、まだ探しているように見える
+    done: ["できたよ！どうかな", "こんな感じでどう？", "また聞いてね", "ふぅ、ひと仕事"],
+    writing: ["いまカタカタ書いてる", "もうすぐできるよ", "あとちょっと！"],
+    sad: ["あれ、うまくいかなかった…", "ごめん、もう一回だけ", "ちょっと調子わるいかも"],
+    cheering: ["やったー！", "おつかれさま！"],
+  },
+  ingest: {
+    idle: ["書けたら押してね", "走り書きでいいよ", "録音でも議事録でもOK", "ネタ、ある？"],
+    thinking: ["ふむふむ、読んでるよ", "どこが使える話かな", "整理してる整理してる"],
+    searching: ["ふむふむ、読んでるよ", "お、いい話じゃん", "もうちょい待ってね"],
+    happy: ["{n}件みつけた！", "お、けっこう採れたね", "いい経験してるじゃん"],
+    done: ["{n}件できたよ！見て", "中身、直してもいいからね", "気になるとこは直そう"],
+    writing: ["登録してるところ", "あとちょっと！"],
+    sad: ["うまく抽出できなかった…", "もう少し詳しく書いてみて？", "ごめん、もう一回だけ"],
+    // 件数は祝いの札が大きく出している。ここで繰り返すと画面が二重になる
+    cheering: ["やったー！", "おつかれさま！", "これでみんなが使えるよ", "また持ってきてね"],
+  },
 };
 
 /**
@@ -111,14 +149,25 @@ function moodOf(phase: Phase, foundCount: number): Mood {
   }
 }
 
-export function AgentPet({ phase, foundCount }: { phase: Phase; foundCount: number }) {
+export function AgentPet({
+  phase,
+  foundCount,
+  scene = "chat",
+  cheer = 0,
+}: {
+  phase: Phase;
+  foundCount: number;
+  scene?: PetScene;
+  /** 祝う合図。増えるたびに数秒だけ跳ねて喜ぶ（KnowledgeInput の登録完了） */
+  cheer?: number;
+}) {
   // セリフの番号だけを持つ。気分が変わっても番号は据え置きでよく、
   // リセットしないぶん「同じ台詞に戻る」感じが出ない
   const [index, setIndex] = useState(0);
   const hidden = usePetHidden();
-  const skin = usePetSkin();
+  const skin = usePetSkin(scene);
   const spot = usePetSpot();
-  const chased = useChase(phase);
+  const chased = useChase(phase, scene);
   const drag = useDrag();
 
   useEffect(() => {
@@ -126,9 +175,14 @@ export function AgentPet({ phase, foundCount }: { phase: Phase; foundCount: numb
     return () => window.clearInterval(timer);
   }, []);
 
-  const mood = moodOf(phase, foundCount);
-  const lines = LINES[mood];
-  const line = lines[index % lines.length];
+  const cheering = useCheer(cheer);
+  // **祝いはフェーズより強い。** 承認し終えた直後は下書きが空になるので
+  // フェーズは idle に戻る。素直に従うと、祝っている最中に
+  // 「書けたら押してね」と言い出す
+  const mood = cheering ? "cheering" : moodOf(phase, foundCount);
+  const reacting = useReaction(mood);
+  const lines = LINES[scene][mood];
+  const line = lines[index % lines.length].replace("{n}", String(foundCount));
 
   if (hidden) return null;
 
@@ -163,7 +217,11 @@ export function AgentPet({ phase, foundCount }: { phase: Phase; foundCount: numb
         }}
         aria-label="アシスタント（つつく・ドラッグで移動）"
         className={
-          "agent-pet pointer-events-auto touch-none " +
+          "pointer-events-auto touch-none " +
+          // 動きは1つだけ当てる。両方を同じ要素にかけると後から当たった方
+          // だけが効き、跳ねたり跳ねなかったりする。
+          // 祝い（数秒喜ぶ）＞ 気づき（1回跳ねる）＞ 呼吸（常時）の順
+          (cheering ? "agent-pet-cheer " : reacting ? "agent-pet-pop " : "agent-pet ") +
           (drag.point ? "cursor-grabbing" : "cursor-grab")
         }
       >
@@ -293,6 +351,62 @@ function useDrag() {
   return { point, movedRef, onPointerDown };
 }
 
+/** 跳ねている長さ。長いと騒がしく、短いと見逃す */
+const REACTION_MS = 900;
+
+/** 祝っている長さ。紙吹雪（Celebration）と揃える。ずれると片方だけ先に終わる */
+const CHEER_MS = 2600;
+
+/**
+ * 祝う合図を受け取る。
+ *
+ * **合図は数を増やすことで送る。** 真偽値だと、続けて2回登録したときに
+ * 2回目が同じ値になり、喜ばないまま終わる。
+ *
+ * 最初の描画では喜ばない。開いた瞬間に何もしていないのに祝われると、
+ * 何に対する祝いなのか分からない。
+ */
+function useCheer(signal: number): boolean {
+  const [cheering, setCheering] = useState(false);
+  const previous = useRef(signal);
+
+  useEffect(() => {
+    if (previous.current === signal) return;
+    previous.current = signal;
+    setCheering(true);
+    const timer = window.setTimeout(() => setCheering(false), CHEER_MS);
+    return () => window.clearTimeout(timer);
+  }, [signal]);
+
+  return cheering;
+}
+
+/** 跳ねて反応する気分。悪い知らせで跳ねると、喜んでいるように見えてしまう */
+const REACTING_MOODS: ReadonlySet<Mood> = new Set(["happy", "done"]);
+
+/**
+ * 嬉しいことが起きた瞬間だけ跳ねる。
+ *
+ * **「今どうか」ではなく「変わったか」で決める。** 結果が出ている間ずっと
+ * 跳ね続けると、跳ねること自体が意味を持たなくなる。抽出が終わった、
+ * 見つかった、というその一瞬に反応するから、目の端でも気づける。
+ */
+function useReaction(mood: Mood): boolean {
+  const [reacting, setReacting] = useState(false);
+  const previous = useRef(mood);
+
+  useEffect(() => {
+    const changed = previous.current !== mood;
+    previous.current = mood;
+    if (!changed || !REACTING_MOODS.has(mood)) return;
+    setReacting(true);
+    const timer = window.setTimeout(() => setReacting(false), REACTION_MS);
+    return () => window.clearTimeout(timer);
+  }, [mood]);
+
+  return reacting;
+}
+
 type Place = { x: number; y: number; facing: number; flipped: boolean };
 
 /**
@@ -302,18 +416,20 @@ type Place = { x: number; y: number; facing: number; flipped: boolean };
  * 左に余白があれば左、無ければ右に立つ。画面の右寄りにいるときは
  * 吹き出しを左に出す（そのままだと画面の外へ出て、黙ったように見える）。
  */
-function useChase(phase: Phase): Place | null {
+function useChase(phase: Phase, scene: PetScene): Place | null {
   const [place, setPlace] = useState<Place | null>(null);
   // 行き先を読むのはタイマーの中。その時点のフェーズを見に行けるようにする
   const phaseRef = useRef(phase);
+  const sceneRef = useRef(scene);
 
   useEffect(() => {
     phaseRef.current = phase;
-  }, [phase]);
+    sceneRef.current = scene;
+  }, [phase, scene]);
 
   useEffect(() => {
     const chase = () => {
-      const found = findAnchor(ANCHORS[phaseRef.current]);
+      const found = findAnchor(ANCHORS[sceneRef.current][phaseRef.current]);
       if (!found) return;
       const { rect, name } = found;
 
@@ -426,11 +542,15 @@ function TigerEyes({ mood }: { mood: Mood }) {
  */
 function Tiger({ mood, facing }: { mood: Mood; facing: number }) {
   const busy = mood === "searching" || mood === "thinking" || mood === "writing";
+  // **IDを実体ごとに分ける。** 登録とチャットで2匹が同時にDOMに居るようになり、
+  // 固定のIDだと同じ姿を選んだ瞬間に重複する。`url(#...)` は先に見つかった方を
+  // 拾うので、隠れている側の定義を参照して塗りが消えることがある
+  const furId = useId();
 
   return (
     <svg viewBox="0 0 54 50" className="size-16 drop-shadow-sm" aria-hidden="true">
       <defs>
-        <linearGradient id="agent-pet-fur" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={furId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#fbbf24" />
           <stop offset="55%" stopColor="#f97316" />
           <stop offset="100%" stopColor="#ea580c" />
@@ -456,15 +576,15 @@ function Tiger({ mood, facing }: { mood: Mood; facing: number }) {
       </g>
 
       {/* 耳。**丸く、小さく、離して置く。** 尖らせると猫になる */}
-      <circle cx={13.6} cy={15.4} r={6.3} fill="url(#agent-pet-fur)" />
-      <circle cx={40.4} cy={15.4} r={6.3} fill="url(#agent-pet-fur)" />
+      <circle cx={13.6} cy={15.4} r={6.3} fill={`url(#${furId})`} />
+      <circle cx={40.4} cy={15.4} r={6.3} fill={`url(#${furId})`} />
       <circle cx={13.6} cy={16.1} r={3.4} fill="#fda4af" opacity={0.8} />
       <circle cx={40.4} cy={16.1} r={3.4} fill="#fda4af" opacity={0.8} />
 
       {/* 顔。頬をわずかに張り出させる */}
       <path
         d="M27 10.5c9.6 0 15.7 4.9 16.7 12.2.3 2 1.9 2.6 1.9 4.2 0 1.7-1.7 2.3-2 4.2C42.5 38.6 36.1 43.6 27 43.6S11.5 38.6 10.4 31.1c-.3-1.9-2-2.5-2-4.2 0-1.6 1.6-2.2 1.9-4.2C11.3 15.4 17.4 10.5 27 10.5z"
-        fill="url(#agent-pet-fur)"
+        fill={`url(#${furId})`}
       />
 
       {/* 額の縞。太く、黒く、左右対称に。ここが一番「虎」を決める */}
@@ -557,30 +677,41 @@ function RobotEyes({ mood }: { mood: Mood }) {
   );
 }
 
-/** 初代の姿。虎に置き換えたあとも選べるように残してある */
+/**
+ * 初代の姿。虎に置き換えたあとも選べるように残してある。
+ *
+ * **耳とアンテナを背景から浮かせる。** 以前は本体より薄い indigo-200 で
+ * 描いていたが、この子が住む画面の地色（slate-50）との差が1.35:1しか無く、
+ * 消えかけて見えた（半透明に描かれていると誤解される）。
+ * 光っているように見せたいのは忙しいときのアンテナだけで、
+ * それ以外の部品は本体と同じくらいはっきり出ている必要がある。
+ */
 function Robot({ mood, facing }: { mood: Mood; facing: number }) {
   const busy = mood === "searching" || mood === "thinking" || mood === "writing";
+  // 虎と同じ理由（実体ごとに分ける）
+  const bodyId = useId();
 
   return (
     <svg viewBox="0 0 54 50" className="size-16 drop-shadow-sm" aria-hidden="true">
       <defs>
-        <linearGradient id="agent-pet-robot-body" x1="0" y1="0" x2="0" y2="1">
+        <linearGradient id={bodyId} x1="0" y1="0" x2="0" y2="1">
           <stop offset="0%" stopColor="#818cf8" />
           <stop offset="100%" stopColor="#6366f1" />
         </linearGradient>
       </defs>
 
-      {/* アンテナ。忙しいときだけ光る */}
-      <path d="M27 12V6" stroke="#c7d2fe" strokeWidth={2} strokeLinecap="round" />
-      <circle cx={27} cy={4.5} r={3} fill={busy ? "#f59e0b" : "#c7d2fe"}>
+      {/* アンテナ。忙しいときだけ光る。地の色に負けない濃さで描く */}
+      <path d="M27 12V6" stroke="#6366f1" strokeWidth={2} strokeLinecap="round" />
+      <circle cx={27} cy={4.5} r={3} fill={busy ? "#f59e0b" : "#6366f1"}>
         {busy && <animate attributeName="opacity" values="1;0.3;1" dur="1.1s" repeatCount="indefinite" />}
       </circle>
 
-      {/* 耳 */}
-      <rect x={4} y={24} width={5} height={9} rx={2.5} fill="#c7d2fe" />
-      <rect x={45} y={24} width={5} height={9} rx={2.5} fill="#c7d2fe" />
+      {/* 耳。頭より濃くする。薄くすると、頭の後ろにある部品ではなく
+          描き忘れた余白に見える */}
+      <rect x={4} y={24} width={5} height={9} rx={2.5} fill="#4f46e5" />
+      <rect x={45} y={24} width={5} height={9} rx={2.5} fill="#4f46e5" />
 
-      <rect x={9} y={12} width={36} height={30} rx={11} fill="url(#agent-pet-robot-body)" />
+      <rect x={9} y={12} width={36} height={30} rx={11} fill={`url(#${bodyId})`} />
       <rect x={14} y={20} width={26} height={16} rx={8} fill="#1e1b4b" />
       {/* 進む方を見る。目が動くだけで、勝手に歩いたのではなく
           自分で行き先を決めたように見える */}
