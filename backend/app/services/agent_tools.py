@@ -105,11 +105,12 @@ def _search_knowledge(db: Session, args: SearchKnowledgeToolArgs) -> dict[str, A
     # Hybrid Search はClaude Code側の担当なので、公開済みのサービス境界だけを呼ぶ。
     from app.services.search import KnowledgeFilter, search_knowledge
 
-    filters = None
-    if args.filters is not None:
-        values = args.filters.model_dump(exclude_none=True)
-        if values:
-            filters = KnowledgeFilter(**values)
+    values = args.filters.model_dump(exclude_none=True) if args.filters is not None else {}
+    # AIチャットは営業ナレッジの検索アシスタントなので、Agentが明示的に
+    # 指定しない限り casual（雑多な実用情報）は検索対象から外す。
+    # 営業と無関係な話題を聞かれた場合のみ、Agentが自分で上書きできる。
+    values.setdefault("knowledge_type", "business")
+    filters = KnowledgeFilter(**values)
 
     rows = search_knowledge(db, args.query, args.top_k, filters=filters)
     return {
@@ -213,6 +214,28 @@ _EXECUTORS: dict[str, ToolExecutor] = {
 }
 
 
+def _unwrap_nested_json_strings(arguments: Any) -> Any:
+    """ネストしたオブジェクト引数が二重にJSON文字列化されている場合を吸収する。
+
+    Qwenのtool callingは、ネストしたオブジェクト（例: filters）を
+    `{"filters": "{\\"knowledge_type\\": \\"business\\"}"}` のように
+    値ごとJSON文字列にして返すことがある（実測）。トップレベルの
+    `arguments` 文字列は解ければ、中の値まではJSONとして再帰的に解かれない。
+    値がJSONオブジェクト/配列に見える文字列なら、もう一段だけ解いておく。
+    """
+    if not isinstance(arguments, dict):
+        return arguments
+    unwrapped: dict[str, Any] = {}
+    for key, value in arguments.items():
+        if isinstance(value, str) and value.strip()[:1] in "{[":
+            try:
+                value = json.loads(value)
+            except json.JSONDecodeError:
+                pass
+        unwrapped[key] = value
+    return unwrapped
+
+
 def execute_agent_tool(
     db: Session,
     tool_name: str,
@@ -234,6 +257,7 @@ def execute_agent_tool(
 
     try:
         raw_arguments = json.loads(arguments) if isinstance(arguments, str) else arguments
+        raw_arguments = _unwrap_nested_json_strings(raw_arguments)
         parsed: ToolArgs = args_model.model_validate(raw_arguments)  # type: ignore[assignment]
     except (json.JSONDecodeError, ValidationError, TypeError) as exc:
         return {

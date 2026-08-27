@@ -181,10 +181,10 @@ export function getKnowledgeEvidence(id: string) {
 
 // --- 検索 ---
 
-export function searchKnowledge(query: string, topK = 5) {
+export function searchKnowledge(query: string, topK = 5, knowledgeType?: string) {
   return request<KnowledgeSearchResult[]>("/search", {
     method: "POST",
-    body: JSON.stringify({ query, top_k: topK }),
+    body: JSON.stringify({ query, top_k: topK, knowledge_type: knowledgeType ?? null }),
   });
 }
 

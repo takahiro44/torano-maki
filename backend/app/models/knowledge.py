@@ -292,6 +292,9 @@ class KnowledgeSearchResult(Knowledge):
 class SearchRequest(BaseModel):
     query: str = Field(min_length=1, description="自然文の検索クエリ")
     top_k: int = Field(default=5, ge=1, le=50)
+    knowledge_type: KnowledgeCategory | None = Field(
+        default=None, description="指定時はbusiness/casualのどちらかに絞り込む"
+    )
 
 
 class ExtractRequest(BaseModel):

@@ -11,7 +11,7 @@ from sqlalchemy.orm import Session
 
 from app.db import get_db
 from app.models.knowledge import KnowledgeSearchResult, SearchRequest
-from app.services.search import search_knowledge
+from app.services.search import KnowledgeFilter, search_knowledge
 
 router = APIRouter(prefix="/search", tags=["search"])
 
@@ -29,5 +29,13 @@ def search(payload: SearchRequest, db: DbSession) -> list[KnowledgeSearchResult]
 
     スコアは参考値。しきい値で足切りせず top_k 件を返す
     （理由は services/search.py のdocstring）。
+
+    `knowledge_type` を指定すると business/casual のどちらかに絞れる。
+    省略時は両方を対象にする（フロントの手動検索の既定はこちら）。
     """
-    return search_knowledge(db, payload.query, payload.top_k)
+    filters = (
+        KnowledgeFilter(knowledge_type=payload.knowledge_type)
+        if payload.knowledge_type is not None
+        else None
+    )
+    return search_knowledge(db, payload.query, payload.top_k, filters=filters)

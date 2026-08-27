@@ -58,9 +58,18 @@ type Props = {
   reloadKey: number;
 };
 
+type CategoryFilter = "all" | "business" | "casual";
+
+const CATEGORY_OPTIONS: { key: CategoryFilter; label: string }[] = [
+  { key: "all", label: "すべて" },
+  { key: "business", label: "営業" },
+  { key: "casual", label: "その他" },
+];
+
 export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
   const [corpus, setCorpus] = useState<CorpusItem[]>([]);
   const [query, setQuery] = useState("");
+  const [category, setCategory] = useState<CategoryFilter>("all");
   const [results, setResults] = useState<KnowledgeSearchResult[] | null>(null);
   const [searching, setSearching] = useState(false);
   const [searchError, setSearchError] = useState<string | null>(null);
@@ -75,7 +84,7 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
       .catch(() => setCorpus([]));
   }, [reloadKey]);
 
-  async function runSearch(q: string) {
+  async function runSearch(q: string, cat: CategoryFilter) {
     const text = q.trim();
     if (!text) {
       setResults(null);
@@ -84,7 +93,9 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
     }
     setSearching(true);
     try {
-      setResults(await searchKnowledge(text, SEARCH_TOP_K));
+      setResults(
+        await searchKnowledge(text, SEARCH_TOP_K, cat === "all" ? undefined : cat),
+      );
       setSearchError(null);
     } catch (e) {
       setSearchError(e instanceof Error ? e.message : String(e));
@@ -98,6 +109,12 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
     setQuery("");
     setResults(null);
     setSearchError(null);
+  }
+
+  function changeCategory(cat: CategoryFilter) {
+    setCategory(cat);
+    // 検索中なら同じクエリで絞り込み直す。待機中の一覧は色点で見分けられるので触らない
+    if (query.trim()) void runSearch(query, cat);
   }
 
   const candidates = useCandidates(turn);
@@ -126,7 +143,7 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
         className="flex shrink-0 items-center gap-1.5 border-b border-indigo-100 bg-white px-3 py-2"
         onSubmit={(e) => {
           e.preventDefault();
-          void runSearch(query);
+          void runSearch(query, category);
         }}
       >
         <input
@@ -156,6 +173,26 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
         </button>
       </form>
 
+      {/* 種別の絞り込み。待機中の一覧にも効くので常に出す */}
+      <div className="flex shrink-0 items-center gap-1 border-b border-indigo-100 bg-white px-3 py-1.5">
+        {CATEGORY_OPTIONS.map((opt) => (
+          <button
+            key={opt.key}
+            type="button"
+            onClick={() => changeCategory(opt.key)}
+            aria-pressed={category === opt.key}
+            className={
+              "rounded-full px-2 py-0.5 text-[10.5px] font-medium transition-colors " +
+              (category === opt.key
+                ? "bg-indigo-600 text-white"
+                : "bg-slate-100 text-slate-500 hover:bg-slate-200")
+            }
+          >
+            {opt.label}
+          </button>
+        ))}
+      </div>
+
       <div className="min-h-0 flex-1 space-y-4 overflow-y-auto bg-white px-3 py-3">
         {searchError && <p className="text-[11px] text-rose-600">{searchError}</p>}
 
@@ -184,12 +221,14 @@ export function AgentWorkspace({ turn, onClose, reloadKey }: Props) {
         ) : (
           results === null && (
             <KnowledgeRows
-              items={corpus.map((c) => ({
-                id: c.id,
-                title: c.title,
-                score: null,
-                knowledgeType: c.knowledgeType,
-              }))}
+              items={corpus
+                .filter((c) => category === "all" || c.knowledgeType === category)
+                .map((c) => ({
+                  id: c.id,
+                  title: c.title,
+                  score: null,
+                  knowledgeType: c.knowledgeType,
+                }))}
               emptyLabel="まだ登録済みのナレッジがありません。"
               onOpen={setScene}
             />
