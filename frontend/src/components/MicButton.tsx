@@ -23,7 +23,22 @@ type Props = {
   disabled?: boolean;
   /** 入力欄の中に置くか、単独で置くか。中に置くときは枠を持たない */
   variant?: "inline" | "standalone";
+  /**
+   * 文字起こしをどのAPIで行うか。既定はナレッジ取り込み用の
+   * `/ingest/audio/transcribe` で、話した内容が `data_sources` に残る。
+   *
+   * **残したくない画面は必ず差し替えること。** AIチャットの質問のように
+   * ナレッジの材料ではない音声を既定のまま通すと、出典一覧に
+   * 「質問だけの商談音声」が積み上がる（`transcribeChatQuestion` を渡す）。
+   */
+  transcribe?: (audio: Blob) => Promise<{ text: string }>;
 };
+
+/** 既定の文字起こし。話した内容を商談音声として `data_sources` に記録する */
+function transcribeAsDataSource(audio: Blob): Promise<{ text: string }> {
+  const type = audio.type || "audio/webm";
+  return transcribeAudio(new File([audio], fileNameFor(type), { type }));
+}
 
 /** ブラウザが実際に出せる形式を選ぶ。指定が通らないと録音自体が始まらない */
 function pickMimeType(): string | undefined {
@@ -38,7 +53,12 @@ function fileNameFor(mimeType: string): string {
   return "recording.webm";
 }
 
-export function MicButton({ onTranscribed, disabled = false, variant = "inline" }: Props) {
+export function MicButton({
+  onTranscribed,
+  disabled = false,
+  variant = "inline",
+  transcribe: transcribeAudioBlob = transcribeAsDataSource,
+}: Props) {
   const [phase, setPhase] = useState<Phase>("idle");
   const [seconds, setSeconds] = useState(0);
   const [error, setError] = useState<string | null>(null);
@@ -94,8 +114,7 @@ export function MicButton({ onTranscribed, disabled = false, variant = "inline" 
 
   async function transcribe(audio: Blob) {
     try {
-      const type = audio.type || "audio/webm";
-      const result = await transcribeAudio(new File([audio], fileNameFor(type), { type }));
+      const result = await transcribeAudioBlob(audio);
       onTranscribed(result.text);
     } catch (e) {
       setError(describeSttError(e));
