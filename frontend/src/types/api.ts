@@ -255,6 +255,19 @@ export type ChatResponse = {
   usage: ChatUsage;
 };
 
+/**
+ * 話した質問の文字起こし（POST /chat/voice）。
+ *
+ * `AudioTranscribeResponse` と違い `data_source_id` を持たない。
+ * 質問はナレッジの出典ではなく、サーバにも保存されないため
+ * （理由はバックエンドの models/chat.py）。
+ */
+export type ChatTranscription = {
+  text: string;
+  language: string | null;
+  duration_sec: number;
+};
+
 // --- AIチャット（ストリーミング） ---
 //
 // SSEで届くイベント。契約は docs/chat-stream-contract.md、

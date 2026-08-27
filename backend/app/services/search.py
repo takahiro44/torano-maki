@@ -180,7 +180,12 @@ def lexical_search(
         similarity >= threshold,
     )
     rows = db.execute(
-        stmt.add_columns(similarity.label("similarity")).order_by(similarity.desc()).limit(limit)
+        stmt.add_columns(similarity.label("similarity"))
+        # word_similarity は同点が出やすい（クエリの語がまるごと含まれると
+        # どれも同じ値になる）。第2キーがないと同点の並びを DB 任せにしてしまい、
+        # 上位 top_k に入る顔ぶれが実行のたびに変わって再現しなくなる。
+        .order_by(similarity.desc(), KnowledgeUnitTable.id)
+        .limit(limit)
     ).all()
 
     return [ScoredHit(row.KnowledgeUnitTable.id, float(row.similarity)) for row in rows]

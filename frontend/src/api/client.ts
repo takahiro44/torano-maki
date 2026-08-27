@@ -15,6 +15,7 @@ import type {
   ChatReviewStatus,
   ChatReviewSummary,
   ChatStreamEvent,
+  ChatTranscription,
   ConfigHealthResponse,
   DbHealthResponse,
   InputMode,
@@ -241,6 +242,32 @@ export function sendChat(messages: ChatMessage[], topK = 5) {
     body: JSON.stringify({ messages, top_k: topK }),
     signal: AbortSignal.timeout(300_000),
   });
+}
+
+/**
+ * 話した質問を文字起こしする。**質問の実行はしない。**
+ *
+ * `transcribeAudio`（`/ingest/audio/transcribe`）を使い回さないのは、
+ * あちらが `data_sources` に商談音声として記録する口だから。
+ * 質問を通すと出典一覧が質問で埋まる（理由はバックエンドの api/chat.py）。
+ *
+ * **Content-Type を自分で付けないこと。** FormData を渡したときに
+ * ブラウザが multipart の boundary 付きで設定するため、
+ * 手で書くと boundary が欠けてサーバ側でパースに失敗する。
+ */
+export async function transcribeChatQuestion(audio: Blob, signal?: AbortSignal) {
+  const form = new FormData();
+  // MediaRecorder の Blob にはファイル名が無い。サーバは Content-Type から
+  // 拡張子を判定できるが、名前を付けておくと原因追跡が楽になる
+  form.append("file", audio, "question.webm");
+  const res = await fetch(`${API_BASE_URL}/chat/voice`, {
+    method: "POST",
+    body: form,
+    // 質問1つ分。商談1本用の30分は長すぎる
+    signal: signal ?? AbortSignal.timeout(180_000),
+  });
+  await throwIfNotOk(res, "POST /chat/voice failed");
+  return (await res.json()) as ChatTranscription;
 }
 
 // --- 上司レビュー ---
