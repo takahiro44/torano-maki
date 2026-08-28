@@ -35,6 +35,8 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
   // マイクから入れた回答は audio として記録する。テキストで打ち直したら text へ戻す
   const [inputMode, setInputMode] = useState<InputMode>("text");
   const [pending, setPending] = useState<null | "turn" | "feedback">(null);
+  // 送信した自分の発言。サーバの応答を待たずに会話へ並べるために持つ
+  const [sendingContent, setSendingContent] = useState<string | null>(null);
   const [elapsed, setElapsed] = useState(0);
   const [error, setError] = useState<string | null>(null);
 
@@ -58,15 +60,21 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
     setError(null);
     setElapsed(0);
     setPending("turn");
+    // 顧客役の生成に十数秒かかるため、応答を待ってから自分の発言を出すと
+    // 「送信できたのか」が分からない時間が生まれる。先に会話へ並べる
+    setSendingContent(content);
+    setDraft("");
     try {
       const updated = await sendRoleplayTurn(session.session_id, content, inputMode);
-      setDraft("");
       setInputMode("text");
       onUpdated(updated);
     } catch (e) {
       // 失敗しても入力は消さない。数十秒かけて話した内容を打ち直させない
+      setDraft(content);
       setError(describeError(e));
     } finally {
+      // 応答が返れば同じ発言が session.turns に入る。二重に出さないよう必ず消す
+      setSendingContent(null);
       setPending(null);
     }
   }
@@ -101,7 +109,7 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
               <span className="mt-0.5 shrink-0">
                 <PetFace
                   scene="roleplay"
-                  mood={i === session.turns.length - 1 ? mood : "idle"}
+                  mood={i === session.turns.length - 1 && sendingContent === null ? mood : "idle"}
                   sizeClass="size-9"
                 />
               </span>
@@ -121,6 +129,14 @@ export function RoleplaySessionView({ session, onUpdated }: Props) {
             </div>
           </div>
         ))}
+
+        {sendingContent !== null && (
+          <div className="flex justify-end">
+            <div className="max-w-[85%] rounded-lg bg-slate-900 px-4 py-2 text-sm whitespace-pre-wrap text-white">
+              {sendingContent}
+            </div>
+          </div>
+        )}
 
         {pending === "turn" && (
           <div className="flex justify-start gap-2">
