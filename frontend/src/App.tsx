@@ -143,7 +143,11 @@ export default function App() {
       <main className="min-h-0 flex-1">
         {/* チャットは隠すだけでアンマウントしない（会話と実行中の応答を保つ） */}
         <div className={tab === "chat" ? "h-full" : "hidden"}>
-          <AiChat knowledgeCount={counts?.confirmed ?? null} reloadKey={reloadKey} />
+          <AiChat
+            knowledgeCount={counts?.confirmed ?? null}
+            reloadKey={reloadKey}
+            onKnowledgeChanged={onChanged}
+          />
         </div>
 
         {/* 登録もチャットと同じ器にする。書こうとしている話が蓄積に既に有るかを
@@ -151,7 +155,11 @@ export default function App() {
             開閉はチャットとは別に覚える（WorkspacePane） */}
         {tab === "input" && (
           <div className="flex h-full">
-            <WorkspacePane storageKey={INPUT_WORKSPACE_KEY} reloadKey={reloadKey} />
+            <WorkspacePane
+              storageKey={INPUT_WORKSPACE_KEY}
+              reloadKey={reloadKey}
+              onListChanged={onChanged}
+            />
             <div className="min-w-0 flex-1 overflow-y-auto">
               <div className="mx-auto max-w-3xl px-4 py-8">
                 <KnowledgeInput onCreated={onChanged} note={inputHandoff?.note ?? null} />

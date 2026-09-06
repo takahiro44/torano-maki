@@ -55,6 +55,8 @@ type Props = {
   turn: Turn | null;
   /** 待機中の一覧の再取得トリガー。登録・音声タブでの登録時にApp側でbumpされる */
   reloadKey: number;
+  /** 一覧の件数が変わったとき（削除など）。App側の件数表示を取り直すため */
+  onListChanged?: () => void;
 };
 
 type CategoryFilter = "all" | "business" | "casual";
@@ -65,7 +67,7 @@ const CATEGORY_OPTIONS: { key: CategoryFilter; label: string }[] = [
   { key: "casual", label: "その他" },
 ];
 
-export function AgentWorkspace({ turn, reloadKey }: Props) {
+export function AgentWorkspace({ turn, reloadKey, onListChanged }: Props) {
   const [corpus, setCorpus] = useState<CorpusItem[]>([]);
   const [query, setQuery] = useState("");
   const [category, setCategory] = useState<CategoryFilter>("all");
@@ -241,6 +243,10 @@ export function AgentWorkspace({ turn, reloadKey }: Props) {
           target={scene}
           onClose={() => setScene(null)}
           onEdited={() => setEditKey((n) => n + 1)}
+          onDeleted={() => {
+            setEditKey((n) => n + 1);
+            onListChanged?.();
+          }}
         />
       )}
 

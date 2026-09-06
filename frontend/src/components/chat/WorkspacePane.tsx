@@ -25,9 +25,11 @@ type Props = {
   turn?: Turn | null;
   /** 待機中の一覧の再取得トリガー */
   reloadKey: number;
+  /** 削除などで件数が変わったとき */
+  onListChanged?: () => void;
 };
 
-export function WorkspacePane({ storageKey, turn = null, reloadKey }: Props) {
+export function WorkspacePane({ storageKey, turn = null, reloadKey, onListChanged }: Props) {
   const [open, setOpen] = useState(() => loadOpen(storageKey));
 
   useEffect(() => {
@@ -42,7 +44,7 @@ export function WorkspacePane({ storageKey, turn = null, reloadKey }: Props) {
     <div className="hidden shrink-0 lg:flex">
       {open && (
         <div className="w-[360px] xl:w-[420px]">
-          <AgentWorkspace turn={turn} reloadKey={reloadKey} />
+          <AgentWorkspace turn={turn} reloadKey={reloadKey} onListChanged={onListChanged} />
         </div>
       )}
       {/* 三角タブは開閉どちらでも常に出す。同じボタンで出し入れできる */}

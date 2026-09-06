@@ -42,9 +42,10 @@ type Props = {
   knowledgeCount: number | null;
   /** 調査ビューの待機中一覧の再取得トリガー。登録・音声タブでの登録時にApp側でbumpされる */
   reloadKey: number;
+  onKnowledgeChanged?: () => void;
 };
 
-export function AiChat({ knowledgeCount, reloadKey }: Props) {
+export function AiChat({ knowledgeCount, reloadKey, onKnowledgeChanged }: Props) {
   const { turns, busy, send, stop, reset, retry } = useChat();
   // 「上司に確認する」を押した合図。要約の状態そのものは
   // ChatReviewPanel が持っているので、番号を送って起こすだけにする
@@ -90,7 +91,12 @@ export function AiChat({ knowledgeCount, reloadKey }: Props) {
     <div className="flex h-full">
       {/* 調査ビューは会話の左。読む列（会話）を画面の同じ位置に置いたまま、
           開閉できる面を外側に足す */}
-      <WorkspacePane storageKey={WORKSPACE_KEY} turn={latest} reloadKey={reloadKey} />
+      <WorkspacePane
+        storageKey={WORKSPACE_KEY}
+        turn={latest}
+        reloadKey={reloadKey}
+        onListChanged={onKnowledgeChanged}
+      />
 
       {/* 画面全体を歩く。パネルを閉じていても、AIが今どこを見ているかは伝わる */}
       <AgentPet phase={currentPhase(latest)} foundCount={latest?.citations.length ?? 0} />

@@ -16,7 +16,7 @@
  */
 
 import { useEffect, useState } from "react";
-import { getKnowledge, getKnowledgeEvidence } from "../../api/client";
+import { deleteKnowledge, getKnowledge, getKnowledgeEvidence } from "../../api/client";
 import { knowledgeCategoryBadge } from "../../lib/knowledgeCategory";
 import { navigate, roleplayStartPath } from "../../lib/router";
 import type { Knowledge, KnowledgeEvidenceSpan } from "../../types/api";
@@ -68,15 +68,19 @@ export function ScenePopover({
   target,
   onClose,
   onEdited,
+  onDeleted,
 }: {
   target: SceneTarget;
   onClose: () => void;
   /** 保存されたら呼ぶ。呼び出し側が一覧と件数を取り直すため */
   onEdited?: () => void;
+  /** 削除されたら呼ぶ。呼び出し側が一覧と件数を取り直すため */
+  onDeleted?: () => void;
 }) {
   const [spans, setSpans] = useState<KnowledgeEvidenceSpan[] | null>(null);
   const [knowledge, setKnowledge] = useState<Knowledge | null>(null);
   const [error, setError] = useState<string | null>(null);
+  const [deleting, setDeleting] = useState(false);
   const [editing, setEditing] = useState(false);
   // 開くと同時にAIへ投げる指示。「直す」を挟まずに相談へ入るため
   const [autoConsult, setAutoConsult] = useState<string | null>(null);
@@ -89,6 +93,21 @@ export function ScenePopover({
   function closeEditor() {
     setEditing(false);
     setAutoConsult(null);
+  }
+
+  async function handleDelete() {
+    if (!window.confirm("このナレッジを削除しますか？")) return;
+    setDeleting(true);
+    setError(null);
+    try {
+      await deleteKnowledge(target.knowledgeId);
+      onDeleted?.();
+      onClose();
+    } catch (e: unknown) {
+      setError(e instanceof Error ? e.message : String(e));
+    } finally {
+      setDeleting(false);
+    }
   }
 
   // 別の行を押したときは呼び出し側が key で作り直すので、ここで初期化しない
@@ -262,14 +281,25 @@ export function ScenePopover({
         {!editing && (
           <footer className="flex shrink-0 items-center gap-2 border-t border-slate-100 px-3.5 py-2.5">
             <button
+              type="button"
+              onClick={() => void handleDelete()}
+              disabled={deleting}
+              className="rounded-lg px-3 py-1.5 text-xs font-medium text-rose-600
+                         hover:bg-rose-50 disabled:text-slate-300"
+            >
+              {deleting ? "削除中…" : "削除"}
+            </button>
+            <button
+              type="button"
               onClick={() => navigate(roleplayStartPath({ knowledgeId: target.knowledgeId }))}
               className="rounded-lg bg-indigo-600 px-3 py-1.5 text-xs font-medium text-white hover:bg-indigo-500"
             >
               この場面を練習する
             </button>
             <button
+              type="button"
               onClick={() => askAi("")}
-              disabled={!knowledge}
+              disabled={!knowledge || deleting}
               className="ml-auto rounded-lg px-3 py-1.5 text-xs font-medium text-indigo-600
                          ring-1 ring-indigo-200 hover:bg-indigo-50
                          disabled:text-slate-300 disabled:ring-slate-200"
