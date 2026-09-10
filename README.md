@@ -2,7 +2,8 @@
 
 営業ナレッジをAI利活用前提の構造で蓄積し、探索・ロープレに活かすプロダクト
 
-> 大塚商会インターンシップ 2026 / Dチーム
+> 株式会社大塚商会主催「8Daysインターンシップ 〜AIエージェント開発コース〜」
+> 4人チーム（Dチーム）での開発成果物
 
 ---
 
@@ -33,6 +34,28 @@
 | ロープレ | 蓄積データから顧客ペルソナを生成し練習 |
 
 <!-- TODO: 実装が進んだら機能ごとに詳細を追記 -->
+
+---
+
+## 商談データについて
+
+**このリポジトリに含まれる商談データは、すべて架空のものである。**
+実在の商談記録・顧客情報・社内資料は一切含まない。
+
+| 種別 | 作り方 |
+|---|---|
+| 商談台本（22件） | ChatGPT で作成（[`tts-demo/prompts/script_prompt.md`](tts-demo/prompts/script_prompt.md)） |
+| 商談音声 | 上記台本を Google Cloud の Gemini TTS で2話者の音声に合成 |
+| 文字起こし | 合成音声を faster-whisper にかけた出力（[`experiments/knowledge-extraction/input/transcripts/`](experiments/knowledge-extraction/input/transcripts/)） |
+
+登場する企業・人物・会話内容に実在のモデルはない。
+文字起こしに誤変換が残っているのは、音声認識の実際の出力をそのまま保存しているため。
+
+音声認識に渡す用語集（`GLOSSARY`）にのみ、実在の商品名を含めている。
+**業務システムの商品名は音声認識が最も間違えやすく、用語集の効果を測るには
+実在の固有名詞が必要だったため。** いずれも公開されている商品名であり、
+実運用では製品マスタ・顧客マスタから組み立てる想定であることを
+[`backend/app/services/transcription.py`](backend/app/services/transcription.py) にコメントとして残している。
 
 ---
 
@@ -419,9 +442,9 @@ git merge origin/main               # feature branch では pull ではなく me
 
 ## チーム
 
-| 担当 | 名前 |
-|---|---|
-| <!-- TODO --> | 山口 亮 |
-| <!-- TODO --> | 佐藤 拓斗 |
-| <!-- TODO --> | 岡本 貴大 |
-| <!-- TODO --> | 近藤 優花 |
+4人チームで開発した。担当領域は [`CLAUDE.md`](CLAUDE.md) 1.1 を参照。
+
+- [@takahiro44](https://github.com/takahiro44)
+- [@Ry0Yamaguchi](https://github.com/Ry0Yamaguchi)
+- [@firotty](https://github.com/firotty)
+- [@yuka-kondo-1118](https://github.com/yuka-kondo-1118)
