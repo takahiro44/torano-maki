@@ -442,9 +442,9 @@ git merge origin/main               # feature branch では pull ではなく me
 
 ## チーム
 
-| 担当 | 名前 |
-|---|---|
-| <!-- TODO --> | 山口 亮 |
-| <!-- TODO --> | 佐藤 拓斗 |
-| <!-- TODO --> | 岡本 貴大 |
-| <!-- TODO --> | 近藤 優花 |
+4人チームで開発した。担当領域は [`CLAUDE.md`](CLAUDE.md) 1.1 を参照。
+
+- [@takahiro44](https://github.com/takahiro44)
+- [@Ry0Yamaguchi](https://github.com/Ry0Yamaguchi)
+- [@firotty](https://github.com/firotty)
+- [@yuka-kondo-1118](https://github.com/yuka-kondo-1118)

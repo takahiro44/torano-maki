@@ -46,7 +46,7 @@ DBコンテナが動作確認できたら、自分の環境の行を埋めるこ
 
 | メンバー | OS / アーキテクチャ | Docker | 動作確認 |
 |---|---|---|---|
-| Windows（岡本） | Windows 11 / x86_64 | 29.2.1 / Compose 5.1.0 | ✅ 2026-08-21 |
+| Windows（@takahiro44） | Windows 11 / x86_64 | 29.2.1 / Compose 5.1.0 | ✅ 2026-08-21 |
 | Windows | | | <!-- TODO --> |
 | Mac | macOS / arm64 | | <!-- TODO --> |
 | Mac | macOS / arm64 | | <!-- TODO --> |
