@@ -85,7 +85,7 @@ confirmed（検索対象） or rejected
 接続例:
 
 ```
-BASE_URL=http://192.168.128.142:8080/v1
+BASE_URL=http://<DGXのIP>:8080/v1
 MODEL_NAME=Qwen3.8-27B-NVFP4
 ```
 
@@ -307,7 +307,7 @@ Response: preview と同じ + `saved_ids: [uuid, ...]`
 `.env`（コミットしない）:
 
 ```
-BASE_URL=http://192.168.128.142:8080/v1
+BASE_URL=http://<DGXのIP>:8080/v1
 MODEL_NAME=Qwen3.8-27B-NVFP4
 ```
 
